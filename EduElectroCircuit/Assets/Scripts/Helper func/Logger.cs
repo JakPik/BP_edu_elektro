@@ -6,13 +6,18 @@ public enum Log_Type
     SUCCESS,
     WARNING,
     ERROR,
-    EXCEPTIION
+    EXCEPTION
 }
 public static class Logger
 {
     public static void Log(string label, string msg, Log_Type type)
     {
         Debug.Log($"<color={GetColor(type)}>[{type.ToString()}] - {label}</color><color=white>: {msg}</color>");
+    }
+
+    public static void LogCalculation(string label, string msg, string input, string output)
+    {
+        Debug.Log($"<color=#fff600>[CALCULATION] - {label}</color><color=white>: {msg}\n{input}\n{output}</color>");
     }
 
         public static string GetColor(Log_Type type)
@@ -23,7 +28,7 @@ public static class Logger
             Log_Type.SUCCESS => "#05e841",
             Log_Type.WARNING => "orange",
             Log_Type.ERROR => "red",
-            Log_Type.EXCEPTIION => "#4d0000",
+            Log_Type.EXCEPTION => "#bb0000",
             _ => "white"
         };
     }
