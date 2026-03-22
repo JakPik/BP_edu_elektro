@@ -17,8 +17,13 @@ public static class NodeCalculationModel
 
     public static float CalculateCurrentDivider(float Ic, float[] R, int idx)
     {
-        Logger.Log("Ic", "Ic: " + Ic+"\n R top: " + (float)Math.Pow(R[idx], -1) + "\n R total: " + CalculateInvertedResistanceSum(R), Log_Type.WARNING);
-        return Ic * ((float)Math.Pow(R[idx], -1)/CalculateInvertedResistanceSum(R));
+        float R_Branch = (float)Math.Pow(R[idx], -1);
+        float R_Total = CalculateInvertedResistanceSum(R);
+        float result = Ic * (R_Branch/R_Total);
+        Logger.LogCalculation("Current divider", "Divider for branch " + idx,
+        "Current In: " + Ic+", R-1 for branch: " + R_Branch + ", R-1 total: " + R_Total,
+        "Result:" + result);
+        return result;
     }
 
     private static float CalculateInvertedResistanceSum(float[] R)
@@ -26,7 +31,7 @@ public static class NodeCalculationModel
         float Rc_ = 0f;
         for(int i =  0; i < R.Length; i++)
         {
-            Rc_ += R[i];
+            Rc_ += (float)Math.Pow(R[i], -1);
         }
         return Rc_;
     }

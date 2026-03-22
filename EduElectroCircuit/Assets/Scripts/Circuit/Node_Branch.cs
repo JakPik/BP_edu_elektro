@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class Nod_Branch : Node
 {
@@ -17,7 +18,7 @@ public class Nod_Branch : Node
             {
                 if(nextBranchNode[i] == null)
                 {
-                    Logger.Log(this.name, "Extra empty branch or not Connected branch", Log_Type.WARNING);
+                    Logger.Log(this.name, "Branch " + i + " is empty", Log_Type.EXCEPTION);
                     continue;
                 }
                 float local_I = NodeCalculationModel.CalculateCurrentDivider(I,branch_R,i);
@@ -44,7 +45,7 @@ public class Nod_Branch : Node
             {
                 if(nextBranchNode[i] == null)
                 {
-                    Logger.Log(this.name, "Extra empty branch or not Connected branch", Log_Type.WARNING);
+                    Logger.Log(this.name, "Branch " + i + " is empty", Log_Type.EXCEPTION);
                     continue;
                 }
                 branch_R[i] = nextBranchNode[i].GetResistanceSum();
@@ -59,5 +60,42 @@ public class Nod_Branch : Node
             return R;
         }
         return R + nextNode.GetResistanceSum();
+    }
+
+    public override void BuildConections(Node branchInRef, int branchId)
+    {
+        /*if(nextNode == null && branchInRef == null)
+        {
+            Logger.Log(this.name, "Line construction done. No nodes to connect to.", Log_Type.SUCCESS);
+            return;
+        }*/
+        try {
+            if(type == Node_Type.BRANCH_OUT)
+            {
+                Logger.Log(this.name, "Forward vector:" + this.transform.forward, Log_Type.WARNING);
+                for(int i = 0; i < nextBranchNode.Length; i++)
+                {
+                    if(nextBranchNode[i] != null) {
+                        LineRenderer.BuildLine(this, GetOutPortPosition(i), nextBranchNode[i].GetInPortPosition(0));
+                        nextBranchNode[i].BuildConections(nextNode, i);
+                    }
+                    else
+                    {
+                        Logger.Log(this.name, "Branch " + i + " is empty", Log_Type.EXCEPTION);
+                    }
+                }
+                nextNode.BuildConections(branchInRef, branchId);
+            }
+            else
+            {
+                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0));
+                nextNode.BuildConections(branchInRef, branchId);
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Log(this.name, e.Message, Log_Type.ERROR);
+            return;
+        }
     }
 }
