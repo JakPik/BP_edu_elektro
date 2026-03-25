@@ -5,6 +5,7 @@ public enum Node_Type
     SOURCE,
     NODE_ACTIVE,
     NODE_PASSIVE,
+    NODE_CONTROL,
     BRANCH_OUT,
     BRANCH_IN,
     END

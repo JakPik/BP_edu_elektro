@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using System;
+using UnityEngine.Events;
 
 public class Node_Interactive: Node
 {
     [SerializeField] private bool readVoltage = false;
     [SerializeField] private bool readCurrent = false;
     [SerializeField] private bool readResistance = false;
+    [SerializeField] private UnityEvent onCorrect;
+    [SerializeField] private UnityEvent onIncorrect;
+    [SerializeField] private float expected_U;
 
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
@@ -22,12 +26,28 @@ public class Node_Interactive: Node
             (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
             Logger.Log(this.name, "U: " + U +"V, I: " + I + " mA, R: " + R, Log_Type.INFO);
         }
+        if(type == Node_Type.NODE_CONTROL)
+        {
+            ValueCheck();
+        }
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available", Log_Type.WARNING);
             return;
         }
         nextNode.CalculateValues(passValues, originValues);
+    }
+
+    private void ValueCheck()
+    {
+        if(U == expected_U)
+        {
+            onCorrect?.Invoke();
+        }
+        else
+        {
+            onIncorrect?.Invoke();
+        }
     }
 
     public override float GetResistanceSum()

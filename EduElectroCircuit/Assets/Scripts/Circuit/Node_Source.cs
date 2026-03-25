@@ -24,7 +24,6 @@ public class Node_Source : Node
 
     public override float GetResistanceSum()
     {
-        BuildLines();
         if (nextNode == null)
         {
             Logger.Log(this.name, "No next node available", Log_Type.WARNING);

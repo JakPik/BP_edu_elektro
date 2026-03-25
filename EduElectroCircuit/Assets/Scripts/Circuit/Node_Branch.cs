@@ -64,11 +64,11 @@ public class Nod_Branch : Node
 
     public override void BuildConections(Node branchInRef, int branchId)
     {
-        /*if(nextNode == null && branchInRef == null)
+        if(nextNode == null && branchInRef == null)
         {
             Logger.Log(this.name, "Line construction done. No nodes to connect to.", Log_Type.SUCCESS);
             return;
-        }*/
+        }
         try {
             if(type == Node_Type.BRANCH_OUT)
             {
