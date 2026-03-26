@@ -5,8 +5,9 @@ using UnityEngine.Splines;
 
 public abstract class Node: MonoBehaviour
 {
+    #region  Variables
     [Header("Node Type")]
-    [SerializeField] protected Node_Type type;
+    [SerializeField] protected NodeType type;
 
     [Header("Node Ports")]
     [Tooltip("Out port used for line generation")]
@@ -14,27 +15,34 @@ public abstract class Node: MonoBehaviour
     [Tooltip("In port used for line generation")]
     [SerializeField] protected GameObject[] inPort;
 
-    protected float R;
-    protected float U;
-    protected float I;
-
     [Header("Refferences")]
     [SerializeField] protected Node nextNode;
-
     [SerializeField] protected SplineContainer spline;
     [SerializeField] protected GameObject line;
 
+    [SerializeField] protected float R;
+    [SerializeField] protected float U;
+    [SerializeField] protected float I;
+    #endregion
 
     /// <summary>
-    /// Calculates Voltage and Current for current node
+    /// Calculates the voltage and current for this node.
     /// </summary>
-    /// <param name="passValues"></param>
-    /// <param name="originValues"></param>
+    /// <param name="passValues">
+    /// Data model containing values passed from the previous node.
+    /// These values are updated according to this node's calculation logic.
+    /// </param>
+    /// <param name="originValues">
+    /// Data model representing the values of the node from which this calculation originates.
+    /// For linear connections, this is usually the source node; for branched connections,
+    /// this contains the values of the node at the start of the branch.
+    /// These values are not modified and serve as a reference for calculation purposes.
+    /// </param>
     public abstract void CalculateValues(NodeDataModel passValues, NodeDataModel originValues);
 
     public abstract float GetResistanceSum();
 
-    public Node_Type GetNodeType()
+    public NodeType GetNodeType()
     {
         return type;
     }

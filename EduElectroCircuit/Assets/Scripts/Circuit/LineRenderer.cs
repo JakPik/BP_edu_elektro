@@ -2,29 +2,51 @@ using System;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public enum Port_Orientation
+/// <summary>
+/// Describes the relative orientation of two ports based on their direction and position.
+/// </summary>
+public enum PortOrientation
 {
+    /// <summary>
+    /// Ports have collinear direction vectors and are aligned.
+    /// </summary>
     INLINE,
+    /// <summary>
+    /// Ports have collinear direction vectors and are not aligned.
+    /// </summary>
     STRAIGHT,
+    /// <summary>
+    /// Ports have non-collinear direction vectors, forming an angle.
+    /// </summary>
     CORNER
 }
+
+/// <summary>
+/// Building visible connection between connected nodes.
+/// It creates GameObject called 'Line' and sets it as a child of the caller node.
+/// </summary>
+/// <remarks>
+/// Assumes the existence of OutPort and InPort in the defined PortOrientation.
+/// Handles some edge cases automatically, but manual adjustment may be required
+/// to shape the created line in certain situations.
+/// </remarks>
 public static class LineRenderer
 {
     public static void BuildLine(Node refference, (Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
     {
         SplineContainer splineContainer = CreateLine(refference, outPort.Item3).GetComponent<SplineContainer>();
         Spline spline = splineContainer.Spline;
-        Port_Orientation orientation = CheckNodeOrientation(outPort, inPort);
+        PortOrientation orientation = CheckNodeOrientation(outPort, inPort);
 
         switch (orientation)
         {
-            case Port_Orientation.INLINE:
+            case PortOrientation.INLINE:
                 InLineConstruction(spline, outPort.Item2, inPort.Item2);
                 break;
-            case Port_Orientation.STRAIGHT:
+            case PortOrientation.STRAIGHT:
                 StraightLineConstruction(spline, outPort, inPort);
                 break;
-            case Port_Orientation.CORNER:
+            case PortOrientation.CORNER:
                 CornerLineConstruction(spline, outPort, inPort);
                 break;
         }
@@ -32,36 +54,27 @@ public static class LineRenderer
 
     private static void InLineConstruction(Spline spline, Vector3 outPort, Vector3 inPort)
     {
-        BezierKnot knot = new BezierKnot(new Vector3(0,0,0));
-        spline.Add(knot);
-        knot = new BezierKnot(inPort - outPort);
-        spline.Add(knot);
+        AddKnot(spline, new Vector3(0,0,0));
+        AddKnot(spline, inPort - outPort);
     }
 
     private static void StraightLineConstruction(Spline spline, (Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
     {
         Vector2 B = new Vector2(inPort.Item2.x, inPort.Item2.z) - new Vector2(outPort.Item2.x, outPort.Item2.z);
-        B = B/ 2;
         Vector2 A2 = new Vector2(outPort.Item1.x, outPort.Item1.z);
-         Vector2 A1 = new Vector2(inPort.Item1.x, inPort.Item1.z);
+
+        B = B/ 2;
         Vector2 X = B * A2;
-        BezierKnot knot = new BezierKnot(new Vector3(0,0,0));
-        spline.Add(knot);
+        AddKnot(spline, new Vector3(0,0,0));
+        AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
         if(X.y == 0) {
-            knot = new BezierKnot(new Vector3(X.x, outPort.Item2.y, X.y));
-            spline.Add(knot);
-            knot = new BezierKnot(new Vector3(X.x, outPort.Item2.y, B.y*2));
-            spline.Add(knot);
+            AddKnot(spline, new Vector3(X.x, outPort.Item2.y, B.y*2));
         }
         else
         {
-            knot = new BezierKnot(new Vector3(X.x, outPort.Item2.y, X.y));
-            spline.Add(knot);
-            knot = new BezierKnot(new Vector3(B.x * 2, outPort.Item2.y, X.y));
-            spline.Add(knot);
+            AddKnot(spline, new Vector3(B.x * 2, outPort.Item2.y, X.y));
         }
-        knot = new BezierKnot(inPort.Item2 - outPort.Item2);
-        spline.Add(knot);
+        AddKnot(spline, inPort.Item2 - outPort.Item2);
     }
 
     private static void CornerLineConstruction(Spline spline, (Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
@@ -77,18 +90,20 @@ public static class LineRenderer
         }
         Vector2 X = new Vector2(CalculateDet(B,A2)/DetA, CalculateDet(A1,B)/DetA);
         X *= A2;
-        BezierKnot knot = new BezierKnot(new Vector3(0,0,0));
-        spline.Add(knot);
-        knot = new BezierKnot(new Vector3(X.x, outPort.Item2.y, X.y));
-        spline.Add(knot);
-        knot = new BezierKnot(inPort.Item2 - outPort.Item2);
-        spline.Add(knot);
-        
+        AddKnot(spline, new Vector3(0,0,0));
+        AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
+        AddKnot(spline, inPort.Item2 - outPort.Item2);
     }
 
     private static float CalculateDet(Vector2 M1, Vector2 M2)
     {
         return M1.x * M2.y - M1.y * M2.x;
+    }
+
+    private static void AddKnot(Spline spline, Vector3 vector)
+    {
+        BezierKnot knot = new BezierKnot(vector);
+        spline.Add(knot);
     }
 
     private static GameObject CreateLine(Node refference, Vector3 startPos)
@@ -108,20 +123,20 @@ public static class LineRenderer
         return line;
     }
 
-    private static Port_Orientation CheckNodeOrientation((Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
+    private static PortOrientation CheckNodeOrientation((Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
     {
         if(Math.Abs(Vector3.Dot(inPort.Item1, outPort.Item1)) != 1)
         {
-            return Port_Orientation.CORNER;
+            return PortOrientation.CORNER;
         }
         Vector3 v = (inPort.Item2 - outPort.Item2).normalized;
         float a = Vector3.Dot(v, outPort.Item1);
         if(Math.Abs(a) == 1)
         {
-            return Port_Orientation.INLINE;
+            return PortOrientation.INLINE;
         }
         else {
-            return Port_Orientation.STRAIGHT;
+            return PortOrientation.STRAIGHT;
         }
     }
 }

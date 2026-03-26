@@ -11,7 +11,7 @@ public static class NodeCalculationModel
 
         U = passValues.Uc * (R / passValues.Rc);
         I = passValues.Ic;
-        passValues.UpdateReduceValues(U, 0f, R);
+        passValues.UpdateReduceValues(U, R);
         return (U,I);        
     }
 

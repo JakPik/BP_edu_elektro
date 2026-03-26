@@ -1,6 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public enum Node_Type
+/// <summary>
+/// Type of node in the circuit.
+/// Determines how the node behaves during value calculation and resistance summation.
+/// </summary>
+public enum NodeType
 {
     SOURCE,
     NODE_ACTIVE,
@@ -11,42 +16,65 @@ public enum Node_Type
     END
 }
 
-public enum Source_Type
+/// <summary>
+/// Type of source.
+/// Determines which value is used as the main calculation reference (voltage or current)
+/// </summary>
+public enum SourceType
 {
     VOLTAGE,
     CURRENT
 }
 
-public enum Circuit_Type
+/// <summary>
+/// Type of circuit.
+/// Determines if circuit is DC or AC.
+/// </summary>
+public enum CircuitType
 {
     DC,
     AC
 }
+
+/// <summary>
+/// Data model for passing values between nodes in a circuit.  
+/// Stores voltage, current, and resistance along with node source and circuit type information.
+/// </summary>
 public class NodeDataModel
 {
-    public Source_Type source_Type;
-    public Circuit_Type circuit_Type;
+    public SourceType sourceType;
+    public CircuitType circuitType;
     public float Uc;
     public float Ic;
     public float Rc;
 
-    public NodeDataModel(float Uc, float Ic, float Rc, Source_Type sType, Circuit_Type cType)
+    public NodeDataModel(float Uc, float Ic, float Rc, SourceType sType, CircuitType cType)
     {
         this.Uc = Uc;
         this.Ic = Ic;
         this.Rc = Rc;
 
-        source_Type = sType;
-        circuit_Type = cType;
+        sourceType = sType;
+        circuitType = cType;
     }
 
-    public void UpdateReduceValues(float Uc, float Ic, float Rc)
+    /// <summary>
+    /// Decremets Voltage and Resistance by given values.
+    /// </summary>
+    /// <param name="U">Node Voltage</param>
+    /// <param name="R">Node Resistance</param>
+    public void UpdateReduceValues(float U, float R)
     {
-        this.Uc -= Uc;
-        this.Ic -= Ic;
-        this.Rc -= Rc;
+        Uc -= U;
+        Rc -= R;
     }
 
+    /// <summary>
+    /// Sets the values based on given parameters.
+    /// </summary>
+    /// <param name="Uc">Voltage value</param>
+    /// <param name="Ic">Current value</param>
+    /// <param name="Rc">Resistance value</param>
     public void SetValues(float Uc, float Ic, float Rc)
     {
         this.Uc = Uc;

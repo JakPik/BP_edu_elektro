@@ -9,6 +9,7 @@ public class DoorControl : MonoBehaviour
     [SerializeField] float animSpeed;
     [SerializeField] bool twoWay = false;
     [SerializeField] bool locked = false;
+    [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidation;
     private float closedHeight;
     private Coroutine curCoroutine = null;
     private Vector3 forward;
@@ -20,9 +21,21 @@ public class DoorControl : MonoBehaviour
         openHeight = closedHeight + 4.0f;
     }
 
-    public void LockState(bool open)
+    private void OnEnable()
     {
-        locked = !open;
+        if(nodeValidation == null) return;
+        nodeValidation.OnEventRaised += LockState;
+    }
+
+    private void OnDisable()
+    {
+        if(nodeValidation == null) return;
+        nodeValidation.OnEventRaised -= LockState;
+    }
+
+    public void LockState(NodeValidationEvent @event)
+    {
+        locked = !@event.Valid;
     }
 
     private void OnTriggerEnter(Collider other)

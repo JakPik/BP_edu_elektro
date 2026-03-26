@@ -6,65 +6,68 @@ using Unity.VisualScripting;
 
 public class Node_Interactive: Node
 {
+    #region Variables
     [Space(10)]
-    [Header("")]
-    [SerializeField] private UnityEvent onCorrect;
-    [SerializeField] private UnityEvent onIncorrect;
+    [Header("Control Value")]
+    [Tooltip("Assign Voltage Value at which doorLockEvent Gets fired. This variable is used only when Node_Type == NODE_CONTROL")]
     [SerializeField] private float expected_U;
 
+    #region Events
+    [Header("Event Channels - Raised Events")]
     [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
+    [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidationEventChannel;
+    #endregion
+    #endregion
 
+
+    /// <summary>
+    /// <para>Calculates based on the type of the node:</para>
+    /// <list type="bullet">
+    ///   <item>NodeType.NODE_PASSIVE => Reads the originValues and assignes it as local R,U,I.</item>
+    ///   <item>NodeType.NODE_ACTIVE  => Calculates the local U,I.</item>
+    ///   <item>NodeType.NODE_CONTROL => Calculates local U,I and Invokes NodeValidationEvent.</item>
+    /// </list>
+    /// </summary>
+    /// <inheritdoc />
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
-        if(type == Node_Type.NODE_PASSIVE)
+        if(type == NodeType.NODE_PASSIVE)
         {
             U = originValues.Uc;
             I = originValues.Ic;
             R = originValues.Rc;
-            Logger.Log(this.name, "Measured => U: " + U +"V, I: " + I + " mA, R: " + R, Log_Type.INFO);
+            Logger.Log(this.name, "Measured => U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
         }
         else
         {
             (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
-            Logger.Log(this.name, "U: " + U +"V, I: " + I + " mA, R: " + R, Log_Type.INFO);
+            Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
         }
-        if(type == Node_Type.NODE_CONTROL)
+        if(type == NodeType.NODE_CONTROL)
         {
-            ValueCheck();
+            nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(U == expected_U), this.name);
         }
         if(nextNode == null)
         {
-            Logger.Log(this.name, "No next node available", Log_Type.WARNING);
+            Logger.Log(this.name, "No next node available", LogType.WARNING);
             return;
         }
         nextNode.CalculateValues(passValues, originValues);
-    }
-
-    private void ValueCheck()
-    {
-        if(U == expected_U)
-        {
-            onCorrect?.Invoke();
-        }
-        else
-        {
-            onIncorrect?.Invoke();
-        }
     }
 
     public override float GetResistanceSum()
     {
         if(nextNode == null)
         {
-            Logger.Log(this.name, "No next node available\n Returning this R: " + R, Log_Type.WARNING);
+            Logger.Log(this.name, "No next node available\n Returning this R: " + R, LogType.WARNING);
             return R;
         }
-        if(type == Node_Type.NODE_PASSIVE)
+        if(type == NodeType.NODE_PASSIVE)
         {
-            Logger.Log(this.name, "Skipping resistance sum, measuring tool active", Log_Type.INFO);
+            Logger.Log(this.name, "Skipping resistance sum, measuring tool active", LogType.INFO);
             return nextNode.GetResistanceSum();
         }
-        Logger.Log(this.name, "Local R: " + R, Log_Type.INFO);
+        Logger.Log(this.name, "Local R: " + R, LogType.INFO);
         return R + nextNode.GetResistanceSum();
     }
 
@@ -72,7 +75,7 @@ public class Node_Interactive: Node
     {
         if(nextNode == null && branchInRef == null)
         {
-            Logger.Log(this.name, "Line construction done. No nodes to connect to.", Log_Type.SUCCESS);
+            Logger.Log(this.name, "Line construction done. No nodes to connect to.", LogType.SUCCESS);
             return;
         }
         try {
@@ -87,7 +90,7 @@ public class Node_Interactive: Node
         }
         catch (Exception e)
         {
-            Logger.Log(this.name, e.Message, Log_Type.ERROR);
+            Logger.Log(this.name, e.Message, LogType.ERROR);
             return;
         }
     }
@@ -96,11 +99,11 @@ public class Node_Interactive: Node
     private void UpdateNode()
     {
         if(nodeStateChangeChannel != null) {
-            nodeStateChangeChannel.RaiseEvent();
+            nodeStateChangeChannel.RaiseEvent(this.name);
         }
         else
         {
-            Logger.Log(this.name, "NodeStateChangeChannel not assigned", Log_Type.ERROR);
+            Logger.Log(this.name, "NodeStateChangeChannel not assigned", LogType.ERROR);
         }
     }
 }
