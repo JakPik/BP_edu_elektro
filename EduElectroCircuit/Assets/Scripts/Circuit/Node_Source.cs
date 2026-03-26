@@ -12,6 +12,10 @@ public class Node_Source : Node
     [SerializeField] private InputActionReference getResistanceAction;
     [SerializeField] private InputActionReference calculateAction;
 
+    [Header("Event Channels")]
+    [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
+   // [SerializeField] private GenericEventChannel<DoorLockEvent> doorLockEventChannel;
+
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
         if (nextNode == null)
@@ -52,6 +56,7 @@ public class Node_Source : Node
 
     private void OnEnable()
     {
+        nodeStateChangeChannel.OnEventRaised += GetResistanceEvent;
         getResistanceAction.action.started += GetResistance;
         calculateAction.action.started += Calculate;
     }
@@ -62,6 +67,10 @@ public class Node_Source : Node
         calculateAction.action.started -= Calculate;
     }
 
+    private void GetResistanceEvent()
+    {
+        GetResistance(new InputAction.CallbackContext());
+    }
     private void GetResistance(InputAction.CallbackContext context)
     {
         Logger.Log(this.name, "Start calculating total Resistance", Log_Type.SUCCESS);

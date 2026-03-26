@@ -2,15 +2,17 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class Node_Interactive: Node
 {
-    [SerializeField] private bool readVoltage = false;
-    [SerializeField] private bool readCurrent = false;
-    [SerializeField] private bool readResistance = false;
+    [Space(10)]
+    [Header("")]
     [SerializeField] private UnityEvent onCorrect;
     [SerializeField] private UnityEvent onIncorrect;
     [SerializeField] private float expected_U;
+
+    [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
 
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
@@ -87,6 +89,18 @@ public class Node_Interactive: Node
         {
             Logger.Log(this.name, e.Message, Log_Type.ERROR);
             return;
+        }
+    }
+
+    [ContextMenu("Updated")]
+    private void UpdateNode()
+    {
+        if(nodeStateChangeChannel != null) {
+            nodeStateChangeChannel.RaiseEvent();
+        }
+        else
+        {
+            Logger.Log(this.name, "NodeStateChangeChannel not assigned", Log_Type.ERROR);
         }
     }
 }

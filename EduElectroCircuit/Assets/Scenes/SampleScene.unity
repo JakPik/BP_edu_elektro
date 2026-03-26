@@ -10798,9 +10798,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 1
-  R: 2
-  U: 1.1363636
-  I: 0.5681818
   nextNode: {fileID: 2010557034}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -10818,6 +10815,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   expected_U: 0
+  nodeStateChangeChannel: {fileID: 0}
 --- !u!1 &281210874
 GameObject:
   m_ObjectHideFlags: 0
@@ -11123,9 +11121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 1
-  R: 5
-  U: 5.681818
-  I: 1.1363636
   nextNode: {fileID: 1444429277}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -11143,6 +11138,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   expected_U: 0
+  nodeStateChangeChannel: {fileID: 0}
 --- !u!1 &369955350
 GameObject:
   m_ObjectHideFlags: 0
@@ -11412,9 +11408,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 3
-  R: 10
-  U: 11.363637
-  I: 1.1363636
   nextNode: {fileID: 0}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -11456,6 +11449,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   expected_U: 10
+  nodeStateChangeChannel: {fileID: 0}
 --- !u!23 &467300671
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12532,7 +12526,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 42551985a3038cd469263449d39a165b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12577,9 +12571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nod_Branch
   type: 5
-  R: 0
-  U: NaN
-  I: 0
   nextNode: {fileID: 1848714766}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -12728,9 +12719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 1
-  R: 6
-  U: 3.4090908
-  I: 0.5681818
   nextNode: {fileID: 1409315863}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -12748,6 +12736,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   expected_U: 0
+  nodeStateChangeChannel: {fileID: 0}
 --- !u!1 &1388025100
 GameObject:
   m_ObjectHideFlags: 0
@@ -12885,9 +12874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 1
-  R: 4
-  U: 2.2727273
-  I: 0.5681818
   nextNode: {fileID: 0}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -12905,6 +12891,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   expected_U: 0
+  nodeStateChangeChannel: {fileID: 0}
 --- !u!1 &1421397155
 GameObject:
   m_ObjectHideFlags: 0
@@ -12999,7 +12986,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 42551985a3038cd469263449d39a165b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13044,9 +13031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Nod_Branch
   type: 4
-  R: 5
-  U: 5.681818
-  I: 1.1363636
   nextNode: {fileID: 1204260125}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -13697,9 +13681,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 1
-  R: 5
-  U: 2.2727273
-  I: 1.1363636
   nextNode: {fileID: 467300670}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -13717,6 +13698,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   expected_U: 0
+  nodeStateChangeChannel: {fileID: 11400000, guid: a0d19a6607b3e3041907c38c86b4cf09, type: 2}
 --- !u!1 &1941509488
 GameObject:
   m_ObjectHideFlags: 0
@@ -13897,9 +13879,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Interactive
   type: 1
-  R: 8
-  U: 4.5454545
-  I: 0.5681818
   nextNode: {fileID: 0}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -13917,6 +13896,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   expected_U: 0
+  nodeStateChangeChannel: {fileID: 0}
 --- !u!1 &2041177452
 GameObject:
   m_ObjectHideFlags: 0
@@ -14461,9 +14441,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Source
   type: 0
-  R: 22
-  U: 25
-  I: 1.1363636
   nextNode: {fileID: 341780714}
   spline: {fileID: 0}
   line: {fileID: 0}
@@ -14474,6 +14451,7 @@ MonoBehaviour:
   circuitType: 0
   getResistanceAction: {fileID: 3595909093326258, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   calculateAction: {fileID: -2681525880936574576, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  nodeStateChnageChannel: {fileID: 11400000, guid: e1461681eff2c3645be2e9dc9f516c03, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

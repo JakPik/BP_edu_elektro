@@ -5,19 +5,31 @@ using UnityEngine.Splines;
 
 public abstract class Node: MonoBehaviour
 {
+    [Header("Node Type")]
     [SerializeField] protected Node_Type type;
 
-    [SerializeField] protected float R;
-    [SerializeField] protected float U;
-    [SerializeField] protected float I;
+    [Header("Node Ports")]
+    [Tooltip("Out port used for line generation")]
+    [SerializeField] protected GameObject[] outPort;
+    [Tooltip("In port used for line generation")]
+    [SerializeField] protected GameObject[] inPort;
 
+    protected float R;
+    protected float U;
+    protected float I;
+
+    [Header("Refferences")]
     [SerializeField] protected Node nextNode;
 
     [SerializeField] protected SplineContainer spline;
     [SerializeField] protected GameObject line;
-    [SerializeField] protected GameObject[] outPort;
-    [SerializeField] protected GameObject[] inPort;
 
+
+    /// <summary>
+    /// Calculates Voltage and Current for current node
+    /// </summary>
+    /// <param name="passValues"></param>
+    /// <param name="originValues"></param>
     public abstract void CalculateValues(NodeDataModel passValues, NodeDataModel originValues);
 
     public abstract float GetResistanceSum();
