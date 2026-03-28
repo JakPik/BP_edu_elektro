@@ -125,12 +125,13 @@ public static class LineRenderer
 
     private static PortOrientation CheckNodeOrientation((Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
     {
-        if(Math.Abs(Vector3.Dot(inPort.Item1, outPort.Item1)) != 1)
+        float b = Math.Clamp(Math.Abs(Vector3.Dot(inPort.Item1, outPort.Item1)), -1f,1f);
+        if(b != 1)
         {
             return PortOrientation.CORNER;
         }
         Vector3 v = (inPort.Item2 - outPort.Item2).normalized;
-        float a = Vector3.Dot(v, outPort.Item1);
+        float a = Math.Clamp(Vector3.Dot(v, outPort.Item1), -1f,1f);
         if(Math.Abs(a) == 1)
         {
             return PortOrientation.INLINE;

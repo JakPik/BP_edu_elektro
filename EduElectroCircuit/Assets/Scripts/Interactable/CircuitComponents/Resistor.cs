@@ -1,0 +1,92 @@
+using System;
+using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
+
+public class Resistor : CircuitComponent, IGrabable
+{
+    [SerializeField] private bool canGrab;
+    [SerializeField] private string grabInfo;
+    [SerializeField] private ResistorDataSO resistorData;
+    
+
+    public bool CanGrab() => canGrab;
+    public string GetGrabInfo() => grabInfo;
+
+    public void OnGrab(bool grabbed, GameObject caller)
+    {
+        rb.constraints = RigidbodyConstraints.None;
+        rb.angularVelocity = Vector3.zero;
+        if (grabbed)
+        {
+            rb.excludeLayers = 1 << caller.layer;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+        else
+        {
+            rb.excludeLayers = LayerMask.GetMask("Nothig");
+            CanAnimate();
+        }
+        rb.useGravity = !grabbed;
+    }
+
+    protected override Quaternion FindTargetRotation(Transform local, Transform target)
+    {
+        float angle = Vector3.SignedAngle(target.forward, local.forward, target.up);
+        
+        angle = Math.Abs(angle) > 90f? 180 * Math.Sign(angle) : 0;
+
+        Quaternion baseRot = Quaternion.LookRotation(target.forward);
+        Quaternion finalRot = baseRot * Quaternion.AngleAxis(angle, Vector3.up);
+        return finalRot;
+    }
+
+    protected override void InteractionLock(CircuitUpdateEvent @event)
+    {
+        canGrab = !@event.CircuitActive;
+    }
+
+    protected override void NodeLockedState(bool locked)
+    {
+        if(locked)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
+
+    protected override void CanAnimate()
+    {
+        if(pendingCoroutine != null)
+        {
+
+            if (curCoroutine != null)
+            {
+                StopCoroutine(curCoroutine);
+            }
+            nodeInteraction.SetComponentData(resistorData);
+            NodeLockedState(true);
+            curCoroutine = StartCoroutine(pendingCoroutine);
+            pendingCoroutine = null;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
+        {
+            this.nodeInteraction = nodeInteraction;
+            Logger.Log(this.name, "Pending Coroutine set", LogType.INFO);
+            pendingCoroutine = AnimateNewPosition(nodeInteraction.GetTransform());
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
+        {
+            this.nodeInteraction = null;
+            Logger.Log(this.name, "Pending Coroutine remove", LogType.INFO);
+            pendingCoroutine = null;
+        }
+    }
+}

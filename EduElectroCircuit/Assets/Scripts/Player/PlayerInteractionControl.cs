@@ -44,8 +44,8 @@ public class PlayerInteractionControl : MonoBehaviour
 
     private void RayCast()
     {
-        var (found, hitInfo) = cameraControl.CameraRayCast();
-        if (!found)
+        var (found, hitInfo) = cameraControl.CameraRayCast(holdDistance);
+        if (!found || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
             if(!holding)
             {
@@ -61,10 +61,18 @@ public class PlayerInteractionControl : MonoBehaviour
                 interactable = interact;
                 Logger.Log(this.name, interactable.GetInteractionInfo(), LogType.INFO);
             }
+            else if(!holding)
+            {
+                interactable = null;
+            }
             if(obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
             {
                 grabbedObject.component = hitInfo.collider.gameObject;
                 grabbedObject.grabable = grabable;
+            }
+            else if(!holding)
+            {
+                grabbedObject.Refresh();
             }
         }
     }

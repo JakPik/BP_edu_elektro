@@ -4,7 +4,7 @@ using System;
 using UnityEngine.Events;
 using Unity.VisualScripting;
 
-public class Node_Interactive: Node
+public class Node_Interactive: Node, INodeInteraction
 {
     #region Variables
     [Space(10)]
@@ -105,5 +105,25 @@ public class Node_Interactive: Node
         {
             Logger.Log(this.name, "NodeStateChangeChannel not assigned", LogType.ERROR);
         }
+    }
+
+    public Transform GetTransform() => transform;
+
+    public void SetComponentData(ComponentDataSO componentData)
+    {
+        if(componentData.type == ComponentType.RESISTOR)
+        {
+            R = ((ResistorDataSO)componentData).resistance;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        /*if(other.gameObject.TryGetComponent(out CircuitComponent component))
+        {
+            R = 0;
+            U = 0;
+            I = 0;
+        }*/
     }
 }
