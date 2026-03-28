@@ -2,6 +2,7 @@ using UnityEngine;
 
 public interface INodeInteraction
 {
-    public Transform GetTransform();
-    public void SetComponentData(ComponentDataSO componentData);
+    public (Vector3, Transform) GetTransform();
+    public void SetComponentData(ComponentDataSO componentData, CircuitComponent circuitComponent);
+    public bool CanConnect();
 }

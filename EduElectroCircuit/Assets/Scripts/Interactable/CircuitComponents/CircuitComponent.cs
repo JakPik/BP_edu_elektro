@@ -22,19 +22,19 @@ public abstract class CircuitComponent : MonoBehaviour
         circuitUpdateChannel.OnEventRaised -= InteractionLock;
     }
 
-    protected IEnumerator AnimateNewPosition(Transform newPosition)
+    protected IEnumerator AnimateNewPosition(Vector3 targetPosition, Transform targetTransform)
     {
-        float totalDistance = Vector3.Distance(transform.position, newPosition.position);
+        float totalDistance = Vector3.Distance(transform.position, targetPosition);
         Vector3 origin = transform.position;
         Quaternion startRot = transform.rotation;
-        Quaternion targetRot = FindTargetRotation(transform, newPosition);
-        float step = 0f;
+        Quaternion targetRot = FindTargetRotation(transform, targetTransform);
+        float step;
         float traveled = 0f;
-        Logger.Log(this.name, "Animating from "+origin + " animating to "+newPosition.position,LogType.INFO);
-        while(transform.position != newPosition.position)
+        Logger.Log(this.name, "Animating from "+origin + " animating to "+ targetPosition,LogType.INFO);
+        while(transform.position != targetPosition)
         {
             step = Time.deltaTime * animationSpeed;
-            transform.position = Vector3.MoveTowards(transform.position, newPosition.position, step);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
             traveled += step;
 
@@ -44,9 +44,12 @@ public abstract class CircuitComponent : MonoBehaviour
             transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
             yield return null;
         }
-        transform.position = newPosition.position;
-        Logger.Log(this.name, "Animating from "+transform.position + " animating to "+newPosition.position,LogType.INFO);
+        transform.position = targetPosition;
+        SendData();
+        Logger.Log(this.name, "Animating from "+transform.position + " animating to "+ targetPosition,LogType.INFO);
     }
+
+    protected abstract void SendData();
     protected abstract Quaternion FindTargetRotation(Transform local, Transform target);
     protected abstract void CanAnimate();
     protected abstract void NodeLockedState(bool locked);

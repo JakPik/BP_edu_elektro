@@ -6,6 +6,7 @@ public class Nod_Branch : Node
 {
     [SerializeField] private Node[] nextBranchNode;
     [SerializeField] private float[] branch_R;
+    [SerializeField] private bool[] branch_connected;
 
     /// <summary>
     /// <para>Calculates based on the type of the node:</para>
@@ -46,9 +47,10 @@ public class Nod_Branch : Node
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override float GetResistanceSum()
+    public override (float, bool) GetResistanceSum()
     {
         R = 0f;
+        int disconnectedBranches = 0;
         if(type == NodeType.BRANCH_OUT)
         {
             Logger.Log(this.name, "Calculating Local Resistance", LogType.INFO);
@@ -59,18 +61,29 @@ public class Nod_Branch : Node
                     Logger.Log(this.name, "Branch " + i + " is empty", LogType.EXCEPTION);
                     continue;
                 }
-                branch_R[i] = nextBranchNode[i].GetResistanceSum();
+                (branch_R[i], branch_connected[i]) = nextBranchNode[i].GetResistanceSum();
+                disconnectedBranches += branch_connected[i]? 0:1;
                 R += (float)Math.Pow(branch_R[i], -1);
             }
             R = (float)Math.Pow(R, -1);
             Logger.Log(this.name, "Local R: " + R, LogType.INFO);
+            connected = !(disconnectedBranches == branch_connected.Length);
         }
+
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available\n Returning this R: " + R, LogType.WARNING);
-            return R;
+            return (R, connected);
         }
-        return R + nextNode.GetResistanceSum();
+        var (nextR, nextConnected) = nextNode.GetResistanceSum();
+        if(type == NodeType.BRANCH_IN)
+        {
+            connected = nextConnected;
+        }
+        else {
+            nextConnected = nextConnected?connected:nextConnected;
+        }
+        return (R + nextR, nextConnected);
     }
 
     public override void BuildConections(Node branchInRef, int branchId)

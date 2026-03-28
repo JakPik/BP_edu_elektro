@@ -81,15 +81,14 @@ public static class LineRenderer
     {
         Vector2 A1 = new Vector2(inPort.Item1.x, inPort.Item1.z);
         Vector2 A2 = new Vector2(-outPort.Item1.x, -outPort.Item1.z);
-        Vector2 B = new Vector2(inPort.Item2.x, inPort.Item2.z) - new Vector2(outPort.Item2.x, outPort.Item2.z);
+        Vector2 B = new Vector2(outPort.Item2.x, outPort.Item2.z) - new Vector2(inPort.Item2.x, inPort.Item2.z);
         float DetA = CalculateDet(A1, A2);
         if(DetA == 0)
         {
             InLineConstruction(spline,outPort.Item2, inPort.Item2);
             return;
         }
-        Vector2 X = new Vector2(CalculateDet(B,A2)/DetA, CalculateDet(A1,B)/DetA);
-        X *= A2;
+        Vector2 X = -A2 * (CalculateDet(A1, B)/DetA);
         AddKnot(spline, new Vector3(0,0,0));
         AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
         AddKnot(spline, inPort.Item2 - outPort.Item2);

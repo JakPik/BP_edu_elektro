@@ -23,6 +23,7 @@ public abstract class Node: MonoBehaviour
     [SerializeField] protected float R;
     [SerializeField] protected float U;
     [SerializeField] protected float I;
+    [SerializeField] protected bool connected = false;
     #endregion
 
     /// <summary>
@@ -40,7 +41,7 @@ public abstract class Node: MonoBehaviour
     /// </param>
     public abstract void CalculateValues(NodeDataModel passValues, NodeDataModel originValues);
 
-    public abstract float GetResistanceSum();
+    public abstract (float, bool) GetResistanceSum();
 
     public NodeType GetNodeType()
     {

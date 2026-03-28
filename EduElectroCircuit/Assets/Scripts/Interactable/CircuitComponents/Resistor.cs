@@ -63,7 +63,6 @@ public class Resistor : CircuitComponent, IGrabable
             {
                 StopCoroutine(curCoroutine);
             }
-            nodeInteraction.SetComponentData(resistorData);
             NodeLockedState(true);
             curCoroutine = StartCoroutine(pendingCoroutine);
             pendingCoroutine = null;
@@ -73,10 +72,12 @@ public class Resistor : CircuitComponent, IGrabable
     void OnTriggerStay(Collider other)
     {
         if(other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
-        {
+        { 
+            if(!nodeInteraction.CanConnect()) return;
             this.nodeInteraction = nodeInteraction;
             Logger.Log(this.name, "Pending Coroutine set", LogType.INFO);
-            pendingCoroutine = AnimateNewPosition(nodeInteraction.GetTransform());
+            var (targetPos, targetTransfrom) = nodeInteraction.GetTransform();
+            pendingCoroutine = AnimateNewPosition(targetPos, targetTransfrom);
         }
     }
 
@@ -88,5 +89,10 @@ public class Resistor : CircuitComponent, IGrabable
             Logger.Log(this.name, "Pending Coroutine remove", LogType.INFO);
             pendingCoroutine = null;
         }
+    }
+
+    protected override void SendData()
+    {
+        nodeInteraction.SetComponentData(resistorData, this);
     }
 }

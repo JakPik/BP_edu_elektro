@@ -32,12 +32,12 @@ public class Node_Source : Node
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override float GetResistanceSum()
+    public override (float,bool) GetResistanceSum()
     {
         if (nextNode == null)
         {
             Logger.Log(this.name, "No next node available", LogType.WARNING);
-            return 0;
+            return (0, false);
         }
         return nextNode.GetResistanceSum();
     }
@@ -83,13 +83,25 @@ public class Node_Source : Node
     private void GetResistance(InputAction.CallbackContext context)
     {
         Logger.Log(this.name, "Start calculating total Resistance", LogType.SUCCESS);
-        R = GetResistanceSum();
-        Logger.Log(this.name, "Total R: " + R, LogType.INFO);
-        Logger.Log(this.name, "Calculation completed", LogType.SUCCESS);
+        (R, connected) = GetResistanceSum();
+        if(!connected)
+        {
+            Logger.Log(this.name, "Circuit not connected", LogType.WARNING);
+        }
+        else
+        {
+            Logger.Log(this.name, "Total R: " + R, LogType.INFO);
+            Logger.Log(this.name, "Calculation completed", LogType.SUCCESS);
+        }
     }
 
     private void Calculate(InputAction.CallbackContext context)
     {
+        if(!connected)
+        {
+            Logger.Log(this.name, "Circuit not connected", LogType.WARNING);
+            return;
+        }
         Logger.Log(this.name, "Start calculating node Values", LogType.SUCCESS);
         I = U / R;
         NodeDataModel outData = new NodeDataModel(U,I,R,sourceType,circuitType);

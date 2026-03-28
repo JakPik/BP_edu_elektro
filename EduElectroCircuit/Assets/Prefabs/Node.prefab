@@ -118,7 +118,10 @@ MonoBehaviour:
   R: 0
   U: 0
   I: 0
+  connected: 0
   expected_U: 0
+  refConnected: {fileID: 0}
+  positionOffset: {x: 0, y: 0.15, z: 0}
   nodeStateChangeChannel: {fileID: 0}
   nodeValidationEventChannel: {fileID: 0}
 --- !u!65 &1606588164255496335

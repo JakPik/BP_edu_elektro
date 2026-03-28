@@ -11,6 +11,8 @@ public class Node_Interactive: Node, INodeInteraction
     [Header("Control Value")]
     [Tooltip("Assign Voltage Value at which doorLockEvent Gets fired. This variable is used only when Node_Type == NODE_CONTROL")]
     [SerializeField] private float expected_U;
+    [SerializeField] private CircuitComponent refConnected;
+    [SerializeField] private Vector3 positionOffset;
 
     #region Events
     [Header("Event Channels - Raised Events")]
@@ -55,20 +57,24 @@ public class Node_Interactive: Node, INodeInteraction
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override float GetResistanceSum()
+    public override (float, bool) GetResistanceSum()
     {
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available\n Returning this R: " + R, LogType.WARNING);
-            return R;
+            return (R,connected);
         }
+
+        var (nextR, nextConnected) = nextNode.GetResistanceSum();
+        nextConnected = nextConnected ? connected:nextConnected;
+
         if(type == NodeType.NODE_PASSIVE)
         {
             Logger.Log(this.name, "Skipping resistance sum, measuring tool active", LogType.INFO);
-            return nextNode.GetResistanceSum();
+            return (nextR,nextConnected);
         }
         Logger.Log(this.name, "Local R: " + R, LogType.INFO);
-        return R + nextNode.GetResistanceSum();
+        return (R + nextR, nextConnected);
     }
 
     public override void BuildConections(Node branchInRef, int branchId)
@@ -107,10 +113,13 @@ public class Node_Interactive: Node, INodeInteraction
         }
     }
 
-    public Transform GetTransform() => transform;
+    public (Vector3, Transform) GetTransform() => (transform.position + positionOffset, transform);
 
-    public void SetComponentData(ComponentDataSO componentData)
+    public void SetComponentData(ComponentDataSO componentData, CircuitComponent circuitComponent)
     {
+        refConnected = circuitComponent;
+        connected = true;
+        UpdateNode();
         if(componentData.type == ComponentType.RESISTOR)
         {
             R = ((ResistorDataSO)componentData).resistance;
@@ -119,11 +128,16 @@ public class Node_Interactive: Node, INodeInteraction
 
     void OnTriggerExit(Collider other)
     {
-        /*if(other.gameObject.TryGetComponent(out CircuitComponent component))
+        if(other.gameObject.TryGetComponent(out CircuitComponent component) && component == refConnected)
         {
+            refConnected = null;
+            connected = false;
+            UpdateNode();
             R = 0;
             U = 0;
             I = 0;
-        }*/
+        }
     }
+
+    public bool CanConnect() => !connected;
 }

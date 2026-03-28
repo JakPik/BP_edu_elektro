@@ -37,7 +37,7 @@ public class PlayerInteractionControl : MonoBehaviour
         {
             Ray ray = new Ray(cameraControl.GetCameraPosition(), cameraControl.GetCameraForward());
             LayerMask mask = ~LayerMask.GetMask("Grabable");
-            float distance = Physics.Raycast(ray, out RaycastHit hitInfo, holdDistance ,mask)? hitInfo.distance : holdDistance;
+            float distance = Physics.Raycast(ray, out RaycastHit hitInfo, holdDistance ,mask, QueryTriggerInteraction.Ignore)? hitInfo.distance : holdDistance;
             grabbedObject.component.transform.position = cameraControl.GetCameraForward() * distance + cameraControl.GetCameraPosition();
         }
     }
