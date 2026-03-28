@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public abstract class CircuitComponent : MonoBehaviour
 {
-    [SerializeField] protected bool interactionLocked;
     [SerializeField] protected GenericEventChannel<CircuitUpdateEvent> circuitUpdateChannel;
     protected abstract void InteractionLock(CircuitUpdateEvent @event);
 

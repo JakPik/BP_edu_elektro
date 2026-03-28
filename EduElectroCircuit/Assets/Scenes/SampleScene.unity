@@ -11110,6 +11110,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11235,6 +11236,21 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3268f69db52067441af5ce8920f411fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraControl
+  orientation: {fileID: 2041177453}
+  lookAction: {fileID: 7390212839690022815, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  sensitivity: 0.15
 --- !u!1 &341780710
 GameObject:
   m_ObjectHideFlags: 0
@@ -11948,7 +11964,8 @@ GameObject:
   - component: {fileID: 733697087}
   - component: {fileID: 733697086}
   - component: {fileID: 733697092}
-  m_Layer: 0
+  - component: {fileID: 733697093}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11968,7 +11985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -11979,7 +11996,31 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f92c523c-39f6-4b93-b9eb-680af0bae120
+    m_ActionName: 'Gameplay/Pick Up[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a0e82987-bfa2-4b77-a074-3f73ac02f61b
+    m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74caa7ec-eb1e-4ac6-b9e4-b0fef392dee0
+    m_ActionName: 'Gameplay/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4d33accd-0725-42d5-81c8-c8a290ad7a37
+    m_ActionName: 'Gameplay/GetResistance[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f08467d-6c44-43fe-a7f2-e1479921b0ab
+    m_ActionName: 'Gameplay/Calculate[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bcaa0294-6588-4665-a241-d31fa5b78cf2
+    m_ActionName: 'Gameplay/Interact[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -12121,19 +12162,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 744eea36f5bd99e4c94fe8653b3be935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  cameraControl: {fileID: 330585548}
   moveSpeed: 7
-  sensitivity: 0.15
-  holdDistance: 2
   rb: {fileID: 733697087}
-  cam: {fileID: 330585545}
-  orientation: {fileID: 2041177453}
   moveAction: {fileID: -4608556605388281726, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
-  lookAction: {fileID: 7390212839690022815, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  drag: 8
+--- !u!114 &733697093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733697084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbd4083f1fce574cafe85f0429d4ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionControl
+  cameraControl: {fileID: 330585548}
+  holdDistance: 2
+  holding: 0
+  grabbedObject:
+    component: {fileID: 0}
   interactAction: {fileID: 2210774455778319481, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   holdtAction: {fileID: -7169816095283335344, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
-  drag: 8
-  holding: 0
-  component: {fileID: 0}
 --- !u!1 &780117637
 GameObject:
   m_ObjectHideFlags: 0
@@ -16822,7 +16874,7 @@ Transform:
   m_GameObject: {fileID: 4188145522426763501}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -7.95, y: 0, z: -0.88}
+  m_LocalPosition: {x: -7.57, y: -0, z: -0.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16849,7 +16901,8 @@ GameObject:
   - component: {fileID: 7775433325285164638}
   - component: {fileID: 7775433325285164639}
   - component: {fileID: 7775433325285164640}
-  m_Layer: 0
+  - component: {fileID: 7775433325285164641}
+  m_Layer: 6
   m_Name: Resistor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16933,7 +16986,7 @@ GameObject:
   - component: {fileID: 586229582370858155}
   - component: {fileID: 7579210978584065682}
   - component: {fileID: 4291551193254076586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: meters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17019,7 +17072,7 @@ GameObject:
   - component: {fileID: 5014396809329368710}
   - component: {fileID: 832765281707351363}
   - component: {fileID: 3662286764474851406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Inductor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17035,7 +17088,7 @@ Transform:
   m_GameObject: {fileID: 4640644913882915269}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -7.9, y: 0, z: -2.59}
+  m_LocalPosition: {x: -7.49, y: 0, z: -2.51}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17158,9 +17211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a26957879d7c7459007fde2bee2e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Resistor
-  interactionLocked: 0
   circuitUpdateChannel: {fileID: 11400000, guid: f595f7351214074468572a65004c922f, type: 2}
-  interactionInfo: fadfasfd
+  canGrab: 0
+  grabInfo: 
 --- !u!65 &7775433325285164640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17182,6 +17235,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1518435, y: 1.1518434, z: 0.67230874}
   m_Center: {x: 0, y: 2.388521e-15, z: 0.33615437}
+--- !u!54 &7775433325285164641
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572079963078211335}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &7784915788559113569
 Transform:
   m_ObjectHideFlags: 0
