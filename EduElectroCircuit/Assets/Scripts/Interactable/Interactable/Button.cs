@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Button : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GenericVoidEventChannel interactionEventChannel;
+    [SerializeField] private GenericEventChannel<ButtonPressedEvent> interactionEventChannel;
     [SerializeField] private string interactionInfo;
     [SerializeField] private bool canInteract;
+    [SerializeField] private bool isPressed;
     [SerializeField] private Material material;
     public bool CanInteract() => canInteract;
 
@@ -13,14 +14,35 @@ public class Button : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        interactionEventChannel?.RaiseEvent(this.name);
-        StartCoroutine(CollorChnage());
+        if(isPressed)
+        {
+            interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(false), this.name);
+            StartCoroutine(CollorChnage(false));
+            isPressed = false;
+        }
+        else
+        {
+            interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(true), this.name);
+            StartCoroutine(CollorChnage(true));
+            isPressed = true;
+        }
+        
     }
 
-    private IEnumerator CollorChnage()
+    private IEnumerator CollorChnage(bool pressed)
     {
-        material.color = Color.green;
-        yield return new WaitForSeconds(0.5f);
-        material.color = Color.red;
+        canInteract = false;
+        if(pressed) {
+            material.color = Color.yellow;
+            yield return new WaitForSeconds(0.5f);
+            material.color = Color.green;
+        }
+        else
+        {
+            material.color = Color.yellow;
+            yield return new WaitForSeconds(0.5f);
+            material.color = Color.red;
+        }
+        canInteract = true;
     }
 }

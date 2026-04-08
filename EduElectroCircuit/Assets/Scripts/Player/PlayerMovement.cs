@@ -45,10 +45,13 @@ public class PlayerMovement: MonoBehaviour
         move = move.normalized * speed;
         
         Vector3 velocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        if(velocity.magnitude < moveSpeed)
+        rb.linearVelocity += new Vector3(move.x, 0f, move.z);
+
+        if(rb.linearVelocity.magnitude > moveSpeed)
         {
-            rb.linearVelocity += new Vector3(move.x, 0f, move.z);
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, moveSpeed);
         }
+
         if(move.magnitude == 0)
         {
             MoveDrag();

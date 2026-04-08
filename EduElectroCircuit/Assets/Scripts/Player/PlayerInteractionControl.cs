@@ -109,7 +109,7 @@ public class PlayerInteractionControl : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if(!holding && interactable != null)
+        if(!holding && interactable != null && interactable.CanInteract())
         {
             interactable?.OnInteract();
         }

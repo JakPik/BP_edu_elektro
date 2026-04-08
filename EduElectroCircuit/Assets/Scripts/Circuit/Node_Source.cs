@@ -10,12 +10,11 @@ public class Node_Source : Node
     #region Variables
     [SerializeField] private SourceType sourceType;
     [SerializeField] private CircuitType circuitType;
-    [SerializeField] private InputActionReference getResistanceAction;
-    [SerializeField] private InputActionReference calculateAction;
 
     [Header("Event Channels")]
     [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
-    [SerializeField] private GenericVoidEventChannel startCalculationChannel;
+    [SerializeField] private GenericEventChannel<ButtonPressedEvent> startCalculationChannel;
+    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
     #endregion
     
     /// <summary>
@@ -62,25 +61,17 @@ public class Node_Source : Node
 
     private void OnEnable()
     {
-        nodeStateChangeChannel.OnEventRaised += GetResistanceEvent;
-        getResistanceAction.action.started += GetResistance;
-        calculateAction.action.started += Calculate;
-        startCalculationChannel.OnEventRaised += TestCalculation;
+        nodeStateChangeChannel.OnEventRaised += GetResistance;
+        startCalculationChannel.OnEventRaised += Calculate;
     }
 
     private void OnDisable()
     {
-        nodeStateChangeChannel.OnEventRaised -= GetResistanceEvent;
-        getResistanceAction.action.started -= GetResistance;
-        calculateAction.action.started -= Calculate;
-        startCalculationChannel.OnEventRaised -= TestCalculation;
+        nodeStateChangeChannel.OnEventRaised -= GetResistance;
+        startCalculationChannel.OnEventRaised -= Calculate;
     }
 
-    private void GetResistanceEvent()
-    {
-        GetResistance(new InputAction.CallbackContext());
-    }
-    private void GetResistance(InputAction.CallbackContext context)
+    private void GetResistance()
     {
         Logger.Log(this.name, "Start calculating total Resistance", LogType.SUCCESS);
         (R, connected) = GetResistanceSum();
@@ -95,18 +86,25 @@ public class Node_Source : Node
         }
     }
 
-    private void Calculate(InputAction.CallbackContext context)
+    private void Calculate(ButtonPressedEvent @event)
     {
+        circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(@event.IsON), this.name);
+        if(!@event.IsON) return;
         if(!connected)
         {
             Logger.Log(this.name, "Circuit not connected", LogType.WARNING);
             return;
         }
+
         Logger.Log(this.name, "Start calculating node Values", LogType.SUCCESS);
+
         I = U / R;
+
         NodeDataModel outData = new NodeDataModel(U,I,R,sourceType,circuitType);
         NodeDataModel originData = new NodeDataModel(U, I, R, sourceType, circuitType);
         CalculateValues(outData, originData);
+
+
         Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
         Logger.Log(this.name, "Calculation completed", LogType.SUCCESS);
     }
@@ -114,8 +112,8 @@ public class Node_Source : Node
     [ContextMenu("Test Calculation")]
     private void TestCalculation()
     {
-        GetResistance(new InputAction.CallbackContext());
-        Calculate(new InputAction.CallbackContext());
+        GetResistance();
+        Calculate(new ButtonPressedEvent(true));
     }
 
     

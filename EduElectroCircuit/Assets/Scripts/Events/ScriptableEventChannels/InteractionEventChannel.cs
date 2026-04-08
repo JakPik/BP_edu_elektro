@@ -3,6 +3,6 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "InteractionEventChannel", menuName = "Events/InteractionEventChannel")]
-public class InteractionEventChannel : GenericVoidEventChannel
+public class InteractionEventChannel : GenericEventChannel<ButtonPressedEvent>
 {
 }

@@ -31,8 +31,37 @@ public static class NodeCalculationModel
         float Rc_ = 0f;
         for(int i =  0; i < R.Length; i++)
         {
+            if(R[i] == 0) continue;
             Rc_ += (float)Math.Pow(R[i], -1);
         }
         return Rc_;
+    }
+
+    public static string FormatValue(float value)
+    {
+        if(value >= 1e6)
+        {
+            return (value / 1e6).ToString("F2") + " M";
+        }
+        else if(value >= 1e3)
+        {
+            return (value / 1e3).ToString("F2") + " k";
+        }
+        else if(value >= 1)
+        {
+            return value.ToString("F2") + " ";
+        }
+        else if(value >= 1e-3)
+        {
+            return (value * 1e3).ToString("F2") + " m";
+        }
+        else if(value == 0 || value <= 1e-10)
+        {
+            return value.ToString("F2") + " ";
+        }
+        else
+        {
+            return (value * 1e6).ToString("F4") + " μ";
+        }
     }
 }

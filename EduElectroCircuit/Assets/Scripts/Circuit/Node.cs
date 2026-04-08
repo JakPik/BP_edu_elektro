@@ -24,6 +24,7 @@ public abstract class Node: MonoBehaviour
     [SerializeField] protected float U;
     [SerializeField] protected float I;
     [SerializeField] protected bool connected = false;
+    [SerializeField] protected bool locked = false;
     #endregion
 
     /// <summary>
@@ -64,6 +65,12 @@ public abstract class Node: MonoBehaviour
             return (transform.TransformDirection(inPort[idx].transform.localPosition.normalized), inPort[idx].transform.position);
         }
         throw new Exception("InPort not found");
+    }
+    
+    public void Refresh()
+    {
+        U = 0;
+        I = 0;
     }
 
     public abstract void BuildConections(Node branchInRef, int branchId);

@@ -11,12 +11,13 @@ public class Node_Interactive: Node, INodeInteraction
     [Header("Control Value")]
     [Tooltip("Assign Voltage Value at which doorLockEvent Gets fired. This variable is used only when Node_Type == NODE_CONTROL")]
     [SerializeField] private float expected_U;
-    [SerializeField] private CircuitComponent refConnected;
+    [SerializeField] private GameObject refConnected;
     [SerializeField] private Vector3 positionOffset;
 
     #region Events
     [Header("Event Channels - Raised Events")]
     [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
+    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
     [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidationEventChannel;
     #endregion
     #endregion
@@ -38,6 +39,10 @@ public class Node_Interactive: Node, INodeInteraction
             U = originValues.Uc;
             I = originValues.Ic;
             R = originValues.Rc;
+            if(refConnected.TryGetComponent<IMeasureTool>(out var measureTool))
+            {
+                measureTool.DisplayValues(U, I, R, passValues.circuitType.ToString());
+            }
             Logger.Log(this.name, "Measured => U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
         }
         else
@@ -62,6 +67,10 @@ public class Node_Interactive: Node, INodeInteraction
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available\n Returning this R: " + R, LogType.WARNING);
+            if(type == NodeType.NODE_PASSIVE)
+            {
+                return (0,connected);
+            }
             return (R,connected);
         }
 
@@ -101,7 +110,6 @@ public class Node_Interactive: Node, INodeInteraction
         }
     }
 
-    [ContextMenu("Updated")]
     private void UpdateNode()
     {
         if(nodeStateChangeChannel != null) {
@@ -115,29 +123,54 @@ public class Node_Interactive: Node, INodeInteraction
 
     public (Vector3, Transform) GetTransform() => (transform.position + positionOffset, transform);
 
-    public void SetComponentData(ComponentDataSO componentData, CircuitComponent circuitComponent)
+    public void SetComponentData(ComponentDataSO componentData, GameObject circuitComponent)
     {
         refConnected = circuitComponent;
         connected = true;
-        UpdateNode();
         if(componentData.type == ComponentType.RESISTOR)
         {
             R = ((ResistorDataSO)componentData).resistance;
         }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.TryGetComponent(out CircuitComponent component) && component == refConnected)
-        {
-            refConnected = null;
-            connected = false;
-            UpdateNode();
-            R = 0;
-            U = 0;
-            I = 0;
-        }
+        UpdateNode();
     }
 
     public bool CanConnect() => !connected;
+    public bool CanGrab() => !locked;
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject == refConnected)
+        {
+            refConnected = null;
+            connected = false;
+            R = 0;
+            U = 0;
+            I = 0;
+            UpdateNode();
+        }
+    }
+
+    void OnEnable()
+    {
+        circuitActiveStateEventChannel.OnEventRaised += CircuitActiveStateChange;
+    }
+
+    void OnDisable()
+    {
+        circuitActiveStateEventChannel.OnEventRaised -= CircuitActiveStateChange;
+    }
+
+    private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
+    {
+        locked = @event.CircuitActive;
+        if(refConnected != null && refConnected.TryGetComponent(out IGrabable grabable))
+        {
+            grabable.LockGrab(locked);
+            
+        }
+        if(type == NodeType.NODE_CONTROL && !locked)
+        {
+            nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(false), this.name);
+        }
+    } 
 }

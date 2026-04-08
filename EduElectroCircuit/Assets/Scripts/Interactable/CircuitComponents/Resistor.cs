@@ -13,6 +13,11 @@ public class Resistor : CircuitComponent, IGrabable
     public bool CanGrab() => canGrab;
     public string GetGrabInfo() => grabInfo;
 
+    public void LockGrab(bool locked)
+    {
+        canGrab = !locked;
+    }
+
     public void OnGrab(bool grabbed, GameObject caller)
     {
         rb.constraints = RigidbodyConstraints.None;
@@ -41,7 +46,7 @@ public class Resistor : CircuitComponent, IGrabable
         return finalRot;
     }
 
-    protected override void InteractionLock(CircuitUpdateEvent @event)
+    protected override void InteractionLock(CircuitActiveStateEvent @event)
     {
         canGrab = !@event.CircuitActive;
     }
@@ -93,6 +98,6 @@ public class Resistor : CircuitComponent, IGrabable
 
     protected override void SendData()
     {
-        nodeInteraction.SetComponentData(resistorData, this);
+        nodeInteraction.SetComponentData(resistorData, this.gameObject);
     }
 }

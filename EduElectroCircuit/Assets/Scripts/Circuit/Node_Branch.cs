@@ -35,7 +35,7 @@ public class Nod_Branch : Node
                 }
                 float local_I = NodeCalculationModel.CalculateCurrentDivider(I,branch_R,i);
                 localValues.SetValues(U, local_I, branch_R[i]);
-                staticValues.SetValues(U, local_I, branch_R[i]);
+                staticValues.SetValues(U, local_I, R);
                 nextBranchNode[i].CalculateValues(localValues, staticValues);
             }
         }
@@ -63,7 +63,10 @@ public class Nod_Branch : Node
                 }
                 (branch_R[i], branch_connected[i]) = nextBranchNode[i].GetResistanceSum();
                 disconnectedBranches += branch_connected[i]? 0:1;
-                R += (float)Math.Pow(branch_R[i], -1);
+                if(branch_R[i] != 0 && branch_connected[i])
+                {
+                    R += (float)Math.Pow(branch_R[i], -1);
+                }
             }
             R = (float)Math.Pow(R, -1);
             Logger.Log(this.name, "Local R: " + R, LogType.INFO);
