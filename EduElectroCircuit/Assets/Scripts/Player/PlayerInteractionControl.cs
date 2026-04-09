@@ -61,18 +61,10 @@ public class PlayerInteractionControl : MonoBehaviour
                 interactable = interact;
                 Logger.Log(this.name, interactable.GetInteractionInfo(), LogType.INFO);
             }
-            else if(!holding)
-            {
-                interactable = null;
-            }
             if(obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
             {
                 grabbedObject.component = hitInfo.collider.gameObject;
                 grabbedObject.grabable = grabable;
-            }
-            else if(!holding)
-            {
-                grabbedObject.Refresh();
             }
         }
     }

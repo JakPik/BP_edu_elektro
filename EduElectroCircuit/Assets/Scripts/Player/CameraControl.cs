@@ -31,7 +31,7 @@ public class CameraControl : MonoBehaviour
     public (bool, RaycastHit) CameraRayCast(float distance)
     {
         Ray ray = new Ray(transform.position, transform.forward);
-        LayerMask layerMask = ~LayerMask.NameToLayer("Default");
+        LayerMask layerMask = ~LayerMask.NameToLayer("Default") & ~LayerMask.NameToLayer("Walls");
         return (Physics.Raycast(ray, out RaycastHit hitInfo, distance*2, layerMask, QueryTriggerInteraction.Ignore), hitInfo);
     }
 
