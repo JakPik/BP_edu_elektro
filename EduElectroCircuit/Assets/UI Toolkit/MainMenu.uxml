@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="MainMenuPanel" style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.2); position: absolute; height: 100%; width: 100%;">
+        <ui:VisualElement name="MainMenu" style="flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; background-color: rgba(0, 0, 59, 0.86); width: 870px; height: 521px; align-self: center; align-content: center; flex-direction: column;">
+            <ui:Label text="Electrician Demo" style="flex-shrink: 1; flex-grow: 0; flex-direction: row; color: rgb(255, 255, 255); font-size: 87px; margin-top: 10%;"/>
+            <ui:Button text="Play&#10;" name="Play_Button" style="height: 141px; width: 318px; margin-top: 9%; padding-top: 0; padding-left: 0; padding-bottom: 0; padding-right: 0; font-size: 55px;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="FadeScreen" style="flex-grow: 1; align-items: auto; position: absolute; background-color: rgba(0, 0, 0, 0); width: 100%; height: 100%; color: rgb(27, 27, 27); visibility: hidden;"/>
+</ui:UXML>

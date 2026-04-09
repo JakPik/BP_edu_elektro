@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Button : MonoBehaviour, IInteractable
+public class ButtonObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private GenericEventChannel<ButtonPressedEvent> interactionEventChannel;
     [SerializeField] private string interactionInfo;
