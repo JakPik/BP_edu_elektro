@@ -19,6 +19,7 @@ public class ResistorDataSO : ComponentDataSO
         int firstDigit = (int)resistance / 100;
         int secondDigit = ((int)resistance / 10) - 10 * firstDigit;
         int thirdDigit = (int)(resistance - 100 * firstDigit - 10 * secondDigit);
+
         colorCode[0] = ResistorColorCode.GetColor(firstDigit);
         colorCode[1] = ResistorColorCode.GetColor(secondDigit);
         colorCode[2] = ResistorColorCode.GetColor(thirdDigit);

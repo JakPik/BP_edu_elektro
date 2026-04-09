@@ -8,7 +8,19 @@ public class Resistor : CircuitComponent, IGrabable
     [SerializeField] private bool canGrab;
     [SerializeField] private string grabInfo;
     [SerializeField] private ResistorDataSO resistorData;
-    
+
+    public void Start()
+    {
+        var rend = GetComponent<Renderer>();
+        var propBlock = new MaterialPropertyBlock();
+        rend.GetPropertyBlock(propBlock);
+        propBlock.SetColor("_Color_1", resistorData.colorCode[0]);
+        propBlock.SetColor("_Color_2", resistorData.colorCode[1]);
+        propBlock.SetColor("_Color_3", resistorData.colorCode[2]);
+        propBlock.SetColor("_Color_4", resistorData.colorCode[3]);
+        propBlock.SetColor("_Color_5", resistorData.colorCode[4]);
+        rend.SetPropertyBlock(propBlock);
+    }
 
     public bool CanGrab() => canGrab;
     public string GetGrabInfo() => grabInfo;

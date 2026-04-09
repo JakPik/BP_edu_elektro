@@ -10,7 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c49e83cfb1b94047af14fcc89661dab, type: 3}
-  m_Name: 2
+  m_Name: R_5 ohm
   m_EditorClassIdentifier: Assembly-CSharp::ResistorDataSO
   type: 0
-  resistance: 2
+  resistance: 5
+  colorCode:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
