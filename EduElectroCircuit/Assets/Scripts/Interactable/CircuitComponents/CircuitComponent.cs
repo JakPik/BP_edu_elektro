@@ -10,17 +10,7 @@ public abstract class CircuitComponent : MonoBehaviour
     [SerializeField] protected IEnumerator pendingCoroutine;
     [SerializeField] protected float animationSpeed;
     [SerializeField] protected Rigidbody rb;
-    [SerializeField] protected GenericEventChannel<CircuitActiveStateEvent> circuitUpdateChannel;
     [SerializeField] protected INodeInteraction nodeInteraction;
-    protected abstract void InteractionLock(CircuitActiveStateEvent @event);
-
-    protected void OnEnable() {
-        circuitUpdateChannel.OnEventRaised += InteractionLock;
-    }
-
-    protected void OnDisable() {
-        circuitUpdateChannel.OnEventRaised -= InteractionLock;
-    }
 
     protected IEnumerator AnimateNewPosition(Vector3 targetPosition, Transform targetTransform)
     {

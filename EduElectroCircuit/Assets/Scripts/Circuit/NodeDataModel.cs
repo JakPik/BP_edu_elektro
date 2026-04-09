@@ -9,11 +9,11 @@ public enum NodeType
 {
     SOURCE,
     NODE_ACTIVE,
-    NODE_PASSIVE,
+    MEASURE_POINT,
     NODE_CONTROL,
     BRANCH_OUT,
     BRANCH_IN,
-    END
+    END,
 }
 
 /// <summary>

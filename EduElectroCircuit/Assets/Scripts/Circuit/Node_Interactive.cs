@@ -34,31 +34,20 @@ public class Node_Interactive: Node, INodeInteraction
     /// <inheritdoc />
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
-        if(type == NodeType.NODE_PASSIVE)
-        {
-            U = originValues.Uc;
-            I = originValues.Ic;
-            R = originValues.Rc;
-            if(refConnected.TryGetComponent<IMeasureTool>(out var measureTool))
-            {
-                measureTool.DisplayValues(U, I, R, passValues.circuitType.ToString());
-            }
-            Logger.Log(this.name, "Measured => U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
-        }
-        else
-        {
-            (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
-            Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
-        }
+        (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
+        Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
+        
         if(type == NodeType.NODE_CONTROL)
         {
             nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(U == expected_U), this.name);
         }
+        
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available", LogType.WARNING);
             return;
         }
+
         nextNode.CalculateValues(passValues, originValues);
     }
 
@@ -67,21 +56,12 @@ public class Node_Interactive: Node, INodeInteraction
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available\n Returning this R: " + R, LogType.WARNING);
-            if(type == NodeType.NODE_PASSIVE)
-            {
-                return (0,connected);
-            }
             return (R,connected);
         }
 
         var (nextR, nextConnected) = nextNode.GetResistanceSum();
         nextConnected = nextConnected ? connected:nextConnected;
 
-        if(type == NodeType.NODE_PASSIVE)
-        {
-            Logger.Log(this.name, "Skipping resistance sum, measuring tool active", LogType.INFO);
-            return (nextR,nextConnected);
-        }
         Logger.Log(this.name, "Local R: " + R, LogType.INFO);
         return (R + nextR, nextConnected);
     }
@@ -134,7 +114,8 @@ public class Node_Interactive: Node, INodeInteraction
         UpdateNode();
     }
 
-    public bool CanConnect() => !connected;
+    public bool CanConnect() => !connected && !locked;
+
     public bool CanGrab() => !locked;
 
     void OnTriggerExit(Collider other)
@@ -165,6 +146,8 @@ public class Node_Interactive: Node, INodeInteraction
         locked = @event.CircuitActive;
         if(refConnected != null && refConnected.TryGetComponent(out IGrabable grabable))
         {
+            Logger.Log(this.name, "Grab lock state changed for: " + refConnected.name, LogType.INFO);
+
             grabable.LockGrab(locked);
             
         }

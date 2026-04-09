@@ -58,11 +58,6 @@ public class Resistor : CircuitComponent, IGrabable
         return finalRot;
     }
 
-    protected override void InteractionLock(CircuitActiveStateEvent @event)
-    {
-        canGrab = !@event.CircuitActive;
-    }
-
     protected override void NodeLockedState(bool locked)
     {
         if(locked)
