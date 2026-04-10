@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MultimeterSO", menuName = "Scriptable Objects/MultimeterSO")]
+[CreateAssetMenu(fileName = "MultimeterSO", menuName = "ComponentData/MultimeterSO")]
 public class MultimeterSO : ScriptableObject
 {
     [SerializeField] public string multimeterName;

@@ -45,26 +45,32 @@ public class PlayerInteractionControl : MonoBehaviour
     private void RayCast()
     {
         var (found, hitInfo) = cameraControl.CameraRayCast(holdDistance);
-        if (!found || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
+        if (!found || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
             if(!holding)
             {
+                grabbedObject.grabable?.DisplayInfo(false);
                 grabbedObject.Refresh();
             }
+
+            interactable?.DisplayInfo(false);
             interactable = null;
         }
         else
         {
             GameObject obj = hitInfo.collider.gameObject;
-            if (obj.TryGetComponent(out IInteractable interact))
+            if (obj.TryGetComponent(out IInteractable interact) && interact != interactable)
             {
+                interactable?.DisplayInfo(false);
                 interactable = interact;
-                Logger.Log(this.name, interactable.GetInteractionInfo(), LogType.INFO);
+                interactable.DisplayInfo(true);
             }
             if(obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
             {
+                grabable?.DisplayInfo(false);
                 grabbedObject.component = hitInfo.collider.gameObject;
                 grabbedObject.grabable = grabable;
+                grabable.DisplayInfo(true);
             }
         }
     }
@@ -86,6 +92,7 @@ public class PlayerInteractionControl : MonoBehaviour
         if(!grabbedObject.grabable?.CanGrab() ?? true) return;
         try {
             grabbedObject.grabable.OnGrab(!holding, this.gameObject);
+            grabbedObject.grabable?.DisplayInfo(false);
         }
         catch(Exception e)
         {

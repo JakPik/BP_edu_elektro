@@ -8,6 +8,8 @@ public class Resistor : CircuitComponent, IGrabable
     [SerializeField] private bool canGrab;
     [SerializeField] private string grabInfo;
     [SerializeField] private ResistorDataSO resistorData;
+    [SerializeField] private InteractionDisplay interactionDisplay;
+    [SerializeField] private InteractionSO grabInteraction;
 
     public void Start()
     {
@@ -23,7 +25,11 @@ public class Resistor : CircuitComponent, IGrabable
     }
 
     public bool CanGrab() => canGrab;
-    public string GetGrabInfo() => grabInfo;
+    public void DisplayInfo(bool display) {
+        if(canGrab) {
+            interactionDisplay.DisplayInteractionInfo(grabInteraction, display);
+        }
+    }
 
     public void LockGrab(bool locked)
     {

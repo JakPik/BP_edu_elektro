@@ -8,9 +8,19 @@ public class ButtonObject : MonoBehaviour, IInteractable
     [SerializeField] private bool canInteract;
     [SerializeField] private bool isPressed;
     [SerializeField] private Material material;
+    [SerializeField] private InteractionDisplay interactionDisplay;
+    [SerializeField] private InteractionSO pressOffInteraction;
+    [SerializeField] private InteractionSO pressOnInteraction;
+
+
+    private void Start() {
+        material.color = Color.red;
+        isPressed = false;
+    }
+
     public bool CanInteract() => canInteract;
 
-    public string GetInteractionInfo() => interactionInfo;
+    public void DisplayInfo(bool display) => interactionDisplay.DisplayInteractionInfo(isPressed ? pressOffInteraction : pressOnInteraction, display);
 
     public void OnInteract()
     {
@@ -19,12 +29,14 @@ public class ButtonObject : MonoBehaviour, IInteractable
             interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(false), this.name);
             StartCoroutine(CollorChnage(false));
             isPressed = false;
+            interactionDisplay.UpdateDisplayInfo(pressOnInteraction);
         }
         else
         {
             interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(true), this.name);
             StartCoroutine(CollorChnage(true));
             isPressed = true;
+            interactionDisplay.UpdateDisplayInfo(pressOffInteraction);
         }
         
     }

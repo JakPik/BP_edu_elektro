@@ -4,5 +4,5 @@ public interface IInteractable
 {
     void OnInteract();
     bool CanInteract();
-    string GetInteractionInfo();
+    void DisplayInfo(bool display);
 }
