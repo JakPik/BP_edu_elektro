@@ -103,13 +103,18 @@ public class Node_MeasurePoint : Node
         circuitActiveStateEventChannel.OnEventRaised -= CircuitActiveStateChange;
     }
 
+    public void Reset()
+    {
+        multimeterData.type = "";
+        multimeterData.value = "";
+    }
+
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
     {
         locked = @event.CircuitActive;
         if(!locked)
         {
-            multimeterData.type = "";
-            multimeterData.value = "";
+            Reset();
         }
     } 
 }

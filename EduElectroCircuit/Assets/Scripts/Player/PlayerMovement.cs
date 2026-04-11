@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Unity.Mathematics;
@@ -22,6 +23,7 @@ public class PlayerMovement: MonoBehaviour
 
     [Header("Player actions")]
     [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference respawnAction;
     
     public float drag;
 
@@ -30,6 +32,8 @@ public class PlayerMovement: MonoBehaviour
 
     /* Runtime helper variables */
     private float _speedCorrection = 10f;   // DeltaTime correction for movement speed
+
+    private Coroutine _respawnCoroutine;
     #endregion
 
     private void Update()
@@ -44,7 +48,6 @@ public class PlayerMovement: MonoBehaviour
         Vector3 move = movementTransform.transform.forward * _moveDirection.y + movementTransform.transform.right * _moveDirection.x;
         move = move.normalized * speed;
         
-        Vector3 velocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.linearVelocity += new Vector3(move.x, 0f, move.z);
 
         if(rb.linearVelocity.magnitude > moveSpeed)
@@ -70,9 +73,16 @@ public class PlayerMovement: MonoBehaviour
         rb.linearVelocity = vector;
     }
 
+    private IEnumerator Respawn(bool fadeIn)
+    {
+        yield return StartCoroutine(LevelControl.Instance.Respawn(rb, cameraControl, fadeIn));
+        _respawnCoroutine = null;
+    }
+
     private void Start()
     {
         cameraControl.InitHandShake(this.gameObject);
+        _respawnCoroutine = StartCoroutine(Respawn(false));
     }
 
     private void OnEnable()
@@ -80,15 +90,26 @@ public class PlayerMovement: MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         moveAction.action.performed += OnMoveInput;
         moveAction.action.canceled += OnMoveInput;
+        respawnAction.action.started += OnRespawn;
         
     }
 
+    
     private void OnDisable()
     {
         moveAction.action.performed -= OnMoveInput;
         moveAction.action.canceled -= OnMoveInput;
-        
+        respawnAction.action.started -= OnRespawn;
     }
+
+    private void OnRespawn(InputAction.CallbackContext context)
+    {
+        if(_respawnCoroutine == null)
+        {
+            _respawnCoroutine = StartCoroutine(Respawn(true));
+        }
+    }
+
 
     private void OnMoveInput(InputAction.CallbackContext context)
     {

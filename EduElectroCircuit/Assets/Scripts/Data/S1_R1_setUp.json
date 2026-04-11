@@ -1,0 +1,19 @@
+{
+    "resistors" : [
+        {
+            "name": "R1",
+            "position": [0,0,0],
+            "resistance": "R_5 ohm"
+        },
+        {
+            "name": "R2",
+            "position": [10,0,0],
+            "resistance": "R_5 ohm"
+        },
+        {
+            "name": "R3",
+            "position": [0,10,10],
+            "resistance": "R_5 ohm"
+        }
+    ]
+}

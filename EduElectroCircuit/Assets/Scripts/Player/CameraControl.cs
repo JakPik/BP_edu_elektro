@@ -39,6 +39,13 @@ public class CameraControl : MonoBehaviour
     public Vector3 GetCameraForward() => transform.forward;
     public Transform GetOrientation() => orientation;
 
+    public void ResetView(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+        _yRotation = transform.eulerAngles.y;
+        _xRotation = 0f;
+    }
+
     public void InitHandShake(GameObject caller)
     {
         _yRotation = caller.transform.eulerAngles.y;

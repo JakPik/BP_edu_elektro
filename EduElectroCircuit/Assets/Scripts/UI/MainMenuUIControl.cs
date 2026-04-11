@@ -14,7 +14,6 @@ public class MainMenuUIControl : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        // Start loading the main game scene
         StartCoroutine(LoadMainGameScene());
     }
 
@@ -22,14 +21,13 @@ public class MainMenuUIControl : MonoBehaviour
     {
         float progress = 0f;
         VisualElement panel = uiDocument.rootVisualElement.Q<VisualElement>("FadeScreen");
-        panel.visible = true; // Show the fade panel
+        panel.visible = true;
         while (progress < 1f)
         {
-            progress += Time.deltaTime; // Simulate loading progress
-            panel.style.backgroundColor = new Color(0f, 0f, 0f, progress); // Fade out the panel
+            progress += Time.deltaTime;
+            panel.style.backgroundColor = new Color(0f, 0f, 0f, progress);
             yield return null;
         }
-        // Simulate loading time
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainGameSceneName);
     }
 }

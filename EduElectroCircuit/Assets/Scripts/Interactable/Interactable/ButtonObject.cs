@@ -12,8 +12,8 @@ public class ButtonObject : MonoBehaviour, IInteractable
     [SerializeField] private InteractionSO pressOffInteraction;
     [SerializeField] private InteractionSO pressOnInteraction;
 
-
-    private void Start() {
+    public void Reset()
+    {
         material.color = Color.red;
         isPressed = false;
     }

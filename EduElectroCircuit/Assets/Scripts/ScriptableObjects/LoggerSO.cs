@@ -53,7 +53,7 @@ public class LoggerSO: ScriptableObject
 
     public static LoggerSO LoadOrCreate()
     {
-        var path = "Assets/LoggerSO.asset";
+        var path = "Assets/Resources/ScriptableObjects/Utils/LoggerSO.asset";
         var logger = UnityEditor.AssetDatabase.LoadAssetAtPath<LoggerSO>(path);
         if (logger == null)
         {

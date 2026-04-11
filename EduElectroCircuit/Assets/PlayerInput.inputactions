@@ -34,7 +34,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "GetResistance",
+                    "name": "Respawn",
                     "type": "Button",
                     "id": "4d33accd-0725-42d5-81c8-c8a290ad7a37",
                     "expectedControlType": "",
@@ -146,7 +146,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GetResistance",
+                    "action": "Respawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

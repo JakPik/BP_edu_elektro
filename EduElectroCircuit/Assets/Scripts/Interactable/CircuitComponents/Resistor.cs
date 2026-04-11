@@ -7,7 +7,7 @@ public class Resistor : CircuitComponent, IGrabable
 {
     [SerializeField] private bool canGrab;
     [SerializeField] private string grabInfo;
-    [SerializeField] private ResistorDataSO resistorData;
+    [SerializeField] public ResistorDataSO resistorData;
     [SerializeField] private InteractionDisplay interactionDisplay;
     [SerializeField] private InteractionSO grabInteraction;
 

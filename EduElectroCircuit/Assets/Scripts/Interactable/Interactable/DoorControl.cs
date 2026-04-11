@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class DoorControl : MonoBehaviour
+public class DoorControl : ColliderDrawUtil
 {
     [SerializeField] GameObject door;
     [SerializeField] GameObject enterPoint;
