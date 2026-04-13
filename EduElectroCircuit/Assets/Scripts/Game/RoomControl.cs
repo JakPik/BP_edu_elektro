@@ -9,12 +9,12 @@ public class RoomControl : MonoBehaviour
 {
     [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
     [SerializeField] private UnityEvent onRoomReload;
+    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
 
     void OnRoomReload()
     {
         onRoomReload?.Invoke();
-        GameObject prefab = Resources.Load<GameObject>("meters");
-        Logger.Log(this.name, "Reloading room, instantiating prefab: " + (prefab == null), LogType.INFO);
+        circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false), this.name);
         ComponentSetUp();
     }
 
@@ -44,6 +44,13 @@ public class RoomControl : MonoBehaviour
             }
             obj.transform.position = resistor.position;
             obj.transform.rotation = componentsParent.rotation;
+            Resistor resistorComp = obj.GetComponent<Resistor>();
+            if (resistorComp == null)
+            {
+                Logger.Log(this.name, "Resistor component not found on " + obj.name, LogType.ERROR);
+                continue;
+            }
+            resistorComp.LockGrab(false);
         }
 
     }

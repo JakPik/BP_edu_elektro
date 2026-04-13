@@ -12,6 +12,7 @@ public class LevelControl : MonoBehaviour
     [SerializeField] private int startTime = 0;
     [SerializeField] private float animSpeedIn = 3.5f;
     [SerializeField] private float animSpeedOut = 1.0f;
+    [SerializeField] public ColorSchemeSO colorScheme;
     public static LevelControl Instance;
 
     void Awake()
@@ -23,7 +24,6 @@ public class LevelControl : MonoBehaviour
         else
         {
             Instance = this;
-            
         }
     }
 
@@ -66,17 +66,23 @@ public class LevelControl : MonoBehaviour
         }
     }
 
-    public IEnumerator Respawn(Rigidbody rb, CameraControl cameraControl, bool fadeIn)
+    public IEnumerator Respawn()
     {
-        yield return StartCoroutine(Fade(fadeIn));
+        yield return StartCoroutine(Fade(true));
+
         roomReloadEventChannel[curSpawnPointIndex]?.RaiseEvent(this.name);
-        var (position, rotation) = RespawnPlayer();
-        rb.position = position;
-        rb.rotation = rotation;
-        rb.linearVelocity = Vector3.zero;
-        cameraControl.ResetView(rotation);
 
         yield return new WaitForSeconds(0.8f);
-        if(fadeIn) yield return StartCoroutine(Fade(false));
+        yield return StartCoroutine(Fade(false));
     }
+
+    public IEnumerator LevelLoad()
+    {
+        
+        roomReloadEventChannel[curSpawnPointIndex]?.RaiseEvent(this.name);
+
+        yield return new WaitForSeconds(0.8f);
+        yield return StartCoroutine(Fade(false));
+    }
+
 }

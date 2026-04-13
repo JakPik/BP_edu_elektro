@@ -2,8 +2,30 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 
+public enum CircuitValueType
+{
+    VOLTAGE,
+    CURRENT,
+    RESISTANCE
+}
+
 public static class NodeCalculationModel
 {
+    private static string GetUnit(CircuitValueType type)
+    {
+        switch(type)
+        {
+            case CircuitValueType.VOLTAGE:
+                return "V";
+            case CircuitValueType.CURRENT:
+                return "A";
+            case CircuitValueType.RESISTANCE:
+                return "Ω";
+            default:
+                return "";
+        }
+    } 
+
     public static (float, float) CalculateNodeValues(NodeDataModel passValues, float R)
     {
         float U = 0f;
@@ -37,31 +59,31 @@ public static class NodeCalculationModel
         return Rc_;
     }
 
-    public static string FormatValue(float value)
+    public static string FormatValue(float value, CircuitValueType type)
     {
         if(value >= 1e6)
         {
-            return (value / 1e6).ToString("F2") + " M";
+            return (value / 1e6).ToString("F2") + " M" + GetUnit(type);
         }
         else if(value >= 1e3)
         {
-            return (value / 1e3).ToString("F2") + " k";
+            return (value / 1e3).ToString("F2") + " k" + GetUnit(type);
         }
         else if(value >= 1)
         {
-            return value.ToString("F2") + " ";
+            return value.ToString("F2") + " " + GetUnit(type);
         }
         else if(value >= 1e-3)
         {
-            return (value * 1e3).ToString("F2") + " m";
+            return (value * 1e3).ToString("F2") + " m" + GetUnit(type);
         }
         else if(value == 0 || value <= 1e-10)
         {
-            return value.ToString("F2") + " ";
+            return value.ToString("F2") + " " + GetUnit(type);
         }
         else
         {
-            return (value * 1e6).ToString("F4") + " μ";
+            return (value * 1e6).ToString("F4") + " μ" + GetUnit(type);
         }
     }
 }

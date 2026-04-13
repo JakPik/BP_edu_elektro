@@ -24,6 +24,7 @@ public class PlayerMovement: MonoBehaviour
     [Header("Player actions")]
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference respawnAction;
+    [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
     
     public float drag;
 
@@ -73,16 +74,23 @@ public class PlayerMovement: MonoBehaviour
         rb.linearVelocity = vector;
     }
 
-    private IEnumerator Respawn(bool fadeIn)
+    private IEnumerator Respawn(bool firstRespawn)
     {
-        yield return StartCoroutine(LevelControl.Instance.Respawn(rb, cameraControl, fadeIn));
+        if(firstRespawn)
+        {
+            yield return StartCoroutine(LevelControl.Instance.LevelLoad());
+        }
+        else
+        {
+            yield return StartCoroutine(LevelControl.Instance.Respawn());
+        }
         _respawnCoroutine = null;
     }
 
     private void Start()
     {
         cameraControl.InitHandShake(this.gameObject);
-        _respawnCoroutine = StartCoroutine(Respawn(false));
+        _respawnCoroutine = StartCoroutine(Respawn(true));
     }
 
     private void OnEnable()
@@ -91,7 +99,7 @@ public class PlayerMovement: MonoBehaviour
         moveAction.action.performed += OnMoveInput;
         moveAction.action.canceled += OnMoveInput;
         respawnAction.action.started += OnRespawn;
-        
+        roomReloadEventChannel.OnEventRaised += OnRoomReload;
     }
 
     
@@ -100,13 +108,22 @@ public class PlayerMovement: MonoBehaviour
         moveAction.action.performed -= OnMoveInput;
         moveAction.action.canceled -= OnMoveInput;
         respawnAction.action.started -= OnRespawn;
+        roomReloadEventChannel.OnEventRaised -= OnRoomReload;
+    }
+
+    private void OnRoomReload()
+    {
+        var (position, rotation) = LevelControl.Instance.RespawnPlayer();
+        rb.position = position;
+        rb.rotation = rotation;
+        rb.linearVelocity = Vector3.zero;
     }
 
     private void OnRespawn(InputAction.CallbackContext context)
     {
         if(_respawnCoroutine == null)
         {
-            _respawnCoroutine = StartCoroutine(Respawn(true));
+            _respawnCoroutine = StartCoroutine(Respawn(false));
         }
     }
 

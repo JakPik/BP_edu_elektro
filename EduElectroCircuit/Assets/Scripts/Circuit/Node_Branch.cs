@@ -4,9 +4,9 @@ using UnityEngine.Splines;
 
 public class Nod_Branch : Node
 {
-    [SerializeField] private Node[] nextBranchNode;
-    [SerializeField] private float[] branch_R;
-    [SerializeField] private bool[] branch_connected;
+    [SerializeField] private Node[] nextBranchNode = new Node[3];
+    [SerializeField] private float[] branch_R = new float[3];
+    [SerializeField] private bool[] branch_connected = new bool[3];
 
     /// <summary>
     /// <para>Calculates based on the type of the node:</para>

@@ -7,6 +7,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private InputActionReference lookAction;
     [SerializeField] private float sensitivity = 0.01f;
+    [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
 
     private Vector2 _lookDirection;
     private float _xRotation = 0f;
@@ -55,12 +56,20 @@ public class CameraControl : MonoBehaviour
     {
         lookAction.action.performed += OnLookInput;
         lookAction.action.canceled += OnLookInput;
+        roomReloadEventChannel.OnEventRaised += OnRoomReload;
     }
 
     private void OnDisable()
     {
         lookAction.action.performed -= OnLookInput;
         lookAction.action.canceled -= OnLookInput;
+        roomReloadEventChannel.OnEventRaised -= OnRoomReload;
+    }
+
+    private void OnRoomReload()
+    {
+        var (position, rotation) = LevelControl.Instance.RespawnPlayer();
+        ResetView(rotation);
     }
 
     private void OnLookInput(InputAction.CallbackContext context)

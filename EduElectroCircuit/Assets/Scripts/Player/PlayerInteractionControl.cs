@@ -24,6 +24,7 @@ public class PlayerInteractionControl : MonoBehaviour
     [SerializeField] private IInteractable interactable;
     [SerializeField] private InputActionReference interactAction;
     [SerializeField] private InputActionReference holdtAction;
+    [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
 
     private void Update()
     {
@@ -67,7 +68,7 @@ public class PlayerInteractionControl : MonoBehaviour
             }
             if(obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
             {
-                grabable?.DisplayInfo(false);
+                grabbedObject.grabable?.DisplayInfo(false);
                 grabbedObject.component = hitInfo.collider.gameObject;
                 grabbedObject.grabable = grabable;
                 grabable.DisplayInfo(true);
@@ -79,12 +80,27 @@ public class PlayerInteractionControl : MonoBehaviour
     {
         interactAction.action.started += OnInteract;
         holdtAction.action.started += OnHold;
+        roomReloadEventChannel.OnEventRaised += OnRoomReload;
     }
 
     private void OnDisable()
     {
         interactAction.action.started -= OnInteract;
         holdtAction.action.started -= OnHold;
+        roomReloadEventChannel.OnEventRaised -= OnRoomReload;
+    }
+
+    private void OnRoomReload()
+    {
+        if(holding)
+        {
+            grabbedObject.grabable.OnGrab(false, this.gameObject);
+            grabbedObject.grabable?.DisplayInfo(false);
+            grabbedObject.Refresh();
+            holding = false;
+        }
+        interactable?.DisplayInfo(false);
+        interactable = null;
     }
 
     private void OnHold(InputAction.CallbackContext context)

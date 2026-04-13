@@ -10,7 +10,7 @@ public class Node_MeasurePoint : Node
 
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
 
-    public void Start()
+    void Awake()
     {
         multimeterData = new MultimeterSO
         {
@@ -82,13 +82,13 @@ public class Node_MeasurePoint : Node
         switch(meterType)
         {
             case MeterType.OHMMETER:
-                multimeterData.value = NodeCalculationModel.FormatValue(R) + "Ω";
+                multimeterData.value = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
                 break;
             case MeterType.VOLTMETER:
-                multimeterData.value = NodeCalculationModel.FormatValue(U) + "V";
+                multimeterData.value = NodeCalculationModel.FormatValue(U, CircuitValueType.VOLTAGE);
                 break;
             case MeterType.AMPMETER:
-                multimeterData.value = NodeCalculationModel.FormatValue(I) + "A";
+                multimeterData.value = NodeCalculationModel.FormatValue(I, CircuitValueType.CURRENT);
                 break;
         }
     }

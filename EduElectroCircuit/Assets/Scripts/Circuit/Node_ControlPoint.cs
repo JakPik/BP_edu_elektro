@@ -1,26 +1,45 @@
-using UnityEngine;
-using UnityEngine.Splines;
 using System;
-using UnityEngine.Events;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UIElements;
 
-public class Node_Interactive: Node, INodeInteraction
+public class Node_ControlPoint : Node
 {
     #region Variables
     [Space(10)]
     [Header("Control Value")]
-    [SerializeField] private GameObject _refConnected;
-    [SerializeField] private Vector3 _positionOffset;
+    [Tooltip("Assign Voltage Value at which doorLockEvent Gets fired. This variable is used only when Node_Type == NODE_CONTROL")]
+    [SerializeField] private float expected_U;
+    [SerializeField] private UIDocument uiDocument;
 
     #region Events
-    [Header("Event Channels / Raised Events")]
-    [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
+    [Header("Event Channels - Raised Events")]
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
-    #endregion
+    [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidationEventChannel;
     #endregion
 
+    private Label stateLabel;
+    private Label resistanceLabel;
+    private Label requireLabel;
+    #endregion
 
-    /// <summary>
+    void Awake()
+    {
+        stateLabel = uiDocument.rootVisualElement.Q<Label>("State");
+        resistanceLabel = uiDocument.rootVisualElement.Q<Label>("Resistance");
+        requireLabel = uiDocument.rootVisualElement.Q<Label>("Required");
+
+        stateLabel.text = "Locked";
+        UIStyleControl.StyleAsError(stateLabel);
+
+        resistanceLabel.text = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
+        UIStyleControl.StyleAsSuccess(resistanceLabel);
+
+        requireLabel.text = NodeCalculationModel.FormatValue(expected_U, CircuitValueType.VOLTAGE);
+        UIStyleControl.StyleAsError(requireLabel);
+    }
+
+     /// <summary>
     /// <para>Calculates based on the type of the node:</para>
     /// <list type="bullet">
     ///   <item>NodeType.NODE_PASSIVE => Reads the originValues and assignes it as local R,U,I.</item>
@@ -34,6 +53,8 @@ public class Node_Interactive: Node, INodeInteraction
         (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
         Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
         
+        nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(U == expected_U), this.name);
+        DisplayLockedState(!(U == expected_U));
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available", LogType.WARNING);
@@ -82,44 +103,19 @@ public class Node_Interactive: Node, INodeInteraction
         }
     }
 
-    private void UpdateNode()
+    private void DisplayLockedState(bool locked)
     {
-        if(nodeStateChangeChannel != null) {
-            nodeStateChangeChannel.RaiseEvent(this.name);
+        if(locked)
+        {
+            stateLabel.text = "Locked";
+            UIStyleControl.StyleAsError(stateLabel);
+            UIStyleControl.StyleAsError(requireLabel);
         }
         else
         {
-            Logger.Log(this.name, "NodeStateChangeChannel not assigned", LogType.ERROR);
-        }
-    }
-
-    public (Vector3, Transform) GetTransform() => (transform.position + _positionOffset, transform);
-
-    public void SetComponentData(ComponentDataSO componentData, GameObject circuitComponent)
-    {
-        _refConnected = circuitComponent;
-        connected = true;
-        if(componentData.type == ComponentType.RESISTOR)
-        {
-            R = ((ResistorDataSO)componentData).resistance;
-        }
-        UpdateNode();
-    }
-
-    public bool CanConnect() => !connected && !locked;
-
-    public bool CanGrab() => !locked;
-
-    void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject == _refConnected)
-        {
-            _refConnected = null;
-            connected = false;
-            R = 0;
-            U = 0;
-            I = 0;
-            UpdateNode();
+            stateLabel.text = "Unlocked";
+            UIStyleControl.StyleAsSuccess(stateLabel);
+            UIStyleControl.StyleAsSuccess(requireLabel);
         }
     }
 
@@ -136,10 +132,10 @@ public class Node_Interactive: Node, INodeInteraction
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
     {
         locked = @event.CircuitActive;
-        if(_refConnected != null && _refConnected.TryGetComponent(out IGrabable grabable))
+        if(!locked)
         {
-            Logger.Log(this.name, "Grab lock state changed for: " + _refConnected.name, LogType.INFO);
-            grabable.LockGrab(locked);
+            nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(false), this.name);
+            DisplayLockedState(true);
         }
     } 
 }
