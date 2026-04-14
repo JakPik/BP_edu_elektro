@@ -9,7 +9,10 @@ public class Node_ControlPoint : Node
     [Space(10)]
     [Header("Control Value")]
     [Tooltip("Assign Voltage Value at which doorLockEvent Gets fired. This variable is used only when Node_Type == NODE_CONTROL")]
-    [SerializeField] private float expected_U;
+    [SerializeField] private float expectedValue;
+    [SerializeField] private CircuitValueType valueType = CircuitValueType.VOLTAGE;
+
+     [Space(10)]
     [SerializeField] private UIDocument uiDocument;
 
     #region Events
@@ -35,7 +38,7 @@ public class Node_ControlPoint : Node
         resistanceLabel.text = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
         UIStyleControl.StyleAsSuccess(resistanceLabel);
 
-        requireLabel.text = NodeCalculationModel.FormatValue(expected_U, CircuitValueType.VOLTAGE);
+        requireLabel.text = NodeCalculationModel.FormatValue(expectedValue, valueType);
         UIStyleControl.StyleAsError(requireLabel);
     }
 
@@ -53,8 +56,8 @@ public class Node_ControlPoint : Node
         (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
         Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
         
-        nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(U == expected_U), this.name);
-        DisplayLockedState(!(U == expected_U));
+        nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(IsCorrectValue()), this.name);
+        DisplayLockedState(!IsCorrectValue());
         if(nextNode == null)
         {
             Logger.Log(this.name, "No next node available", LogType.WARNING);
@@ -62,6 +65,19 @@ public class Node_ControlPoint : Node
         }
 
         nextNode.CalculateValues(passValues, originValues);
+    }
+
+    private bool IsCorrectValue()
+    {
+        switch(valueType)
+        {
+            case CircuitValueType.VOLTAGE:
+                return U == expectedValue;
+            case CircuitValueType.CURRENT:
+                return I == expectedValue;
+            default:
+                return false;
+        }
     }
 
     public override (float, bool) GetResistanceSum()

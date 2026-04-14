@@ -1,0 +1,31 @@
+{
+    "resistors": [
+        {
+            "name": "Resistor",
+            "position": {
+                "x": 2.5,
+                "y": 0.0,
+                "z": -4.0
+            },
+            "resistance": "R_175 ohm"
+        },
+        {
+            "name": "Resistor (1)",
+            "position": {
+                "x": 2.5,
+                "y": 0.0,
+                "z": -3.0
+            },
+            "resistance": "R_25 ohm"
+        },
+        {
+            "name": "Resistor (2)",
+            "position": {
+                "x": 2.5,
+                "y": 0.0,
+                "z": -2.0
+            },
+            "resistance": "R_5 ohm"
+        }
+    ]
+}

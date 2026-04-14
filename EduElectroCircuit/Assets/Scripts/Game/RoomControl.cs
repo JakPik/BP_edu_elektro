@@ -1,13 +1,11 @@
 using System.IO;
-using Mono.Cecil;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class RoomControl : MonoBehaviour
 {
     [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
+    [SerializeField] private TextAsset jsonFile;
     [SerializeField] private UnityEvent onRoomReload;
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
 
@@ -18,15 +16,15 @@ public class RoomControl : MonoBehaviour
         ComponentSetUp();
     }
 
+    [ContextMenu("Load Components")]
     private void ComponentSetUp()
     {
-        TextAsset textAsset = Resources.Load<TextAsset>("Data/S1_R1_setUp");
-        if (textAsset == null)
+        if (jsonFile == null)
         {
             Logger.Log(this.name, "Set up file not found", LogType.ERROR);
             return;
         }
-        string json = textAsset.text;
+        string json = jsonFile.text;
         Resistors data = JsonUtility.FromJson<Resistors>(json);
         Transform componentsParent = transform.Find("Components");
         foreach (var resistor in data.resistors)
@@ -42,7 +40,7 @@ public class RoomControl : MonoBehaviour
                 Resistor resistorComponent = obj.GetComponent<Resistor>();
                 resistorComponent.resistorData = Resources.Load<ResistorDataSO>("ScriptableObjects/Component_properties/" + resistor.resistance);
             }
-            obj.transform.position = resistor.position;
+            obj.transform.position = resistor.position + componentsParent.position;
             obj.transform.rotation = componentsParent.rotation;
             Resistor resistorComp = obj.GetComponent<Resistor>();
             if (resistorComp == null)
@@ -70,13 +68,20 @@ public class RoomControl : MonoBehaviour
                 data.resistors[i] = new ResistorData
                 {
                     name = child.name,
-                    position = child.position,
+                    position = child.localPosition,
                     resistance = resistorComponent.resistorData.name
                 };
             }
         }
         string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(Application.dataPath + "/Resources/Data/S1_R1_setUp.json", json);
+        if(jsonFile != null)
+        {
+            File.WriteAllText(Application.dataPath + "/Resources/Data/" + jsonFile.name + ".json", json);
+        }
+        else
+        {
+            File.WriteAllText(Application.dataPath + "/Resources/Data/ComponentSetUp.json", json);   
+        }
         Logger.Log(this.name, "Component set up saved to file", LogType.INFO);
     }
 

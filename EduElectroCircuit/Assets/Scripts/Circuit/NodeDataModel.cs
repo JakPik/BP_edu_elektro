@@ -17,20 +17,10 @@ public enum NodeType
 }
 
 /// <summary>
-/// Type of source.
-/// Determines which value is used as the main calculation reference (voltage or current)
-/// </summary>
-public enum SourceType
-{
-    VOLTAGE,
-    CURRENT
-}
-
-/// <summary>
 /// Type of circuit.
 /// Determines if circuit is DC or AC.
 /// </summary>
-public enum CircuitType
+public enum SignalType
 {
     DC,
     AC
@@ -42,13 +32,13 @@ public enum CircuitType
 /// </summary>
 public class NodeDataModel
 {
-    public SourceType sourceType;
-    public CircuitType circuitType;
+    public CircuitValueType sourceType;
+    public SignalType circuitType;
     public float Uc;
     public float Ic;
     public float Rc;
 
-    public NodeDataModel(float Uc, float Ic, float Rc, SourceType sType, CircuitType cType)
+    public NodeDataModel(float Uc, float Ic, float Rc, CircuitValueType sType, SignalType cType)
     {
         this.Uc = Uc;
         this.Ic = Ic;

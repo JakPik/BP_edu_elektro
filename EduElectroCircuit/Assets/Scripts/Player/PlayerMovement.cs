@@ -48,12 +48,13 @@ public class PlayerMovement: MonoBehaviour
         Transform movementTransform = cameraControl.GetOrientation();
         Vector3 move = movementTransform.transform.forward * _moveDirection.y + movementTransform.transform.right * _moveDirection.x;
         move = move.normalized * speed;
-        
+        float y_velocity = rb.linearVelocity.y;
         rb.linearVelocity += new Vector3(move.x, 0f, move.z);
 
         if(rb.linearVelocity.magnitude > moveSpeed)
         {
             rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, moveSpeed);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, y_velocity, rb.linearVelocity.z);
         }
 
         if(move.magnitude == 0)

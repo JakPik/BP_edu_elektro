@@ -7,6 +7,7 @@ public class LevelControl : MonoBehaviour
     [SerializeField] private UIDocument uiDocument;
     [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private GenericVoidEventChannel[] roomReloadEventChannel;
+    [SerializeField] private GenericVoidEventChannel globalReloadEventChannel;
     [SerializeField] private int curSpawnPointIndex = 0;
     [SerializeField] private int numOfRespawns = 0;
     [SerializeField] private int startTime = 0;
@@ -34,7 +35,7 @@ public class LevelControl : MonoBehaviour
             Logger.Log(this.name, "No spawn points set", LogType.ERROR);
             return (Vector3.zero, Quaternion.identity);
         }
-        numOfRespawns++;
+        
         return (spawnPoints[curSpawnPointIndex].transform.position, spawnPoints[curSpawnPointIndex].transform.rotation);
     }
 
@@ -68,8 +69,9 @@ public class LevelControl : MonoBehaviour
 
     public IEnumerator Respawn()
     {
+        numOfRespawns++;
         yield return StartCoroutine(Fade(true));
-
+        globalReloadEventChannel?.RaiseEvent(this.name);
         roomReloadEventChannel[curSpawnPointIndex]?.RaiseEvent(this.name);
 
         yield return new WaitForSeconds(0.8f);
@@ -78,8 +80,12 @@ public class LevelControl : MonoBehaviour
 
     public IEnumerator LevelLoad()
     {
-        
-        roomReloadEventChannel[curSpawnPointIndex]?.RaiseEvent(this.name);
+        numOfRespawns++;
+        globalReloadEventChannel?.RaiseEvent(this.name);
+        foreach(var channel in roomReloadEventChannel)
+        {
+            channel?.RaiseEvent(this.name);
+        }
 
         yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(Fade(false));

@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d7872dadae2c3a4389156ef1d6976dc, type: 3}
-  m_Name: Button_Interaction
-  m_EditorClassIdentifier: Assembly-CSharp::InteractionEventChannel
+  m_Script: {fileID: 11500000, guid: a5f187ad7e994d545aa1fc3f4fc6d34a, type: 3}
+  m_Name: Room_2_Door_NodeValidation
+  m_EditorClassIdentifier: Assembly-CSharp::NodeValidationEventChannel

@@ -7,10 +7,18 @@ public class ButtonObject : MonoBehaviour, IInteractable
     [SerializeField] private string interactionInfo;
     [SerializeField] private bool canInteract;
     [SerializeField] private bool isPressed;
-    [SerializeField] private Material material;
+    [SerializeField] private Shader buttonShader;
+    private Material material;
     [SerializeField] private InteractionDisplay interactionDisplay;
     [SerializeField] private InteractionSO pressOffInteraction;
     [SerializeField] private InteractionSO pressOnInteraction;
+
+    void Awake()
+    {
+        material = new Material(buttonShader);
+
+        GetComponent<Renderer>().material = material;
+    }
 
     public void Reset()
     {

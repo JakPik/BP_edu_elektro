@@ -1,21 +1,38 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Events;
-using UnityEngine.Splines;
+using UnityEngine.UIElements;
 
 public class Node_Source : Node
 {
     #region Variables
-    [SerializeField] private SourceType sourceType;
-    [SerializeField] private CircuitType circuitType;
+    [SerializeField] private CircuitValueType sourceType;
+    [SerializeField] private SignalType signalType;
+    [SerializeField] private UIDocument uiDocument;
 
     [Header("Event Channels")]
     [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
     [SerializeField] private GenericEventChannel<ButtonPressedEvent> startCalculationChannel;
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
+
+    private Label sourceTypeLabel;
+    private Label signalTypeLabel;
+    private Label valueLabel;
     #endregion
+
+    void Awake()
+    {
+        sourceTypeLabel = uiDocument.rootVisualElement.Q<Label>("SourceType");
+        signalTypeLabel = uiDocument.rootVisualElement.Q<Label>("SignalType");
+        valueLabel = uiDocument.rootVisualElement.Q<Label>("Value");
+
+        sourceTypeLabel.text = sourceType.ToString();
+
+        signalTypeLabel.text = signalType.ToString();
+
+        float displayValue = sourceType == CircuitValueType.VOLTAGE? U:I;
+
+        valueLabel.text = NodeCalculationModel.FormatValue(displayValue, sourceType);
+    }
     
     /// <summary>
     /// Starts the calculation process.
@@ -100,8 +117,8 @@ public class Node_Source : Node
 
         I = U / R;
 
-        NodeDataModel outData = new NodeDataModel(U,I,R,sourceType,circuitType);
-        NodeDataModel originData = new NodeDataModel(U, I, R, sourceType, circuitType);
+        NodeDataModel outData = new NodeDataModel(U,I,R,sourceType,signalType);
+        NodeDataModel originData = new NodeDataModel(U, I, R, sourceType, signalType);
         CalculateValues(outData, originData);
 
 

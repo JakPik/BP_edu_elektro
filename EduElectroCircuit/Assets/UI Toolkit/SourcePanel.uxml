@@ -1,0 +1,55 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Panel" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" style="flex-grow: 1; align-items: center; justify-content: flex-start; background-color: rgb(75, 106, 115);">
+        <ui:Label text="Source Panel" style="font-size: 10px; -unity-font-style: bold; color: rgb(0, 216, 255); -unity-text-outline-color: rgb(0, 43, 51); -unity-text-outline-width: 0.3px; word-spacing: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+            <Bindings>
+                <ui:DataBinding property="style.color" data-source-path="textPrimary" binding-mode="ToTarget"/>
+                <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textBorderPrimary" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Label>
+        <ui:VisualElement name="InfoPanel" style="flex-grow: 0; flex-shrink: 1; width: 97%; height: 78%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-direction: column; align-self: auto; align-items: center;">
+            <ui:Label text="Parameters" style="font-size: 10px; -unity-text-outline-width: 0.3px; -unity-font-style: bold; color: rgb(0, 216, 255); -unity-text-outline-color: rgb(0, 43, 51); letter-spacing: 0; margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                <Bindings>
+                    <ui:DataBinding property="style.color" data-source-path="textPrimary" binding-mode="ToTarget"/>
+                    <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textBorderPrimary" binding-mode="ToTarget"/>
+                </Bindings>
+            </ui:Label>
+            <ui:VisualElement name="ResistancePanel" style="flex-grow: 0; flex-direction: row; align-items: flex-start; align-content: flex-start; justify-content: flex-start; flex-shrink: 0;">
+                <ui:Label text="Source Type:" name="Label" style="font-size: 6px; -unity-font-style: bold; color: rgb(0, 216, 255); -unity-text-outline-color: rgb(0, 43, 51); -unity-text-outline-width: 0.3px; position: relative; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 1px; margin-left: 0;">
+                    <Bindings>
+                        <ui:DataBinding property="style.color" data-source-path="textPrimary" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textBorderPrimary" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Voltage" name="SourceType" style="font-size: 6px; -unity-font-style: bold; color: rgb(19, 249, 0); -unity-text-outline-color: rgb(0, 51, 6); -unity-text-outline-width: 0.3px; visibility: visible; position: relative; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 1px; margin-left: 1px;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="RequirePanel" style="flex-grow: 0; flex-direction: row; align-items: auto; align-content: auto; justify-content: flex-start; flex-shrink: 0;">
+                <ui:Label text="Signal Type:" name="Label" style="font-size: 6px; -unity-font-style: bold; color: rgb(0, 216, 255); -unity-text-outline-color: rgb(0, 43, 51); -unity-text-outline-width: 0.3px; position: relative; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 1px; margin-right: 0; margin-bottom: 2px; margin-left: 0;">
+                    <Bindings>
+                        <ui:DataBinding property="style.color" data-source-path="textPrimary" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textBorderPrimary" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="AC" name="SignalType" style="font-size: 6px; -unity-font-style: bold; color: rgb(255, 4, 0); -unity-text-outline-color: rgb(51, 1, 0); -unity-text-outline-width: 0.3px; visibility: visible; position: relative; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 1px; margin-right: 0; margin-bottom: 2px; margin-left: 1px;">
+                    <Bindings>
+                        <ui:DataBinding property="style.color" data-source-path="textSuccess" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textOutlineSuccess" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement name="RequirePanel" style="flex-grow: 0; flex-direction: row; align-items: auto; align-content: auto; justify-content: flex-start; flex-shrink: 0;">
+                <ui:Label text="Value:" name="Label" style="font-size: 6px; -unity-font-style: bold; color: rgb(0, 216, 255); -unity-text-outline-color: rgb(0, 43, 51); -unity-text-outline-width: 0.3px; position: relative; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 1px; margin-right: 0; margin-bottom: 2px; margin-left: 0;">
+                    <Bindings>
+                        <ui:DataBinding property="style.color" data-source-path="textPrimary" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textBorderPrimary" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="999,99 MV" name="Value" style="font-size: 6px; -unity-font-style: bold; color: rgb(255, 4, 0); -unity-text-outline-color: rgb(51, 1, 0); -unity-text-outline-width: 0.3px; visibility: visible; position: relative; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 1px; margin-right: 0; margin-bottom: 2px; margin-left: 1px;">
+                    <Bindings>
+                        <ui:DataBinding property="style.color" data-source-path="textSuccess" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.unityTextOutlineColor" data-source-path="textOutlineSuccess" binding-mode="ToTarget"/>
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
