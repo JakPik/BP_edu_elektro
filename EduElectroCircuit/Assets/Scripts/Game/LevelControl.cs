@@ -4,17 +4,14 @@ using UnityEngine.UIElements;
 
 public class LevelControl : MonoBehaviour
 {
-    [SerializeField] private UIDocument uiDocument;
     [SerializeField] private GameObject[] spawnPoints;
     [SerializeField] private GenericVoidEventChannel[] roomReloadEventChannel;
     [SerializeField] private GenericVoidEventChannel globalReloadEventChannel;
     [SerializeField] private int curSpawnPointIndex = 0;
     [SerializeField] private int numOfRespawns = 0;
-    [SerializeField] private int startTime = 0;
-    [SerializeField] private float animSpeedIn = 3.5f;
-    [SerializeField] private float animSpeedOut = 1.0f;
-    [SerializeField] public ColorSchemeSO colorScheme;
+    [SerializeField] private float startTime = 0;
     public static LevelControl Instance;
+    
 
     void Awake()
     {
@@ -54,33 +51,22 @@ public class LevelControl : MonoBehaviour
         }
     }
 
-    public IEnumerator Fade(bool fadeIn)
-    {
-        float progress = 0f;
-        VisualElement panel = uiDocument.rootVisualElement.Q<VisualElement>("Fade");
-        float alpha = fadeIn ? 0f : 1f;
-        while (progress < 1f)
-        {
-            progress += Time.deltaTime * (fadeIn ? animSpeedIn : animSpeedOut);
-            panel.style.backgroundColor = new Color(0f, 0f, 0f, alpha + progress * (fadeIn ? 1 : -1));
-            yield return null;
-        }
-    }
-
     public IEnumerator Respawn()
     {
         numOfRespawns++;
-        yield return StartCoroutine(Fade(true));
+        yield return StartCoroutine(GameUIControl.Instance.Fade(true));
         globalReloadEventChannel?.RaiseEvent(this.name);
-        roomReloadEventChannel[curSpawnPointIndex]?.RaiseEvent(this.name);
+        if(curSpawnPointIndex != 0) roomReloadEventChannel[curSpawnPointIndex]?.RaiseEvent(this.name);
 
         yield return new WaitForSeconds(0.8f);
-        yield return StartCoroutine(Fade(false));
+        yield return StartCoroutine(GameUIControl.Instance.Fade(false));
     }
 
     public IEnumerator LevelLoad()
     {
-        numOfRespawns++;
+        numOfRespawns = 0;
+        curSpawnPointIndex = 0;
+        startTime = Time.time * 1000f;
         globalReloadEventChannel?.RaiseEvent(this.name);
         foreach(var channel in roomReloadEventChannel)
         {
@@ -88,7 +74,7 @@ public class LevelControl : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.8f);
-        yield return StartCoroutine(Fade(false));
+        yield return StartCoroutine(GameUIControl.Instance.Fade(false));
     }
 
 }

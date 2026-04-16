@@ -8,7 +8,7 @@ public class InteractionDisplay : MonoBehaviour
     [SerializeField] private bool canRotate = true;
     private Label interactionDescription;
     private Label interactionKey;
-    private VisualElement display;
+    private VisualElement _display;
     private GameObject mainCamera;
     private Coroutine fadeCoroutine;
 
@@ -16,7 +16,7 @@ public class InteractionDisplay : MonoBehaviour
     {
         interactionDescription = uiDocument.rootVisualElement.Q<Label>("Description");
         interactionKey = uiDocument.rootVisualElement.Q<Label>("InteractionKey");
-        display = uiDocument.rootVisualElement.Q<VisualElement>("Display");
+        _display = uiDocument.rootVisualElement.Q<VisualElement>("Display");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
@@ -32,11 +32,20 @@ public class InteractionDisplay : MonoBehaviour
         interactionDescription.text = interactionData.description;
         interactionKey.text = interactionData.interactionKey;
         
-        if(fadeCoroutine != null)
+        /*if(fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
         }
-        fadeCoroutine = StartCoroutine(FadeInOut(display, interactionData.animationSpeed));
+        fadeCoroutine = StartCoroutine(FadeInOut(display, interactionData.animationSpeed));*/
+        
+        if(display)
+        {
+            _display.RemoveFromClassList("container_hidden");
+        }
+        else
+        {
+            _display.AddToClassList("container_hidden");
+        }
     }
 
     public void UpdateDisplayInfo(InteractionSO interactionData)
@@ -49,14 +58,14 @@ public class InteractionDisplay : MonoBehaviour
     {
         float time = fadeIn? 0 : 1;
         float progressiong = 0f;
-        if(fadeIn) this.display.visible = true;
+        if(fadeIn) this._display.visible = true;
         while (progressiong < 1)
         {
             progressiong += Time.deltaTime * animationSpeed;
             time += Time.deltaTime *animationSpeed  * (fadeIn? 1 : -1);
-            display.style.opacity = time;
+            _display.style.opacity = time;
             yield return null;
         }
-        if(!fadeIn) this.display.visible = false;
+        if(!fadeIn) this._display.visible = false;
     }
 }

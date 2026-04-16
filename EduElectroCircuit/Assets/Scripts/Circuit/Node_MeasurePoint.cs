@@ -6,18 +6,19 @@ public class Node_MeasurePoint : Node
 {
     [SerializeField] MeterType meterType;
     [SerializeField] UIDocument display;
-    private MultimeterSO multimeterData;
+    private Label _meterName;
+    private Label _signalType;
+    private Label _value;
 
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
 
     void Awake()
     {
-        multimeterData = new MultimeterSO
-        {
-            multimeterName = EnumTransformer.MeterTypeToString(meterType)
-        };
-        VisualElement meterPanel = display.rootVisualElement.Q<VisualElement>("MeterPanel");
-        meterPanel.dataSource = multimeterData;
+        _meterName = display.rootVisualElement.Q<Label>("MeterName");
+        _signalType = display.rootVisualElement.Q<Label>("SignalType");
+        _value = display.rootVisualElement.Q<Label>("Value");
+
+        _meterName.text = EnumTransformer.MeterTypeToString(meterType);
     }
 
     public override void BuildConections(Node branchInRef, int branchId)
@@ -78,17 +79,17 @@ public class Node_MeasurePoint : Node
 
     private void DisplayValues(float U, float I, float R, string mode)
     {
-        multimeterData.type = mode;
+        _signalType.text = mode;
         switch(meterType)
         {
             case MeterType.OHMMETER:
-                multimeterData.value = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
+                _value.text = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
                 break;
             case MeterType.VOLTMETER:
-                multimeterData.value = NodeCalculationModel.FormatValue(U, CircuitValueType.VOLTAGE);
+                 _value.text = NodeCalculationModel.FormatValue(U, CircuitValueType.VOLTAGE);
                 break;
             case MeterType.AMPMETER:
-                multimeterData.value = NodeCalculationModel.FormatValue(I, CircuitValueType.CURRENT);
+                 _value.text = NodeCalculationModel.FormatValue(I, CircuitValueType.CURRENT);
                 break;
         }
     }
@@ -105,8 +106,8 @@ public class Node_MeasurePoint : Node
 
     public void Reset()
     {
-        multimeterData.type = "";
-        multimeterData.value = "";
+         _signalType.text = "";
+         _value.text = "";
     }
 
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)

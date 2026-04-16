@@ -33,13 +33,12 @@ public class Node_ControlPoint : Node
         requireLabel = uiDocument.rootVisualElement.Q<Label>("Required");
 
         stateLabel.text = "Locked";
-        UIStyleControl.StyleAsError(stateLabel);
+        StyleAsError(stateLabel);
 
         resistanceLabel.text = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
-        UIStyleControl.StyleAsSuccess(resistanceLabel);
 
         requireLabel.text = NodeCalculationModel.FormatValue(expectedValue, valueType);
-        UIStyleControl.StyleAsError(requireLabel);
+        StyleAsError(requireLabel);
     }
 
      /// <summary>
@@ -124,15 +123,27 @@ public class Node_ControlPoint : Node
         if(locked)
         {
             stateLabel.text = "Locked";
-            UIStyleControl.StyleAsError(stateLabel);
-            UIStyleControl.StyleAsError(requireLabel);
+            StyleAsError(stateLabel);
+            StyleAsError(requireLabel);
         }
         else
         {
             stateLabel.text = "Unlocked";
-            UIStyleControl.StyleAsSuccess(stateLabel);
-            UIStyleControl.StyleAsSuccess(requireLabel);
+            StyleAsSuccess(stateLabel);
+            StyleAsSuccess(requireLabel);
         }
+    }
+
+    private void StyleAsSuccess(Label label)
+    {
+        label.RemoveFromClassList("label-error");
+        label.AddToClassList("label-success");
+    }
+
+    private void StyleAsError(Label label)
+    {
+        label.RemoveFromClassList("label-success");
+        label.AddToClassList("label-error");
     }
 
     void OnEnable()

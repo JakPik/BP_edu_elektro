@@ -6,10 +6,15 @@ public class MainMenuUIControl : MonoBehaviour
 {
     [SerializeField] UIDocument uiDocument;
     [SerializeField] string mainGameSceneName = "DemoScene";
+
+    private VisualElement _fadePanel;
+    private Button _playButton;
     private void Start()
     {
-        Button playButton = uiDocument.rootVisualElement.Q<Button>("Play_Button");
-        playButton.clicked += OnPlayButtonClicked;
+        _playButton = uiDocument.rootVisualElement.Q<Button>("Play_Button");
+        _fadePanel = uiDocument.rootVisualElement.Q<VisualElement>("FadeScreen");
+        _playButton.clicked += OnPlayButtonClicked;
+        StartCoroutine(FadeOut());
     }
 
     private void OnPlayButtonClicked()
@@ -19,15 +24,18 @@ public class MainMenuUIControl : MonoBehaviour
 
     private IEnumerator LoadMainGameScene()
     {
-        float progress = 0f;
-        VisualElement panel = uiDocument.rootVisualElement.Q<VisualElement>("FadeScreen");
-        panel.visible = true;
-        while (progress < 1f)
-        {
-            progress += Time.deltaTime;
-            panel.style.backgroundColor = new Color(0f, 0f, 0f, progress);
+        _fadePanel.AddToClassList("fade-in");
+        while(_fadePanel.resolvedStyle.opacity != 1f) {
             yield return null;
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainGameSceneName);
     }
+
+    private IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(1);
+        _fadePanel.RemoveFromClassList("fade-in");
+    }
 }
+
+

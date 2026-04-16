@@ -1,9 +1,4 @@
-using System;
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

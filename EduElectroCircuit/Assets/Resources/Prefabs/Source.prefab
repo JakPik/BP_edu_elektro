@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3953166066340771095}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.4233, y: -0.3303, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50,10 +50,10 @@ MonoBehaviour:
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 84
-  m_WorldSpaceHeight: 65
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
+  m_WorldSpaceWidth: 85
+  m_WorldSpaceHeight: 66
+  m_PivotReferenceSize: 1
+  m_Pivot: 6
   m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &6162031281100358813
 GameObject:
@@ -173,7 +173,7 @@ MonoBehaviour:
   connected: 0
   locked: 0
   sourceType: 0
-  circuitType: 0
+  signalType: 0
   uiDocument: {fileID: 3107853079682261398}
   nodeStateChangeChannel: {fileID: 0}
   startCalculationChannel: {fileID: 0}
@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7380406921051407349}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.435, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

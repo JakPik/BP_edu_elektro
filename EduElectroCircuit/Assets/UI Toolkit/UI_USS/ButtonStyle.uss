@@ -1,0 +1,49 @@
+.menu-button {
+    font-size: 45px;
+    background-color: rgb(156, 217, 188);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-left-color: rgb(217, 217, 217);
+    border-right-color: rgb(217, 217, 217);
+    border-top-color: rgb(217, 217, 217);
+    border-bottom-color: rgb(217, 217, 217);
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out-back;
+    color: rgb(0, 6, 78);
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(156, 156, 156);
+}
+
+.menu-button:hover {
+    font-size: 45px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    background-color: rgb(140, 255, 200);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    scale: 1.2 1.2;
+    transition-timing-function: ease-out-back;
+    transition-duration: 1s;
+    -unity-font-style: normal;
+    color: rgb(0, 159, 255);
+    -unity-text-outline-width: 1.5px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+}

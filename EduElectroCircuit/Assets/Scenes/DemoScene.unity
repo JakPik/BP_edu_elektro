@@ -822,6 +822,7 @@ MonoBehaviour:
   triggerType: 0
   boundsSize: {x: 4.0000005, y: 2, z: 1.5}
   boundsCenter: {x: -6.5009136, y: 1, z: 8.55}
+  levelReload: {fileID: 11400000, guid: 22d8027a296c79a48b638cf8a87a1ad2, type: 2}
 --- !u!4 &95744162
 Transform:
   m_ObjectHideFlags: 0
@@ -6528,7 +6529,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.05, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 253222288}
@@ -7627,7 +7628,7 @@ Transform:
   m_GameObject: {fileID: 733697084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.82303727, z: 0, w: 0.56798744}
-  m_LocalPosition: {x: -6.61, y: 1, z: 18.43}
+  m_LocalPosition: {x: 10.14, y: 1, z: 6.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8218,7 +8219,6 @@ GameObject:
   m_Component:
   - component: {fileID: 769732429}
   - component: {fileID: 769732428}
-  - component: {fileID: 769732430}
   m_Layer: 0
   m_Name: LevelControl
   m_TagString: Untagged
@@ -8238,22 +8238,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d0fae9935db8247bd07de927b1dfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelControl
-  uiDocument: {fileID: 769732430}
   spawnPoints:
   - {fileID: 1816558212}
   - {fileID: 95744159}
   - {fileID: 1522978345}
   roomReloadEventChannel:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 22d8027a296c79a48b638cf8a87a1ad2, type: 2}
   - {fileID: 11400000, guid: a5738047f81d90d439dd32893dda0f68, type: 2}
   - {fileID: 11400000, guid: 699180d9b21b9c549a78dc0f62228304, type: 2}
   globalReloadEventChannel: {fileID: 11400000, guid: 76cc7efff5d2c744a9e2a7740235626a, type: 2}
   curSpawnPointIndex: 0
   numOfRespawns: -1
   startTime: 0
-  animSpeedIn: 3.7
-  animSpeedOut: 0.8
-  colorScheme: {fileID: 11400000, guid: 8fe9bc264959c0346b4c42aef71f7ece, type: 2}
 --- !u!4 &769732429
 Transform:
   m_ObjectHideFlags: 0
@@ -8269,29 +8265,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &769732430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 769732427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: 838299ef03a24e64580ca11b84fc5b2d, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: c950955d0ced1d4498c11c4f99a0e52f, type: 3}
-  m_SortingOrder: 0
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &780117637
 GameObject:
   m_ObjectHideFlags: 0
@@ -9509,6 +9482,79 @@ PrefabInstance:
       addedObject: {fileID: 1054706047}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43ebede077353f5469be8bc5729ff3ba, type: 3}
+--- !u!1 &875327624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875327627}
+  - component: {fileID: 875327626}
+  - component: {fileID: 875327625}
+  m_Layer: 0
+  m_Name: GUI_Control
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &875327625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875327624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 838299ef03a24e64580ca11b84fc5b2d, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: c950955d0ced1d4498c11c4f99a0e52f, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &875327626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875327624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52042fef05732ba489a50d54fe5ba1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameUIControl
+  uiDocument: {fileID: 875327625}
+  animSpeedIn: 3.5
+  animSpeedOut: 1
+  actionMap: {fileID: -944628639613478452, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  pauseAction: {fileID: -2681525880936574576, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+--- !u!4 &875327627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875327624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47348, y: 0, z: 17.59357}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &897710048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14903,6 +14949,7 @@ MonoBehaviour:
   triggerType: 0
   boundsSize: {x: 1.5, y: 2.0000005, z: 4.0000014}
   boundsCenter: {x: 29.93, y: 1, z: 1.496}
+  levelReload: {fileID: 11400000, guid: 22d8027a296c79a48b638cf8a87a1ad2, type: 2}
 --- !u!1 &1596044759
 GameObject:
   m_ObjectHideFlags: 0
@@ -18230,6 +18277,7 @@ MonoBehaviour:
   triggerType: 0
   boundsSize: {x: 2, y: 2, z: 2}
   boundsCenter: {x: -6.500913, y: 1, z: 19.18}
+  levelReload: {fileID: 0}
 --- !u!4 &1816558215
 Transform:
   m_ObjectHideFlags: 0
@@ -18271,7 +18319,7 @@ Transform:
   m_GameObject: {fileID: 1816614209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.07}
+  m_LocalPosition: {x: 0.4207, y: -0.3275, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18295,10 +18343,10 @@ MonoBehaviour:
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 84
-  m_WorldSpaceHeight: 65
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
+  m_WorldSpaceWidth: 85
+  m_WorldSpaceHeight: 66
+  m_PivotReferenceSize: 1
+  m_Pivot: 6
   m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &1819036171
 GameObject:
@@ -23379,3 +23427,4 @@ SceneRoots:
   - {fileID: 1596044760}
   - {fileID: 2104309935}
   - {fileID: 1738992368}
+  - {fileID: 875327627}

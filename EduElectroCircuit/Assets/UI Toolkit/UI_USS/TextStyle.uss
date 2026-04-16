@@ -1,0 +1,107 @@
+.menu-title {
+    font-size: 120px;
+    -unity-text-outline-width: 6px;
+    -unity-font-style: bold;
+    color: rgb(0, 220, 255);
+    -unity-text-outline-color: rgb(0, 44, 51);
+}
+
+.panel-title {
+    color: rgb(0, 218, 255);
+    -unity-text-outline-color: rgb(0, 43, 51);
+    -unity-text-outline-width: 0.5px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.property-display {
+    flex-direction: row;
+}
+
+.property-display .label {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 1px;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 6px;
+}
+
+.property-display .label-success {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 6px;
+}
+
+.property-display .label-error {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 6px;
+}
+
+.property-display .label-param {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 6px;
+}
+
+.label {
+    -unity-font-style: bold;
+    color: rgb(0, 216, 255);
+    -unity-text-outline-color: rgb(0, 43, 51);
+    -unity-text-outline-width: 0.3px;
+    font-size: 8px;
+}
+
+.label-success {
+    color: rgb(19, 249, 0);
+    -unity-text-outline-color: rgb(0, 51, 6);
+    -unity-text-outline-width: 0.3px;
+    -unity-font-style: bold;
+    font-size: 8px;
+}
+
+.label-error {
+    color: rgb(255, 0, 0);
+    -unity-text-outline-color: rgb(51, 0, 0);
+    -unity-text-outline-width: 0.3px;
+    -unity-font-style: bold;
+    font-size: 8px;
+}
+
+.label-param {
+    -unity-font-style: bold;
+    color: rgb(255, 170, 0);
+    -unity-text-outline-color: rgb(51, 34, 0);
+    -unity-text-outline-width: 0.3px;
+    font-size: 8px;
+}
