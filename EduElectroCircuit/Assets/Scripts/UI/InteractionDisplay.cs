@@ -10,7 +10,6 @@ public class InteractionDisplay : MonoBehaviour
     private Label interactionKey;
     private VisualElement _display;
     private GameObject mainCamera;
-    private Coroutine fadeCoroutine;
 
     private void Start()
     {
@@ -22,7 +21,8 @@ public class InteractionDisplay : MonoBehaviour
 
     void Update()
     {
-        if(canRotate) {
+        if (canRotate)
+        {
             transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
         }
     }
@@ -31,14 +31,14 @@ public class InteractionDisplay : MonoBehaviour
     {
         interactionDescription.text = interactionData.description;
         interactionKey.text = interactionData.interactionKey;
-        
+
         /*if(fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
         }
         fadeCoroutine = StartCoroutine(FadeInOut(display, interactionData.animationSpeed));*/
-        
-        if(display)
+
+        if (display)
         {
             _display.RemoveFromClassList("container_hidden");
         }
@@ -56,16 +56,16 @@ public class InteractionDisplay : MonoBehaviour
 
     private IEnumerator FadeInOut(bool fadeIn, float animationSpeed)
     {
-        float time = fadeIn? 0 : 1;
+        float time = fadeIn ? 0 : 1;
         float progressiong = 0f;
-        if(fadeIn) this._display.visible = true;
+        if (fadeIn) this._display.visible = true;
         while (progressiong < 1)
         {
             progressiong += Time.deltaTime * animationSpeed;
-            time += Time.deltaTime *animationSpeed  * (fadeIn? 1 : -1);
+            time += Time.deltaTime * animationSpeed * (fadeIn ? 1 : -1);
             _display.style.opacity = time;
             yield return null;
         }
-        if(!fadeIn) this._display.visible = false;
+        if (!fadeIn) this._display.visible = false;
     }
 }

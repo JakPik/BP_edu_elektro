@@ -177,13 +177,20 @@ MonoBehaviour:
   inPort:
   - {fileID: 4525769126950283343}
   nextNode: {fileID: 0}
-  spline: {fileID: 0}
-  line: {fileID: 0}
   R: 0
   U: 0
   I: 0
-  nextBranchNode: []
-  branch_R: []
+  connected: 0
+  locked: 0
+  nextBranchNode:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  branch_R:
+  - 0
+  - 0
+  - 0
+  branch_connected: 000000
 --- !u!1 &4525769126950283343
 GameObject:
   m_ObjectHideFlags: 0

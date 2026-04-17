@@ -2,34 +2,34 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement: MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CameraControl cameraControl;
     #region Variables
     [Header("Player control variables")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float drag = 4f;
 
     [Tooltip("Sets camera sensitivity")]
 
     [Space(10)]
     [Header("Refferences")]
     [SerializeField] private Rigidbody rb;
-    
+
 
     [Header("Player actions")]
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference respawnAction;
-    [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
-    
-    public float drag;
 
-    /* Helper variables to store action data and state flags*/
+    [Header("Raised Events")]
+    [SerializeField] private GenericEventChannel<ReloadRequestEvent> reloadRequest;
+
+    [Header("Event Channels")]
+    [SerializeField] private GenericEventChannel<ReloadEvent> reload;
+
     private Vector2 _moveDirection;
+    private float _speedCorrection = 10f;
 
-    /* Runtime helper variables */
-    private float _speedCorrection = 10f;   // DeltaTime correction for movement speed
-
-    private Coroutine _respawnCoroutine;
     #endregion
 
     private void Update()
@@ -46,13 +46,13 @@ public class PlayerMovement: MonoBehaviour
         float y_velocity = rb.linearVelocity.y;
         rb.linearVelocity += new Vector3(move.x, 0f, move.z);
 
-        if(rb.linearVelocity.magnitude > moveSpeed)
+        if (rb.linearVelocity.magnitude > moveSpeed)
         {
             rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, moveSpeed);
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, y_velocity, rb.linearVelocity.z);
         }
 
-        if(move.magnitude == 0)
+        if (move.magnitude == 0)
         {
             MoveDrag();
         }
@@ -70,23 +70,10 @@ public class PlayerMovement: MonoBehaviour
         rb.linearVelocity = vector;
     }
 
-    private IEnumerator Respawn(bool firstRespawn)
-    {
-        if(firstRespawn)
-        {
-            yield return StartCoroutine(LevelControl.Instance.LevelLoad());
-        }
-        else
-        {
-            yield return StartCoroutine(LevelControl.Instance.Respawn());
-        }
-        _respawnCoroutine = null;
-    }
-
     private void Start()
     {
         cameraControl.InitHandShake(this.gameObject);
-        _respawnCoroutine = StartCoroutine(Respawn(true));
+        reloadRequest?.RaiseEvent(new ReloadRequestEvent(true), this.name);
     }
 
     private void OnEnable()
@@ -95,32 +82,28 @@ public class PlayerMovement: MonoBehaviour
         moveAction.action.performed += OnMoveInput;
         moveAction.action.canceled += OnMoveInput;
         respawnAction.action.started += OnRespawn;
-        roomReloadEventChannel.OnEventRaised += OnRoomReload;
+        reload.OnEventRaised += OnRoomReload;
     }
 
-    
+
     private void OnDisable()
     {
         moveAction.action.performed -= OnMoveInput;
         moveAction.action.canceled -= OnMoveInput;
         respawnAction.action.started -= OnRespawn;
-        roomReloadEventChannel.OnEventRaised -= OnRoomReload;
+        reload.OnEventRaised -= OnRoomReload;
     }
 
-    private void OnRoomReload()
+    private void OnRoomReload(ReloadEvent @event)
     {
-        var (position, rotation) = LevelControl.Instance.RespawnPlayer();
-        rb.position = position;
-        rb.rotation = rotation;
+        rb.position = @event.SpawnTransform.position;
+        rb.rotation = @event.SpawnTransform.rotation;
         rb.linearVelocity = Vector3.zero;
     }
 
     private void OnRespawn(InputAction.CallbackContext context)
     {
-        if(_respawnCoroutine == null)
-        {
-            _respawnCoroutine = StartCoroutine(Respawn(false));
-        }
+        reloadRequest?.RaiseEvent(new ReloadRequestEvent(false), this.name);
     }
 
 
@@ -134,6 +117,6 @@ public class PlayerMovement: MonoBehaviour
         {
             _moveDirection = Vector2.zero;
         }
-        
+
     }
 }

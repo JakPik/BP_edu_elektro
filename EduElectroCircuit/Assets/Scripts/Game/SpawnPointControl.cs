@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class SpawnPointControl : ColliderDrawUtil
 {
-    [SerializeField] private GenericVoidEventChannel levelReload;
+    [SerializeField] private GenericEventChannel<ReloadEvent> reload;
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             LevelControl.Instance.SetNextSpawnPoint(this.gameObject);
             this.GetComponent<BoxCollider>().enabled = false;
@@ -17,16 +17,16 @@ public class SpawnPointControl : ColliderDrawUtil
 
     void OnEnable()
     {
-        if(levelReload != null) levelReload.OnEventRaised += OnReload;
+        reload.OnEventRaised += OnReload;
     }
 
-     void OnDisable() 
+    void OnDisable()
     {
-        if(levelReload != null) levelReload.OnEventRaised -= OnReload;
+        reload.OnEventRaised -= OnReload;
     }
 
-    private void OnReload()
+    private void OnReload(ReloadEvent @event)
     {
-        this.GetComponent<BoxCollider>().enabled = true;
+        if (@event.SpawnReference == null) this.GetComponent<BoxCollider>().enabled = true;
     }
 }

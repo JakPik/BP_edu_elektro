@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8260114641189607369}
   - component: {fileID: 4336773555800989740}
+  - component: {fileID: 8764967552237734834}
   m_Layer: 5
   m_Name: Display
   m_TagString: Untagged
@@ -117,6 +118,20 @@ MonoBehaviour:
   m_PivotReferenceSize: 1
   m_Pivot: 7
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &8764967552237734834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967227802453927740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b36cbe942f3c2458a89f86a3dae21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeterUIPanel
+  display: {fileID: 4336773555800989740}
+  node: {fileID: 341708395664196374}
 --- !u!1 &8658965171363992390
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,16 +246,14 @@ MonoBehaviour:
   inPort:
   - {fileID: 2061113042905101665}
   nextNode: {fileID: 0}
-  spline: {fileID: 0}
-  line: {fileID: 0}
   R: 0
   U: 0
   I: 0
   connected: 1
   locked: 0
   meterType: 0
-  display: {fileID: 4336773555800989740}
-  circuitActiveStateEventChannel: {fileID: 11400000, guid: f595f7351214074468572a65004c922f, type: 2}
+  uiPanel: {fileID: 5967227802453927740}
+  circuitActiveState: {fileID: 0}
 --- !u!54 &8863826339175667927
 Rigidbody:
   m_ObjectHideFlags: 0

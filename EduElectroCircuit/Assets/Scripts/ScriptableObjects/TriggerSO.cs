@@ -8,14 +8,15 @@ public class TriggerSO : ScriptableObject
 
     public static TriggerSO LoadOrCreate()
     {
-        var path = "Assets/Resources/ScriptableObjects/Utils/TriggerSO.asset";
+        /*var path = "Assets/Resources/ScriptableObjects/Utils/TriggerSO.asset";
         var triggerSO = UnityEditor.AssetDatabase.LoadAssetAtPath<TriggerSO>(path);
         if (triggerSO == null)
         {
             triggerSO = ScriptableObject.CreateInstance<TriggerSO>();
             UnityEditor.AssetDatabase.CreateAsset(triggerSO, path);
             UnityEditor.AssetDatabase.SaveAssets();
-        }
+        }*/
+        TriggerSO triggerSO = Resources.Load<TriggerSO>("ScriptableObjects/Utils/TriggerSO");
         return triggerSO;
     }
 

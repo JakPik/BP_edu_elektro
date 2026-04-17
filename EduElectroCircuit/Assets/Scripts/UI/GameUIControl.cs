@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class GameUIControl: MonoBehaviour
+public class GameUIControl : MonoBehaviour
 {
     public static GameUIControl Instance;
 
@@ -12,6 +12,7 @@ public class GameUIControl: MonoBehaviour
     [SerializeField] private float animSpeedOut = 1.0f;
     [SerializeField] private InputActionAsset actionMap;
     [SerializeField] private InputActionReference pauseAction;
+    [SerializeField] private GenericEventChannel<ReloadRequestEvent> reloadRequest;
 
 
     private VisualElement _pauseGUI;
@@ -25,7 +26,7 @@ public class GameUIControl: MonoBehaviour
 
     void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -72,10 +73,7 @@ public class GameUIControl: MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         _playerGUI.RemoveFromClassList("panel-visible");
-        //_pauseGUI.RemoveFromClassList("panel-hidden");
         _pauseGUI.AddToClassList("panel-visible");
-        /*_playerGUI.visible = false;
-        _pauseGUI.visible = true;*/
     }
 
     private void OnResume()
@@ -83,7 +81,6 @@ public class GameUIControl: MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         _playerGUI.AddToClassList("panel-visible");
-
         _pauseGUI.RemoveFromClassList("panel-visible");
         actionMap.Enable();
     }
@@ -91,32 +88,33 @@ public class GameUIControl: MonoBehaviour
     private void OnRestart()
     {
         Time.timeScale = 1f;
-        
+
         StartCoroutine(Restart());
     }
 
     private void OnSettings()
     {
-        
+
     }
 
-    private void OnMainMenu()
+    public void OnMainMenu()
     {
         Time.timeScale = 1f;
         StartCoroutine(MainMenuTransition());
-        
+
     }
 
     private IEnumerator MainMenuTransition()
     {
         yield return StartCoroutine(Fade(true));
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     public IEnumerator Fade(bool fadeIn)
     {
         StyleFloat target = fadeIn ? 1f : 0f;
-        if(fadeIn)
+        if (fadeIn)
         {
             _fadePanel.AddToClassList("fade-in");
         }
@@ -124,10 +122,11 @@ public class GameUIControl: MonoBehaviour
         {
             _fadePanel.RemoveFromClassList("fade-in");
         }
-        while(_fadePanel.resolvedStyle.opacity != target) {
+        while (_fadePanel.resolvedStyle.opacity != target)
+        {
             yield return null;
         }
-        if(fadeIn)
+        if (fadeIn)
         {
             actionMap.Disable();
         }
@@ -143,6 +142,6 @@ public class GameUIControl: MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         _playerGUI.AddToClassList("panel-visible");
         _pauseGUI.RemoveFromClassList("panel-visible");
-        yield return StartCoroutine(LevelControl.Instance.LevelLoad());
+        reloadRequest?.RaiseEvent(new ReloadRequestEvent(true), this.name);
     }
 }

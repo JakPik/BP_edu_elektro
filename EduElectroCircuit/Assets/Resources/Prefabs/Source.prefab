@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1219329011161034594}
   - component: {fileID: 3107853079682261398}
+  - component: {fileID: 7517263725359651976}
   m_Layer: 0
-  m_Name: Display_UI
+  m_Name: Source_Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +56,19 @@ MonoBehaviour:
   m_PivotReferenceSize: 1
   m_Pivot: 6
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &7517263725359651976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953166066340771095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7d6efd9316f7b469263bc866cb082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SourceUIPanel
+  uiDocument: {fileID: 3107853079682261398}
 --- !u!1 &6162031281100358813
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,8 +179,6 @@ MonoBehaviour:
   - {fileID: 7380406921051407349}
   inPort: []
   nextNode: {fileID: 0}
-  spline: {fileID: 0}
-  line: {fileID: 0}
   R: 0
   U: 0
   I: 0
@@ -174,10 +186,10 @@ MonoBehaviour:
   locked: 0
   sourceType: 0
   signalType: 0
-  uiDocument: {fileID: 3107853079682261398}
+  uiPanel: {fileID: 3953166066340771095}
+  circuitActiveStateEventChannel: {fileID: 0}
   nodeStateChangeChannel: {fileID: 0}
   startCalculationChannel: {fileID: 0}
-  circuitActiveStateEventChannel: {fileID: 0}
 --- !u!1 &7380406921051407349
 GameObject:
   m_ObjectHideFlags: 0

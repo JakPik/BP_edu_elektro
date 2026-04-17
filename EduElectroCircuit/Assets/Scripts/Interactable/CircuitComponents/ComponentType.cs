@@ -10,8 +10,6 @@ public enum MeterType
     OHMMETER,
     VOLTMETER,
     AMPMETER
-
-    
 }
 
 public static class EnumTransformer

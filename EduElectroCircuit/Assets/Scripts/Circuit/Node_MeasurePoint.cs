@@ -4,32 +4,77 @@ using UnityEngine.UIElements;
 
 public class Node_MeasurePoint : Node
 {
-    [SerializeField] MeterType meterType;
-    [SerializeField] UIDocument display;
-    private Label _meterName;
-    private Label _signalType;
-    private Label _value;
+    #region Variables
+    [SerializeField] private MeterType meterType;
+    [SerializeField] private GameObject uiPanel;
 
-    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
+    [Header("Event Channels")]
+    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveState;
+
+    private UIPanel _uiPanel;
+    private string _signalType = "";
+    private string _displayValue = "";
+    #endregion
 
     void Awake()
     {
-        _meterName = display.rootVisualElement.Q<Label>("MeterName");
-        _signalType = display.rootVisualElement.Q<Label>("SignalType");
-        _value = display.rootVisualElement.Q<Label>("Value");
+        if (uiPanel.TryGetComponent(out UIPanel panel))
+        {
+            _uiPanel = panel;
+        }
+        else
+        {
+            Logger.LogNode(this.GetType().Name, uiPanel.name + " does not contain class UIPanel", LogType.ERROR);
+        }
+    }
 
-        _meterName.text = EnumTransformer.MeterTypeToString(meterType);
+    void Start()
+    {
+        _uiPanel.SetData(GetMeasurePointData());
+    }
+
+    public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
+    {
+        U = originValues.Uc;
+        I = originValues.Ic;
+        R = originValues.Rc;
+        Logger.LogNode(this, "Measured => U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
+
+        DisplayValues(passValues.circuitType.ToString());
+
+        if (nextNode == null)
+        {
+            Logger.LogNode(this, "No next node available", LogType.WARNING);
+            return;
+        }
+        nextNode.CalculateValues(passValues, originValues);
+    }
+
+    public override (float, bool) GetResistanceSum()
+    {
+        if (nextNode == null)
+        {
+            Logger.LogNode(this, "No next node available", LogType.WARNING);
+            return (0, connected);
+        }
+        var (nextR, nextConnected) = nextNode.GetResistanceSum();
+        nextConnected = nextConnected ? connected : nextConnected;
+
+        Logger.LogNode(this, "Skipping resistance sum, measuring tool active", LogType.INFO);
+        return (nextR, nextConnected);
     }
 
     public override void BuildConections(Node branchInRef, int branchId)
     {
-        if(nextNode == null && branchInRef == null)
+        if (nextNode == null && branchInRef == null)
         {
-            Logger.Log(this.name, "Line construction done. No nodes to connect to.", LogType.SUCCESS);
+            Logger.LogNode(this, "Line construction done. No nodes to connect to.", LogType.SUCCESS);
             return;
         }
-        try {
-            if(nextNode != null) {
+        try
+        {
+            if (nextNode != null)
+            {
                 LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0));
                 nextNode.BuildConections(branchInRef, branchId);
             }
@@ -40,82 +85,62 @@ public class Node_MeasurePoint : Node
         }
         catch (Exception e)
         {
-            Logger.Log(this.name, e.Message, LogType.ERROR);
+            Logger.LogNode(this, e.Message, LogType.ERROR);
             return;
         }
     }
 
-    public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
+    #region Node_MeasurePoint local logic
+    private MeasurePointData GetMeasurePointData()
     {
-        U = originValues.Uc;
-        I = originValues.Ic;
-        R = originValues.Rc;
-        Logger.Log(this.name, "Measured => U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
-
-        DisplayValues(U, I, R, passValues.circuitType.ToString());
-
-        if(nextNode == null)
+        return new MeasurePointData
         {
-            Logger.Log(this.name, "No next node available", LogType.WARNING);
-            return;
-        }
-        nextNode.CalculateValues(passValues, originValues);
-
+            name = EnumTransformer.MeterTypeToString(meterType),
+            signal = _signalType,
+            value = _displayValue
+        };
     }
 
-    public override (float, bool) GetResistanceSum()
+    private void DisplayValues(string mode)
     {
-        if(nextNode == null)
-        {
-            Logger.Log(this.name, "No next node available", LogType.WARNING);
-            return (0,connected);
-        }
-        var (nextR, nextConnected) = nextNode.GetResistanceSum();
-        nextConnected = nextConnected ? connected:nextConnected;
-
-        Logger.Log(this.name, "Skipping resistance sum, measuring tool active", LogType.INFO);
-        return (nextR,nextConnected);
-    }
-
-    private void DisplayValues(float U, float I, float R, string mode)
-    {
-        _signalType.text = mode;
-        switch(meterType)
+        _signalType = mode;
+        switch (meterType)
         {
             case MeterType.OHMMETER:
-                _value.text = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
+                _displayValue = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
                 break;
             case MeterType.VOLTMETER:
-                 _value.text = NodeCalculationModel.FormatValue(U, CircuitValueType.VOLTAGE);
+                _displayValue = NodeCalculationModel.FormatValue(U, CircuitValueType.VOLTAGE);
                 break;
             case MeterType.AMPMETER:
-                 _value.text = NodeCalculationModel.FormatValue(I, CircuitValueType.CURRENT);
+                _displayValue = NodeCalculationModel.FormatValue(I, CircuitValueType.CURRENT);
                 break;
         }
-    }
 
+        _uiPanel.SetData(GetMeasurePointData());
+    }
+    #endregion
+
+    #region Event Handling Logic
     void OnEnable()
     {
-        circuitActiveStateEventChannel.OnEventRaised += CircuitActiveStateChange;
+        circuitActiveState.OnEventRaised += CircuitActiveStateChange;
     }
 
     void OnDisable()
     {
-        circuitActiveStateEventChannel.OnEventRaised -= CircuitActiveStateChange;
-    }
-
-    public void Reset()
-    {
-         _signalType.text = "";
-         _value.text = "";
+        circuitActiveState.OnEventRaised -= CircuitActiveStateChange;
     }
 
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
     {
         locked = @event.CircuitActive;
-        if(!locked)
+        if (!locked)
         {
-            Reset();
+            _signalType = "";
+            _displayValue = "";
+            _uiPanel.SetData(GetMeasurePointData());
         }
-    } 
+    }
+    #endregion
 }

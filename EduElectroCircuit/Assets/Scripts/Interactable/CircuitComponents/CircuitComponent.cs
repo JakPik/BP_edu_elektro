@@ -20,8 +20,8 @@ public abstract class CircuitComponent : MonoBehaviour
         Quaternion targetRot = FindTargetRotation(transform, targetTransform);
         float step;
         float traveled = 0f;
-        Logger.Log(this.name, "Animating from "+origin + " animating to "+ targetPosition,LogType.INFO);
-        while(transform.position != targetPosition)
+        Logger.Log(this, "INTERACTION", "Animating from " + origin + " animating to " + targetPosition, LogType.INFO);
+        while (transform.position != targetPosition)
         {
             step = Time.deltaTime * animationSpeed;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
@@ -36,7 +36,7 @@ public abstract class CircuitComponent : MonoBehaviour
         }
         transform.position = targetPosition;
         SendData();
-        Logger.Log(this.name, "Animating from "+transform.position + " animating to "+ targetPosition,LogType.INFO);
+        Logger.Log(this, "INTERACTION", "Animating from " + transform.position + " animating to " + targetPosition, LogType.INFO);
     }
 
     protected abstract void SendData();

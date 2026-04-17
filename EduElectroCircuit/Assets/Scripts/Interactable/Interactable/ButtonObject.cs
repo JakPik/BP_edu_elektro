@@ -3,20 +3,27 @@ using UnityEngine;
 
 public class ButtonObject : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GenericEventChannel<ButtonPressedEvent> interactionEventChannel;
-    [SerializeField] private string interactionInfo;
+    #region Variables
+    [Header("Control Variables")]
+    [SerializeField] private InteractionDisplay interactionDisplay;
+    [SerializeField] private Shader buttonShader;
     [SerializeField] private bool canInteract;
     [SerializeField] private bool isPressed;
-    [SerializeField] private Shader buttonShader;
+
+    [Header("Interaction Types")]
+    [SerializeField] private InteractionSO pressOn;
+
+    [SerializeField] private InteractionSO pressOff;
+
+    [Header("Raised Events")]
+    [SerializeField] private GenericEventChannel<ButtonPressedEvent> interactionEventChannel;
+
     private Material material;
-    [SerializeField] private InteractionDisplay interactionDisplay;
-    [SerializeField] private InteractionSO pressOffInteraction;
-    [SerializeField] private InteractionSO pressOnInteraction;
+    #endregion
 
     void Awake()
     {
         material = new Material(buttonShader);
-
         GetComponent<Renderer>().material = material;
     }
 
@@ -28,41 +35,24 @@ public class ButtonObject : MonoBehaviour, IInteractable
 
     public bool CanInteract() => canInteract;
 
-    public void DisplayInfo(bool display) => interactionDisplay.DisplayInteractionInfo(isPressed ? pressOffInteraction : pressOnInteraction, display);
+    public void DisplayInfo(bool display) => interactionDisplay.DisplayInteractionInfo(isPressed ? pressOff : pressOn, display);
 
     public void OnInteract()
     {
-        if(isPressed)
-        {
-            interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(false), this.name);
-            StartCoroutine(CollorChnage(false));
-            isPressed = false;
-            interactionDisplay.UpdateDisplayInfo(pressOnInteraction);
-        }
-        else
-        {
-            interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(true), this.name);
-            StartCoroutine(CollorChnage(true));
-            isPressed = true;
-            interactionDisplay.UpdateDisplayInfo(pressOffInteraction);
-        }
-        
+        isPressed = !isPressed;
+        interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(isPressed), this.name);
+        StartCoroutine(CollorChnage());
+        interactionDisplay.UpdateDisplayInfo(isPressed ? pressOff : pressOn);
     }
 
-    private IEnumerator CollorChnage(bool pressed)
+    private IEnumerator CollorChnage()
     {
         canInteract = false;
-        if(pressed) {
-            material.color = Color.yellow;
-            yield return new WaitForSeconds(0.5f);
-            material.color = Color.green;
-        }
-        else
-        {
-            material.color = Color.yellow;
-            yield return new WaitForSeconds(0.5f);
-            material.color = Color.red;
-        }
+
+        material.color = Color.yellow;
+        yield return new WaitForSeconds(0.5f);
+        material.color = isPressed ? Color.green : Color.red;
+
         canInteract = true;
     }
 }

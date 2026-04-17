@@ -8,40 +8,44 @@ public class Node_ControlPoint : Node
     #region Variables
     [Space(10)]
     [Header("Control Value")]
-    [Tooltip("Assign Voltage Value at which doorLockEvent Gets fired. This variable is used only when Node_Type == NODE_CONTROL")]
-    [SerializeField] private float expectedValue;
+    [Tooltip("Set what type of value is expected to be checked on calculation")]
     [SerializeField] private CircuitValueType valueType = CircuitValueType.VOLTAGE;
 
-     [Space(10)]
-    [SerializeField] private UIDocument uiDocument;
+    [Tooltip("Assign value to set off unlock condition. Local value of valueType is compared to this value")]
+    [SerializeField] private float expectedValue;
+
+    [Space(10)]
+    [SerializeField] private GameObject uiPanel;
 
     #region Events
-    [Header("Event Channels - Raised Events")]
-    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
-    [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidationEventChannel;
+    [Header("Raised Events")]
+    [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidation;
+
+    [Header("Event Channels")]
+    [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveState;
     #endregion
 
-    private Label stateLabel;
-    private Label resistanceLabel;
-    private Label requireLabel;
+    private UIPanel _uiPanel;
     #endregion
 
     void Awake()
     {
-        stateLabel = uiDocument.rootVisualElement.Q<Label>("State");
-        resistanceLabel = uiDocument.rootVisualElement.Q<Label>("Resistance");
-        requireLabel = uiDocument.rootVisualElement.Q<Label>("Required");
-
-        stateLabel.text = "Locked";
-        StyleAsError(stateLabel);
-
-        resistanceLabel.text = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE);
-
-        requireLabel.text = NodeCalculationModel.FormatValue(expectedValue, valueType);
-        StyleAsError(requireLabel);
+        if (uiPanel.TryGetComponent(out UIPanel panel))
+        {
+            _uiPanel = panel;
+        }
+        else
+        {
+            Logger.LogNode(this.GetType().Name, uiPanel.name + " does not contain class UIPanel", LogType.ERROR);
+        }
     }
 
-     /// <summary>
+    void Start()
+    {
+        _uiPanel?.SetData(GetControlPointData(true));
+    }
+
+    /// <summary>
     /// <para>Calculates based on the type of the node:</para>
     /// <list type="bullet">
     ///   <item>NodeType.NODE_PASSIVE => Reads the originValues and assignes it as local R,U,I.</item>
@@ -53,56 +57,45 @@ public class Node_ControlPoint : Node
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
         (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
-        Logger.Log(this.name, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
-        
-        nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(IsCorrectValue()), this.name);
-        DisplayLockedState(!IsCorrectValue());
-        if(nextNode == null)
+        Logger.LogNode(this, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
+
+        nodeValidation?.RaiseEvent(new NodeValidationEvent(IsCorrectValue()), this.name);
+        DisplayLockState(!IsCorrectValue());
+        if (nextNode == null)
         {
-            Logger.Log(this.name, "No next node available", LogType.WARNING);
+            Logger.LogNode(this, "No next node available", LogType.WARNING);
             return;
         }
 
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    private bool IsCorrectValue()
-    {
-        switch(valueType)
-        {
-            case CircuitValueType.VOLTAGE:
-                return U == expectedValue;
-            case CircuitValueType.CURRENT:
-                return I == expectedValue;
-            default:
-                return false;
-        }
-    }
-
     public override (float, bool) GetResistanceSum()
     {
-        if(nextNode == null)
+        if (nextNode == null)
         {
-            Logger.Log(this.name, "No next node available\n Returning this R: " + R, LogType.WARNING);
-            return (R,connected);
+            Logger.LogNode(this, "No next node available\n Returning this R: " + R, LogType.WARNING);
+            return (R, connected);
         }
 
         var (nextR, nextConnected) = nextNode.GetResistanceSum();
-        nextConnected = nextConnected ? connected:nextConnected;
+        nextConnected = nextConnected ? connected : nextConnected;
 
-        Logger.Log(this.name, "Local R: " + R, LogType.INFO);
+        Logger.LogNode(this, "Local R: " + R, LogType.INFO);
         return (R + nextR, nextConnected);
     }
 
     public override void BuildConections(Node branchInRef, int branchId)
     {
-        if(nextNode == null && branchInRef == null)
+        if (nextNode == null && branchInRef == null)
         {
-            Logger.Log(this.name, "Line construction done. No nodes to connect to.", LogType.SUCCESS);
+            Logger.LogNode(this, "Line construction done. No nodes to connect to.", LogType.SUCCESS);
             return;
         }
-        try {
-            if(nextNode != null) {
+        try
+        {
+            if (nextNode != null)
+            {
                 LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0));
                 nextNode.BuildConections(branchInRef, branchId);
             }
@@ -113,56 +106,60 @@ public class Node_ControlPoint : Node
         }
         catch (Exception e)
         {
-            Logger.Log(this.name, e.Message, LogType.ERROR);
+            Logger.LogNode(this, e.Message, LogType.ERROR);
             return;
         }
     }
 
-    private void DisplayLockedState(bool locked)
+    #region Node_ControlPoint local logic
+    private bool IsCorrectValue()
     {
-        if(locked)
+        switch (valueType)
         {
-            stateLabel.text = "Locked";
-            StyleAsError(stateLabel);
-            StyleAsError(requireLabel);
-        }
-        else
-        {
-            stateLabel.text = "Unlocked";
-            StyleAsSuccess(stateLabel);
-            StyleAsSuccess(requireLabel);
+            case CircuitValueType.VOLTAGE:
+                return U == expectedValue;
+            case CircuitValueType.CURRENT:
+                return I == expectedValue;
+            default:
+                return false;
         }
     }
 
-    private void StyleAsSuccess(Label label)
+    private ControlPointData GetControlPointData(bool locked)
     {
-        label.RemoveFromClassList("label-error");
-        label.AddToClassList("label-success");
+        return new ControlPointData
+        {
+            locked = locked,
+            resistance = NodeCalculationModel.FormatValue(R, CircuitValueType.RESISTANCE),
+            required = NodeCalculationModel.FormatValue(expectedValue, valueType)
+        };
     }
 
-    private void StyleAsError(Label label)
+    private void DisplayLockState(bool locked)
     {
-        label.RemoveFromClassList("label-success");
-        label.AddToClassList("label-error");
+        _uiPanel.SetData(GetControlPointData(locked));
     }
+    #endregion
 
+    #region Event Handling Logic
     void OnEnable()
     {
-        circuitActiveStateEventChannel.OnEventRaised += CircuitActiveStateChange;
+        circuitActiveState.OnEventRaised += CircuitActiveStateChange;
     }
 
     void OnDisable()
     {
-        circuitActiveStateEventChannel.OnEventRaised -= CircuitActiveStateChange;
+        circuitActiveState.OnEventRaised -= CircuitActiveStateChange;
     }
 
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
     {
         locked = @event.CircuitActive;
-        if(!locked)
+        if (!locked)
         {
-            nodeValidationEventChannel?.RaiseEvent(new NodeValidationEvent(false), this.name);
-            DisplayLockedState(true);
+            nodeValidation?.RaiseEvent(new NodeValidationEvent(false), this.name);
+            DisplayLockState(true);
         }
-    } 
+    }
+    #endregion
 }

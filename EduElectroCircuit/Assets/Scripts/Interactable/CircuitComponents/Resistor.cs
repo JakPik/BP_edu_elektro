@@ -10,7 +10,7 @@ public class Resistor : CircuitComponent, IGrabable
     [SerializeField] public ResistorDataSO resistorData;
     [SerializeField] private InteractionDisplay interactionDisplay;
     [SerializeField] private InteractionSO grabInteraction;
-    
+
     public void Start()
     {
         var rend = GetComponent<Renderer>();
@@ -23,17 +23,41 @@ public class Resistor : CircuitComponent, IGrabable
         rend.SetPropertyBlock(propBlock);
     }
 
-    public bool CanGrab() => canGrab;
-    public void DisplayInfo(bool display) {
-        if(canGrab) {
-            interactionDisplay.DisplayInteractionInfo(grabInteraction, display);
-        }
+    protected override void SendData()
+    {
+        nodeInteraction.SetComponentData(resistorData, this.gameObject);
     }
 
-    public void LockGrab(bool locked)
+    protected override Quaternion FindTargetRotation(Transform local, Transform target)
     {
-        canGrab = !locked;
+        float angle = Vector3.SignedAngle(target.forward, local.forward, target.up);
+
+        angle = Math.Abs(angle) > 90f ? 180 * Math.Sign(angle) : 0;
+
+        Quaternion baseRot = Quaternion.LookRotation(target.forward);
+        Quaternion finalRot = baseRot * Quaternion.AngleAxis(angle, Vector3.up);
+        return finalRot;
     }
+
+    protected override void CanAnimate()
+    {
+        if (pendingCoroutine == null) return;
+
+        if (curCoroutine != null) StopCoroutine(curCoroutine);
+
+        NodeLockedState(true);
+        curCoroutine = StartCoroutine(pendingCoroutine);
+        pendingCoroutine = null;
+    }
+
+    protected override void NodeLockedState(bool locked)
+    {
+        if (locked) rb.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    #region IGrabable
+    public bool CanGrab() => canGrab;
+    public void LockGrab(bool locked) => canGrab = !locked;
 
     public void OnGrab(bool grabbed, GameObject caller)
     {
@@ -52,47 +76,24 @@ public class Resistor : CircuitComponent, IGrabable
         rb.useGravity = !grabbed;
     }
 
-    protected override Quaternion FindTargetRotation(Transform local, Transform target)
+    public void DisplayInfo(bool display)
     {
-        float angle = Vector3.SignedAngle(target.forward, local.forward, target.up);
-        
-        angle = Math.Abs(angle) > 90f? 180 * Math.Sign(angle) : 0;
-
-        Quaternion baseRot = Quaternion.LookRotation(target.forward);
-        Quaternion finalRot = baseRot * Quaternion.AngleAxis(angle, Vector3.up);
-        return finalRot;
-    }
-
-    protected override void NodeLockedState(bool locked)
-    {
-        if(locked)
+        if (canGrab)
         {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            interactionDisplay.DisplayInteractionInfo(grabInteraction, display);
         }
     }
-
-    protected override void CanAnimate()
-    {
-        if(pendingCoroutine != null)
-        {
-
-            if (curCoroutine != null)
-            {
-                StopCoroutine(curCoroutine);
-            }
-            NodeLockedState(true);
-            curCoroutine = StartCoroutine(pendingCoroutine);
-            pendingCoroutine = null;
-        }
-    }
+    #endregion
 
     void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
-        { 
-            if(!nodeInteraction.CanConnect()) return;
+        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
+        {
+            if (!nodeInteraction.CanConnect()) return;
+            if (pendingCoroutine != null) return;
+
             this.nodeInteraction = nodeInteraction;
-            Logger.Log(this.name, "Pending Coroutine set", LogType.INFO);
+            Logger.Log(this, "COMPONENT", "Pending Coroutine set", LogType.INFO);
             var (targetPos, targetTransfrom) = nodeInteraction.GetTransform();
             pendingCoroutine = AnimateNewPosition(targetPos, targetTransfrom);
         }
@@ -100,16 +101,11 @@ public class Resistor : CircuitComponent, IGrabable
 
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
+        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
         {
             this.nodeInteraction = null;
-            Logger.Log(this.name, "Pending Coroutine remove", LogType.INFO);
+            Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
             pendingCoroutine = null;
         }
-    }
-
-    protected override void SendData()
-    {
-        nodeInteraction.SetComponentData(resistorData, this.gameObject);
     }
 }

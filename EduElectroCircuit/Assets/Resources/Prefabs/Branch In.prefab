@@ -177,13 +177,14 @@ MonoBehaviour:
   - {fileID: 8938028351905689328}
   - {fileID: 4209566476135198935}
   nextNode: {fileID: 0}
-  spline: {fileID: 0}
-  line: {fileID: 0}
   R: 0
   U: 0
   I: 0
+  connected: 0
+  locked: 0
   nextBranchNode: []
   branch_R: []
+  branch_connected: 
 --- !u!1 &8938028351905689328
 GameObject:
   m_ObjectHideFlags: 0

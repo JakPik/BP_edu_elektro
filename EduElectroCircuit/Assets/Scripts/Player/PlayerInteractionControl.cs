@@ -24,7 +24,8 @@ public class PlayerInteractionControl : MonoBehaviour
     [SerializeField] private IInteractable interactable;
     [SerializeField] private InputActionReference interactAction;
     [SerializeField] private InputActionReference holdtAction;
-    [SerializeField] private GenericVoidEventChannel roomReloadEventChannel;
+    [Header("Event Channels")]
+    [SerializeField] private GenericEventChannel<ReloadEvent> reload;
 
     private void Update()
     {
@@ -34,11 +35,11 @@ public class PlayerInteractionControl : MonoBehaviour
 
     private void UpdateHold()
     {
-        if(holding && grabbedObject.component != null)
+        if (holding && grabbedObject.component != null)
         {
             Ray ray = new Ray(cameraControl.GetCameraPosition(), cameraControl.GetCameraForward());
             LayerMask mask = ~LayerMask.GetMask("Grabable");
-            float distance = Physics.Raycast(ray, out RaycastHit hitInfo, holdDistance ,mask, QueryTriggerInteraction.Ignore)? hitInfo.distance : holdDistance;
+            float distance = Physics.Raycast(ray, out RaycastHit hitInfo, holdDistance, mask, QueryTriggerInteraction.Ignore) ? hitInfo.distance : holdDistance;
             grabbedObject.component.transform.position = cameraControl.GetCameraForward() * distance + cameraControl.GetCameraPosition();
         }
     }
@@ -48,7 +49,7 @@ public class PlayerInteractionControl : MonoBehaviour
         var (found, hitInfo) = cameraControl.CameraRayCast(holdDistance);
         if (!found || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
-            if(!holding)
+            if (!holding)
             {
                 grabbedObject.grabable?.DisplayInfo(false);
                 grabbedObject.Refresh();
@@ -66,7 +67,7 @@ public class PlayerInteractionControl : MonoBehaviour
                 interactable = interact;
                 interactable.DisplayInfo(true);
             }
-            if(obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
+            if (obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
             {
                 grabbedObject.grabable?.DisplayInfo(false);
                 grabbedObject.component = hitInfo.collider.gameObject;
@@ -80,19 +81,19 @@ public class PlayerInteractionControl : MonoBehaviour
     {
         interactAction.action.started += OnInteract;
         holdtAction.action.started += OnHold;
-        roomReloadEventChannel.OnEventRaised += OnRoomReload;
+        reload.OnEventRaised += OnRoomReload;
     }
 
     private void OnDisable()
     {
         interactAction.action.started -= OnInteract;
         holdtAction.action.started -= OnHold;
-        roomReloadEventChannel.OnEventRaised -= OnRoomReload;
+        reload.OnEventRaised -= OnRoomReload;
     }
 
-    private void OnRoomReload()
+    private void OnRoomReload(ReloadEvent @event)
     {
-        if(holding)
+        if (holding)
         {
             grabbedObject.grabable.OnGrab(false, this.gameObject);
             grabbedObject.grabable?.DisplayInfo(false);
@@ -105,26 +106,27 @@ public class PlayerInteractionControl : MonoBehaviour
 
     private void OnHold(InputAction.CallbackContext context)
     {
-        if(!grabbedObject.grabable?.CanGrab() ?? true) return;
-        try {
+        if (!grabbedObject.grabable?.CanGrab() ?? true) return;
+        try
+        {
             grabbedObject.grabable.OnGrab(!holding, this.gameObject);
             grabbedObject.grabable?.DisplayInfo(false);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            Logger.Log(this.name, "While calling OnGrab() on " + grabbedObject.component.name + "\n" + e.Message, LogType.EXCEPTION);
+            Logger.Log(this, this.name, "While calling OnGrab() on " + grabbedObject.component.name + "\n" + e.Message, LogType.EXCEPTION);
         }
-        if(holding)
+        if (holding)
         {
-           grabbedObject.Refresh();
+            grabbedObject.Refresh();
         }
-        if(!holding && grabbedObject.component == null) return;
+        if (!holding && grabbedObject.component == null) return;
         holding = !holding;
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if(!holding && interactable != null && interactable.CanInteract())
+        if (!holding && interactable != null && interactable.CanInteract())
         {
             interactable?.OnInteract();
         }
