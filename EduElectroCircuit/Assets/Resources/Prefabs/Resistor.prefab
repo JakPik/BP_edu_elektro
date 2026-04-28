@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionDisplay
   uiDocument: {fileID: 3787897286544951542}
+  canRotate: 1
 --- !u!1 &8557624517745879780
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +183,9 @@ MonoBehaviour:
   resistorData: {fileID: 11400000, guid: d4fbd18517dc2f04ca99cf82ffdaafd8, type: 2}
   interactionDisplay: {fileID: 6023654254353541254}
   grabInteraction: {fileID: 11400000, guid: ddb5712ebab18bc4dbadee5ef808589d, type: 2}
+  followSpeed: 10
+  smoothness: 15
+  vector: {x: 0, y: 0, z: 0}
 --- !u!65 &2988132583311527574
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -227,6 +231,6 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
