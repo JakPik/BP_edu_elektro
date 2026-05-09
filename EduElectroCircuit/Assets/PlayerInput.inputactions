@@ -43,7 +43,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Calculate",
+                    "name": "Pause_Menu",
                     "type": "Button",
                     "id": "4f08467d-6c44-43fe-a7f2-e1479921b0ab",
                     "expectedControlType": "",
@@ -129,6 +129,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "2D Vector",
+                    "id": "88e16ce5-c052-4964-9259-31b70816e3b9",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0b2065cc-2adb-44e4-adb7-c19cf0df87f8",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "2a3d464d-54fd-41be-907b-96a94e43edd2",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "f23cfab7-0763-42df-8d43-eef6f0d40bbc",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "20618feb-7381-486b-a153-d58626694c29",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "9bf6ae25-2b4b-43dc-aed0-fbed7a020fa2",
                     "path": "<Mouse>/delta",
@@ -153,11 +208,11 @@
                 {
                     "name": "",
                     "id": "408680a9-74e3-4b05-8cac-81cf7de0b3a2",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Calculate",
+                    "action": "Pause_Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

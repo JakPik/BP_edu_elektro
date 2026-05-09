@@ -9,11 +9,14 @@ public class MainMenuUIControl : MonoBehaviour
 
     private VisualElement _fadePanel;
     private Button _playButton;
+    private Button _quitButton;
     private void Start()
     {
         _playButton = uiDocument.rootVisualElement.Q<Button>("Play_Button");
+        _quitButton = uiDocument.rootVisualElement.Q<Button>("Quit_Button");
         _fadePanel = uiDocument.rootVisualElement.Q<VisualElement>("FadeScreen");
         _playButton.clicked += OnPlayButtonClicked;
+        _quitButton.clicked += OnQuitButtonClicked;
         StartCoroutine(FadeOut());
     }
 
@@ -22,10 +25,16 @@ public class MainMenuUIControl : MonoBehaviour
         StartCoroutine(LoadMainGameScene());
     }
 
+    private void OnQuitButtonClicked()
+    {
+        Application.Quit();
+    }
+
     private IEnumerator LoadMainGameScene()
     {
         _fadePanel.AddToClassList("fade-in");
-        while(_fadePanel.resolvedStyle.opacity != 1f) {
+        while (_fadePanel.resolvedStyle.opacity != 1f)
+        {
             yield return null;
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(mainGameSceneName);

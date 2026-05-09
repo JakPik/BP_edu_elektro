@@ -30,13 +30,17 @@ public class RoomControl : MonoBehaviour
             {
                 Logger.Log(this, this.name, "Resistor " + resistor.name + " not found in scene\nCreating new resistor: " + resistor.name, LogType.WARNING);
                 GameObject resistorPrefab = Resources.Load<GameObject>("Prefabs/Resistor");
-                obj = Instantiate(resistorPrefab, componentsParent.position, componentsParent.rotation, componentsParent);
+                obj = Instantiate(resistorPrefab, componentsParent.position + resistor.position, componentsParent.rotation, componentsParent);
                 obj.name = resistor.name;
                 Resistor resistorComponent = obj.GetComponent<Resistor>();
                 resistorComponent.resistorData = Resources.Load<ResistorDataSO>("ScriptableObjects/Component_properties/" + resistor.resistance);
+
             }
-            obj.transform.position = resistor.position + componentsParent.position;
-            obj.transform.rotation = componentsParent.rotation;
+            else
+            {
+                obj.transform.position = resistor.position + componentsParent.position;
+                obj.transform.rotation = componentsParent.rotation;
+            }
             Resistor resistorComp = obj.GetComponent<Resistor>();
             if (resistorComp == null)
             {

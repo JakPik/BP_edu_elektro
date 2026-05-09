@@ -53,8 +53,9 @@ public class PlayerInteractionControl : MonoBehaviour
             Vector3 newPos = cameraControl.GetCameraForward() * holdDistance + cameraControl.GetCameraPosition();
             Vector3 direction = newPos - grabbedObject.component.transform.position;
             Vector3 targetVelocity = direction * followSpeed;
+            Vector3 maxHoldDistance = transform.position - grabbedObject.component.transform.position;
 
-            if (Math.Abs(direction.magnitude) > dropDistance)
+            if (Math.Abs(maxHoldDistance.magnitude) > dropDistance)
             {
                 Drop();
                 return;

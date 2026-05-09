@@ -15,12 +15,14 @@ public abstract class CircuitComponent : MonoBehaviour
     protected IEnumerator AnimateNewPosition(Vector3 targetPosition, Transform targetTransform)
     {
         float totalDistance = Vector3.Distance(transform.position, targetPosition);
+        Rigidbody rigidBody = GetComponent<Rigidbody>();
         Vector3 origin = transform.position;
         Quaternion startRot = transform.rotation;
         Quaternion targetRot = FindTargetRotation(transform, targetTransform);
         float step;
         float traveled = 0f;
         Logger.Log(this, "INTERACTION", "Animating from " + origin + " animating to " + targetPosition, LogType.INFO);
+        rigidBody.interpolation = RigidbodyInterpolation.None;
         while (transform.position != targetPosition)
         {
             step = Time.deltaTime * animationSpeed;
@@ -34,6 +36,7 @@ public abstract class CircuitComponent : MonoBehaviour
             transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
             yield return null;
         }
+        rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
         transform.position = targetPosition;
         SendData();
         Logger.Log(this, "INTERACTION", "Animating from " + transform.position + " animating to " + targetPosition, LogType.INFO);

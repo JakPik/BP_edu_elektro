@@ -113,17 +113,15 @@ MonoBehaviour:
   inPort:
   - {fileID: 6884611382567157896}
   nextNode: {fileID: 0}
-  spline: {fileID: 0}
-  line: {fileID: 0}
   R: 0
   U: 0
   I: 0
   connected: 0
-  expected_U: 0
+  locked: 0
   refConnected: {fileID: 0}
-  positionOffset: {x: 0, y: 0.15, z: 0}
-  nodeStateChangeChannel: {fileID: 0}
-  nodeValidationEventChannel: {fileID: 0}
+  positionOffset: {x: 0, y: 0.16, z: 0}
+  nodeStateChange: {fileID: 0}
+  circuitActiveState: {fileID: 0}
 --- !u!65 &1606588164255496335
 BoxCollider:
   m_ObjectHideFlags: 0
