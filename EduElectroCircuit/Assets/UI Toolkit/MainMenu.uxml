@@ -9,5 +9,5 @@
             <ui:Button text="Odejít" name="Quit_Button" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="FadeScreen" picking-mode="Ignore" class="fade-out fade-in" style="position: absolute; width: 100%; height: 100%; display: none;"/>
+    <ui:VisualElement name="FadeScreen" picking-mode="Ignore" class="fade-out fade-in" style="position: absolute; width: 100%; height: 100%;"/>
 </ui:UXML>
