@@ -7,7 +7,6 @@ using UnityEngine;
 public abstract class CircuitComponent : MonoBehaviour
 {
     [SerializeField] protected Coroutine curCoroutine;
-    [SerializeField] protected IEnumerator pendingCoroutine;
     [SerializeField] protected float animationSpeed;
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected INodeInteraction nodeInteraction;
@@ -22,28 +21,31 @@ public abstract class CircuitComponent : MonoBehaviour
         float step;
         float traveled = 0f;
         Logger.Log(this, "INTERACTION", "Animating from " + origin + " animating to " + targetPosition, LogType.INFO);
-        rigidBody.interpolation = RigidbodyInterpolation.None;
         while (transform.position != targetPosition)
         {
             step = Time.deltaTime * animationSpeed;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+            rigidBody.transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
             traveled += step;
 
             float t = totalDistance > 0f ? traveled / totalDistance : 1f;
             t = Mathf.Clamp01(t);
 
-            transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+            rigidBody.transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
             yield return null;
         }
-        rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
-        transform.position = targetPosition;
+        rigidBody.transform.position = targetPosition;
         SendData();
         Logger.Log(this, "INTERACTION", "Animating from " + transform.position + " animating to " + targetPosition, LogType.INFO);
     }
 
-    protected abstract void SendData();
+    protected abstract void SendData(bool placed = true);
     protected abstract Quaternion FindTargetRotation(Transform local, Transform target);
-    protected abstract void CanAnimate();
-    protected abstract void NodeLockedState(bool locked);
+    protected void CanAnimate(Rigidbody rb, Vector3 targetPos, Transform targetTransfrom)
+    {
+        if (curCoroutine != null) StopCoroutine(curCoroutine);
+
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        curCoroutine = StartCoroutine(AnimateNewPosition(targetPos, targetTransfrom));
+    }
 }

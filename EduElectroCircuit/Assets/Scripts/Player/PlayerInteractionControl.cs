@@ -20,6 +20,7 @@ public struct GrabbedObject
 public class PlayerInteractionControl : MonoBehaviour
 {
     [SerializeField] private CameraControl cameraControl;
+    [SerializeField] private Transform orientation;
     [Header("Hold/Grab params")]
     [SerializeField] private float followSpeed = 10f;
     [SerializeField] private float smoothness = 15f;
@@ -66,6 +67,11 @@ public class PlayerInteractionControl : MonoBehaviour
                 targetVelocity,
                 smoothness * Time.deltaTime
             );
+            Quaternion targetRotation = orientation.rotation * Quaternion.Euler(0f, 90f, 0f);
+            grabbedObject.object_rb.rotation = Quaternion.RotateTowards(
+                grabbedObject.object_rb.rotation,
+                targetRotation,
+                smoothness);
         }
     }
 

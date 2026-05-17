@@ -5,7 +5,9 @@ using UnityEngine.UIElements;
 public class InteractionDisplay : MonoBehaviour
 {
     [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private GameObject uiContainer;
     [SerializeField] private bool canRotate = true;
+    [SerializeField] private bool display = false;
     private Label interactionDescription;
     private Label interactionKey;
     private VisualElement _display;
@@ -21,14 +23,16 @@ public class InteractionDisplay : MonoBehaviour
 
     void Update()
     {
-        if (canRotate)
+        if (display && canRotate)
         {
             transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
+            uiContainer.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
         }
     }
 
-    public void DisplayInteractionInfo(InteractionSO interactionData, bool display)
+    public void DisplayInteractionInfo(InteractionSO interactionData, bool show)
     {
+        display = show;
         interactionDescription.text = interactionData.description;
         interactionKey.text = interactionData.interactionKey;
 

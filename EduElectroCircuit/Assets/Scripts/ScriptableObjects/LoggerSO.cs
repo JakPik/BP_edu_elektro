@@ -97,7 +97,7 @@ public class LoggerSO : ScriptableObject
     public static LoggerSO LoadOrCreate()
     {
         LoggerSO logger = Resources.Load<LoggerSO>("ScriptableObjects/Utils/LoggerSO");
-        StartLogging();
+        //StartLogging();
         /*var path = "Assets/Resources/ScriptableObjects/Utils/LoggerSO.asset";
         var logger = UnityEditor.AssetDatabase.LoadAssetAtPath<LoggerSO>(path);
         if (logger == null)

@@ -94,6 +94,11 @@ public class Node_Interactive : Node, INodeInteraction
 
     public void SetComponentData(ComponentDataSO componentData, GameObject circuitComponent)
     {
+        if (componentData == null)
+        {
+            ClearNode(circuitComponent);
+            return;
+        }
         refConnected = circuitComponent;
         connected = true;
         if (componentData.type == ComponentType.RESISTOR)
@@ -111,7 +116,12 @@ public class Node_Interactive : Node, INodeInteraction
     #region Node_Interactive local logic
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == refConnected)
+        ClearNode(other.gameObject);
+    }
+
+    private void ClearNode(GameObject caller)
+    {
+        if (caller == refConnected)
         {
             refConnected = null;
             connected = false;

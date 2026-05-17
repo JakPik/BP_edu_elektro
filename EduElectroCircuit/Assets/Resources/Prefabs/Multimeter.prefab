@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeterUIPanel
   display: {fileID: 4336773555800989740}
-  node: {fileID: 341708395664196374}
+  node: {fileID: 0}
 --- !u!1 &8658965171363992390
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,11 +143,11 @@ GameObject:
   - component: {fileID: 6108635961669170393}
   - component: {fileID: 7197969122601997982}
   - component: {fileID: 3868388557602094581}
-  - component: {fileID: 341708395664196374}
+  - component: {fileID: 3417963774768003176}
   - component: {fileID: 8863826339175667927}
   - component: {fileID: 2515372753544797321}
   m_Layer: 6
-  m_Name: meters
+  m_Name: Multimeter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: e3b488e8c7b17f842b13f331ebd2fca8, type: 3}
+  - {fileID: -3314925830214808573, guid: 74268425126de5e489a1ba1642aba2f1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -228,7 +228,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &341708395664196374
+--- !u!114 &3417963774768003176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

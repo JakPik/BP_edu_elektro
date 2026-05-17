@@ -38,8 +38,20 @@ public class RoomControl : MonoBehaviour
             }
             else
             {
+                Rigidbody rigidbody = obj.GetComponent<Rigidbody>();
+                if (rigidbody == null)
+                {
+                    Logger.Log(this, this.name, "Rigidbody component not found on " + obj.name, LogType.ERROR);
+                    continue;
+                }
+
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+                /*  rigidbody.transform.position = resistor.position + componentsParent.position;
+                  rigidbody.transform.rotation = componentsParent.rotation;*/
                 obj.transform.position = resistor.position + componentsParent.position;
                 obj.transform.rotation = componentsParent.rotation;
+
             }
             Resistor resistorComp = obj.GetComponent<Resistor>();
             if (resistorComp == null)

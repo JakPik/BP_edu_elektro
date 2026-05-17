@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Resistor : CircuitComponent, IGrabable
 {
@@ -23,9 +24,16 @@ public class Resistor : CircuitComponent, IGrabable
         rend.SetPropertyBlock(propBlock);
     }
 
-    protected override void SendData()
+    protected override void SendData(bool placed = true)
     {
-        nodeInteraction.SetComponentData(resistorData, this.gameObject);
+        if (placed)
+        {
+            nodeInteraction?.SetComponentData(resistorData, this.gameObject);
+        }
+        else
+        {
+            nodeInteraction?.SetComponentData(null, this.gameObject);
+        }
     }
 
     protected override Quaternion FindTargetRotation(Transform local, Transform target)
@@ -39,41 +47,28 @@ public class Resistor : CircuitComponent, IGrabable
         return finalRot;
     }
 
-    protected override void CanAnimate()
-    {
-        if (pendingCoroutine == null) return;
-
-        if (curCoroutine != null) StopCoroutine(curCoroutine);
-
-        NodeLockedState(true);
-        curCoroutine = StartCoroutine(pendingCoroutine);
-        pendingCoroutine = null;
-    }
-
-    protected override void NodeLockedState(bool locked)
-    {
-        if (locked) rb.constraints = RigidbodyConstraints.FreezeAll;
-    }
-
     #region IGrabable
     public bool CanGrab() => canGrab;
     public void LockGrab(bool locked) => canGrab = !locked;
 
     public void OnGrab(bool grabbed, GameObject caller)
     {
-        rb.constraints = RigidbodyConstraints.None;
         rb.angularVelocity = Vector3.zero;
         if (grabbed)
         {
-            rb.excludeLayers = 1 << caller.layer;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            GrabControlUtility.SetGrabbedState(rb, caller);
+            //  StartCoroutine(GrabControlUtility.AnimateRotationCorrection(this.gameObject, caller.transform));
+            SendData(false);
         }
         else
         {
-            rb.excludeLayers = LayerMask.GetMask("Nothig");
-            CanAnimate();
+            GrabControlUtility.SetReleasedState(rb);
+            if (!nodeInteraction?.CanConnect() ?? true) return;
+            Logger.Log(this, "COMPONENT", "Animating new position", LogType.INFO);
+
+            var (targetPos, targetTransfrom) = nodeInteraction.GetTransform();
+            CanAnimate(rb, targetPos, targetTransfrom);
         }
-        rb.useGravity = !grabbed;
     }
 
     public void DisplayInfo(bool display)
@@ -85,17 +80,11 @@ public class Resistor : CircuitComponent, IGrabable
     }
     #endregion
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
         {
-            if (!nodeInteraction.CanConnect()) return;
-            if (pendingCoroutine != null) return;
-
             this.nodeInteraction = nodeInteraction;
-            Logger.Log(this, "COMPONENT", "Pending Coroutine set", LogType.INFO);
-            var (targetPos, targetTransfrom) = nodeInteraction.GetTransform();
-            pendingCoroutine = AnimateNewPosition(targetPos, targetTransfrom);
         }
     }
 
@@ -105,7 +94,6 @@ public class Resistor : CircuitComponent, IGrabable
         {
             this.nodeInteraction = null;
             Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
-            pendingCoroutine = null;
         }
     }
 }
