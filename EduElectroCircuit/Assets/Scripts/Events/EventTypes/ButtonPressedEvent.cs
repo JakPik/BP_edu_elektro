@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: ButtonPressedEvent
+ */
+
 public class ButtonPressedEvent : EventBaseType
 {
     public bool IsON;

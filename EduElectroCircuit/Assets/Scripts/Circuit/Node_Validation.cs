@@ -1,9 +1,16 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: Node_Validation
+ */
+
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Node_ControlPoint : Node
+public class Node_Validation : Node
 {
     #region Variables
     [Space(10)]

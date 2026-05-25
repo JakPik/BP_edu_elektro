@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: InteractionSO
+ */
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InteractionSO", menuName = "ComponentData/InteractionSO")]

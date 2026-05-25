@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: LineRenderer
+ */
+
 using System;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -54,7 +61,7 @@ public static class LineRenderer
 
     private static void InLineConstruction(Spline spline, Vector3 outPort, Vector3 inPort)
     {
-        AddKnot(spline, new Vector3(0,0,0));
+        AddKnot(spline, new Vector3(0, 0, 0));
         AddKnot(spline, inPort - outPort);
     }
 
@@ -63,12 +70,13 @@ public static class LineRenderer
         Vector2 B = new Vector2(inPort.Item2.x, inPort.Item2.z) - new Vector2(outPort.Item2.x, outPort.Item2.z);
         Vector2 A2 = new Vector2(outPort.Item1.x, outPort.Item1.z);
 
-        B = B/ 2;
+        B = B / 2;
         Vector2 X = B * A2;
-        AddKnot(spline, new Vector3(0,0,0));
+        AddKnot(spline, new Vector3(0, 0, 0));
         AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
-        if(X.y == 0) {
-            AddKnot(spline, new Vector3(X.x, outPort.Item2.y, B.y*2));
+        if (X.y == 0)
+        {
+            AddKnot(spline, new Vector3(X.x, outPort.Item2.y, B.y * 2));
         }
         else
         {
@@ -83,13 +91,13 @@ public static class LineRenderer
         Vector2 A2 = new Vector2(-outPort.Item1.x, -outPort.Item1.z);
         Vector2 B = new Vector2(outPort.Item2.x, outPort.Item2.z) - new Vector2(inPort.Item2.x, inPort.Item2.z);
         float DetA = CalculateDet(A1, A2);
-        if(DetA == 0)
+        if (DetA == 0)
         {
-            InLineConstruction(spline,outPort.Item2, inPort.Item2);
+            InLineConstruction(spline, outPort.Item2, inPort.Item2);
             return;
         }
-        Vector2 X = -A2 * (CalculateDet(A1, B)/DetA);
-        AddKnot(spline, new Vector3(0,0,0));
+        Vector2 X = -A2 * (CalculateDet(A1, B) / DetA);
+        AddKnot(spline, new Vector3(0, 0, 0));
         AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
         AddKnot(spline, inPort.Item2 - outPort.Item2);
     }
@@ -124,18 +132,19 @@ public static class LineRenderer
 
     private static PortOrientation CheckNodeOrientation((Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
     {
-        float b = Math.Clamp(Math.Abs(Vector3.Dot(inPort.Item1, outPort.Item1)), -1f,1f);
-        if(b != 1)
+        float b = Math.Clamp(Math.Abs(Vector3.Dot(inPort.Item1, outPort.Item1)), -1f, 1f);
+        if (b != 1)
         {
             return PortOrientation.CORNER;
         }
         Vector3 v = (inPort.Item2 - outPort.Item2).normalized;
-        float a = Math.Clamp(Vector3.Dot(v, outPort.Item1), -1f,1f);
-        if(Math.Abs(a) == 1)
+        float a = Math.Clamp(Vector3.Dot(v, outPort.Item1), -1f, 1f);
+        if (Math.Abs(a) == 1)
         {
             return PortOrientation.INLINE;
         }
-        else {
+        else
+        {
             return PortOrientation.STRAIGHT;
         }
     }

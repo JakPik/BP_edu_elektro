@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: MeterUIPanel
+ */
+
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,7 +20,7 @@ public struct MeasurePointData
 public class MeterUIPanel : UIPanel
 {
     [SerializeField] private UIDocument display;
-    [SerializeField] private Node_MeasurePoint node;
+    [SerializeField] private Node_Measurement node;
     //  private IDataUIProvider meter;
     private Label _meterName;
     private Label _signalType;

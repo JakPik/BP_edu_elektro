@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: ControlPointUIPanel
+ */
+
 using System;
 using Unity.VisualScripting;
 using UnityEngine;

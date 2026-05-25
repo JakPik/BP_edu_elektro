@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: ColliderDrawUtil
+ */
+
 using UnityEngine;
 
 public class ColliderDrawUtil : MonoBehaviour

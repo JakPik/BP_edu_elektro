@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: EndPoint
+ */
+
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]

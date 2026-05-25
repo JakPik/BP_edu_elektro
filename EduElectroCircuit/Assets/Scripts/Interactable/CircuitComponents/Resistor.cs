@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: Resistor
+ */
+
 using System;
 using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;

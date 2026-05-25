@@ -1,3 +1,10 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: ResistorDataSO
+ */
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Resistor data", menuName = "ComponentData/Resistor data", order = 0)]
@@ -11,7 +18,7 @@ public class ResistorDataSO : ComponentDataSO
     {
         int multiplier = 0;
         float R = resistance;
-        while(resistance >= 1000)
+        while (resistance >= 1000)
         {
             resistance /= 10;
             multiplier++;

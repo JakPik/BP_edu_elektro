@@ -1,8 +1,15 @@
+/*
+ * Edukativní hra zaměřená na elektrické obvody
+ * Author: Jakub Pikal
+ * Year: 2026
+ * Module: Node_Measurement
+ */
+
 using UnityEngine;
 using System;
 using UnityEngine.UIElements;
 
-public class Node_MeasurePoint : Node
+public class Node_Measurement : Node
 {
     #region Variables
     [SerializeField] private MeterType meterType;
