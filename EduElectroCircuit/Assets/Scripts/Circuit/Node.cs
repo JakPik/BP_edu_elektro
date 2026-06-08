@@ -53,20 +53,20 @@ public abstract class Node : MonoBehaviour
         return type;
     }
 
-    public (Vector3, Vector3, Vector3) GetOutPortPosition(int idx)
+    public PortData GetOutPortPosition(int idx)
     {
         if (idx < outPort.Length)
         {
-            return (transform.TransformDirection(outPort[idx].transform.localPosition.normalized), outPort[idx].transform.position, outPort[idx].transform.localPosition);
+            return new PortData(transform.TransformDirection(outPort[idx].transform.localPosition.normalized), outPort[idx].transform.position, outPort[idx].transform.localPosition);
         }
         throw new Exception("OutPort not found");
     }
 
-    public (Vector3, Vector3) GetInPortPosition(int idx)
+    public PortData GetInPortPosition(int idx)
     {
         if (idx < inPort.Length)
         {
-            return (transform.TransformDirection(inPort[idx].transform.localPosition.normalized), inPort[idx].transform.position);
+            return new PortData(transform.TransformDirection(inPort[idx].transform.localPosition.normalized), inPort[idx].transform.position, null);
         }
         throw new Exception("InPort not found");
     }

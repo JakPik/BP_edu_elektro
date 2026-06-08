@@ -6,6 +6,7 @@
  */
 
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -21,7 +22,7 @@ public enum PortOrientation
     /// <summary>
     /// Ports have collinear direction vectors and are not aligned.
     /// </summary>
-    STRAIGHT,
+    Z_LINE,
     /// <summary>
     /// Ports have non-collinear direction vectors, forming an angle.
     /// </summary>
@@ -39,19 +40,23 @@ public enum PortOrientation
 /// </remarks>
 public static class LineRenderer
 {
-    public static void BuildLine(Node refference, (Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
+    public static void BuildLine(Node refference, PortData outPort, PortData inPort)
     {
-        SplineContainer splineContainer = CreateLine(refference, outPort.Item3).GetComponent<SplineContainer>();
+        if (outPort.portLocalPosition == null)
+        {
+            Logger.Log(outPort, "Line Builder", "Out port does not have local position set", LogType.ERROR);
+        }
+        SplineContainer splineContainer = CreateLine(refference, outPort.portLocalPosition ?? Vector3.zero).GetComponent<SplineContainer>();
         Spline spline = splineContainer.Spline;
         PortOrientation orientation = CheckNodeOrientation(outPort, inPort);
 
         switch (orientation)
         {
             case PortOrientation.INLINE:
-                InLineConstruction(spline, outPort.Item2, inPort.Item2);
+                InLineConstruction(spline, outPort.portPosition, inPort.portPosition);
                 break;
-            case PortOrientation.STRAIGHT:
-                StraightLineConstruction(spline, outPort, inPort);
+            case PortOrientation.Z_LINE:
+                ZLineConstruction(spline, outPort, inPort);
                 break;
             case PortOrientation.CORNER:
                 CornerLineConstruction(spline, outPort, inPort);
@@ -65,41 +70,37 @@ public static class LineRenderer
         AddKnot(spline, inPort - outPort);
     }
 
-    private static void StraightLineConstruction(Spline spline, (Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
+    private static void ZLineConstruction(Spline spline, PortData outPort, PortData inPort)
     {
-        Vector2 B = new Vector2(inPort.Item2.x, inPort.Item2.z) - new Vector2(outPort.Item2.x, outPort.Item2.z);
-        Vector2 A2 = new Vector2(outPort.Item1.x, outPort.Item1.z);
+        Vector3 A = inPort.portPosition - outPort.portPosition;
+        float length = ProjB_A(A, outPort.portDirection).magnitude / 2;
 
-        B = B / 2;
-        Vector2 X = B * A2;
         AddKnot(spline, new Vector3(0, 0, 0));
-        AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
-        if (X.y == 0)
-        {
-            AddKnot(spline, new Vector3(X.x, outPort.Item2.y, B.y * 2));
-        }
-        else
-        {
-            AddKnot(spline, new Vector3(B.x * 2, outPort.Item2.y, X.y));
-        }
-        AddKnot(spline, inPort.Item2 - outPort.Item2);
+        AddKnot(spline, outPort.portDirection * length);
+        AddKnot(spline, A + inPort.portDirection * length);
+        AddKnot(spline, inPort.portPosition - outPort.portPosition);
     }
 
-    private static void CornerLineConstruction(Spline spline, (Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
+    private static Vector3 ProjB_A(Vector3 a, Vector3 b)
     {
-        Vector2 A1 = new Vector2(inPort.Item1.x, inPort.Item1.z);
-        Vector2 A2 = new Vector2(-outPort.Item1.x, -outPort.Item1.z);
-        Vector2 B = new Vector2(outPort.Item2.x, outPort.Item2.z) - new Vector2(inPort.Item2.x, inPort.Item2.z);
+        return Vector3.Dot(a, b) * b;
+    }
+
+    private static void CornerLineConstruction(Spline spline, PortData outPort, PortData inPort)
+    {
+        Vector2 A1 = new Vector2(inPort.portDirection.x, inPort.portDirection.z);
+        Vector2 A2 = new Vector2(-outPort.portDirection.x, -outPort.portDirection.z);
+        Vector2 B = new Vector2(outPort.portPosition.x, outPort.portPosition.z) - new Vector2(inPort.portPosition.x, inPort.portPosition.z);
         float DetA = CalculateDet(A1, A2);
         if (DetA == 0)
         {
-            InLineConstruction(spline, outPort.Item2, inPort.Item2);
+            InLineConstruction(spline, outPort.portPosition, inPort.portPosition);
             return;
         }
         Vector2 X = -A2 * (CalculateDet(A1, B) / DetA);
         AddKnot(spline, new Vector3(0, 0, 0));
-        AddKnot(spline, new Vector3(X.x, outPort.Item2.y, X.y));
-        AddKnot(spline, inPort.Item2 - outPort.Item2);
+        AddKnot(spline, new Vector3(X.x, outPort.portPosition.y, X.y));
+        AddKnot(spline, inPort.portPosition - outPort.portPosition);
     }
 
     private static float CalculateDet(Vector2 M1, Vector2 M2)
@@ -130,22 +131,23 @@ public static class LineRenderer
         return line;
     }
 
-    private static PortOrientation CheckNodeOrientation((Vector3, Vector3, Vector3) outPort, (Vector3, Vector3) inPort)
+    private static PortOrientation CheckNodeOrientation(PortData outPort, PortData inPort)
     {
-        float b = Math.Clamp(Math.Abs(Vector3.Dot(inPort.Item1, outPort.Item1)), -1f, 1f);
+        if (outPort.portDirection.y != 0 || inPort.portDirection.y != 0) return PortOrientation.INLINE;
+        float b = Math.Clamp(Math.Abs(Vector3.Dot(inPort.portDirection, outPort.portDirection)), -1f, 1f);
         if (b != 1)
         {
             return PortOrientation.CORNER;
         }
-        Vector3 v = (inPort.Item2 - outPort.Item2).normalized;
-        float a = Math.Clamp(Vector3.Dot(v, outPort.Item1), -1f, 1f);
+        Vector3 v = (inPort.portPosition - outPort.portPosition).normalized;
+        float a = Math.Clamp(Vector3.Dot(v, outPort.portDirection), -1f, 1f);
         if (Math.Abs(a) == 1)
         {
             return PortOrientation.INLINE;
         }
         else
         {
-            return PortOrientation.STRAIGHT;
+            return PortOrientation.Z_LINE;
         }
     }
 }

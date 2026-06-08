@@ -19,6 +19,7 @@ public class InteractionDisplay : MonoBehaviour
     private Label interactionKey;
     private VisualElement _display;
     private GameObject mainCamera;
+    private Coroutine lookRoutine = null;
 
     private void Start()
     {
@@ -26,15 +27,6 @@ public class InteractionDisplay : MonoBehaviour
         interactionKey = uiDocument.rootVisualElement.Q<Label>("InteractionKey");
         _display = uiDocument.rootVisualElement.Q<VisualElement>("Display");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-    }
-
-    void Update()
-    {
-        if (display && canRotate)
-        {
-            transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
-            uiContainer.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
-        }
     }
 
     public void DisplayInteractionInfo(InteractionSO interactionData, bool show)
@@ -51,10 +43,12 @@ public class InteractionDisplay : MonoBehaviour
 
         if (display)
         {
+            if (canRotate) lookRoutine = StartCoroutine(UpdatePanelOrientation());
             _display.RemoveFromClassList("container_hidden");
         }
         else
         {
+            if (lookRoutine != null) StopCoroutine(lookRoutine);
             _display.AddToClassList("container_hidden");
         }
     }
@@ -78,5 +72,15 @@ public class InteractionDisplay : MonoBehaviour
             yield return null;
         }
         if (!fadeIn) this._display.visible = false;
+    }
+
+    private IEnumerator UpdatePanelOrientation()
+    {
+        while (true)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
+            uiContainer.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+            yield return null;
+        }
     }
 }
