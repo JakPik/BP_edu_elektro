@@ -5,6 +5,7 @@
  * Module: Logger
  */
 
+using System.Diagnostics;
 using UnityEngine;
 
 public enum LogType
@@ -30,31 +31,37 @@ public static class Logger
         }
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void Log<T>(T obj, string label, string msg, LogType type)
     {
         Instance.Log(label, msg + "\n" + obj.ToString(), type);
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogCalculation(string label, string msg, string input, string output)
     {
         Instance.LogCalculation(label, msg, input, output);
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogNode<T>(T obj, string msg, LogType type)
     {
         Instance.Log("NODE", msg + "\n" + obj.ToString(), type);
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogUI<T>(T obj, string msg, string compare)
     {
         Instance.LogUI(msg, compare, obj.ToString());
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogUI<T>(T obj, string msg, LogType type)
     {
         Instance.Log("UI", msg + "\n" + obj.ToString(), type);
     }
 
+    [Conditional("UNITY_EDITOR")]
     public static void LogEvent<T>(T obj, string msg)
     {
         Instance.LogEvent(msg + "\n" + obj.ToString());

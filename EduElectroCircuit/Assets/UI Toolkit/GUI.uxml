@@ -8,7 +8,7 @@
             <ui:VisualElement style="flex-grow: 1; align-content: auto; align-items: center; justify-content: space-evenly; margin-top: 20px; margin-bottom: 40px; width: 100%;">
                 <ui:Button text="Resume" name="ResumeButton" class="menu-button" style="width: 300px; height: 100px;"/>
                 <ui:Button text="Restart" name="RestartButton" class="menu-button" style="width: 300px; height: 100px;"/>
-                <ui:Button text="Settings" name="SettingsButton" class="menu-button" style="width: 300px; height: 100px;"/>
+                <ui:Button text="Settings" name="SettingsButton" enabled="false" focusable="false" picking-mode="Ignore" class="menu-button" style="width: 300px; height: 100px;"/>
                 <ui:Button text="Main Menu" name="MainMenuButton" class="menu-button" style="width: 300px; height: 100px;"/>
             </ui:VisualElement>
             <Bindings>

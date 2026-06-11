@@ -20,7 +20,7 @@ public enum NodeType
     NODE_CONTROL,
     BRANCH_OUT,
     BRANCH_IN,
-    END,
+    GND,
 }
 
 /// <summary>

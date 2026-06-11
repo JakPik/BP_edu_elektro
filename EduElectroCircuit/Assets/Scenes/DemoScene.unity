@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 76088165}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -3055,11 +3055,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3067,7 +3067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22
+      value: 4.200001
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3075,15 +3075,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3106,6 +3106,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
+--- !u!4 &172233356 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
+  m_PrefabInstance: {fileID: 172233355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &204955929
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,7 +3856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 256085643}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -4012,11 +4017,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4024,7 +4029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11
+      value: -6.799999
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4032,7 +4037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4040,7 +4045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4063,6 +4068,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &266086253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 266086252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &266859101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4357,7 +4367,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 577757549629628009, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_Name
@@ -4365,7 +4375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4373,7 +4383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.999998
+      value: 3.1999989
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4381,7 +4391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4389,7 +4399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4408,6 +4418,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
+--- !u!4 &285493064 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
+  m_PrefabInstance: {fileID: 285493063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &295682737 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8658965171363992390, guid: e69cc6895ee6b8a4192bff508a4c5567, type: 3}
@@ -5063,11 +5078,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5075,7 +5090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26
+      value: 8.200001
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5083,7 +5098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5091,7 +5106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5114,6 +5129,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
+--- !u!4 &335837356 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
+  m_PrefabInstance: {fileID: 335837355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &341329250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5240,7 +5260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 361011999}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -5730,7 +5750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 415368753}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -6670,6 +6690,10 @@ PrefabInstance:
       value: -0.037524045
       objectReference: {fileID: 0}
     - target: {fileID: 3417963774768003176, guid: e69cc6895ee6b8a4192bff508a4c5567, type: 3}
+      propertyPath: meterType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417963774768003176, guid: e69cc6895ee6b8a4192bff508a4c5567, type: 3}
       propertyPath: circuitActiveState
       value: 
       objectReference: {fileID: 11400000, guid: f595f7351214074468572a65004c922f, type: 2}
@@ -6981,7 +7005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 494865924}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -7677,7 +7701,23 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1422125182}
+  - {fileID: 266086253}
+  - {fileID: 1034187429}
+  - {fileID: 2065820765}
+  - {fileID: 1133710049}
+  - {fileID: 2072590437}
+  - {fileID: 1339109983}
+  - {fileID: 1705751595}
+  - {fileID: 1381847019}
+  - {fileID: 1020336048}
+  - {fileID: 172233356}
+  - {fileID: 335837356}
+  - {fileID: 654916979}
+  - {fileID: 1574793180}
+  - {fileID: 1861092887}
+  - {fileID: 285493064}
   m_Father: {fileID: 1738992368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &596850001
@@ -8317,7 +8357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 621230628}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -8835,7 +8875,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 800979978329884896, guid: d882a623533013940978c0fb97179060, type: 3}
       propertyPath: m_Name
@@ -8843,7 +8883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571731746613057498, guid: d882a623533013940978c0fb97179060, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1571731746613057498, guid: d882a623533013940978c0fb97179060, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8851,7 +8891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1571731746613057498, guid: d882a623533013940978c0fb97179060, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22
+      value: 4.200001
       objectReference: {fileID: 0}
     - target: {fileID: 1571731746613057498, guid: d882a623533013940978c0fb97179060, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8886,6 +8926,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d882a623533013940978c0fb97179060, type: 3}
+--- !u!4 &654916979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1571731746613057498, guid: d882a623533013940978c0fb97179060, type: 3}
+  m_PrefabInstance: {fileID: 654916978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &684779079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11027,7 +11072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 855212156}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -11478,7 +11523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 895576121}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -13451,11 +13496,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13463,7 +13508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26
+      value: 8.200001
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13471,7 +13516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.y
@@ -13479,7 +13524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13502,6 +13547,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
+--- !u!4 &1020336048 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2831849885723711548, guid: b4f431e40f7966b40be2acfb4b50f8f0, type: 3}
+  m_PrefabInstance: {fileID: 1020336047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1032906067
 GameObject:
   m_ObjectHideFlags: 0
@@ -13635,11 +13685,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13647,7 +13697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: -2.7999992
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13655,7 +13705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -13663,7 +13713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13686,6 +13736,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &1034187429 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 1034187428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1035590252
 Mesh:
   m_ObjectHideFlags: 0
@@ -13913,7 +13968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1036579042}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -15017,6 +15072,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 727398977}
     - target: {fileID: 3417963774768003176, guid: e69cc6895ee6b8a4192bff508a4c5567, type: 3}
+      propertyPath: meterType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417963774768003176, guid: e69cc6895ee6b8a4192bff508a4c5567, type: 3}
       propertyPath: circuitActiveState
       value: 
       objectReference: {fileID: 11400000, guid: f9df80c4b3fc71643bb4bfa8ab3436c4, type: 2}
@@ -15287,11 +15346,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15299,7 +15358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22
+      value: 4.200001
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15307,15 +15366,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15338,6 +15397,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &1133710049 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 1133710048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1160070446
 GameObject:
   m_ObjectHideFlags: 0
@@ -16586,7 +16650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1302602813}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -16950,11 +17014,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16962,7 +17026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26
+      value: 8.200001
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16970,7 +17034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -16978,7 +17042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17001,6 +17065,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &1339109983 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 1339109982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1346596024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3953866247578863956, guid: 7647c8607cab1ce4692245139655a32c, type: 3}
@@ -17306,7 +17375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1361151677}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -17519,11 +17588,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17531,7 +17600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19
+      value: 1.2000008
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17539,7 +17608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -17547,7 +17616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17570,6 +17639,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &1381847019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 1381847018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403959320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17755,7 +17829,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 5345597191700202116, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_Name
@@ -17763,7 +17837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17771,7 +17845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: -7.799999
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17779,15 +17853,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17806,6 +17880,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
+--- !u!4 &1422125182 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8692585524449878898, guid: c1bc6824de92239489251640af9a3d7d, type: 3}
+  m_PrefabInstance: {fileID: 1422125181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1422660944 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: 8db9cf740493046499d05dca1892ab79, type: 3}
@@ -17998,7 +18077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1460429607}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -19107,7 +19186,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 577757549629628009, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_Name
@@ -19115,7 +19194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19123,7 +19202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25
+      value: 7.200001
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19131,7 +19210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -19139,7 +19218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19158,6 +19237,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
+--- !u!4 &1574793180 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
+  m_PrefabInstance: {fileID: 1574793179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1577899117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20343,11 +20427,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20355,7 +20439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.999999
+      value: -2.8000002
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20363,7 +20447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -20371,7 +20455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20394,6 +20478,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &1705751595 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 1705751594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1707623397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2460746350641605330, guid: 43ebede077353f5469be8bc5729ff3ba, type: 3}
@@ -20586,7 +20675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1714813483}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -20822,7 +20911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1717661335}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -22842,7 +22931,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 577757549629628009, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_Name
@@ -22850,7 +22939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22858,7 +22947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.999998
+      value: 5.199999
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22866,7 +22955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -22874,7 +22963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22893,6 +22982,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
+--- !u!4 &1861092887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4747811849943574935, guid: 630f21ee51b39e9478cc2a87a6b46d4e, type: 3}
+  m_PrefabInstance: {fileID: 1861092886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1865469807
 GameObject:
   m_ObjectHideFlags: 0
@@ -22942,7 +23036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1865469812}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -23324,7 +23418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1900502310}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -24092,7 +24186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineExtrude
   m_Container: {fileID: 1941619384}
   m_TargetMesh: {fileID: 0}
-  m_RebuildOnSplineChange: 1
+  m_RebuildOnSplineChange: 0
   m_RebuildFrequency: 1
   m_UpdateColliders: 1
   m_Sides: 32
@@ -25177,11 +25271,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25189,7 +25283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19
+      value: 1.2000008
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25197,7 +25291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -25205,7 +25299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25228,17 +25322,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &2065820765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 2065820764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2072590436
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 544521654}
     m_Modifications:
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25246,7 +25345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26
+      value: 8.200001
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25254,7 +25353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.y
@@ -25262,7 +25361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25285,6 +25384,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+--- !u!4 &2072590437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6338800373834344350, guid: d372d8c12e7712f4eaa93624aba7b896, type: 3}
+  m_PrefabInstance: {fileID: 2072590436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2075359715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1571731746613057498, guid: 68425487a250ed54ebf67b28a7ed164c, type: 3}
@@ -27546,19 +27650,3 @@ SceneRoots:
   - {fileID: 2104309935}
   - {fileID: 1738992368}
   - {fileID: 875327627}
-  - {fileID: 1422125181}
-  - {fileID: 266086252}
-  - {fileID: 1034187428}
-  - {fileID: 2065820764}
-  - {fileID: 1133710048}
-  - {fileID: 2072590436}
-  - {fileID: 1339109982}
-  - {fileID: 1705751594}
-  - {fileID: 1381847018}
-  - {fileID: 1020336047}
-  - {fileID: 172233355}
-  - {fileID: 335837355}
-  - {fileID: 654916978}
-  - {fileID: 1574793179}
-  - {fileID: 1861092886}
-  - {fileID: 285493063}

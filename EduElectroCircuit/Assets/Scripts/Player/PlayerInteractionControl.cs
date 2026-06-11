@@ -50,6 +50,9 @@ public class PlayerInteractionControl : MonoBehaviour
     private void Update()
     {
         RayCast();
+    }
+
+    private void FixedUpdate() {
         UpdateHold();
     }
 
@@ -72,7 +75,7 @@ public class PlayerInteractionControl : MonoBehaviour
             grabbedObject.object_rb.linearVelocity = Vector3.Lerp(
                 grabbedObject.object_rb.linearVelocity,
                 targetVelocity,
-                smoothness * Time.deltaTime
+                smoothness * Time.fixedDeltaTime
             );
             Quaternion targetRotation = orientation.rotation * Quaternion.Euler(0f, 90f, 0f);
             grabbedObject.object_rb.rotation = Quaternion.RotateTowards(
