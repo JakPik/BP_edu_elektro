@@ -6,10 +6,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Node_Validation : Node
 {
@@ -20,7 +17,7 @@ public class Node_Validation : Node
     [SerializeField] private CircuitValueType valueType = CircuitValueType.VOLTAGE;
 
     [Tooltip("Assign value to set off unlock condition. Local value of valueType is compared to this value")]
-    [SerializeField] private float expectedValue;
+    [SerializeField] private ComplexFloat expectedValue;
 
     [Space(10)]
     [SerializeField] private GameObject uiPanel;
@@ -78,7 +75,7 @@ public class Node_Validation : Node
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override (float, bool) GetResistanceSum()
+    public override (ComplexFloat, bool) GetResistanceSum()
     {
         if (nextNode == null)
         {
@@ -118,33 +115,16 @@ public class Node_Validation : Node
             return;
         }
     }
-    public Dictionary<string, string> GetEventChannels()
-    {
-        return new Dictionary<string, string> {
-            { "circuitActiveState", circuitActiveState.name },
-            { "nodeValidation", nodeValidation.name },
-        };
-    }
 
-    public Dictionary<string, object> GetProperties()
-    {
-        return new Dictionary<string, object>
-        {
-            { "resistance", R},
-            { "controlType", valueType },
-            { "controlValue", expectedValue }
-        };
-    }
-
-    public float GetResistance() => R;
-    public float GetExpectedValue() => expectedValue;
+    public ComplexFloat GetResistance() => R;
+    public ComplexFloat GetExpectedValue() => expectedValue;
     public string GetControlType() => valueType.ToString();
 
-    public void SetResistance(float R)
+    public void SetResistance(ComplexFloat R)
     {
         this.R = R;
     }
-    public void SetExpectedValue(float expectedValue)
+    public void SetExpectedValue(ComplexFloat expectedValue)
     {
         this.expectedValue = expectedValue;
     }

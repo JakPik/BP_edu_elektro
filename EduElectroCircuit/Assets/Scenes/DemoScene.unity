@@ -27046,6 +27046,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3654205961544689197, guid: ae3393ed1325b844aaa6eef483f304b3, type: 3}
+      propertyPath: R.real
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654205961544689197, guid: ae3393ed1325b844aaa6eef483f304b3, type: 3}
       propertyPath: nextNode
       value: 
       objectReference: {fileID: 1311725924}
@@ -27061,6 +27065,10 @@ PrefabInstance:
       propertyPath: circuitActiveState
       value: 
       objectReference: {fileID: 11400000, guid: f595f7351214074468572a65004c922f, type: 2}
+    - target: {fileID: 3654205961544689197, guid: ae3393ed1325b844aaa6eef483f304b3, type: 3}
+      propertyPath: expectedValue.real
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4319831105248701540, guid: ae3393ed1325b844aaa6eef483f304b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.972

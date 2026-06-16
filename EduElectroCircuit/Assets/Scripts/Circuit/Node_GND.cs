@@ -10,9 +10,15 @@ using System;
 
 public class Node_GND : Node
 {
+    public void Awake()
+    {
+        R.Refresh();
+        U.Refresh();
+        I.Refresh();
+    }
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues) { return; }
 
-    public override (float, bool) GetResistanceSum() { return (R, connected); }
+    public override (ComplexFloat, bool) GetResistanceSum() { return (R, connected); }
 
     public override void BuildConections(Node branchInRef, int branchId, string containerName) { return; }
 }

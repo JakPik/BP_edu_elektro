@@ -6,8 +6,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public abstract class Node : MonoBehaviour
@@ -26,9 +24,13 @@ public abstract class Node : MonoBehaviour
     [SerializeField] protected Node nextNode;
 
     [Header("Control Variables")]
-    [SerializeField] protected float R;
-    [SerializeField] protected float U;
-    [SerializeField] protected float I;
+    [SerializeField] protected int roomID;
+    [SerializeField] protected int circuitID;
+    [Space(5)]
+    [SerializeField] protected ComplexFloat R;
+    [SerializeField] protected ComplexFloat U;
+    [SerializeField] protected ComplexFloat I;
+    [Space(5)]
     [SerializeField] protected bool connected = false;
     [SerializeField] protected bool locked = false;
     #endregion
@@ -48,7 +50,7 @@ public abstract class Node : MonoBehaviour
     /// </param>
     public abstract void CalculateValues(NodeDataModel passValues, NodeDataModel originValues);
 
-    public abstract (float, bool) GetResistanceSum();
+    public abstract (ComplexFloat, bool) GetResistanceSum();
 
     public NodeType GetNodeType()
     {
@@ -75,8 +77,8 @@ public abstract class Node : MonoBehaviour
 
     public void Refresh()
     {
-        U = 0;
-        I = 0;
+        U.Refresh();
+        I.Refresh();
     }
 
     public abstract void BuildConections(Node branchInRef, int branchId, string containerName);

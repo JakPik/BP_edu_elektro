@@ -7,6 +7,7 @@
 
 using System;
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum CircuitValueType
@@ -33,41 +34,39 @@ public static class NodeCalculationModel
         }
     }
 
-    public static (float, float) CalculateNodeValues(NodeDataModel passValues, float R)
+    public static (ComplexFloat, ComplexFloat) CalculateNodeValues(NodeDataModel passValues, ComplexFloat R)
     {
-        float U;
-        float I;
-
-        U = passValues.Uc * (R / passValues.Rc);
-        I = passValues.Ic;
+        ComplexFloat U = passValues.Uc * (R / passValues.Rc);
+        ComplexFloat I = passValues.Ic;
         passValues.UpdateReduceValues(U, R);
         return (U, I);
     }
 
-    public static float CalculateCurrentDivider(float Ic, float[] R, int idx)
+    public static ComplexFloat CalculateCurrentDivider(ComplexFloat Ic, ComplexFloat[] R, int idx)
     {
-        float R_Branch = (float)Math.Pow(R[idx], -1);
-        float R_Total = CalculateInvertedResistanceSum(R);
-        float result = Ic * (R_Branch / R_Total);
+        ComplexFloat R_Branch = R[idx].Inverse();
+        ComplexFloat R_Total = CalculateInvertedResistanceSum(R);
+        ComplexFloat result = Ic * (R_Branch / R_Total);
         Logger.LogCalculation("Current divider", "Divider for branch " + idx,
         "Current In: " + Ic + ", R-1 for branch: " + R_Branch + ", R-1 total: " + R_Total,
         "Result:" + result);
         return result;
     }
 
-    private static float CalculateInvertedResistanceSum(float[] R)
+    private static ComplexFloat CalculateInvertedResistanceSum(ComplexFloat[] R)
     {
-        float Rc_ = 0f;
+        ComplexFloat Rc_ = new ComplexFloat();
         for (int i = 0; i < R.Length; i++)
         {
             if (R[i] == 0) continue;
-            Rc_ += (float)Math.Pow(R[i], -1);
+            Rc_ += R[i].Inverse();
         }
         return Rc_;
     }
 
-    public static string FormatValue(float value, CircuitValueType type)
+    public static string FormatValue(ComplexFloat _value, CircuitValueType type)
     {
+        float value = _value.GetMagnitude();
         if (value >= 1e6)
         {
             return (value / 1e6).ToString("F2") + " M" + GetUnit(type);
@@ -93,4 +92,85 @@ public static class NodeCalculationModel
             return (value * 1e6).ToString("F4") + " μ" + GetUnit(type);
         }
     }
+}
+
+[System.Serializable]
+public struct ComplexFloat
+{
+    public float real;
+    public float imaginary;
+
+    private const float Epsilon = 1e-6f;
+
+    public ComplexFloat(float real, float imaginary)
+    {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    public float GetMagnitude() => (float)Math.Sqrt(real * real + imaginary * imaginary);
+
+    public override string ToString()
+    {
+        return real.ToString() + " + " + imaginary.ToString() + "i";
+    }
+
+    public void Refresh()
+    {
+        real = 0f;
+        imaginary = 0f;
+    }
+
+    public static ComplexFloat operator *(ComplexFloat a, ComplexFloat b)
+        => new ComplexFloat(a.real * b.real - a.imaginary * b.imaginary, a.real * b.imaginary + a.imaginary * b.real);
+
+    public static ComplexFloat operator /(ComplexFloat a, ComplexFloat b)
+    {
+        float denominator = b.real * b.real + b.imaginary * b.imaginary;
+        float inv = 1f / denominator;
+        return new ComplexFloat((a.real * b.real + a.imaginary * b.imaginary) * inv, (a.imaginary * b.real - a.real * b.imaginary) * inv);
+    }
+
+    public static ComplexFloat operator +(ComplexFloat a, ComplexFloat b)
+        => new ComplexFloat(a.real + b.real, a.imaginary + b.imaginary);
+
+    public static ComplexFloat operator -(ComplexFloat a, ComplexFloat b)
+        => new ComplexFloat(a.real - b.real, a.imaginary  - b.imaginary);
+
+    public ComplexFloat Inverse()
+    {
+        float denominator = real * real + imaginary * imaginary;
+        float inv = 1f / denominator;
+        return new ComplexFloat(real * inv, -imaginary * inv);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is not ComplexFloat other)
+            return false;
+
+        return
+            Math.Abs(real - other.real) < Epsilon &&
+            Math.Abs(imaginary - other.imaginary) < Epsilon;
+    }
+
+    public override int GetHashCode()
+    {
+        int r = (int)(real / Epsilon);
+        int i = (int)(imaginary / Epsilon);
+
+        return HashCode.Combine(r, i);
+    }
+
+    public static bool operator ==(ComplexFloat a, ComplexFloat b)
+        => a.Equals(b);
+
+    public static bool operator !=(ComplexFloat a, ComplexFloat b)
+        => !a.Equals(b);
+
+    public static bool operator ==(ComplexFloat a, float b)
+        => a.GetMagnitude() == b;
+
+    public static bool operator !=(ComplexFloat a, float b)
+        => a.GetMagnitude() != b;
 }

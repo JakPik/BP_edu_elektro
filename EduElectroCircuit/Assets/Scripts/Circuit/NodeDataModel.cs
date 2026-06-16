@@ -41,11 +41,11 @@ public class NodeDataModel
 {
     public CircuitValueType sourceType;
     public SignalType circuitType;
-    public float Uc;
-    public float Ic;
-    public float Rc;
+    public ComplexFloat Uc;
+    public ComplexFloat Ic;
+    public ComplexFloat Rc;
 
-    public NodeDataModel(float Uc, float Ic, float Rc, CircuitValueType sType, SignalType cType)
+    public NodeDataModel(ComplexFloat Uc, ComplexFloat Ic, ComplexFloat Rc, CircuitValueType sType, SignalType cType)
     {
         this.Uc = Uc;
         this.Ic = Ic;
@@ -60,7 +60,7 @@ public class NodeDataModel
     /// </summary>
     /// <param name="U">Node Voltage</param>
     /// <param name="R">Node Resistance</param>
-    public void UpdateReduceValues(float U, float R)
+    public void UpdateReduceValues(ComplexFloat U, ComplexFloat R)
     {
         Uc -= U;
         Rc -= R;
@@ -72,7 +72,7 @@ public class NodeDataModel
     /// <param name="Uc">Voltage value</param>
     /// <param name="Ic">Current value</param>
     /// <param name="Rc">Resistance value</param>
-    public void SetValues(float Uc, float Ic, float Rc)
+    public void SetValues(ComplexFloat Uc, ComplexFloat Ic, ComplexFloat Rc)
     {
         this.Uc = Uc;
         this.Ic = Ic;

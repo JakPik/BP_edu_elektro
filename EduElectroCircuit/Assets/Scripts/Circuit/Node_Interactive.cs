@@ -19,7 +19,7 @@ public class Node_Interactive : Node, INodeInteraction
 
     #region Events
     [Header("Raised Events")]
-    [SerializeField] private GenericVoidEventChannel nodeStateChange;
+    [SerializeField] private GenericEventChannel<NodeStateChange> nodeStateChange;
     [Header("Event Channels")]
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveState;
     #endregion
@@ -56,7 +56,7 @@ public class Node_Interactive : Node, INodeInteraction
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override (float, bool) GetResistanceSum()
+    public override (ComplexFloat, bool) GetResistanceSum()
     {
         if (nextNode == null)
         {
@@ -121,7 +121,7 @@ public class Node_Interactive : Node, INodeInteraction
         {
             R = ((ResistorDataSO)componentData).resistance;
         }
-        nodeStateChange?.RaiseEvent(this.name);
+        nodeStateChange?.RaiseEvent(new NodeStateChange(new NodeCircuit_ID(0,0)), this.name);
     }
 
     public bool CanConnect() => !connected && !locked;
@@ -141,10 +141,10 @@ public class Node_Interactive : Node, INodeInteraction
         {
             refConnected = null;
             connected = false;
-            R = 0;
-            U = 0;
-            I = 0;
-            nodeStateChange?.RaiseEvent(this.name);
+            R.Refresh();
+            U.Refresh();
+            I.Refresh();
+            nodeStateChange?.RaiseEvent(new NodeStateChange(new NodeCircuit_ID(0,0)), this.name);
         }
     }
     #endregion

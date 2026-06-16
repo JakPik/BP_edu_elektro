@@ -58,12 +58,12 @@ public class Node_Measurement : Node
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override (float, bool) GetResistanceSum()
+    public override (ComplexFloat, bool) GetResistanceSum()
     {
         if (nextNode == null)
         {
             Logger.LogNode(this, "No next node available", LogType.WARNING);
-            return (0, connected);
+            return (new ComplexFloat(), connected);
         }
         var (nextR, nextConnected) = nextNode.GetResistanceSum();
         nextConnected = nextConnected ? connected : nextConnected;

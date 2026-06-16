@@ -214,7 +214,7 @@ public class Node_SourceDTO
     public ConectionLine conectionLine;
     public string sourceType;
     public string signalType;
-    public float sourceValue;
+    public ComplexFloat sourceValue;
     public string nextNodeID;
     // public Dictionary<string, string> eventChannels;
     // public Dictionary<string, object> properties;
@@ -385,9 +385,9 @@ public class Node_ValidationDTO
     public string id;
     public TransformProperty transform;
     public ConectionLine conectionLine;
-    public float R;
+    public ComplexFloat R;
     public string controlType;
-    public float expectedValue;
+    public ComplexFloat expectedValue;
     public string nextNodeID;
     // public Dictionary<string, string> eventChannels;
     // public Dictionary<string, object> properties;

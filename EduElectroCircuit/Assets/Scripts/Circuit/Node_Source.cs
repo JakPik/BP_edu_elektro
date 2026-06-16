@@ -20,7 +20,7 @@ public class Node_Source : Node
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
 
     [Header("Event Channels")]
-    [SerializeField] private GenericVoidEventChannel nodeStateChangeChannel;
+    [SerializeField] private GenericEventChannel<NodeStateChange> nodeStateChangeChannel;
     [SerializeField] private GenericEventChannel<ButtonPressedEvent> startCalculationChannel;
 
     private UIPanel _uiPanel;
@@ -56,12 +56,12 @@ public class Node_Source : Node
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override (float, bool) GetResistanceSum()
+    public override (ComplexFloat, bool) GetResistanceSum()
     {
         if (nextNode == null)
         {
             Logger.LogNode(this, "No next node available", LogType.WARNING);
-            return (0, false);
+            return (new ComplexFloat(), false);
         }
         return nextNode.GetResistanceSum();
     }
@@ -93,7 +93,7 @@ public class Node_Source : Node
 
     public string GetSignalType() => signalType.ToString();
 
-    public float GetSourceValue()
+    public ComplexFloat GetSourceValue()
     {
         if(sourceType == CircuitValueType.VOLTAGE)
         {
@@ -115,7 +115,7 @@ public class Node_Source : Node
         signalType = Enum.Parse<SignalType>(type);
     }
 
-    public void SetSourceValue(float value)
+    public void SetSourceValue(ComplexFloat value)
     {
         if (sourceType == CircuitValueType.VOLTAGE)
         {
@@ -130,12 +130,12 @@ public class Node_Source : Node
     #region Node_Source local logic
     private SourceData GetSourceData()
     {
-        float value;
+        ComplexFloat value;
         switch (sourceType)
         {
             case CircuitValueType.VOLTAGE: value = U; break;
             case CircuitValueType.CURRENT: value = I; break;
-            default: value = 0f; break;
+            default: value = new ComplexFloat(); break;
         }
         return new SourceData
         {
@@ -159,7 +159,7 @@ public class Node_Source : Node
         startCalculationChannel.OnEventRaised -= Calculate;
     }
 
-    private void GetResistance()
+    private void GetResistance(NodeStateChange @event)
     {
         Logger.LogNode(this, "Start calculating total Resistance", LogType.SUCCESS);
         (R, connected) = GetResistanceSum();
@@ -211,7 +211,7 @@ public class Node_Source : Node
     [ContextMenu("Test Calculation")]
     private void TestCalculation()
     {
-        GetResistance();
+        GetResistance(new NodeStateChange(new NodeCircuit_ID(0,0)));
         Calculate(new ButtonPressedEvent(true));
     }
 

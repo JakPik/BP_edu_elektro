@@ -40,7 +40,10 @@
         },
         "sourceType": "VOLTAGE",
         "signalType": "DC",
-        "sourceValue": 30.0,
+        "sourceValue": {
+            "real": 30.0,
+            "imaginary": 0.0
+        },
         "nextNodeID": "Node"
     },
     "node_InteractiveDTOs": [
@@ -543,9 +546,15 @@
                     "z": -0.029999999329447748
                 }
             },
-            "R": 10.0,
+            "R": {
+                "real": 10.0,
+                "imaginary": 0.0
+            },
             "controlType": "VOLTAGE",
-            "expectedValue": 2.5,
+            "expectedValue": {
+                "real": 2.5,
+                "imaginary": 0.0
+            },
             "nextNodeID": "GND"
         }
     ],

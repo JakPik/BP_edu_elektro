@@ -13,7 +13,7 @@ using UnityEngine.Splines;
 public class Node_Branch : Node
 {
     [SerializeField] private Node[] nextBranchNode = new Node[3];
-    [SerializeField] private float[] branch_R = new float[3];
+    [SerializeField] private ComplexFloat[] branch_R = new ComplexFloat[3];
     [SerializeField] private bool[] branch_connected = new bool[3];
 
     /// <summary>
@@ -32,8 +32,8 @@ public class Node_Branch : Node
         if (type == NodeType.BRANCH_OUT)
         {
             (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
-            NodeDataModel localValues = new NodeDataModel(U, 0f, 0f, passValues.sourceType, passValues.circuitType);
-            NodeDataModel staticValues = new NodeDataModel(U, 0f, 0f, passValues.sourceType, passValues.circuitType);
+            NodeDataModel localValues = new NodeDataModel(U, new ComplexFloat(), new ComplexFloat(), passValues.sourceType, passValues.circuitType);
+            NodeDataModel staticValues = new NodeDataModel(U, new ComplexFloat(), new ComplexFloat(), passValues.sourceType, passValues.circuitType);
             for (int i = 0; i < nextBranchNode.Length; i++)
             {
                 if (nextBranchNode[i] == null)
@@ -41,7 +41,7 @@ public class Node_Branch : Node
                     Logger.LogNode(this, "Branch " + i + " is empty", LogType.EXCEPTION);
                     continue;
                 }
-                float local_I = NodeCalculationModel.CalculateCurrentDivider(I, branch_R, i);
+                ComplexFloat local_I = NodeCalculationModel.CalculateCurrentDivider(I, branch_R, i);
                 localValues.SetValues(U, local_I, branch_R[i]);
                 staticValues.SetValues(U, local_I, R);
                 nextBranchNode[i].CalculateValues(localValues, staticValues);
@@ -55,9 +55,9 @@ public class Node_Branch : Node
         nextNode.CalculateValues(passValues, originValues);
     }
 
-    public override (float, bool) GetResistanceSum()
+    public override (ComplexFloat, bool) GetResistanceSum()
     {
-        R = 0f;
+        R = new ComplexFloat();
         int disconnectedBranches = 0;
         if (type == NodeType.BRANCH_OUT)
         {
@@ -73,10 +73,10 @@ public class Node_Branch : Node
                 disconnectedBranches += branch_connected[i] ? 0 : 1;
                 if (branch_R[i] != 0 && branch_connected[i])
                 {
-                    R += (float)Math.Pow(branch_R[i], -1);
+                    R += branch_R[i].Inverse();
                 }
             }
-            R = (float)Math.Pow(R, -1);
+            R = R.Inverse();
             Logger.LogNode(this, "Local R: " + R, LogType.INFO);
             connected = !(disconnectedBranches == branch_connected.Length);
         }

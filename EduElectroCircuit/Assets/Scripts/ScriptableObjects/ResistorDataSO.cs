@@ -10,29 +10,28 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Resistor data", menuName = "ComponentData/Resistor data", order = 0)]
 public class ResistorDataSO : ComponentDataSO
 {
-    public float resistance;
+    public ComplexFloat resistance;
     public Color[] colorCode = new Color[5];
 
     [ContextMenu("Calculate color code")]
     public void CalculateColorCode()
     {
         int multiplier = 0;
-        float R = resistance;
-        while (resistance >= 1000)
+        float R = resistance.real;
+        while (R >= 1000)
         {
-            resistance /= 10;
+            R /= 10;
             multiplier++;
         }
-        int firstDigit = (int)resistance / 100;
-        int secondDigit = ((int)resistance / 10) - 10 * firstDigit;
-        int thirdDigit = (int)(resistance - 100 * firstDigit - 10 * secondDigit);
+        int firstDigit = (int)R / 100;
+        int secondDigit = ((int)R / 10) - 10 * firstDigit;
+        int thirdDigit = (int)(R - 100 * firstDigit - 10 * secondDigit);
 
         colorCode[0] = ResistorColorCode.GetColor(firstDigit);
         colorCode[1] = ResistorColorCode.GetColor(secondDigit);
         colorCode[2] = ResistorColorCode.GetColor(thirdDigit);
         colorCode[3] = ResistorColorCode.GetColor(multiplier);
         colorCode[4] = Color.black;
-        resistance = R;
     }
 }
 
