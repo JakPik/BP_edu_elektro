@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -92,7 +93,7 @@ public class Node_Validation : Node
         return (R + nextR, nextConnected);
     }
 
-    public override void BuildConections(Node branchInRef, int branchId)
+    public override void BuildConections(Node branchInRef, int branchId, string containerName)
     {
         if (nextNode == null && branchInRef == null)
         {
@@ -103,12 +104,12 @@ public class Node_Validation : Node
         {
             if (nextNode != null)
             {
-                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0));
-                nextNode.BuildConections(branchInRef, branchId);
+                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0), containerName);
+                nextNode.BuildConections(branchInRef, branchId, containerName);
             }
             else
             {
-                LineRenderer.BuildLine(this, GetOutPortPosition(0), branchInRef.GetInPortPosition(branchId));
+                LineRenderer.BuildLine(this, GetOutPortPosition(0), branchInRef.GetInPortPosition(branchId), containerName);
             }
         }
         catch (Exception e)
@@ -116,6 +117,40 @@ public class Node_Validation : Node
             Logger.LogNode(this, e.Message, LogType.ERROR);
             return;
         }
+    }
+    public Dictionary<string, string> GetEventChannels()
+    {
+        return new Dictionary<string, string> {
+            { "circuitActiveState", circuitActiveState.name },
+            { "nodeValidation", nodeValidation.name },
+        };
+    }
+
+    public Dictionary<string, object> GetProperties()
+    {
+        return new Dictionary<string, object>
+        {
+            { "resistance", R},
+            { "controlType", valueType },
+            { "controlValue", expectedValue }
+        };
+    }
+
+    public float GetResistance() => R;
+    public float GetExpectedValue() => expectedValue;
+    public string GetControlType() => valueType.ToString();
+
+    public void SetResistance(float R)
+    {
+        this.R = R;
+    }
+    public void SetExpectedValue(float expectedValue)
+    {
+        this.expectedValue = expectedValue;
+    }
+    public void SetControlType(string type)
+    {
+        valueType = Enum.Parse<CircuitValueType>(type);
     }
 
     #region Node_ControlPoint local logic

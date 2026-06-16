@@ -135,6 +135,12 @@ public class RoomControl : MonoBehaviour
     {
         SaveComponentSetUp();
     }
+
+    [ContextMenu("Load JSON")]
+    private void LoadJSON()
+    {
+        NodeModel.LoadModel(this.gameObject, "NodeTree");
+    }
     #endregion
 }
 

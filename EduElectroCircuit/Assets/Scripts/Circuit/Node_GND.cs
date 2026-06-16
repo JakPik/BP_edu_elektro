@@ -14,5 +14,5 @@ public class Node_GND : Node
 
     public override (float, bool) GetResistanceSum() { return (R, connected); }
 
-    public override void BuildConections(Node branchInRef, int branchId) { return; }
+    public override void BuildConections(Node branchInRef, int branchId, string containerName) { return; }
 }

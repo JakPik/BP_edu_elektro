@@ -15,9 +15,9 @@ using UnityEngine.InputSystem;
 public enum NodeType
 {
     SOURCE,
-    NODE_ACTIVE,
-    MEASURE_POINT,
-    NODE_CONTROL,
+    INTERACTIVE,
+    MEASUREMENT,
+    VALIDATION,
     BRANCH_OUT,
     BRANCH_IN,
     GND,

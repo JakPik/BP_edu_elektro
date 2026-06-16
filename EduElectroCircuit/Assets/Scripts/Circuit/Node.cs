@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public abstract class Node : MonoBehaviour
@@ -77,5 +79,14 @@ public abstract class Node : MonoBehaviour
         I = 0;
     }
 
-    public abstract void BuildConections(Node branchInRef, int branchId);
+    public abstract void BuildConections(Node branchInRef, int branchId, string containerName);
+
+    public Node GetNextNode() => nextNode;
+
+    public void SetNextNode(Node node)
+    {
+        nextNode = node;
+    }
+
+    
 }

@@ -1,0 +1,60 @@
+{
+  "root": {
+    "prefab": "Source",
+    "properties": {
+      "source": "",
+      "signal": "",
+      "value": 0
+    },
+    "eventChanels": {
+      "circuitActive": "",
+      "nodeStateChange": "",
+      "startCalculation": ""
+    },
+    "nextNode": {
+      "prefab": "Interactive",
+      "eventChanels": {
+        "circuitActive": "",
+        "nodeStateChange": ""
+      },
+      "nextNode": {
+        "prefab": "BranchOut",
+        "branches": {
+          "branch_1": {
+            "prefab": "Interactive",
+            "eventChanels": {
+              "circuitActive": "",
+              "nodeStateChange": ""
+            },
+            "nextNode": null
+          },
+          "branch_2": {
+            "prefab": "meter",
+            "type": "",
+            "eventChanels": {
+              "circuitActive": ""
+            },
+            "nextNode": null
+          },
+          "branch_3": {}
+        },
+        "nextNode": {
+          "prefab": "BranchIn",
+          "nextNode": {
+            "prefab": "Control",
+            "properties": {
+              "R": 0,
+              "controlType": "",
+              "controlValue": 0
+            },
+            "eventChanels": {
+              "circuitActive": "",
+              "nodeValidation": ""
+            },
+            "nextNode": "GND"
+          }
+        }
+      }
+    }
+  }
+}

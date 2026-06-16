@@ -5,11 +5,12 @@
  * Module: Node_Branch
  */
 
+using NUnit.Framework;
 using System;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class Nod_Branch : Node
+public class Node_Branch : Node
 {
     [SerializeField] private Node[] nextBranchNode = new Node[3];
     [SerializeField] private float[] branch_R = new float[3];
@@ -97,7 +98,7 @@ public class Nod_Branch : Node
         return (R + nextR, nextConnected);
     }
 
-    public override void BuildConections(Node branchInRef, int branchId)
+    public override void BuildConections(Node branchInRef, int branchId, string containerName)
     {
         if (nextNode == null && branchInRef == null)
         {
@@ -113,20 +114,20 @@ public class Nod_Branch : Node
                 {
                     if (nextBranchNode[i] != null)
                     {
-                        LineRenderer.BuildLine(this, GetOutPortPosition(i), nextBranchNode[i].GetInPortPosition(0));
-                        nextBranchNode[i].BuildConections(nextNode, i);
+                        LineRenderer.BuildLine(this, GetOutPortPosition(i), nextBranchNode[i].GetInPortPosition(0), containerName, i);
+                        nextBranchNode[i].BuildConections(nextNode, i, containerName);
                     }
                     else
                     {
                         Logger.LogNode(this, "Branch " + i + " is empty", LogType.EXCEPTION);
                     }
                 }
-                nextNode.BuildConections(branchInRef, branchId);
+                nextNode.BuildConections(branchInRef, branchId, containerName);
             }
             else
             {
-                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0));
-                nextNode.BuildConections(branchInRef, branchId);
+                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0), containerName);
+                nextNode.BuildConections(branchInRef, branchId, containerName);
             }
         }
         catch (Exception e)
@@ -134,5 +135,12 @@ public class Nod_Branch : Node
             Logger.LogNode(this, e.Message, LogType.ERROR);
             return;
         }
+    }
+
+    public Node[] GetBranches() => nextBranchNode;
+
+    public void SetBranches(Node[] branches)
+    {
+        nextBranchNode = branches;
     }
 }

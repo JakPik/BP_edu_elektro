@@ -8,6 +8,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Splines;
 
 /// <summary>
@@ -40,13 +41,14 @@ public enum PortOrientation
 /// </remarks>
 public static class LineRenderer
 {
-    public static void BuildLine(Node refference, PortData outPort, PortData inPort)
+    public static void BuildLine(Node refference, PortData outPort, PortData inPort, string containerName, int? branchID = null)
     {
         if (outPort.portLocalPosition == null)
         {
             Logger.Log(outPort, "Line Builder", "Out port does not have local position set", LogType.ERROR);
         }
-        SplineContainer splineContainer = CreateLine(refference, outPort.portLocalPosition ?? Vector3.zero).GetComponent<SplineContainer>();
+        GameObject line = CreateLine(refference, outPort.portLocalPosition ?? Vector3.zero, containerName, branchID);
+        SplineContainer splineContainer = line.GetComponent<SplineContainer>();
         Spline spline = splineContainer.Spline;
         PortOrientation orientation = CheckNodeOrientation(outPort, inPort);
 
@@ -62,6 +64,8 @@ public static class LineRenderer
                 CornerLineConstruction(spline, outPort, inPort);
                 break;
         }
+        SplineExtrude extrude = line.GetComponent<SplineExtrude>();
+        extrude.Rebuild();
     }
 
     private static void InLineConstruction(Spline spline, Vector3 outPort, Vector3 inPort)
@@ -114,21 +118,50 @@ public static class LineRenderer
         spline.Add(knot);
     }
 
-    private static GameObject CreateLine(Node refference, Vector3 startPos)
+    private static GameObject CreateLine(Node refference, Vector3 startPos, string containerName,int? branchID)
     {
-        GameObject line = new GameObject();
+        string branch = "";
+        if(branchID != null)
+        {
+            branch = "_" + branchID.Value;
+        }
+        GameObject line = refference.transform.Find(containerName + "_Line" + branch)?.gameObject;
+        if (line != null)
+        {
+            SplineContainer splineContainer = line.GetComponent<SplineContainer>();
+            Spline spline = splineContainer.Spline;
+            line.transform.rotation = Quaternion.identity;
+            while (spline.Count > 0) {
+                spline.RemoveAt(0);
+            }
+            return line;
+        }
+        line = new GameObject(containerName + "_Line" + branch);
         line.AddComponent<SplineContainer>();
         line.AddComponent<SplineExtrude>();
         SplineExtrude extrude = line.GetComponent<SplineExtrude>();
         extrude.Sides = 32;
-        extrude.RebuildFrequency = 1;
+        extrude.RebuildOnSplineChange = false;
+        extrude.RebuildFrequency = 0;
         extrude.Radius = 0.05f;
         extrude.SegmentsPerUnit = 16;
         line.transform.parent = refference.transform;
         line.transform.localPosition = startPos;
         line.transform.rotation = Quaternion.identity;
-        line.name = "Line";
         return line;
+    }
+
+    public static void CreateLineFromKnots(Node refference, string containerName, ConectionLine _line, int? branchID)
+    {
+        GameObject line = CreateLine(refference, _line.position, containerName, branchID);
+        SplineContainer splineContainer = line.GetComponent<SplineContainer>();
+        Spline spline = splineContainer.Spline;
+        foreach(Vector3 knot in _line.knots)
+        {
+            AddKnot(spline, knot);
+        }
+        SplineExtrude extrude = line.GetComponent<SplineExtrude>();
+        extrude.Rebuild();
     }
 
     private static PortOrientation CheckNodeOrientation(PortData outPort, PortData inPort)

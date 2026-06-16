@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class Node_Interactive : Node, INodeInteraction
 {
@@ -70,7 +71,7 @@ public class Node_Interactive : Node, INodeInteraction
         return (R + nextR, nextConnected);
     }
 
-    public override void BuildConections(Node branchInRef, int branchId)
+    public override void BuildConections(Node branchInRef, int branchId, string containerName)
     {
         if (nextNode == null && branchInRef == null)
         {
@@ -81,12 +82,12 @@ public class Node_Interactive : Node, INodeInteraction
         {
             if (nextNode != null)
             {
-                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0));
-                nextNode.BuildConections(branchInRef, branchId);
+                LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(0), containerName);
+                nextNode.BuildConections(branchInRef, branchId, containerName);
             }
             else
             {
-                LineRenderer.BuildLine(this, GetOutPortPosition(0), branchInRef.GetInPortPosition(branchId));
+                LineRenderer.BuildLine(this, GetOutPortPosition(0), branchInRef.GetInPortPosition(branchId), containerName);
             }
         }
         catch (Exception e)
@@ -94,6 +95,14 @@ public class Node_Interactive : Node, INodeInteraction
             Logger.LogNode(this, e.Message, LogType.ERROR);
             return;
         }
+    }
+
+    public Dictionary<string, string> GetEventChannels()
+    {
+        return new Dictionary<string, string> {
+            { "circuitActiveState", circuitActiveState.name },
+            { "nodeStateChange", nodeStateChange.name },
+        };
     }
 
     #region INodeInteraction

@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Node_Source : Node
@@ -65,18 +66,65 @@ public class Node_Source : Node
         return nextNode.GetResistanceSum();
     }
 
-    public override void BuildConections(Node branchInRef, int branchId)
+    public override void BuildConections(Node branchInRef, int branchId, string containerName)
     {
         try
         {
-            LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(branchId));
+            LineRenderer.BuildLine(this, GetOutPortPosition(0), nextNode.GetInPortPosition(branchId), containerName);
         }
         catch (Exception e)
         {
             Logger.LogNode(this, e.Message, LogType.ERROR);
             return;
         }
-        nextNode.BuildConections(null, branchId);
+        nextNode.BuildConections(null, branchId, containerName);
+    }
+
+    public Dictionary<string, string> GetEventChannels()
+    {
+        return new Dictionary<string, string> {
+            { "circuitActiveState", circuitActiveStateEventChannel.name },
+            { "nodeStateChange", nodeStateChangeChannel.name },
+            { "startCalculation", startCalculationChannel.name }
+        };
+    }
+
+    public string GetSourceType() => sourceType.ToString();
+
+    public string GetSignalType() => signalType.ToString();
+
+    public float GetSourceValue()
+    {
+        if(sourceType == CircuitValueType.VOLTAGE)
+        {
+            return U;
+        }
+        else
+        {
+            return I;
+        }
+    }
+
+    public void SetSourceType(string type)
+    {
+        sourceType = Enum.Parse<CircuitValueType>(type);
+    }
+
+    public void SetSignalType(string type)
+    {
+        signalType = Enum.Parse<SignalType>(type);
+    }
+
+    public void SetSourceValue(float value)
+    {
+        if (sourceType == CircuitValueType.VOLTAGE)
+        {
+            U = value;
+        }
+        else
+        {
+            I = value;
+        }
     }
 
     #region Node_Source local logic
@@ -156,7 +204,8 @@ public class Node_Source : Node
     [ContextMenu("Construct line")]
     private void BuildLines()
     {
-        BuildConections(null, 0);
+        string containerName = this.transform.parent.transform.parent.name;
+        BuildConections(null, 0, containerName);
     }
 
     [ContextMenu("Test Calculation")]
@@ -164,6 +213,12 @@ public class Node_Source : Node
     {
         GetResistance();
         Calculate(new ButtonPressedEvent(true));
+    }
+
+    [ContextMenu("Save To JSON")]
+    private void SaveToJSON()
+    {
+        NodeModel.SaveModel(this);
     }
     #endregion
 }
