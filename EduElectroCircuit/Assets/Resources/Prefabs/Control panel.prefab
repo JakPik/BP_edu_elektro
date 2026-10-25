@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7322387815180842992
 Transform:
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6299353035903725828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0.381, z: -0.03}
+  m_LocalPosition: {x: 0, y: 0.266, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5055869459530620848
 Transform:
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 7145329455128478197}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0.394, z: -0.03}
+  m_LocalPosition: {x: 0, y: -0.266, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +78,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &397303799946695200
 Transform:
@@ -89,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 8161615263351052291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.4207, y: -0.3275, z: 0.07}
+  m_LocalPosition: {x: 0.4243, y: -0.2568, z: 0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 85
-  m_WorldSpaceHeight: 66
+  m_WorldSpaceHeight: 50
   m_PivotReferenceSize: 1
   m_Pivot: 6
   m_WorldSpaceCollider: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4319831105248701540
 Transform:
@@ -237,19 +237,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9465be1ac1bb45843ba2bb774a809a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_ControlPoint
-  type: 3
-  outPort:
+  _type: 3
+  _outPort:
   - {fileID: 6299353035903725828}
-  inPort:
+  _inPort:
   - {fileID: 7145329455128478197}
-  nextNode: {fileID: 0}
-  R: 0
-  U: 0
-  I: 0
-  connected: 1
-  locked: 0
-  valueType: 0
-  expectedValue: 0
-  uiPanel: {fileID: 8161615263351052291}
-  nodeValidation: {fileID: 0}
-  circuitActiveState: {fileID: 0}
+  _nextNode: {fileID: 0}
+  _nodeCircuit_ID:
+    roomID: 0
+    circuitID: 0
+  R:
+    real: 0
+    imaginary: 0
+  U:
+    real: 0
+    imaginary: 0
+  I:
+    real: 0
+    imaginary: 0
+  _connected: 1
+  _locked: 0
+  _expectedValueType: 0
+  _expectedValue:
+    real: 0
+    imaginary: 0
+  _uiPanel: {fileID: 1562607596623823507}
+  _nodeValidation: {fileID: 0}
+  _circuitActiveState: {fileID: 11400000, guid: f595f7351214074468572a65004c922f, type: 2}

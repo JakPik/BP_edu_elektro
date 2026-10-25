@@ -1,0 +1,8 @@
+public enum TriggerType
+{
+    SPAWN_POINT,
+    ANIM_TRIGGER,
+    INTERACTION_CLICK,
+    INTERACTION_PROXIMITY,
+    OTHER
+}

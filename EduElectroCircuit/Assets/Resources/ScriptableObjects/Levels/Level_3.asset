@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31ffc5b068258946a2438e0662d07e7, type: 3}
+  m_Name: Level_3
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSO
+  levelName: Current circuits
+  levelID: Level_3
+  fullComplete: 0
+  locked: 0
+  timeImporved: 0
+  roomsGradeImproved: 0
+  difficultyGradeImproved: 0
+  bestEasy:
+    _star: 0
+    _timeGrade: 8
+    _levelTime:
+      _hours: 0
+      _minutes: 0
+      _seconds: 0
+    _roomGrades: 
+    _roomsGrade: 8
+    _difficultyGrade: 8
+  bestNormal:
+    _star: 0
+    _timeGrade: 8
+    _levelTime:
+      _hours: 0
+      _minutes: 0
+      _seconds: 0
+    _roomGrades: 
+    _roomsGrade: 8
+    _difficultyGrade: 8
+  bestHard:
+    _star: 0
+    _timeGrade: 8
+    _levelTime:
+      _hours: 0
+      _minutes: 0
+      _seconds: 0
+    _roomGrades: 
+    _roomsGrade: 8
+    _difficultyGrade: 8
+  levelGrade: 8

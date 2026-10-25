@@ -1,0 +1,174 @@
+.levelTabButton_silver {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    background-color: rgb(51, 51, 51);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    transition-duration: 0.1s;
+    border-left-color: rgb(140, 140, 140);
+    border-right-color: rgb(140, 140, 140);
+    border-top-color: rgb(140, 140, 140);
+    border-bottom-color: rgb(140, 140, 140);
+}
+
+.levelTabButton_silver:hover {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    background-color: rgba(64, 64, 64, 0.9);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    transition-duration: 0.1s;
+    border-left-color: rgb(178, 178, 178);
+    border-right-color: rgb(178, 178, 178);
+    border-top-color: rgb(178, 178, 178);
+    border-bottom-color: rgb(178, 178, 178);
+}
+
+.levelTabButton_silver.selected {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    background-color: rgb(38, 38, 38);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    transition-duration: 0.1s;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.levelTabButton_locked {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    background-color: rgba(13, 13, 13, 0.9);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    transition-duration: 0.1s;
+    border-left-color: rgba(51, 51, 51, 0.9);
+    border-right-color: rgba(51, 51, 51, 0.9);
+    border-top-color: rgba(51, 51, 51, 0.9);
+    border-bottom-color: rgba(51, 51, 51, 0.9);
+}
+
+.levelTabButton_gold {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    background-color: rgb(51, 51, 51);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    transition-duration: 0.1s;
+    border-left-color: rgb(140, 108, 42);
+    border-right-color: rgb(140, 108, 42);
+    border-top-color: rgb(140, 108, 42);
+    border-bottom-color: rgb(140, 108, 42);
+}
+
+.levelTabButton_gold:hover {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    background-color: rgba(64, 64, 64, 0.9);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    transition-duration: 0.1s;
+    border-left-color: rgb(178, 138, 54);
+    border-right-color: rgb(178, 138, 54);
+    border-top-color: rgb(178, 138, 54);
+    border-bottom-color: rgb(178, 138, 54);
+}
+
+.levelTabButton_gold.selected {
+    flex-direction: row;
+    flex-shrink: 1;
+    align-items: center;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    background-color: rgb(38, 38, 38);
+    border-top-width: 6px;
+    border-right-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 6px;
+    transition-duration: 0.1s;
+    border-left-color: rgb(255, 185, 0);
+    border-right-color: rgb(255, 185, 0);
+    border-top-color: rgb(255, 185, 0);
+    border-bottom-color: rgb(255, 185, 0);
+}

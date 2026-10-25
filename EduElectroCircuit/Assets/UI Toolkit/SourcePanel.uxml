@@ -2,21 +2,28 @@
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3#PanelStyle"/>
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=4bfa4f5599d4b304db9593cd4b56e35b&amp;type=3#TextStyle"/>
     <ui:VisualElement name="Panel" class="display-background">
-        <ui:Label text="Source Panel" class="panel-title" style="font-size: 12px;"/>
-        <ui:VisualElement name="InfoPanel" class="info-border">
-            <ui:Label text="Parameters" class="panel-title" style="font-size: 10px;"/>
-            <ui:VisualElement name="ResistancePanel" class="property-display">
-                <ui:Label text="Source Type:" name="Label" class="label"/>
-                <ui:Label text="Voltage" name="SourceType" class="label-param"/>
+        <ui:Label text="Napájení" class="panel-title" style="font-size: 10px;"/>
+        <ui:VisualElement name="InfoPanel" class="info-border" style="flex-shrink: 1; justify-content: flex-start; align-items: stretch;">
+            <ui:VisualElement style="flex-grow: 0; height: 40px; border-top-color: rgb(0, 216, 255); border-bottom-color: rgb(0, 216, 255); border-top-width: 1px; border-right-width: 0; border-bottom-width: 1px; border-left-width: 0; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; padding-top: 2px; padding-bottom: 2px; background-color: rgba(0, 0, 0, 0.58); justify-content: center;">
+                <ui:VisualElement name="ResistancePanel" class="property-display">
+                    <ui:Label text="Typ zdroje:" name="Label" class="label"/>
+                    <ui:Label text="Voltage" name="SourceType" class="label-param"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="RequirePanel" class="property-display">
+                    <ui:Label text="Výstup:" name="Label" class="label"/>
+                    <ui:Label text="999,99 MV" name="Value" class="label-param"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="RequirePanel" class="property-display">
+                    <ui:Label text="Typ proudu:" name="Label" class="label"/>
+                    <ui:Label text="AC" name="SignalType" class="label-param"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="PeriodPanel" class="property-display">
+                    <ui:Label text="Frekvence:" name="Label" class="label"/>
+                    <ui:Label text="10 s" name="Period" class="label-param"/>
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="RequirePanel" class="property-display">
-                <ui:Label text="Signal Type:" name="Label" class="label"/>
-                <ui:Label text="AC" name="SignalType" class="label-param"/>
-            </ui:VisualElement>
-            <ui:VisualElement name="RequirePanel" class="property-display">
-                <ui:Label text="Value:" name="Label" class="label"/>
-                <ui:Label text="999,99 MV" name="Value" class="label-param"/>
-            </ui:VisualElement>
+            <ui:Button text="Button" name="Button" class="interactive-button button-on"/>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background" style="-unity-material: url(&quot;project://database/Assets/Materials/UI/UI_hologramEffect.shadergraph?fileID=-876546973899608171&amp;guid=07cd88f1b873c08409282e403befcce9&amp;type=3#UI_hologramEffect&quot;) prop(&quot;_ColorMain&quot; rgb(0, 255, 242)) prop(&quot;_Height&quot; 90); position: absolute; width: 100%; height: 100%; background-color: rgb(3, 5, 30); top: 1px; left: 0;"/>
 </ui:UXML>

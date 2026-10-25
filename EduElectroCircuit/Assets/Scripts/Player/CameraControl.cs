@@ -15,6 +15,8 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Transform orientation;
     [SerializeField] private InputActionReference lookAction;
     [SerializeField] private float sensitivity = 0.01f;
+    [SerializeField] private bool _smoothing = false;
+    [SerializeField] private float _smoothness = 0.25f;
 
     [Header("Event Channels")]
     [SerializeField] private GenericEventChannel<ReloadEvent> reload;
@@ -30,20 +32,38 @@ public class CameraControl : MonoBehaviour
     private void UpdateCameraLook()
     {
         _lookDirection *= sensitivity;
-        _xRotation -= _lookDirection.y;
-        _yRotation += _lookDirection.x;
-        _yRotation = _yRotation % 360f;
-
+        _xRotation -= _lookDirection.y * (_smoothing? _smoothness : 1f);
+        _yRotation += _lookDirection.x * (_smoothing? _smoothness : 1f);
+        
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-        orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
-        transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+
+
+        if(_smoothing)
+        {
+            orientation.rotation = Quaternion.Lerp(
+                orientation.rotation, 
+                Quaternion.Euler(0, _yRotation, 0),
+                _smoothness * Time.fixedDeltaTime);
+
+            transform.rotation = Quaternion.Lerp(
+                Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0), 
+                Quaternion.Euler(_xRotation, _yRotation, 0),
+                _smoothness * Time.fixedDeltaTime);
+            //transform.rotation = Quaternion.Euler(_xRotation, transform.rotation.y, transform.rotation.z);
+        }
+        else
+        {
+            _yRotation = _yRotation % 360f;
+            orientation.rotation = Quaternion.Euler(0, _yRotation, 0);
+            transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);  
+        }
     }
 
     public (bool, RaycastHit) CameraRayCast(float distance)
     {
         Ray ray = new Ray(transform.position, transform.forward);
         LayerMask layerMask = ~LayerMask.NameToLayer("Default") & ~LayerMask.NameToLayer("Walls");
-        return (Physics.Raycast(ray, out RaycastHit hitInfo, distance * 2, layerMask, QueryTriggerInteraction.Ignore), hitInfo);
+        return (Physics.Raycast(ray, out RaycastHit hitInfo, distance, layerMask, QueryTriggerInteraction.Ignore), hitInfo);
     }
 
     public Vector3 GetCameraPosition() => transform.position;
@@ -57,8 +77,9 @@ public class CameraControl : MonoBehaviour
         _xRotation = 0f;
     }
 
-    public void InitHandShake(GameObject caller)
+    public void InitHandShake(GameObject caller, bool cinematicMove)
     {
+        _smoothing = cinematicMove;
         _yRotation = caller.transform.eulerAngles.y;
     }
 
@@ -92,4 +113,6 @@ public class CameraControl : MonoBehaviour
             _lookDirection = Vector2.zero;
         }
     }
+
+    public Camera GetCamera() => this.GetComponent<Camera>();
 }

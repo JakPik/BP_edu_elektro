@@ -326,7 +326,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuUIControl
   uiDocument: {fileID: 1420909655}
-  mainGameSceneName: DemoScene
+  mainGameSceneName: Level_1
+  _levelSelect:
+    levelSelectTab: {fileID: 9197481963319205126, guid: 299c1cd0d7488dd4da4b564daac5187e, type: 3}
+    _lockUnlocked: {fileID: 2800000, guid: b310fbad6b970b746aaedb6962cf4969, type: 3}
+    _lockLocked: {fileID: 2800000, guid: 20ceeb5afeaf45740b508c5da937b499, type: 3}
+    _animDuration: 0.5
+  _mainMenu:
+    _animDuration: 0.5
 --- !u!114 &1420909655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,8 +502,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771206283}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9964342, z: -0, w: -0.08437338}
-  m_LocalPosition: {x: -6.49, y: 1.6, z: 19.97}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

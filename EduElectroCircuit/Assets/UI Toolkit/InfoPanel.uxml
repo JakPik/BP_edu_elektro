@@ -1,9 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/InfoLabelStyle.uss?fileID=7433441132597879392&amp;guid=1db002b2b8aecf849afc78b48086d734&amp;type=3#InfoLabelStyle"/>
-    <ui:VisualElement name="Display" class="container container_hidden">
-        <ui:Label text="HHHHHHH" name="Description" class="description"/>
-        <ui:VisualElement class="key-holder">
-            <ui:Label text="E" name="InteractionKey" class="interaction-key"/>
-        </ui:VisualElement>
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/InfoLabelStyle.uss?fileID=7433441132597879392&amp;guid=1db002b2b8aecf849afc78b48086d734&amp;type=3"/>
+    <ui:VisualElement name="Display" style="flex-grow: 1; background-color: rgba(2, 0, 41, 0.7);">
+        <ui:Image source="project://database/Assets/Textures/UI/InfoPanels/Info_basic%20Circuit_1.1.png?fileID=2800000&amp;guid=36730cfb1f81b934196066a2d5eb468e&amp;type=3#Info_basic Circuit_1.1" scale-mode="StretchToFill"/>
+        <ui:VisualElement name="" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background" style="-unity-material: url(&quot;project://database/Assets/Materials/UI/UI_hologramEffect.shadergraph?fileID=-876546973899608171&amp;guid=07cd88f1b873c08409282e403befcce9&amp;type=3#UI_hologramEffect&quot;) prop(&quot;_ColorMain&quot; rgb(0, 255, 242)) prop(&quot;_Height&quot; 66); position: absolute; width: 100%; height: 100%; background-color: rgb(3, 5, 30);"/>
     </ui:VisualElement>
 </ui:UXML>

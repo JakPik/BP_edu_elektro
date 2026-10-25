@@ -15,12 +15,14 @@ public struct GrabbedObject
     public GameObject component;
     public Rigidbody object_rb;
     public IGrabable grabable;
+    public CircuitComponent circuitComponent;
 
     public void Refresh()
     {
         component = null;
         grabable = null;
         object_rb = null;
+        circuitComponent = null;
     }
 }
 
@@ -46,13 +48,39 @@ public class PlayerInteractionControl : MonoBehaviour
     [Header("Event Channels")]
     [SerializeField] private GenericEventChannel<ReloadEvent> reload;
 
+    private InteractionControlData _interactData = new InteractionControlData
+    {
+        show = false,
+        label = "Interact"
+    };
+    private InteractionControlData _grabData = new InteractionControlData
+    {
+        show = false,
+        label = ""
+    };
 
     private void Update()
     {
         RayCast();
+        _interactData.show = interactable == null? false: interactable.CanInteract();
+        if(holding)
+        {
+            _interactData.show = false;
+            _grabData.show = grabbedObject.circuitComponent.CanConnectToNode();
+            _grabData.label = grabbedObject.circuitComponent.CanConnectToNode()? "Attach to Node": _grabData.label;
+        }
+        else
+        {
+            _grabData.show = grabbedObject.grabable == null? false : grabbedObject.grabable.CanGrab();
+            _grabData.label = "Grab";
+        }
+        GameUIControl.Instance.UpdateInteraction(
+            _interactData,
+            _grabData);
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         UpdateHold();
     }
 
@@ -78,16 +106,19 @@ public class PlayerInteractionControl : MonoBehaviour
                 smoothness * Time.fixedDeltaTime
             );
             Quaternion targetRotation = orientation.rotation * Quaternion.Euler(0f, 90f, 0f);
-            grabbedObject.object_rb.rotation = Quaternion.RotateTowards(
-                grabbedObject.object_rb.rotation,
-                targetRotation,
-                smoothness);
+            grabbedObject.object_rb.MoveRotation(
+                Quaternion.RotateTowards(
+                    grabbedObject.object_rb.rotation,
+                    targetRotation,
+                    smoothness
+                )
+            );
         }
     }
 
     private void RayCast()
     {
-        var (found, hitInfo) = cameraControl.CameraRayCast(holdDistance);
+        var (found, hitInfo) = cameraControl.CameraRayCast(holdDistance * 1.5f);
         if (!found || hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
             if (!holding)
@@ -102,11 +133,14 @@ public class PlayerInteractionControl : MonoBehaviour
         }
 
         GameObject obj = hitInfo.collider.gameObject;
-        if (obj.TryGetComponent(out IInteractable interact) && interact != interactable)
+        if (obj.TryGetComponent(out IInteractable interact))
         {
-            interactable?.DisplayInfo(false);
-            interactable = interact;
-            interactable.DisplayInfo(true);
+            if(interact != interactable)
+            {
+                interactable?.DisplayInfo(false);
+                interactable = interact;
+            }
+            interactable.DisplayInfo(true, hitInfo, cameraControl.GetCamera());
         }
         if (!holding && obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
         {
@@ -114,6 +148,10 @@ public class PlayerInteractionControl : MonoBehaviour
             grabbedObject.component = hitInfo.collider.gameObject;
             grabbedObject.grabable = grabable;
             grabbedObject.object_rb = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
+            if(obj.TryGetComponent(out CircuitComponent component))
+            {
+                grabbedObject.circuitComponent = component;
+            }
             if (grabbedObject.object_rb == null)
             {
                 grabbedObject.Refresh();
@@ -168,6 +206,7 @@ public class PlayerInteractionControl : MonoBehaviour
 
     private void Grab()
     {
+        if(interactable != null) interactable.OnInteract(true);
         holding = !holding;
         try
         {
@@ -195,4 +234,6 @@ public class PlayerInteractionControl : MonoBehaviour
             interactable?.OnInteract();
         }
     }
+
+    public bool GetHoldingState() => holding;
 }

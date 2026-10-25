@@ -5,7 +5,6 @@
  * Module: ReloadEvent
  */
 
-using System.Numerics;
 using UnityEngine;
 
 public class ReloadEvent : EventBaseType

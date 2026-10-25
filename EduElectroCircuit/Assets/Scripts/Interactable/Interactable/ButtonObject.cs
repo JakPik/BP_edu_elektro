@@ -34,17 +34,26 @@ public class ButtonObject : MonoBehaviour, IInteractable
         GetComponent<Renderer>().material = material;
     }
 
-    public void Reset()
+    public void ButtonReset(bool circuitActive)
     {
-        material.color = Color.red;
         isPressed = false;
+        if(circuitActive)
+        {
+            material.color = Color.green;
+            OnInteract();
+        }
+        else
+        {
+            material.color = Color.red;
+        }
+        
     }
 
     public bool CanInteract() => canInteract;
 
-    public void DisplayInfo(bool display) => interactionDisplay.DisplayInteractionInfo(isPressed ? pressOff : pressOn, display);
+    public void DisplayInfo(bool display, RaycastHit hit = new RaycastHit(), Camera camera = null) => interactionDisplay.DisplayInteractionInfo(isPressed ? pressOff : pressOn, display);
 
-    public void OnInteract()
+    public void OnInteract(bool resetInteraction = false)
     {
         isPressed = !isPressed;
         interactionEventChannel?.RaiseEvent(new ButtonPressedEvent(isPressed), this.name);

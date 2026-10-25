@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: ProBuilder_Doors
   m_Shader: {fileID: 4800000, guid: 8547ec39534635c4289065e5c5033f43, type: 3}
-  m_Parent: {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  m_Parent: {fileID: 2100000, guid: e50412431b84e874e8ed25797bd59e6d, type: 2}
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords: []
   m_InvalidKeywords:

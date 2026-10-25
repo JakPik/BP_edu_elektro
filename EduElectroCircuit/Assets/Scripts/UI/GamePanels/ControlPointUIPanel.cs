@@ -5,22 +5,10 @@
  * Module: ControlPointUIPanel
  */
 
-using System;
-using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.UIElements;
-
-public struct ControlPointData
-{
-    public bool locked;
-    public string resistance;
-    public string required;
-}
 
 public class ControlPointUIPanel : UIPanel
 {
-    [SerializeField] private UIDocument display;
-
     private Label _stateLabel;
     private Label _resistanceLabel;
     private Label _requireLabel;
@@ -31,35 +19,36 @@ public class ControlPointUIPanel : UIPanel
         _resistanceLabel = display.rootVisualElement.Q<Label>("Resistance");
         _requireLabel = display.rootVisualElement.Q<Label>("Required");
 
-        _stateLabel.text = "Locked";
+        _stateLabel.text = "Zmačeny";
         StyleAsError(_stateLabel);
         StyleAsError(_requireLabel);
     }
 
-    public override void SetData<T>(T data)
+    public override bool SetData<T>(T data)
     {
-        if (data is ControlPointData controlPointData)
+        if (data is ValidationNodeData nodeData)
         {
-            _resistanceLabel.text = controlPointData.resistance;
-            _requireLabel.text = controlPointData.required;
-            DisplayLockState(controlPointData.locked);
+            _resistanceLabel.text = NodeCalculationModel.FormatValue(nodeData.resistance, ElectricalQuantityType.RESISTANCE);
+            _requireLabel.text = NodeCalculationModel.FormatValue(nodeData.expectedValue, nodeData.expectedValueType);
+            DisplayLockState(nodeData.locked);
             Logger.LogUI(this, "Data loaded. ", LogType.SUCCESS);
-            return;
+            return true;
         }
         Logger.LogUI(this, "Data could not be loaded. ", typeof(T) + " != ControlPointData");
+        return false;
     }
 
     private void DisplayLockState(bool locked)
     {
         if (locked)
         {
-            _stateLabel.text = "Locked";
+            _stateLabel.text = "Zmačeny";
             StyleAsError(_stateLabel);
             StyleAsError(_requireLabel);
         }
         else
         {
-            _stateLabel.text = "Unlocked";
+            _stateLabel.text = "Odemčeny";
             StyleAsSuccess(_stateLabel);
             StyleAsSuccess(_requireLabel);
         }

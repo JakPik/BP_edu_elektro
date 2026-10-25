@@ -6,8 +6,10 @@
  */
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class UIPanel : MonoBehaviour
 {
-    public abstract void SetData<T>(T data);
+    [SerializeField] protected UIDocument display;
+    public abstract bool SetData<T>(T data);    
 }

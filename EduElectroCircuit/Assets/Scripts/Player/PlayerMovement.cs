@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player control variables")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float drag = 4f;
+    [SerializeField] private bool _cinematicMove = false;
 
     [Tooltip("Sets camera sensitivity")]
 
@@ -37,7 +38,22 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveDirection;
     private float _speedCorrection = 10f;
 
+    #region Cinematic Movement Variables
+    private float _groundHeight = 1.32f;
+
     #endregion
+    #endregion
+
+    private void Awake()
+    {
+        cameraControl.InitHandShake(this.gameObject, _cinematicMove);
+        if(_cinematicMove)
+        {
+            rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            moveSpeed = 2.5f;
+        }
+        //reloadRequest?.RaiseEvent(new ReloadRequestEvent(true), this.name);
+    }
 
     private void Update()
     {
@@ -75,12 +91,6 @@ public class PlayerMovement : MonoBehaviour
         vector.z -= velocityZ;
 
         rb.linearVelocity = vector;
-    }
-
-    private void Start()
-    {
-        cameraControl.InitHandShake(this.gameObject);
-        reloadRequest?.RaiseEvent(new ReloadRequestEvent(true), this.name);
     }
 
     private void OnEnable()

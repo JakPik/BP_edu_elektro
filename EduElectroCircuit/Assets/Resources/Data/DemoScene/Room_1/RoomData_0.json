@@ -1,0 +1,111 @@
+{
+    "components": [
+        {
+            "sourcePanelDTO": {
+                "sourceType": "VOLTAGE",
+                "signalType": "DC",
+                "sourceValue": {
+                    "real": 0.0,
+                    "imaginary": 0.0
+                }
+            },
+            "doorPanelDTO": {
+                "controlType": "VOLTAGE",
+                "expectedValue": {
+                    "real": 2.5,
+                    "imaginary": 0.0
+                },
+                "resistance": {
+                    "real": 5.0,
+                    "imaginary": 0.0
+                }
+            },
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -1.0,
+                        "y": 0.0,
+                        "z": -2.0
+                    },
+                    "resistance": {
+                        "real": 25.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -0.05000000074505806,
+                        "y": 0.0,
+                        "z": 6.53000020980835
+                    },
+                    "resistance": {
+                        "real": 211.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": 5.5,
+                        "y": 0.0,
+                        "z": 0.5
+                    },
+                    "resistance": {
+                        "real": 25.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (3)",
+                    "position": {
+                        "x": -8.0,
+                        "y": 0.0,
+                        "z": -3.0
+                    },
+                    "resistance": {
+                        "real": 5.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (4)",
+                    "position": {
+                        "x": 4.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "resistance": {
+                        "real": 175.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (5)",
+                    "position": {
+                        "x": -8.0,
+                        "y": 0.0,
+                        "z": 3.0
+                    },
+                    "resistance": {
+                        "real": 175.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (6)",
+                    "position": {
+                        "x": -8.0,
+                        "y": 0.0,
+                        "z": 4.0
+                    },
+                    "resistance": {
+                        "real": 5.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ]
+        }
+    ]
+}

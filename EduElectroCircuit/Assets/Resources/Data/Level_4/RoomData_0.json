@@ -1,0 +1,406 @@
+{
+    "components": [
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "CURRENT",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 2.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "CURRENT",
+                    "expectedValue": {
+                        "real": 1.2799999713897706,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 45.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -4.016139030456543,
+                        "y": 0.0,
+                        "z": -2.6193249225616457
+                    },
+                    "resistance": {
+                        "real": 32.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [
+                {
+                    "name": "LightBulb",
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 10.0
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 48.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 70.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 76.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                },
+                {
+                    "name": "LightBulb (1)",
+                    "position": {
+                        "x": -4.0,
+                        "y": 0.0,
+                        "z": 10.0
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 58.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 100.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 110.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                },
+                {
+                    "name": "LightBulb (2)",
+                    "position": {
+                        "x": -2.5,
+                        "y": 0.0,
+                        "z": 12.0
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 48.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 30.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 33.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 120.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 40.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 230.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": 2.25472354888916,
+                        "y": 0.0,
+                        "z": -1.119791030883789
+                    },
+                    "resistance": {
+                        "real": 90.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": -0.24527645111083985,
+                        "y": 0.0,
+                        "z": 11.880208969116211
+                    },
+                    "resistance": {
+                        "real": 180.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": 2.25472354888916,
+                        "y": 0.0,
+                        "z": 11.380208969116211
+                    },
+                    "resistance": {
+                        "real": 220.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (3)",
+                    "position": {
+                        "x": 1.2547235488891602,
+                        "y": 0.0,
+                        "z": 8.380208969116211
+                    },
+                    "resistance": {
+                        "real": 540.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (4)",
+                    "position": {
+                        "x": -2.74527645111084,
+                        "y": 0.0,
+                        "z": -1.119791030883789
+                    },
+                    "resistance": {
+                        "real": 80.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [
+                {
+                    "name": "LightBulb",
+                    "position": {
+                        "x": -2.954343795776367,
+                        "y": 0.0,
+                        "z": -2.327829360961914
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 150.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 30.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 50.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                },
+                {
+                    "name": "LightBulb (1)",
+                    "position": {
+                        "x": -4.454343795776367,
+                        "y": 0.0,
+                        "z": -2.327829360961914
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 150.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 15.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 25.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                },
+                {
+                    "name": "LightBulb (2)",
+                    "position": {
+                        "x": -5.954343795776367,
+                        "y": 0.0,
+                        "z": -2.827829360961914
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 240.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 70.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 80.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "CURRENT",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 6.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 150.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 25.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": 4.345359802246094,
+                        "y": 0.0,
+                        "z": 2.259244918823242
+                    },
+                    "resistance": {
+                        "real": 120.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": -0.14677810668945313,
+                        "y": 0.0,
+                        "z": 2.212855100631714
+                    },
+                    "resistance": {
+                        "real": 480.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -6.58880615234375,
+                        "y": 0.0,
+                        "z": 2.4482152462005617
+                    },
+                    "resistance": {
+                        "real": 280.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [
+                {
+                    "name": "LightBulb",
+                    "position": {
+                        "x": 4.2209625244140629,
+                        "y": 0.0,
+                        "z": 3.4298861026763918
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 120.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 360.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 396.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                },
+                {
+                    "name": "LightBulb (1)",
+                    "position": {
+                        "x": -0.2790374755859375,
+                        "y": 0.0,
+                        "z": 3.4298861026763918
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 120.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 140.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 154.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                },
+                {
+                    "name": "LightBulb (2)",
+                    "position": {
+                        "x": -7.7790374755859379,
+                        "y": 0.0,
+                        "z": 3.4298861026763918
+                    },
+                    "lightbulbData": {
+                        "type": 3,
+                        "resistance": {
+                            "real": 120.0,
+                            "imaginary": 0.0
+                        },
+                        "ratedVoltage": {
+                            "real": 200.0,
+                            "imaginary": 0.0
+                        },
+                        "maxVoltage": {
+                            "real": 220.0,
+                            "imaginary": 0.0
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,22 +1,26 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=4bfa4f5599d4b304db9593cd4b56e35b&amp;type=3#TextStyle"/>
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle_1.uss?fileID=7433441132597879392&amp;guid=4bfa4f5599d4b304db9593cd4b56e35b&amp;type=3#TextStyle_1"/>
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3#PanelStyle"/>
-    <ui:VisualElement name="Panel" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background">
-        <ui:Label text="Door Panel" class="panel-title" style="font-size: 12px;"/>
-        <ui:VisualElement name="StatePanel" class="property-display" style="justify-content: center;">
-            <ui:Label text="State:" class="label"/>
-            <ui:Label text="Locked" name="State" class="label-success"/>
-        </ui:VisualElement>
-        <ui:VisualElement name="InfoPanel" class="info-border">
-            <ui:Label text="Parameters" class="panel-title" style="font-size: 10px; margin-bottom: 4px;"/>
-            <ui:VisualElement name="ResistancePanel" class="property-display">
-                <ui:Label text="Resistance:" class="label"/>
-                <ui:Label text="999,99 MΩ" name="Resistance" class="label-param"/>
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=6c2a30a343cba4947a5db234dc5f7ae3&amp;type=3#TextStyle"/>
+    <ui:VisualElement>
+        <ui:VisualElement name="Panel" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background">
+            <ui:Label text="" class="panel-title" style="font-size: 12px; -unity-material: url(&quot;&quot;);"/>
+            <ui:VisualElement name="StatePanel" class="property-display" style="justify-content: center; -unity-material: url(&quot;&quot;);">
+                <ui:Label text="Dveře:" class="text-base text-info" style="font-size: 8px;"/>
+                <ui:Label text="Locked" name="State" class="text-base text-success" style="font-size: 8px;"/>
             </ui:VisualElement>
-            <ui:VisualElement name="RequirePanel" class="property-display">
-                <ui:Label text="Requires:" name="Label" class="label"/>
-                <ui:Label text="999,99 MV" name="Required" class="label-error"/>
+            <ui:VisualElement name="InfoPanel" class="info-border" style="-unity-material: url(&quot;&quot;); padding-top: 2px; padding-bottom: 2px;">
+                <ui:Label text="Parametry Dveří" class="text-base text-info" style="font-size: 9px; margin-bottom: 2px; -unity-text-outline-width: 0.5px; -unity-text-align: upper-center;"/>
+                <ui:VisualElement name="ResistancePanel" class="property-display">
+                    <ui:Label text="Odpor:" class="text-info text-base" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                    <ui:Label text="999,99 MΩ" name="Resistance" class="text-base text-parameter" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="RequirePanel" class="property-display">
+                    <ui:Label text="Požadováno:" name="Label" class="text-base text-info" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                    <ui:Label text="999,99 MV" name="Required" class="text-base text-error" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background" style="-unity-material: url(&quot;project://database/Assets/Materials/UI/UI_hologramEffect.shadergraph?fileID=-876546973899608171&amp;guid=07cd88f1b873c08409282e403befcce9&amp;type=3#UI_hologramEffect&quot;) prop(&quot;_ColorMain&quot; rgb(0, 255, 242)) prop(&quot;_Height&quot; 66); position: absolute; width: 100%; height: 100%; background-color: rgb(3, 5, 30); top: 0; left: 1px;"/>
     </ui:VisualElement>
 </ui:UXML>

@@ -1,0 +1,8 @@
+public enum NodeConectionStates
+{
+    EMPTY,
+    PLACED_COMPONENT,
+    ACTIVE_OPEN_CIRCUIT,
+    ACTIVE_CLOSED_CIRCUIT,
+    ACTIVE_ON_INTERACTION
+}

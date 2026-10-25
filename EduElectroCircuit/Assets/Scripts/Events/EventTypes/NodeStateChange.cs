@@ -1,5 +1,5 @@
 /*
- * Edukativní hra zamìøená na elektrické obvody
+ * Edukativnï¿½ hra zamï¿½ï¿½enï¿½ na elektrickï¿½ obvody
  * Author: Jakub Pikal
  * Year: 2026
  * Module: NodeStateChange
@@ -17,18 +17,5 @@ public class NodeStateChange : EventBaseType
     public override string DisplayData()
     {
         return "(Room_circuit ID: " + nodeCircuit_ID.roomID + "_" + nodeCircuit_ID.circuitID + ")";
-    }
-}
-
-[System.Serializable]
-public struct NodeCircuit_ID
-{
-    public int roomID;
-    public int circuitID;
-
-    public NodeCircuit_ID(int roomID, int circuitID)
-    {
-        this.roomID = roomID;
-        this.circuitID = circuitID;
     }
 }

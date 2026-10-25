@@ -1,0 +1,26 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3#PanelStyle"/>
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=4bfa4f5599d4b304db9593cd4b56e35b&amp;type=3#TextStyle"/>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0.9); width: 460px;">
+            <ui:Label text="Label" style="font-size: 80px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;); color: rgb(255, 255, 255);"/>
+            <ui:Button text="General" style="flex-shrink: 1; font-size: 50px; width: 260px; height: 56px;"/>
+            <ui:Button text="Controls" style="flex-shrink: 1; font-size: 50px; width: 260px; height: 56px;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgb(168, 66, 66); position: relative; flex-shrink: 1;">
+            <ui:VisualElement name="General" style="flex-grow: 1; display: none;">
+                <ui:VisualElement style="flex-grow: 1;">
+                    <ui:DropdownField label="Resolution&#10;"/>
+                    <ui:Toggle label="FullScreen"/>
+                    <ui:DropdownField label="Language"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1;">
+                    <ui:Slider label="Master Volume" value="42" high-value="100"/>
+                    <ui:Slider label="Music&#10;" value="42" high-value="100"/>
+                    <ui:Slider label="Sound Efects" value="42" high-value="100"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

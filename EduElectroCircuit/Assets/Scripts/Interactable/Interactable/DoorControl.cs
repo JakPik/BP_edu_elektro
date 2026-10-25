@@ -8,84 +8,96 @@
 using UnityEngine;
 using System.Collections;
 
-public class DoorControl : ColliderDrawUtil
+public abstract class DoorControl : ColliderDrawUtil
 {
-    [SerializeField] private GameObject door;
-    [SerializeField] private GameObject enterPoint;
-    [SerializeField] private float openHeight;
-    [SerializeField] private float animSpeed;
-    [SerializeField] private bool twoWay = false;
-    [SerializeField] private bool locked = false;
-    [SerializeField] private GenericEventChannel<NodeValidationEvent> nodeValidation;
-    private float _closedHeight;
-    private Coroutine _curCoroutine = null;
-    private Vector3 _forward;
+    [SerializeField] protected GameObject _enterPoint;
+    [SerializeField] protected float _animSpeed;
+    [SerializeField] private bool _twoWay = false;
+    [SerializeField] private bool _locked = false;
+    [Tooltip("Determins if components can be carried through the door. True => can be carried, Flase => can not be carried.")]
+    [SerializeField] private bool _transportComponents = true;
+    [SerializeField] private GenericEventChannel<NodeValidationEvent> _nodeValidation;
+    protected Coroutine _curCoroutine = null;
+    protected Vector3 _forward;
+    private PlayerInteractionControl _playerInteraction = null;
+    private int _numberOfComponents = 0;
 
-    private void Start()
-    {
-        _forward = door.transform.position - enterPoint.transform.position;
-        _closedHeight = door.transform.position.y;
-        openHeight = _closedHeight + 4.0f;
-    }
+
 
     private void OnEnable()
     {
-        if (nodeValidation == null)
+        if (_nodeValidation == null)
         {
             Logger.Log(this, "DOOR", "nodeValidation is null", LogType.WARNING);
             return;
         }
-        nodeValidation.OnEventRaised += LockState;
+        _nodeValidation.OnEventRaised += LockState;
     }
 
     private void OnDisable()
     {
-        if (nodeValidation == null) return;
-        nodeValidation.OnEventRaised -= LockState;
+        if (_nodeValidation == null) return;
+        _nodeValidation.OnEventRaised -= LockState;
     }
 
     public void LockState(NodeValidationEvent @event)
     {
-        locked = !@event.Valid;
+        _locked = !@event.Valid;
+        if(_locked)
+        {
+            StartAnimation(CloseDoor());
+        }
+        else if(_playerInteraction != null)
+        {
+            if(!_transportComponents && (_numberOfComponents > 0 || _playerInteraction.GetHoldingState())) return;
+            StartAnimation(OpenDoor());
+        }
+
+    }
+
+    private void StartAnimation(IEnumerator coroutine)
+    {
+        if (_curCoroutine != null) StopCoroutine(_curCoroutine);
+        _curCoroutine = StartCoroutine(coroutine);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (locked) return;
-
-        Vector3 position = door.transform.position - other.transform.position;
-        if (!twoWay && Vector3.Dot(position, _forward) < 0) return;
-
-        if (_curCoroutine != null) StopCoroutine(_curCoroutine);
-
-        _curCoroutine = StartCoroutine(OpenDoor());
-    }
-
-    public IEnumerator OpenDoor()
-    {
-        while (door.transform.position.y < openHeight)
+        if(other.TryGetComponent(out CircuitComponent _) && !_transportComponents)
         {
-            door.transform.position += new Vector3(0.0f, animSpeed, 0.0f);
-            yield return null;
+            _numberOfComponents++;
+            StartAnimation(CloseDoor());
+            return;
         }
-        _curCoroutine = null;
-    }
-
-    public IEnumerator CloseDoor()
-    {
-        while (door.transform.position.y > _closedHeight)
+        if(!other.CompareTag("Player")) return;
+        if(other.TryGetComponent(out PlayerInteractionControl playerInteractionControl))
         {
-            door.transform.position += new Vector3(0.0f, -animSpeed, 0.0f);
-            yield return null;
-        }
-        _curCoroutine = null;
+            _playerInteraction = playerInteractionControl;
+            if((!_transportComponents && (_numberOfComponents > 0)) || _locked) {
+                StartAnimation(CloseDoor());
+                return;
+            }
+            Vector3 position = this.transform.position - other.transform.position;
+            if (!_twoWay && Vector3.Dot(position, _forward) < 0) return;
+
+            StartAnimation(OpenDoor());
+        }        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (_curCoroutine != null) StopCoroutine(_curCoroutine);
-
-        _curCoroutine = StartCoroutine(CloseDoor());
+        if(other.TryGetComponent(out CircuitComponent _))
+        {
+            _numberOfComponents--;
+            if(_numberOfComponents == 0 && _playerInteraction != null && !_locked) StartAnimation(OpenDoor());
+            return;
+        }
+        if(!other.CompareTag("Player")) return;
+        _playerInteraction = null;
+        StartAnimation(CloseDoor());
     }
 
+    public abstract IEnumerator OpenDoor();
+
+    public abstract  IEnumerator CloseDoor();
 }

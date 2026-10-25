@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4863185826141165951
 Transform:
@@ -48,7 +48,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2697817573973030246
 Transform:
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 7017800361786976655}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -137,13 +137,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f223ed38c302848921e5c1ab8a4ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_GND
-  type: 6
-  outPort: []
-  inPort:
+  _type: 0
+  _outPort: []
+  _inPort:
   - {fileID: 4561312512068467330}
-  nextNode: {fileID: 0}
-  R: 0
-  U: 0
-  I: 0
-  connected: 1
-  locked: 0
+  _nextNode: {fileID: 0}
+  _nodeCircuit_ID:
+    roomID: 0
+    circuitID: 0
+  R:
+    real: 0
+    imaginary: 0
+  U:
+    real: 0
+    imaginary: 0
+  I:
+    real: 0
+    imaginary: 0
+  _connected: 1
+  _locked: 0

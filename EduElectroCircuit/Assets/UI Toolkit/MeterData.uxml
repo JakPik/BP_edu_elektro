@@ -7,7 +7,7 @@
                 <ui:DataBinding property="text" data-source-path="multimeterName" binding-mode="ToTarget"/>
             </Bindings>
         </ui:Label>
-        <ui:VisualElement name="RequirePanel" class="property-display" style="translate: 5px 4px;">
+        <ui:VisualElement name="RequirePanel" class="property-display" style="translate: 0 4px; margin-right: 3px; margin-left: 3px;">
             <ui:Label text="Mode:" name="Label" class="label"/>
             <ui:Label text="DC" name="SignalType" class="label-param"/>
         </ui:VisualElement>

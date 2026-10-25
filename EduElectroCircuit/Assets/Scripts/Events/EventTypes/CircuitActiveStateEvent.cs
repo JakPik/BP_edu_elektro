@@ -7,15 +7,17 @@
 
 public class CircuitActiveStateEvent : EventBaseType
 {
-    public bool CircuitActive;
+    public bool circuitActive;
+    public NodeCircuit_ID nodeCircuit_ID;
 
-    public CircuitActiveStateEvent(bool circuitActive)
+    public CircuitActiveStateEvent(bool circuitActive, NodeCircuit_ID nodeCircuit_ID)
     {
-        CircuitActive = circuitActive;
+        this.circuitActive = circuitActive;
+        this.nodeCircuit_ID = nodeCircuit_ID;
     }
 
     public override string DisplayData()
     {
-        return "(Circuit Active: " + CircuitActive.ToString() + ")";
+        return "(Circuit Active: " + circuitActive.ToString() + ", " + nodeCircuit_ID + ")";
     }
 }

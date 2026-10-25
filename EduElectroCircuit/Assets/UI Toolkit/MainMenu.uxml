@@ -2,12 +2,135 @@
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=4bfa4f5599d4b304db9593cd4b56e35b&amp;type=3#TextStyle"/>
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/ButtonStyle.uss?fileID=7433441132597879392&amp;guid=d1c1ee34e1d3eba44b370c73f29799e9&amp;type=3#ButtonStyle"/>
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3#PanelStyle"/>
-    <ui:VisualElement name="MainMenuPanel" style="background-color: rgba(0, 0, 0, 0.2); position: relative; align-items: center; align-content: flex-start; justify-content: center; flex-grow: 1;">
-        <ui:VisualElement name="MainMenu" style="background-color: rgba(9, 0, 102, 0.8); align-items: center; justify-content: space-between; padding-top: 40px; padding-bottom: 50px; padding-right: 20px; padding-left: 20px; align-content: flex-start; flex-shrink: 0; height: 668px; width: 850px;">
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/LevelTab.uss?fileID=7433441132597879392&amp;guid=65c2f2107978b404bbcc132bfbc865da&amp;type=3#LevelTab"/>
+    <ui:VisualElement name="MainMenuContainer" picking-mode="Ignore" style="background-color: rgba(0, 0, 0, 0.4); position: absolute; flex-grow: 1; display: flex; width: 100%; height: 100%;">
+        <ui:VisualElement name="MainMenuPanel" style="background-color: rgba(9, 0, 102, 0.8); align-items: center; flex-grow: 1; width: 550px; padding-top: 40px; padding-right: 40px; padding-bottom: 40px; padding-left: 40px; justify-content: space-between;">
             <ui:Label text="Electrician Demo" class="menu-title" style="white-space: pre-wrap; -unity-text-align: upper-center;"/>
-            <ui:Button text="Play&#10;" name="Play_Button" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
-            <ui:Button text="Odejít" name="Quit_Button" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
+            <ui:VisualElement style="flex-grow: 1; align-items: flex-start; justify-content: center;">
+                <ui:VisualElement style="flex-grow: 0; align-items: center; justify-content: center; width: 350px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:Button text="Play&#10;" name="Play_Button" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="" style="flex-grow: 0; justify-content: center; align-items: center; width: 350px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:Button text="Continue" name="" enabled="false" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center; display: flex;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="" style="flex-grow: 0; align-items: center; justify-content: center; width: 350px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:Button text="Levels" name="Levels" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 0; align-items: center; justify-content: center; width: 350px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px;">
+                    <ui:Button text="Settings" name="" enabled="false" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; align-items: center; justify-content: center; width: 350px;">
+                <ui:Button text="Odejít" name="Quit_Button" class="menu-button" style="text-overflow: clip; white-space: pre-wrap; -unity-text-align: middle-center;"/>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="FadeScreen" picking-mode="Ignore" class="fade-out fade-in" style="position: absolute; width: 100%; height: 100%;"/>
+    <ui:VisualElement name="LevelSelectContainer" style="background-color: rgba(0, 0, 0, 0.2); position: absolute; flex-grow: 1; display: flex; background-image: none; width: 100%; height: 100%;">
+        <ui:VisualElement name="LevelSelectPanel" style="background-color: rgba(0, 0, 0, 0); padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left: 50px; background-image: url(&quot;project://database/Assets/Textures/UI/UI_frame.png?fileID=2800000&amp;guid=7eff7310742389b46a058d9eb5b8e53f&amp;type=3#UI_frame&quot;); background-size: 100% 100%; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
+            <ui:Label text="Level Select" name="Label" style="color: rgb(255, 255, 255); font-size: 80%; white-space: normal; -unity-font-style: normal; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;); -unity-text-align: middle-left; position: absolute; left: 393px; top: 0;"/>
+            <ui:VisualElement style="flex-grow: 1; margin-left: 10px; margin-bottom: 10px; margin-right: 10px; margin-top: 40px; background-color: rgba(0, 2, 43, 0.75); flex-direction: row; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+                <ui:ScrollView name="ScrollView" style="width: 600px; background-color: rgba(25, 45, 55, 0.5);"/>
+                <ui:VisualElement style="flex-grow: 1; border-left-width: 20px; border-left-color: rgb(0, 2, 43); border-right-color: rgb(0, 2, 43); border-top-color: rgb(0, 2, 43); border-bottom-color: rgb(0, 2, 43);">
+                    <ui:VisualElement name="VisualElement" style="background-color: rgba(25, 45, 55, 0.5); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-image: url(&quot;project://database/Assets/Textures/UI/Frame_silver.png?fileID=2800000&amp;guid=65eac62635775634bb01278b7f4f6e80&amp;type=3#Frame_silver&quot;); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-start; margin-left: 110px; margin-top: 20px;">
+                            <ui:Label text="Total Resistance" name="LevelName" class="UI_text_style" style="font-size: 50px; border-left-color: rgb(50, 156, 181); border-right-color: rgb(50, 156, 181); border-top-color: rgb(50, 156, 181); border-bottom-color: rgb(50, 156, 181); border-top-width: 0; border-bottom-width: 3px; max-height: 55px; margin-top: 25px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;"/>
+                            <ui:Label text="B" name="LevelGrade" style="font-size: 50px; color: rgb(255, 255, 255); background-image: url(&quot;project://database/Assets/Textures/UI/GradeFrame_silver.png?fileID=2800000&amp;guid=8f15075dac25d2c41b5e0acf43f3ef9b&amp;type=3#GradeFrame_silver&quot;); width: 100px; -unity-text-align: middle-center; height: 100px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 15px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement style="flex-direction: row; height: 733px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; margin-top: 10px; margin-right: 0; margin-bottom: 10px; margin-left: 10px;">
+                            <ui:VisualElement name="VisualElement" style="flex-grow: 1; margin-left: 30px; width: 1200px;">
+                                <ui:VisualElement name="EasyPanel" style="flex-grow: 0;">
+                                    <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-top: 10px; margin-bottom: 10px;">
+                                        <ui:VisualElement style="flex-grow: 0; align-items: center; justify-content: center; width: 50px; height: 50px;">
+                                            <ui:Image source="project://database/Assets/Textures/UI/StarInomplete_bronze.png?fileID=2800000&amp;guid=61e109eedb7e1144f9eab851c14e7d9c&amp;type=3#StarInomplete_bronze" style="width: 50px; height: 50px; position: absolute; opacity: 1;"/>
+                                            <ui:Image source="project://database/Assets/Textures/UI/StarComplete_bronze.png?fileID=2800000&amp;guid=c2b679b0a559c694cbe15533b67e4ae9&amp;type=3#StarComplete_bronze" name="Star" style="width: 50px; height: 50px; display: none;"/>
+                                        </ui:VisualElement>
+                                        <ui:Label text="Easy:" class="UI_text_style" style="font-size: 35px; -unity-font-style: bold;"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="A" name="DifficultyGrade" class="UI_text_style" style="font-size: 35px; -unity-font-style: bold;"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 50px;">
+                                        <ui:Label text="Best Time:" class="UI_text_style" style="font-size: 30px;"/>
+                                        <ui:Label text="1h 25min 15s" name="Time" class="UI_text_style" style="font-size: 30px;"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="A" name="TimeGrade" class="UI_text_style" style="font-size: 30px;"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row; align-items: flex-end; margin-left: 50px;">
+                                        <ui:Label text="Rooms:" name="" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                        <ui:Label text="A, B, D, F, C, E, F, D, C" name="RoomsGrades" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row; align-items: flex-end; margin-left: 50px;">
+                                        <ui:Label text="Final room grade" name="" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="S" name="RoomFinalGrade" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement name="NormalPanel" style="flex-grow: 0;">
+                                    <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-top: 10px; margin-bottom: 10px;">
+                                        <ui:VisualElement style="flex-grow: 0; align-items: center; justify-content: center; width: 50px; height: 50px;">
+                                            <ui:Image source="project://database/Assets/Textures/UI/StarInomplete_silver.png?fileID=2800000&amp;guid=e605c69d880e0f540b2b71ad4055b7b7&amp;type=3#StarInomplete_silver" style="width: 50px; height: 50px; position: absolute; opacity: 1;"/>
+                                            <ui:Image source="project://database/Assets/Textures/UI/StarComplete_silver.png?fileID=2800000&amp;guid=461b36c47d62e604cb6090b31d3f1c4c&amp;type=3#StarComplete_silver" name="Star" style="width: 50px; height: 50px; display: none;"/>
+                                        </ui:VisualElement>
+                                        <ui:Label text="Normal:" class="UI_text_style" style="font-size: 35px; -unity-font-style: bold;"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="A" name="DifficultyGrade" class="UI_text_style" style="font-size: 35px; -unity-font-style: bold;"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 50px;">
+                                        <ui:Label text="Best Time:" class="UI_text_style" style="font-size: 30px;"/>
+                                        <ui:Label text="1h 25min 15s" name="Time" class="UI_text_style" style="font-size: 30px;"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="A" name="TimeGrade" class="UI_text_style" style="font-size: 30px;"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row; align-items: flex-end; margin-left: 50px;">
+                                        <ui:Label text="Rooms:" name="" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                        <ui:Label text="A, B, D, F, C, E, F, D, C" name="RoomsGrades" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row; align-items: flex-end; margin-left: 50px;">
+                                        <ui:Label text="Final room grade" name="" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="S" name="RoomFinalGrade" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                                <ui:VisualElement name="HardPanel" style="flex-grow: 0;">
+                                    <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-top: 10px; margin-bottom: 10px;">
+                                        <ui:VisualElement style="flex-grow: 0; align-items: center; justify-content: center; width: 50px; height: 50px;">
+                                            <ui:Image source="project://database/Assets/Textures/UI/StarInomplete_gold.png?fileID=2800000&amp;guid=fd30d9207260570478d51543d0f19878&amp;type=3#StarInomplete_gold" style="width: 50px; height: 50px; position: absolute; opacity: 1;"/>
+                                            <ui:Image source="project://database/Assets/Textures/UI/StarComplete_gold.png?fileID=2800000&amp;guid=96e0c944a4421d44ead9101a4b6b6b70&amp;type=3#StarComplete_gold" name="Star" style="width: 50px; height: 50px; display: none;"/>
+                                        </ui:VisualElement>
+                                        <ui:Label text="Hard:" class="UI_text_style" style="font-size: 35px; -unity-font-style: bold;"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="A" name="DifficultyGrade" class="UI_text_style" style="font-size: 35px; -unity-font-style: bold;"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement style="flex-grow: 0; flex-direction: row; margin-left: 50px;">
+                                        <ui:Label text="Best Time:" class="UI_text_style" style="font-size: 30px;"/>
+                                        <ui:Label text="1h 25min 15s" name="Time" class="UI_text_style" style="font-size: 30px;"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="A" name="TimeGrade" class="UI_text_style" style="font-size: 30px;"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row; align-items: flex-end; margin-left: 50px;">
+                                        <ui:Label text="Rooms:" name="" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                        <ui:Label text="A, B, D, F, C, E, F, D, C" name="RoomsGrades" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                    </ui:VisualElement>
+                                    <ui:VisualElement name="" style="flex-grow: 0; flex-direction: row; align-items: flex-end; margin-left: 50px;">
+                                        <ui:Label text="Final room grade" name="" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                        <ui:VisualElement style="flex-grow: 1; border-bottom-color: rgb(50, 156, 181); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;"/>
+                                        <ui:Label text="S" name="RoomFinalGrade" class="UI_text_style" style="font-size: 30px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+                                    </ui:VisualElement>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:Image source="project://database/Assets/Textures/Obr%201.png?fileID=2800000&amp;guid=69daec90c2e20a14fb9f919ce80b6edd&amp;type=3#Obr 1" scale-mode="ScaleAndCrop" name="LevelImage" style="margin-top: 25px; margin-right: 35px; margin-bottom: 25px; margin-left: 15px; border-left-color: rgb(151, 151, 151); border-right-color: rgb(151, 151, 151); border-top-color: rgb(151, 151, 151); border-bottom-color: rgb(151, 151, 151); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; height: 230px;"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; margin-top: 10px; margin-right: 65px; margin-bottom: 25px; margin-left: 107px;">
+                            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                                <ui:Label text="Difficulty" class="UI_text_style" style="font-size: 40px; -unity-text-align: middle-left;"/>
+                                <ui:DropdownField name="DifficultyField" choices="EASY,NORMAL,HARD" style="font-size: 30px; color: rgb(255, 255, 255); background-color: rgb(64, 64, 64); border-left-color: rgb(149, 149, 149); border-right-color: rgb(149, 149, 149); border-top-color: rgb(149, 149, 149); border-bottom-color: rgb(149, 149, 149); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; -unity-text-align: middle-left; width: 268px;"/>
+                            </ui:VisualElement>
+                            <ui:Button text="Enter" name="LevelStart" class="menu-button" style="width: 200px; margin-right: 35px; font-size: 40px;"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button text="Back" name="Back" class="menu-button" style="width: 160px; font-size: 40px; margin-top: 0; margin-right: 10px; margin-bottom: 10px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 60px; align-self: flex-end;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="FadeScreen" picking-mode="Ignore" class="fade-out fade-in" style="position: absolute; width: 100%; height: 100%; display: flex;"/>
 </ui:UXML>

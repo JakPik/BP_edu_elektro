@@ -5,8 +5,6 @@
  * Module: ReloadRequestEvent
  */
 
-using System.Reflection;
-
 public class ReloadRequestEvent : EventBaseType
 {
     public bool FirstLoad;

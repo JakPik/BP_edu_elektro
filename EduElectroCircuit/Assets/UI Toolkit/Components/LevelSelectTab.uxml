@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/LevelTab.uss?fileID=7433441132597879392&amp;guid=65c2f2107978b404bbcc132bfbc865da&amp;type=3#LevelTab"/>
+    <ui:Button text="" name="Button" class="levelTabButton_silver">
+        <ui:Label text="Lv. 1" name="LV_Number" style="margin-top: 0; margin-right: 0; margin-bottom: 40px; margin-left: 0; padding-top: 0; padding-right: 5px; padding-bottom: 0; padding-left: 5px; color: rgb(155, 155, 155); -unity-font-style: italic; flex-direction: column; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;); font-size: 20px;"/>
+        <ui:Label text="Total Resistance" name="LevelName" style="font-size: 45px; flex-grow: 1; -unity-text-align: middle-left; color: rgb(232, 232, 232); margin-left: 5px; -unity-font-definition: resource(&quot;Fonts/TIMES&quot;);"/>
+        <ui:Image source="project://database/Assets/Textures/UI/Lock_green.png?fileID=2800000&amp;guid=b310fbad6b970b746aaedb6962cf4969&amp;type=3#Lock_green" name="Lock" style="height: 50px; width: 50px; margin-top: 0%; margin-right: 0%; margin-bottom: 0%; margin-left: 0%; padding-top: 0%; padding-right: 0%; padding-bottom: 0%; padding-left: 0%; flex-grow: 0;"/>
+    </ui:Button>
+</ui:UXML>
