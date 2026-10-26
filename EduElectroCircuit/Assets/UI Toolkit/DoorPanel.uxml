@@ -1,23 +1,24 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle_1.uss?fileID=7433441132597879392&amp;guid=4bfa4f5599d4b304db9593cd4b56e35b&amp;type=3#TextStyle_1"/>
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3#PanelStyle"/>
     <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=6c2a30a343cba4947a5db234dc5f7ae3&amp;type=3#TextStyle"/>
     <ui:VisualElement>
         <ui:VisualElement name="Panel" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background">
-            <ui:Label text="" class="panel-title" style="font-size: 12px; -unity-material: url(&quot;&quot;);"/>
-            <ui:VisualElement name="StatePanel" class="property-display" style="justify-content: center; -unity-material: url(&quot;&quot;);">
+            <ui:Label text="" class="panel-title" style="font-size: 12px; -unity-material: url(&quot;&quot;); display: none;"/>
+            <ui:VisualElement name="StatePanel" class="property-item" style="justify-content: center; -unity-material: url(&quot;&quot;);">
                 <ui:Label text="Dveře:" class="text-base text-info" style="font-size: 8px;"/>
                 <ui:Label text="Locked" name="State" class="text-base text-success" style="font-size: 8px;"/>
             </ui:VisualElement>
             <ui:VisualElement name="InfoPanel" class="info-border" style="-unity-material: url(&quot;&quot;); padding-top: 2px; padding-bottom: 2px;">
                 <ui:Label text="Parametry Dveří" class="text-base text-info" style="font-size: 9px; margin-bottom: 2px; -unity-text-outline-width: 0.5px; -unity-text-align: upper-center;"/>
-                <ui:VisualElement name="ResistancePanel" class="property-display">
-                    <ui:Label text="Odpor:" class="text-info text-base" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
-                    <ui:Label text="999,99 MΩ" name="Resistance" class="text-base text-parameter" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
-                </ui:VisualElement>
-                <ui:VisualElement name="RequirePanel" class="property-display">
-                    <ui:Label text="Požadováno:" name="Label" class="text-base text-info" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
-                    <ui:Label text="999,99 MV" name="Required" class="text-base text-error" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                <ui:VisualElement name="VisualElement" class="property-panel" style="flex-grow: 1;">
+                    <ui:VisualElement name="ResistancePanel" class="property-display property-item">
+                        <ui:Label text="Odpor:" class="text-info text-base" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                        <ui:Label text="999,99 MΩ" name="Resistance" class="text-base text-parameter" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="RequirePanel" class="property-display property-item">
+                        <ui:Label text="Požadováno:" name="Label" class="text-base text-info" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                        <ui:Label text="999,99 MV" name="Required" class="text-base text-error" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

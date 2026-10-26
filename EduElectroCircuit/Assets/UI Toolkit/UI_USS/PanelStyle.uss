@@ -59,3 +59,31 @@
     align-self: auto;
     flex-grow: 1;
 }
+
+.property-item {
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    padding-right: 2px;
+    padding-left: 2px;
+    -unity-font-definition: resource("Fonts/TIMES");
+}
+
+.property-panel {
+    flex-grow: 0;
+    border-top-color: rgb(0, 216, 255);
+    border-bottom-color: rgb(0, 216, 255);
+    border-top-width: 1px;
+    border-right-width: 0;
+    border-bottom-width: 1px;
+    border-left-width: 0;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: rgba(0, 0, 0, 0.58);
+    justify-content: center;
+    width: 100%;
+}

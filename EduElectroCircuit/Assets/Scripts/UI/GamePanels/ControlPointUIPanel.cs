@@ -20,8 +20,8 @@ public class ControlPointUIPanel : UIPanel
         _requireLabel = display.rootVisualElement.Q<Label>("Required");
 
         _stateLabel.text = "Zmačeny";
-        StyleAsError(_stateLabel);
-        StyleAsError(_requireLabel);
+        UIStyleControler.StyleLabel(_stateLabel, LabelStyles.ERROR);
+        UIStyleControler.StyleLabel(_requireLabel, LabelStyles.ERROR);
     }
 
     public override bool SetData<T>(T data)
@@ -43,26 +43,14 @@ public class ControlPointUIPanel : UIPanel
         if (locked)
         {
             _stateLabel.text = "Zmačeny";
-            StyleAsError(_stateLabel);
-            StyleAsError(_requireLabel);
+            UIStyleControler.StyleLabel(_stateLabel, LabelStyles.ERROR);
+            UIStyleControler.StyleLabel(_requireLabel, LabelStyles.ERROR);
         }
         else
         {
             _stateLabel.text = "Odemčeny";
-            StyleAsSuccess(_stateLabel);
-            StyleAsSuccess(_requireLabel);
+            UIStyleControler.StyleLabel(_stateLabel, LabelStyles.SUCCESS);
+            UIStyleControler.StyleLabel(_requireLabel, LabelStyles.SUCCESS);
         }
-    }
-
-    private void StyleAsSuccess(Label label)
-    {
-        label.RemoveFromClassList("label-error");
-        label.AddToClassList("label-success");
-    }
-
-    private void StyleAsError(Label label)
-    {
-        label.RemoveFromClassList("label-success");
-        label.AddToClassList("label-error");
     }
 }

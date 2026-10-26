@@ -26,15 +26,13 @@ public class InteractiveDoorUIPanel : InteractiveUIPanel
 
     private void StyleAsOpened()
     {
-        _stateLabel.RemoveFromClassList("label-error");
-        _stateLabel.AddToClassList("label-success");
+        UIStyleControler.StyleLabel(_stateLabel, LabelStyles.SUCCESS);
         _stateLabel.text = "Odemčeny";
     }
 
     private void StyleAsClosed()
     {
-        _stateLabel.RemoveFromClassList("label-success");
-        _stateLabel.AddToClassList("label-error");
+        UIStyleControler.StyleLabel(_stateLabel, LabelStyles.ERROR);
         _stateLabel.text = "Zamčeny";
     }
 
