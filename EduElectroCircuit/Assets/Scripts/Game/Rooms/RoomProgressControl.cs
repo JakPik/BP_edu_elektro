@@ -6,24 +6,25 @@ using UnityEngine.SceneManagement;
 public class RoomProgressControl : MonoBehaviour
 {
     public int saveID;
+    [SerializeField] private LevelDifficulty _levelDifficulty;
     private RoomDTO roomData = null;
     [SerializeField] private RoomControl[] rooms;
     public IEnumerator LoadRoomData(int? loadID = null)
     {
-        roomData = RoomJsonManager.LoadJsonFile(SceneManager.GetActiveScene().name, loadID);
+        roomData = RoomJsonManager.LoadJsonFile(SceneManager.GetActiveScene().name, loadID, loadID == null? PersistanceManager.GetLevelDifficulty() : _levelDifficulty);
         if(roomData != null)
         {
             int roomLoadId = 0;
-            foreach(ComponentsDTO componentsDTO in roomData.components)
+            foreach(RoomConfigurationDTO roomConfigurationDTO in roomData.roomConfigurations)
             {
-                if(loadID == null)
-                {
-                    rooms[roomLoadId].LoadComponentSetUp(componentsDTO);
-                }
-                else
+               // if(loadID == null)
+               // {
+                    rooms[roomLoadId].LoadComponentSetUp(roomConfigurationDTO);
+               // }
+               /* else
                 {
                     rooms[roomLoadId].LoadSetUp(componentsDTO);
-                }
+                }*/
                 roomLoadId++;
                 yield return null;
             }
@@ -70,14 +71,14 @@ public class RoomProgressControl : MonoBehaviour
     {
         int roomSaveId = 0;
         roomData = new RoomDTO{
-            components = new ComponentsDTO[rooms.Length]
+            roomConfigurations = new RoomConfigurationDTO[rooms.Length]
         };
         foreach(RoomControl room in rooms)
         {
-            roomData.components[roomSaveId] = room.SaveComponentSetUp();
+            roomData.roomConfigurations[roomSaveId] = room.SaveComponentSetUp();
             roomSaveId++;
         }
-        RoomJsonManager.SaveJsonFile(SceneManager.GetActiveScene().name, roomData, saveID);
+        RoomJsonManager.SaveJsonFile(SceneManager.GetActiveScene().name, roomData, saveID, _levelDifficulty);
     }
 
     public EvaluationGrade[] GetRoomsGrades()

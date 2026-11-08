@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af5fd5c786cc8748a10179cb0394e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door_segmented
-  spawnPointCollider: {fileID: 9145639505676336818}
+  objectCollider: {fileID: 9145639505676336818}
   triggerType: 3
   boundsSize: {x: 6, y: 4, z: 8}
   boundsCenter: {x: 0, y: 2, z: 0}

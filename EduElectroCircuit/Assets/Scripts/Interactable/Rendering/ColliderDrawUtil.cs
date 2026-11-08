@@ -9,17 +9,17 @@ using UnityEngine;
 
 public class ColliderDrawUtil : MonoBehaviour
 {
-    [SerializeField] protected Collider spawnPointCollider;
+    [SerializeField] protected Collider objectCollider;
     [SerializeField] protected TriggerType triggerType;
     [SerializeField] protected Vector3 boundsSize = new Vector3(1, 1, 1);
     [SerializeField] protected Vector3 boundsCenter = Vector3.zero;
 
     protected virtual void OnDrawGizmos()
     {
-        if (spawnPointCollider != null && spawnPointCollider.enabled)
+        if (objectCollider != null && objectCollider.enabled)
         {
-            boundsSize = spawnPointCollider.bounds.size;
-            boundsCenter = spawnPointCollider.bounds.center;
+            boundsSize = objectCollider.bounds.size;
+            boundsCenter = objectCollider.bounds.center;
         }
         TriggerDrawTool.DrawTriggerGizmos(triggerType, boundsCenter, boundsSize);
     }

@@ -1112,10 +1112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac5c2b738b99f542a7e41000d2f98f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndPoint
-  spawnPointCollider: {fileID: 6957574230020600851}
+  objectCollider: {fileID: 6957574230020600851}
   triggerType: 4
-  boundsSize: {x: 3, y: 4.000001, z: 4.000002}
-  boundsCenter: {x: 25, y: 2, z: 2.0000005}
+  boundsSize: {x: 4, y: 4, z: 3}
+  boundsCenter: {x: 57, y: 2, z: 10}
 --- !u!1001 &991273168146278852
 PrefabInstance:
   m_ObjectHideFlags: 0

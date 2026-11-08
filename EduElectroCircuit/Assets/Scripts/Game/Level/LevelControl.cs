@@ -48,6 +48,7 @@ public class LevelControl : MonoBehaviour
 
     void Start()
     {
+        PersistanceManager.InitPersistance();
         curCoroutine = StartCoroutine(LevelEnterInit());
     }
     public void EndLevel()

@@ -163,17 +163,17 @@ public class Lightbulb : CircuitComponent
         {
             new ComponentPropertyData
             {
-                label = "Resistance",
+                label = "Odpor",
                 value = NodeCalculationModel.FormatValue(lightbulbData.GetResistance(), ElectricalQuantityType.RESISTANCE)
             },
             new ComponentPropertyData
             {
-                label = "Rated Voltage",
+                label = "Pracovní Napětí",
                 value = NodeCalculationModel.FormatValue(lightbulbData.GetRatedVoltage(), ElectricalQuantityType.VOLTAGE)
             },
             new ComponentPropertyData
             {
-                label = "Max Voltage",
+                label = "Maximální Napětí",
                 value = NodeCalculationModel.FormatValue(lightbulbData.GetMaxVoltage(), ElectricalQuantityType.VOLTAGE)
             }
         };

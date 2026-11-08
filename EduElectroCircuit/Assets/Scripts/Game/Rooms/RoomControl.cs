@@ -29,26 +29,26 @@ public class RoomControl: MonoBehaviour
     private void Awake() {
         roomID = int.Parse(Regex.Match(this.name, @"-?\d+").Value);
     }
-    public void LoadComponentSetUp(ComponentsDTO componentsDTO)
+    public void LoadComponentSetUp(RoomConfigurationDTO roomConfigurationDTO)
     {
-        if(componentsDTO == null) {
+        if(roomConfigurationDTO == null) {
             Logger.Log(this, "Set up Load", "No data to be loaded!", LogType.WARNING);
         };
         
         circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false, new NodeCircuit_ID(roomID) ), this.name);
 
-        for(int i = 0; i < componentsDTO.sourcePanelDTOs.Length; i++)
+        for(int i = 0; i < roomConfigurationDTO.sourcePanelDTOs.Length; i++)
         {
-            componentsDTO.sourcePanelDTOs[i].DTO_ToSourceNode(node_Source[i]);
+            roomConfigurationDTO.sourcePanelDTOs[i].DTO_ToSourceNode(node_Source[i]);
         }
         
-        for(int i = 0; i < componentsDTO.doorPanelDTOs.Length; i++)
+        for(int i = 0; i < roomConfigurationDTO.doorPanelDTOs.Length; i++)
         {
-            componentsDTO.doorPanelDTOs[i].DTO_ToValidationNode(node_Validation[i]);
+            roomConfigurationDTO.doorPanelDTOs[i].DTO_ToValidationNode(node_Validation[i]);
         }
 
-        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(componentsDTO.resistors, componentsContainer);
-        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(componentsDTO.lightbulbs, componentsContainer);
+        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(roomConfigurationDTO.resistors, componentsContainer);
+        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(roomConfigurationDTO.lightbulbs, componentsContainer);
         
         _numberOfActivations = 0;
         _numberOfReloads = 0;
@@ -56,6 +56,18 @@ public class RoomControl: MonoBehaviour
         onRoomReset.Invoke();
         //onRoomReload.Invoke(false);
     }
+
+   /* private void ClearComponents()
+    {
+        foreach(Resistor resistor in resistors)
+        {
+            resistor.Des();            
+        }
+        foreach(Lightbulb lightbulb in lightbulbs)
+        {
+            lightbulb.SaveCurrentState();
+        }
+    }*/
 
     public void ReloadComponets(bool circuitActive)
     {
@@ -74,9 +86,9 @@ public class RoomControl: MonoBehaviour
         onRoomReload.Invoke(circuitActive);
     }
 
-    public ComponentsDTO SaveComponentSetUp()
+    public RoomConfigurationDTO SaveComponentSetUp()
     {
-        ComponentsDTO components = new ComponentsDTO();
+        RoomConfigurationDTO roomConfigurationDTO = new RoomConfigurationDTO();
 
         SourcePanelDTO[] sourcePanelDTOs = new SourcePanelDTO[node_Source.Length];
         for(int i = 0; i < node_Source.Length; i++)
@@ -89,11 +101,11 @@ public class RoomControl: MonoBehaviour
         {
             doorPanelDTOs[i] = new DoorPanelDTO(node_Validation[i]);
         }
-        components.doorPanelDTOs = doorPanelDTOs;
-        components.sourcePanelDTOs = sourcePanelDTOs;
+        roomConfigurationDTO.doorPanelDTOs = doorPanelDTOs;
+        roomConfigurationDTO.sourcePanelDTOs = sourcePanelDTOs;
 
-        RoomDataManager.SaveComponentSetUp(componentsContainer, components);
-        return components;
+        RoomDataManager.SaveComponentSetUp(componentsContainer, roomConfigurationDTO);
+        return roomConfigurationDTO;
     }
 
     public void SaveComponents()
@@ -121,12 +133,12 @@ public class RoomControl: MonoBehaviour
 
 
     #region Debug Inspector Call Functions
-    public void LoadSetUp(ComponentsDTO componentsDTO)
+    public void LoadSetUp(RoomConfigurationDTO roomConfigurationDTO)
     {
         circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false, new NodeCircuit_ID(roomID) ), this.name);
 
-        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(componentsDTO.resistors, componentsContainer);
-        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(componentsDTO.lightbulbs, componentsContainer);
+        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(roomConfigurationDTO.resistors, componentsContainer);
+        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(roomConfigurationDTO.lightbulbs, componentsContainer);
         
         _numberOfActivations = 0;
         _numberOfReloads = 0;

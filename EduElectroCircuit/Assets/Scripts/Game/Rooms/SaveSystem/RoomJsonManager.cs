@@ -4,11 +4,13 @@ using Random = UnityEngine.Random;
 
 public static class RoomJsonManager
 {
-    public static RoomDTO LoadJsonFile(string level, /*string room,*/ int? load_saveID)
+    public static RoomDTO LoadJsonFile(string level, /*string room,*/ int? load_saveID, LevelDifficulty levelDifficulty)
     {
         string resourcePath = 
         "Data/" +
-        level/* +
+        level +
+        "/" +
+        levelDifficulty.ToString()/* +
         "/" +
         room*/;
 
@@ -35,13 +37,15 @@ public static class RoomJsonManager
         }
     }
 
-     public static void SaveJsonFile(string level, /*string room, */RoomDTO roomData, int load_saveID)
+     public static void SaveJsonFile(string level, /*string room, */RoomDTO roomData, int load_saveID, LevelDifficulty levelDifficulty)
     {
         string json = JsonUtility.ToJson(roomData, true);
 
         string resourcePath = 
             "Data/" +
             level +
+            "/" +
+            levelDifficulty.ToString() +
             "/"/* +
             room +
             "/"*/;

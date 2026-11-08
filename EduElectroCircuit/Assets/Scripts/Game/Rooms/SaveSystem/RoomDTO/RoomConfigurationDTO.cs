@@ -1,5 +1,5 @@
 [System.Serializable]
-public class ComponentsDTO
+public class RoomConfigurationDTO
 {
     public SourcePanelDTO[] sourcePanelDTOs;
     public DoorPanelDTO[] doorPanelDTOs;

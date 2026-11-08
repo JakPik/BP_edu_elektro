@@ -10,6 +10,7 @@ public static class PersistanceManager
 
     public static void InitPersistance()
     {
+        if(_gamePersistance != null) return;
         _gamePersistance = Resources.Load<GamePersistanceSO>("ScriptableObjects/Game/GamePersistance");
     }
 

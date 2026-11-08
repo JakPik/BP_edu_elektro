@@ -2,7 +2,7 @@ public enum TriggerType
 {
     SPAWN_POINT,
     ANIM_TRIGGER,
-    INTERACTION_CLICK,
+    EVENT_TRIGGER,
     INTERACTION_PROXIMITY,
     OTHER
 }

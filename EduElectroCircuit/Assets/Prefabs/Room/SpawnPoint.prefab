@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031660b01d1313d4e8a2afb51b7ae4da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnPointControl
-  spawnPointCollider: {fileID: 8318390933190505206}
+  objectCollider: {fileID: 8318390933190505206}
   triggerType: 0
   boundsSize: {x: 1.000001, y: 3.000001, z: 3.0000017}
   boundsCenter: {x: -4, y: 1.5, z: -5.000002}
+  roomID: 0
   reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}
-  multiRoomControl: {fileID: 0}
+  multiTrigger: 0
 --- !u!65 &8318390933190505206
 BoxCollider:
   m_ObjectHideFlags: 0

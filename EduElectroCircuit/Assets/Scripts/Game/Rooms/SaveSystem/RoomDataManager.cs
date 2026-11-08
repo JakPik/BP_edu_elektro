@@ -16,7 +16,7 @@ public static class RoomDataManager
         return resistorComp;
     }
     
-    public static void SaveComponentSetUp(Transform componentContainer, ComponentsDTO componentsDTO)
+    public static void SaveComponentSetUp(Transform componentContainer, RoomConfigurationDTO roomConfigurationDTO)
     {
         List<ResistorDTO> resistorDTOs = new List<ResistorDTO>();
         List<LightbulbDTO> lightbulbDTOs = new List<LightbulbDTO>();
@@ -32,8 +32,8 @@ public static class RoomDataManager
                 lightbulbDTOs.Add(new LightbulbDTO(lightbulb));
             }
         }
-        componentsDTO.resistors = resistorDTOs.ToArray();
-        componentsDTO.lightbulbs = lightbulbDTOs.ToArray();
+        roomConfigurationDTO.resistors = resistorDTOs.ToArray();
+        roomConfigurationDTO.lightbulbs = lightbulbDTOs.ToArray();
     }
     
     public static T[] LoadComponentSetUp<T, U>(U[] componentDTOs, Transform componentsContainer)

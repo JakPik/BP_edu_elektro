@@ -70,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af5fd5c786cc8748a10179cb0394e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door_segmented
-  spawnPointCollider: {fileID: 9145639505676336818}
+  objectCollider: {fileID: 9145639505676336818}
   triggerType: 3
-  boundsSize: {x: 4, y: 3, z: 6}
-  boundsCenter: {x: 0, y: 1.5, z: 0}
+  boundsSize: {x: 6, y: 3.000001, z: 4.000004}
+  boundsCenter: {x: 50.5, y: 1.5, z: 25}
   _enterPoint: {fileID: 2749730838193786936}
   _animSpeed: 2.5
   _twoWay: 1

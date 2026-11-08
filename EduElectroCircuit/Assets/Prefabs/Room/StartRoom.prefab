@@ -796,10 +796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031660b01d1313d4e8a2afb51b7ae4da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnPointControl
-  spawnPointCollider: {fileID: 2027320196644024692}
+  objectCollider: {fileID: 2027320196644024692}
   triggerType: 0
   boundsSize: {x: 2, y: 2, z: 2}
-  boundsCenter: {x: -6, y: 1, z: 19}
+  boundsCenter: {x: 1, y: 1, z: -5}
   roomID: 0
   reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}
   multiTrigger: 0
