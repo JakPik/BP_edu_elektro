@@ -123,7 +123,7 @@ public class PlayerInteractionControl : MonoBehaviour
         {
             if (!holding)
             {
-                grabbedObject.grabable?.DisplayInfo(false);
+                //grabbedObject.grabable?.DisplayInfo(false);
                 grabbedObject.Refresh();
             }
 
@@ -144,7 +144,7 @@ public class PlayerInteractionControl : MonoBehaviour
         }
         if (!holding && obj != grabbedObject.component && obj.TryGetComponent(out IGrabable grabable))
         {
-            grabbedObject.grabable?.DisplayInfo(false);
+            //grabbedObject.grabable?.DisplayInfo(false);
             grabbedObject.component = hitInfo.collider.gameObject;
             grabbedObject.grabable = grabable;
             grabbedObject.object_rb = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
@@ -158,7 +158,7 @@ public class PlayerInteractionControl : MonoBehaviour
             }
             else
             {
-                grabable.DisplayInfo(true);
+                //grabable.DisplayInfo(true);
             }
         }
 
@@ -183,7 +183,7 @@ public class PlayerInteractionControl : MonoBehaviour
         if (holding)
         {
             grabbedObject.grabable.OnGrab(false, this.gameObject);
-            grabbedObject.grabable?.DisplayInfo(false);
+            //grabbedObject.grabable?.DisplayInfo(false);
             grabbedObject.Refresh();
             holding = false;
         }
@@ -211,7 +211,7 @@ public class PlayerInteractionControl : MonoBehaviour
         try
         {
             grabbedObject.grabable.OnGrab(true, this.gameObject);
-            grabbedObject.grabable?.DisplayInfo(false);
+            //grabbedObject.grabable?.DisplayInfo(false);
         }
         catch (Exception e)
         {

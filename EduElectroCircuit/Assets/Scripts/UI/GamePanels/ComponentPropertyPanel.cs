@@ -118,7 +118,7 @@ public class ComponentPropertyPanel : MonoBehaviour
         while (true)
         {
             Vector3 direction = _container.transform.position - _mainCamera.transform.position;
-            if(direction.magnitude >= 3f) break;
+            if(direction.magnitude >= 3.5f) break;
             if(direction.magnitude < 1.0f) 
             {
                 yield return null;

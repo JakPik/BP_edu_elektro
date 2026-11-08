@@ -91,7 +91,6 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
     public abstract bool CanGrab();
     public abstract void LockGrab(bool locked);
     public abstract void OnGrab(bool grabbed, GameObject caller);
-    public abstract void DisplayInfo(bool display);
     public abstract bool CanConnectToNode();
 
     public void SaveCurrentState()
@@ -150,4 +149,22 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
         
     }
     #endregion
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction) && !rb.useGravity)
+        {
+            Logger.Log(this, "COMPONENT", "Found Interaction Node: " + other.name, LogType.INFO);
+            this.nodeInteraction = nodeInteraction;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out INodeInteraction _))
+        {
+            this.nodeInteraction = null;
+        Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
+        }
+    }
 }

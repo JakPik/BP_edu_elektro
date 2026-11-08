@@ -94,7 +94,7 @@ public class Resistor : CircuitComponent
         else
         {
             SetReleasedState(rb);
-            if(nodeInteraction == null) return;
+            if(!CanConnectToNode()) return;
 
             Logger.Log(this, "COMPONENT", "Animating new position", LogType.INFO);
             SendData(nodeInteraction);
@@ -102,34 +102,7 @@ public class Resistor : CircuitComponent
             CanAnimate(rb, targetPos, targetTransfrom);
         }
     }
-
-    public override void DisplayInfo(bool display)
-    {
-        if (canGrab)
-        {
-            //_componentPropertyPanel.DisplayInteractionInfo(grabInteraction, display);
-        }
-    }
+   
     #endregion
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
-        {
-            if(!nodeInteraction.CanConnect(resistorData.type)) return;
-            Logger.Log(this, "COMPONENT", "Found Interaction Node: " + other.name, LogType.INFO);
-            this.nodeInteraction = nodeInteraction;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out INodeInteraction _))
-        {
-            this.nodeInteraction = null;
-            Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
-        }
-    }
-
-    public override bool CanConnectToNode() => nodeInteraction != null;
+    public override bool CanConnectToNode() => nodeInteraction?.CanConnect(resistorData.type) ?? false;
 }

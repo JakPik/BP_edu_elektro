@@ -207,7 +207,7 @@ public class Lightbulb : CircuitComponent
         else
         {
             SetReleasedState(rb);
-            if(nodeInteraction == null || broken) return;
+            if(!CanConnectToNode()) return;
 
             Logger.Log(this, "COMPONENT", "Animating new position", LogType.INFO);
             SendData(nodeInteraction);
@@ -216,36 +216,22 @@ public class Lightbulb : CircuitComponent
         }
     }
 
-    public override void DisplayInfo(bool display)
-    {
-        if (canGrab)
-        {
-            //interactionDisplay.DisplayInteractionInfo(grabInteraction, display);
-        }
-    }
-
     public LightbulbData GetLightbulbData() => lightbulbData;
     #endregion
 
 
-    void OnTriggerEnter(Collider other)
+  /* protected override void TriggerStay(Collider other, INodeInteraction nodeInteraction)
     {
-        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
-        {
-            if(!nodeInteraction.CanConnect(lightbulbData.type)) return;
-            Logger.Log(this, "COMPONENT", "Found Interaction Node: " + other.name, LogType.INFO);
-            this.nodeInteraction = nodeInteraction;
-        }
+        if(!nodeInteraction.CanConnect(lightbulbData.type)) return;
+        Logger.Log(this, "COMPONENT", "Found Interaction Node: " + other.name, LogType.INFO);
+        this.nodeInteraction = nodeInteraction;
     }
 
-    void OnTriggerExit(Collider other)
+    protected override void TriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out INodeInteraction _))
-        {
-            this.nodeInteraction = null;
-            Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
-        }
-    }
+        this.nodeInteraction = null;
+        Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
+    }*/
 
     [ContextMenu("Test Brightness")]
     private void LoadSetUp()
@@ -261,5 +247,5 @@ public class Lightbulb : CircuitComponent
         SetData(ComponentControlState.REPAIR, new ComplexFloat(),new ComplexFloat());
     }
 
-    public override bool CanConnectToNode() => nodeInteraction != null && !broken;
+    public override bool CanConnectToNode() => nodeInteraction?.CanConnect(lightbulbData.type) ?? false && !broken;
 }
