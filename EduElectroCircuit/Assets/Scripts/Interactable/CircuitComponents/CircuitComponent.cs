@@ -74,6 +74,11 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
 
     public void SetGrabbedState(Rigidbody rb, GameObject caller)
     {
+        if(curCoroutine != null)
+        {
+            StopCoroutine(curCoroutine);
+            curCoroutine = null;
+        }
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.excludeLayers = 1 << caller.layer;
         rb.constraints = RigidbodyConstraints.FreezeRotation;

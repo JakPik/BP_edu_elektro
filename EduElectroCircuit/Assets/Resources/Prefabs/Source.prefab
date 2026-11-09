@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SourceUIPanel
   display: {fileID: 3107853079682261398}
+  _roomID: 0
   node_Source: {fileID: 5462739573379176758}
   _uIButton:
     _buttonName: Button
@@ -91,6 +92,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  _roomCommandEventChannel: {fileID: 11400000, guid: e39628b6e046e4440a9994fb7f598312, type: 2}
 --- !u!65 &1109238735651165877
 BoxCollider:
   m_ObjectHideFlags: 0

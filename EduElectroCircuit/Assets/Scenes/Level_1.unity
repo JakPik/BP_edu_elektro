@@ -922,6 +922,10 @@ PrefabInstance:
       propertyPath: onRoomReload.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8930796436132737127, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
+      propertyPath: _roomID
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8775379726207448473, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
     m_RemovedGameObjects: []
@@ -2231,6 +2235,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1052578382803418083, guid: 426fa01a4bf5f5142a3d9d8fb7e2f53e, type: 3}
+      propertyPath: _roomID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052578382803418083, guid: 426fa01a4bf5f5142a3d9d8fb7e2f53e, type: 3}
       propertyPath: _doorSignal
       value: 
       objectReference: {fileID: 11400000, guid: 7c44f63e44b558042af336fa755886f3, type: 2}
@@ -3200,7 +3208,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 1930909766}
-  m_VersionIndex: 1737
+  m_VersionIndex: 1758
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4581,7 +4589,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 1851705529}
-  m_VersionIndex: 1073
+  m_VersionIndex: 1094
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5023,7 +5031,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 750759362}
-  m_VersionIndex: 1128
+  m_VersionIndex: 1149
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -8007,7 +8015,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 1754925372}
-  m_VersionIndex: 1280
+  m_VersionIndex: 1301
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9307,7 +9315,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 2075026712}
-  m_VersionIndex: 1572
+  m_VersionIndex: 1593
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9737,15 +9745,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomReset.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomReload.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomStateSave.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomReset.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -9838,6 +9846,10 @@ PrefabInstance:
     - target: {fileID: 8042673784236376268, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930796436132737127, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
+      propertyPath: _roomID
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8775379726207448473, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
@@ -10833,7 +10845,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 2005966997}
-  m_VersionIndex: 1900
+  m_VersionIndex: 1921
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -14962,7 +14974,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 782717300}
-  m_VersionIndex: 1280
+  m_VersionIndex: 1301
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -16120,7 +16132,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 655104727}
-  m_VersionIndex: 1581
+  m_VersionIndex: 1602
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -20057,6 +20069,10 @@ PrefabInstance:
       propertyPath: spawnPointReference
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8930796436132737127, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
+      propertyPath: _roomID
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8775379726207448473, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
     m_RemovedGameObjects: []
@@ -20724,15 +20740,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomReset.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomReload.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomStateSave.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6561486416457221208, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: onRoomReset.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -20857,6 +20873,10 @@ PrefabInstance:
     - target: {fileID: 8042673784236376268, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930796436132737127, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
+      propertyPath: _roomID
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8775379726207448473, guid: 318bf4f0131700c4dbf5e8041d1fa52a, type: 3}
@@ -24206,7 +24226,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 618824942}
-  m_VersionIndex: 1572
+  m_VersionIndex: 1593
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -27794,6 +27814,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1152087857}
     m_Modifications:
+    - target: {fileID: 1052578382803418083, guid: 426fa01a4bf5f5142a3d9d8fb7e2f53e, type: 3}
+      propertyPath: _roomID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1052578382803418083, guid: 426fa01a4bf5f5142a3d9d8fb7e2f53e, type: 3}
       propertyPath: _doorSignal
       value: 

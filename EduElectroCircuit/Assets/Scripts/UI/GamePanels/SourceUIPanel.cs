@@ -10,8 +10,10 @@ using UnityEngine.UIElements;
 
 public class SourceUIPanel : InteractiveUIPanel
 {
+    [SerializeField] private int _roomID;
     [SerializeField] private Node_Source node_Source;
     [SerializeField] private UIButton _uIButton;
+    [SerializeField] private GenericEventChannel<RoomCommandEvent> _roomCommandEventChannel;
     private Label _sourceTypeLabel;
     private Label _signalTypeLabel;
     private Label _valueLabel;
@@ -73,17 +75,17 @@ public class SourceUIPanel : InteractiveUIPanel
         }
     }
 
-    public override void PanelButtonReset()
+    protected override void PanelButtonReset()
     {
         _uIButton.OnButtonReset(this);
     }
 
-    public override void PanelButtonSave()
+    protected override void PanelButtonSave()
     {
         _uIButton.OnButtonStateSave();
     }
 
-    public override void PanelButtonReload(bool circuitActive)
+    protected override void PanelButtonReload()
     {
         _uIButton.OnButtonReload(this);
     }
@@ -95,4 +97,32 @@ public class SourceUIPanel : InteractiveUIPanel
             _uIButton.ButtonInteraction(this);
         }
     }
+
+    public void OnEnable()
+    {
+        _roomCommandEventChannel.OnEventRaised += OnRoomCommand;
+    }
+
+    public void OnDisable()
+    {
+        _roomCommandEventChannel.OnEventRaised -= OnRoomCommand;
+    }
+
+    protected override void OnRoomCommand(RoomCommandEvent @event)
+    {
+        if(@event.RoomID != _roomID) return;
+        switch(@event.Command)
+        {
+            case RoomCommand.RELOAD:
+                PanelButtonReload();
+                break;
+            case RoomCommand.RESET:
+                PanelButtonReset();
+                break;
+            case RoomCommand.SAVE:
+                PanelButtonSave();
+            break;
+        }
+    }
+
 }

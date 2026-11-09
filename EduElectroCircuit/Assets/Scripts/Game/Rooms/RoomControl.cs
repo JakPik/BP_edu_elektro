@@ -13,9 +13,7 @@ public class RoomControl: MonoBehaviour
     [SerializeField] private Node_Source[] node_Source;
     [SerializeField] private Node_Validation[] node_Validation;
     [Header("Raised Events")]
-    [SerializeField] private UnityEvent<bool> onRoomReload;
-    [SerializeField] private UnityEvent onRoomReset;
-    [SerializeField] private UnityEvent onRoomStateSave;
+    [SerializeField] private GenericEventChannel<RoomCommandEvent> _roomCommandEventChannel;
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> circuitActiveStateEventChannel;
 
     private Resistor[] resistors;
@@ -53,8 +51,7 @@ public class RoomControl: MonoBehaviour
         _numberOfActivations = 0;
         _numberOfReloads = 0;
 
-        onRoomReset.Invoke();
-        //onRoomReload.Invoke(false);
+        _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.RESET, roomID), this.name);
     }
 
    /* private void ClearComponents()
@@ -83,7 +80,7 @@ public class RoomControl: MonoBehaviour
         }
 
         circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(circuitActive, new NodeCircuit_ID(roomID) ), this.name);
-        onRoomReload.Invoke(circuitActive);
+        _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.RELOAD, roomID), this.name);
     }
 
     public RoomConfigurationDTO SaveComponentSetUp()
@@ -110,7 +107,7 @@ public class RoomControl: MonoBehaviour
 
     public void SaveComponents()
     {
-        onRoomStateSave.Invoke();
+        _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.SAVE, roomID), this.name);
         foreach(Resistor resistor in resistors)
         {
             resistor.SaveCurrentState();            
@@ -143,7 +140,7 @@ public class RoomControl: MonoBehaviour
         _numberOfActivations = 0;
         _numberOfReloads = 0;
 
-        onRoomReset.Invoke();
+        _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.RESET, roomID), this.name);
     }
 
     [ContextMenu("Save Components")]

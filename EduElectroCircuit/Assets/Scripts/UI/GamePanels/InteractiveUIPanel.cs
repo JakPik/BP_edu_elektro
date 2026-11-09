@@ -53,8 +53,9 @@ public abstract class InteractiveUIPanel: UIPanel, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public abstract void PanelButtonReset();
-    public abstract void PanelButtonSave();
-    public abstract void PanelButtonReload(bool circuitActive);
+    protected abstract void PanelButtonReset();
+    protected abstract void PanelButtonSave();
+    protected abstract void PanelButtonReload();
+    protected abstract void OnRoomCommand(RoomCommandEvent @event);
 }
 

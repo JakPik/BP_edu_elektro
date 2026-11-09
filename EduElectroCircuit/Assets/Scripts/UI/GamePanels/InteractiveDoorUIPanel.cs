@@ -10,7 +10,9 @@ using UnityEngine.UIElements;
 
 public class InteractiveDoorUIPanel : InteractiveUIPanel
 {
+    [SerializeField] private int _roomID;
     [SerializeField] private UIButton _uIButton;
+    [SerializeField] private GenericEventChannel<RoomCommandEvent> _roomCommandEventChannel;
     private Label _stateLabel;
     private DoorLockControl _control;
 
@@ -71,21 +73,50 @@ public class InteractiveDoorUIPanel : InteractiveUIPanel
         }
     }
 
-    public override void PanelButtonReset()
+    protected override void PanelButtonReset()
     {
         _uIButton.OnButtonReset(this);
         UpdatePanelStyle();
     }
 
-    public override void PanelButtonSave()
+    protected override void PanelButtonSave()
     {
         _uIButton.OnButtonStateSave();
     }
 
-    public override void PanelButtonReload(bool circuitActive)
+    protected override void PanelButtonReload()
     {
         _uIButton.OnButtonReload(this);
         UpdatePanelStyle();
+    }
+
+    public void OnEnable()
+    {
+        if(_roomCommandEventChannel == null) return;
+        _roomCommandEventChannel.OnEventRaised += OnRoomCommand;
+    }
+
+    public void OnDisable()
+    {
+        if(_roomCommandEventChannel == null) return;
+        _roomCommandEventChannel.OnEventRaised -= OnRoomCommand;
+    }
+
+    protected override void OnRoomCommand(RoomCommandEvent @event)
+    {
+        if(@event.RoomID != _roomID) return;
+        switch(@event.Command)
+        {
+            case RoomCommand.RELOAD:
+                PanelButtonReload();
+                break;
+            case RoomCommand.RESET:
+                PanelButtonReset();
+                break;
+            case RoomCommand.SAVE:
+                PanelButtonSave();
+            break;
+        }
     }
 
     public void UpdateLockState(bool unlocked)

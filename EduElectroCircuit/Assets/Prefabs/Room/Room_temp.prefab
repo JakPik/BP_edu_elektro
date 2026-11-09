@@ -118,51 +118,16 @@ MonoBehaviour:
   - {fileID: 6371946134625449433}
   node_Validation:
   - {fileID: 179319142081467350}
+  _roomCommandEventChannel: {fileID: 11400000, guid: e39628b6e046e4440a9994fb7f598312, type: 2}
   onRoomReload:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8930796436132737127}
-        m_TargetAssemblyTypeName: SourceUIPanel, Assembly-CSharp
-        m_MethodName: PanelButtonReload
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onRoomReset:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8930796436132737127}
-        m_TargetAssemblyTypeName: SourceUIPanel, Assembly-CSharp
-        m_MethodName: PanelButtonReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onRoomStateSave:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8930796436132737127}
-        m_TargetAssemblyTypeName: SourceUIPanel, Assembly-CSharp
-        m_MethodName: PanelButtonSave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   circuitActiveStateEventChannel: {fileID: 11400000, guid: f595f7351214074468572a65004c922f, type: 2}
 --- !u!1 &4650863840884559360
 GameObject:
@@ -313,17 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72fadf9e9f0b444f99eb124aeffd965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Node_Source
---- !u!114 &8930796436132737127 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7517263725359651976, guid: 2f34d658869066e429a6668d2e37d1e9, type: 3}
-  m_PrefabInstance: {fileID: 1414763108340722927}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa7d6efd9316f7b469263bc866cb082c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SourceUIPanel
 --- !u!1001 &3515984444677551611
 PrefabInstance:
   m_ObjectHideFlags: 0
