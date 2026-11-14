@@ -12,11 +12,18 @@ using UnityEngine;
 public class SpawnPointControl : ColliderDrawUtil
 {
     [SerializeField] private int roomID;
+    [SerializeField] private bool _startActive = true;
     [SerializeField] private GenericEventChannel<ReloadEvent> reload;
+    [SerializeField] private GenericEventChannel<NodeValidationEvent> _validationChannel;
     [SerializeField] private bool multiTrigger = false;
+
+    private bool _activeState;
+    private bool _disabled;
 
     void Awake()
     {
+        _activeState = _startActive;
+        _disabled = false;
         try {
             roomID = int.Parse(Regex.Match(this.transform.parent.name, @"-?\d+").Value);
         }
@@ -24,6 +31,7 @@ public class SpawnPointControl : ColliderDrawUtil
         {
             roomID = 0;
         }
+        SetColliderState(_activeState);
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -31,7 +39,8 @@ public class SpawnPointControl : ColliderDrawUtil
         {
             LevelControl.Instance.SetNextSpawnPoint(this.gameObject,roomID);
             if(!multiTrigger) {
-                this.GetComponent<BoxCollider>().enabled = false;
+                SetColliderState(false);
+                _disabled = true;
             }
         }
     }
@@ -39,15 +48,36 @@ public class SpawnPointControl : ColliderDrawUtil
     void OnEnable()
     {
         reload.OnEventRaised += OnReload;
+        if(_validationChannel == null) return;
+        _validationChannel.OnEventRaised += OnValidation;
     }
 
     void OnDisable()
     {
         reload.OnEventRaised -= OnReload;
+        if(_validationChannel == null) return;
+        _validationChannel.OnEventRaised -= OnValidation;
+    }
+
+    private void OnValidation(NodeValidationEvent @event)
+    {
+        _activeState = @event.Valid;
+        SetColliderState(_activeState);
+    }
+
+    private void SetColliderState(bool enabled)
+    {
+        if(_disabled) return;
+        this.GetComponent<BoxCollider>().enabled = enabled;
     }
 
     private void OnReload(ReloadEvent @event)
     {
-        if (@event.SpawnReference == null) this.GetComponent<BoxCollider>().enabled = true;
+        if (@event.LoadingState == LevelLoadingStates.LOADING_DATA_TRANSFER && @event.SpawnReference == null)
+        {
+            _activeState = _startActive;
+            _disabled = false;
+            SetColliderState(_activeState);
+        }
     }
 }

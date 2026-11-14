@@ -5,6 +5,10 @@
  * Module: NodeCalculationModel
  */
 
+using System;
+using NUnit.Framework;
+using UnityEngine;
+
 public static class NodeCalculationModel
 {
     private static string GetUnit(ElectricalQuantityType type)
@@ -17,6 +21,8 @@ public static class NodeCalculationModel
                 return "A";
             case ElectricalQuantityType.RESISTANCE:
                 return "Ω";
+            case ElectricalQuantityType.CAPACITANCE:
+                return "F";
             default:
                 return "";
         }
@@ -122,20 +128,59 @@ public static class NodeCalculationModel
         }
     }
 
-    public static ComplexFloat GetImpedanceDC(ComponentData componentData)
+    public static string FormatValue(float _value, ElectricalQuantityType type)
+    {
+        float value = _value;
+        if (value >= 1e6)
+        {
+            return (value / 1e6).ToString("F2") + " M" + GetUnit(type);
+        }
+        else if (value >= 1e3)
+        {
+            return (value / 1e3).ToString("F2") + " k" + GetUnit(type);
+        }
+        else if (value >= 1)
+        {
+            return value.ToString("F2") + " " + GetUnit(type);
+        }
+        else if (value >= 1e-3)
+        {
+            return (value * 1e3).ToString("F2") + " m" + GetUnit(type);
+        }
+        else if (value == 0 || value <= 1e-10)
+        {
+            return value.ToString("F2") + " " + GetUnit(type);
+        }
+        else
+        {
+            return (value * 1e6).ToString("F4") + " μ" + GetUnit(type);
+        }
+    }
+
+    public static ComplexFloat GetImpedance(ComponentData componentData, float frequency, bool isDC)
     {
         switch(componentData.type)
         {
             case ComponentType.RESISTOR:
-                return ((ResistorData)componentData).GetResistance();
+                return ((ResistorData)componentData).Resistance;
             case ComponentType.LIGHTBULB:
-                return ((LightbulbData)componentData).GetResistance();
-            default:
+                return ((LightbulbData)componentData).Resistance;
             case ComponentType.CAPACITOR:
-                // ZC = 0
+                return isDC? ((CapacitorData)componentData).ChargingRezistanceChange: CalculateInductiveImpedance(frequency, ((CapacitorData)componentData).Capacitance);
             case ComponentType.INDUCTOR:
-                // ZL = 0
+                return isDC? new ComplexFloat() : CalculateInductiveImpedance(frequency, ((InductorData)componentData).Inductance);
+            default:
                 return new ComplexFloat();
         }
+    }
+
+    private static ComplexFloat CalculateInductiveImpedance(float frequency, float inductance)
+    {
+        return new ComplexFloat(0, 2*Mathf.PI*frequency*inductance);
+    }
+
+    private static ComplexFloat CalculateCapacitiveImpedance(float frequency, float capacitance)
+    {
+        return new ComplexFloat(0, Mathf.Pow(2*Mathf.PI*frequency*capacitance, -1));
     }
 }

@@ -6,15 +6,15 @@
         <ui:Label text="Napájení" class="text-base text-info" style="font-size: 10px;"/>
         <ui:VisualElement name="InfoPanel" class="info-border" style="flex-shrink: 1; justify-content: space-around; align-items: stretch;">
             <ui:VisualElement class="property-panel">
-                <ui:VisualElement name="ResistancePanel" class="property-item">
+                <ui:VisualElement name="SourcePanel" class="property-item">
                     <ui:Label text="Typ zdroje:" name="Label" class="text-base text-info" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
                     <ui:Label text="Voltage" name="SourceType" class="text-base text-parameter" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>
                 </ui:VisualElement>
-                <ui:VisualElement name="RequirePanel" class="property-item">
+                <ui:VisualElement name="ValuePanel" class="property-item">
                     <ui:Label text="Výstup:" name="Label" class="text-info text-base" style="-unity-text-outline-width: 0.3px; font-size: 6px;"/>
                     <ui:Label text="999,99 MV" name="Value" class="text-parameter text-base" style="-unity-text-outline-width: 0.3px; font-size: 6px;"/>
                 </ui:VisualElement>
-                <ui:VisualElement name="RequirePanel" class="property-item">
+                <ui:VisualElement name="SignalPanel" class="property-item">
                     <ui:Label text="Typ proudu:" name="Label" class="text-info text-base" style="-unity-text-outline-width: 0.3px; font-size: 6px;"/>
                     <ui:Label text="AC" name="SignalType" class="text-parameter text-base" style="-unity-text-outline-width: 0.3px; font-size: 6px;"/>
                 </ui:VisualElement>
@@ -22,6 +22,7 @@
                     <ui:Label text="Frekvence:" name="Label" class="text-info text-base" style="-unity-text-outline-width: 0.3px; font-size: 6px;"/>
                     <ui:Label text="10 s" name="Period" class="text-base text-parameter" style="-unity-text-outline-width: 0.3px; font-size: 6px;"/>
                 </ui:VisualElement>
+                <ui:Label text="Panel Offline&#10;&#10;Nutné zapnou napájení panelu" name="Offline" class="text-base text-parameter" style="white-space: pre-wrap; -unity-text-align: middle-center; flex-shrink: 1; flex-grow: 1;"/>
             </ui:VisualElement>
             <ui:Button text="Button" name="Button" class="interactive-button button-on text-button" style="top: 0;"/>
         </ui:VisualElement>

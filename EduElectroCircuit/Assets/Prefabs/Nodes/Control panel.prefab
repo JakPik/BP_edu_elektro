@@ -131,6 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControlPointUIPanel
   display: {fileID: 1846273921695414633}
+  _lockedStateLabel: "Zam\u010Deny"
+  _unlockedStateLabel: "Odem\u010Deny"
 --- !u!1 &8416527279148077966
 GameObject:
   m_ObjectHideFlags: 0

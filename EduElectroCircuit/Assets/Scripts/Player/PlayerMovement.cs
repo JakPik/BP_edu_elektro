@@ -113,9 +113,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnRoomReload(ReloadEvent @event)
     {
-        rb.position = @event.SpawnTransform.position;
-        rb.rotation = @event.SpawnTransform.rotation;
-        rb.linearVelocity = Vector3.zero;
+        if(@event.LoadingState == LevelLoadingStates.LOADING_DATA_TRANSFER)
+        {
+            rb.position = @event.SpawnTransform.position;
+            rb.rotation = @event.SpawnTransform.rotation;
+            rb.linearVelocity = Vector3.zero;
+        }
     }
 
     private void OnRespawn(InputAction.CallbackContext context)

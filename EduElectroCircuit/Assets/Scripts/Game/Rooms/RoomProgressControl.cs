@@ -17,14 +17,14 @@ public class RoomProgressControl : MonoBehaviour
             int roomLoadId = 0;
             foreach(RoomConfigurationDTO roomConfigurationDTO in roomData.roomConfigurations)
             {
-               // if(loadID == null)
-               // {
-                    rooms[roomLoadId].LoadComponentSetUp(roomConfigurationDTO);
-               // }
-               /* else
+                if(loadID == null)
                 {
-                    rooms[roomLoadId].LoadSetUp(componentsDTO);
-                }*/
+                    rooms[roomLoadId].LoadComponentSetUp(roomConfigurationDTO);
+                }
+                else
+                {
+                    rooms[roomLoadId].LoadSetUp(roomConfigurationDTO);
+                }
                 roomLoadId++;
                 yield return null;
             }

@@ -138,14 +138,25 @@ public class Node_Source : Node
     private void GetConectionState(NodeStateChange @event)
     {
         if(_nodeCircuit_ID != @event.nodeCircuit_ID) return;
-        _uiPanel.TurnCircuitOff();
-        _circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false, _nodeCircuit_ID), this.name);
-        CheckConection();
+        if(!@event.valueUpdate) {
+            _uiPanel.TurnCircuitOff();
+            _circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false, _nodeCircuit_ID), this.name);
+            CheckConection();
+        }
+        else
+        {
+            CheckConection();
+            if(_locked)
+            {
+                Calculate(_locked);
+            }
+        }
     }
 
     public void Calculate(bool isOn)
     {
         _circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(isOn, _nodeCircuit_ID), this.name);
+        _locked = isOn;
         if (!isOn) return;
         if (!_connected)
         {

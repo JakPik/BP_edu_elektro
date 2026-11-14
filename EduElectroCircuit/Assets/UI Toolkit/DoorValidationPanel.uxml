@@ -4,12 +4,12 @@
     <ui:VisualElement>
         <ui:VisualElement name="Panel" data-source="project://database/Assets/Resources/ScriptableObjects/Utils/ColorSchemeSO.asset?fileID=11400000&amp;guid=8fe9bc264959c0346b4c42aef71f7ece&amp;type=2#ColorSchemeSO" class="display-background">
             <ui:Label text="" class="panel-title" style="font-size: 12px; -unity-material: url(&quot;&quot;); display: none;"/>
-            <ui:VisualElement name="StatePanel" class="property-item" style="justify-content: center; -unity-material: url(&quot;&quot;);">
+            <ui:VisualElement name="StatePanel" class="property-item" style="justify-content: center; -unity-material: url(&quot;&quot;); display: flex;">
                 <ui:Label text="Dveře:" class="text-base text-info" style="font-size: 8px;"/>
                 <ui:Label text="Locked" name="State" class="text-base text-success" style="font-size: 8px;"/>
             </ui:VisualElement>
             <ui:VisualElement name="InfoPanel" class="info-border" style="-unity-material: url(&quot;&quot;); padding-top: 2px; padding-bottom: 2px;">
-                <ui:Label text="Parametry Dveří" class="text-base text-info" style="font-size: 9px; margin-bottom: 2px; -unity-text-outline-width: 0.5px; -unity-text-align: upper-center;"/>
+                <ui:Label text="Parametry Dveří" class="text-base text-info" style="font-size: 9px; margin-bottom: 2px; -unity-text-outline-width: 0.5px; -unity-text-align: upper-center; display: flex;"/>
                 <ui:VisualElement name="VisualElement" class="property-panel" style="flex-grow: 1;">
                     <ui:VisualElement name="ResistancePanel" class="property-display property-item">
                         <ui:Label text="Odpor:" class="text-info text-base" style="font-size: 6px; -unity-text-outline-width: 0.3px;"/>

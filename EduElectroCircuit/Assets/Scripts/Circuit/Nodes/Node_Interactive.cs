@@ -18,6 +18,8 @@ public class Node_Interactive : Node, INodeInteraction
     [Space(10)]
     [Header("Control Value")]
     [SerializeField] private GameObject _refConnected;
+    [Tooltip("If true, the reference object cannot be removed from this node. A reference must be assigned before the application starts.")]
+    [SerializeField] private bool _referenceLock;
     [Space(10)]
     [SerializeField] private DecalProjector _decalProjector;
     [SerializeField] private Material _decalMaterial;
@@ -32,6 +34,7 @@ public class Node_Interactive : Node, INodeInteraction
     [SerializeField] private GenericEventChannel<NodeStateChange> _nodeStateChange;
     [Header("Event Channels")]
     [SerializeField] private GenericEventChannel<CircuitActiveStateEvent> _circuitActiveState;
+    [SerializeField] private GenericEventChannel<ReloadEvent> reload;
     #endregion
 
     private MaterialPropertyBlock _materialPropertyBlock;
@@ -40,11 +43,9 @@ public class Node_Interactive : Node, INodeInteraction
     private CircuitComponent _circuitComponent;
     private Coroutine _coroutine;
     private ComponentData _componentData;
-    private Coroutine _DC_CapacitorRoutine;
     private ComplexFloat _chargingCapacitorRezistance;
     private bool _chargingCapacitorStarted;
 
-    const float ChargingMultiplier = 8;
     #endregion
 
     private void Awake() {
@@ -56,6 +57,29 @@ public class Node_Interactive : Node, INodeInteraction
         _decalProjector.material.SetColor("_Color", InteractiveNodeStatesExt.ToColor(_nodeState));
         _decalProjector.material.SetFloat("_Intensity", 0f);
         _renderer.SetPropertyBlock(_materialPropertyBlock);
+    }
+
+    private void ReferenceLock(ReloadEvent @event) {
+       /* if(@event.LoadingState == LevelLoadingStates.LOADING_START &&
+            _referenceLock)
+        {
+            CircuitComponent circuitComponent = _refConnected.GetComponent<CircuitComponent>();
+            if(circuitComponent != null) {
+                SetComponentData(circuitComponent.GetComponentData(), _refConnected);
+                NodeStateChange(NodeConectionStates.PLACED_COMPONENT_LOCKED);
+                circuitComponent.ForcePermanentNodeConnection(transform.position + _positionOffset, transform);
+            }
+        }*/
+        if( @event.LoadingState == LevelLoadingStates.LOADING_FINISHED &&
+            _referenceLock)
+        {
+            CircuitComponent circuitComponent = _refConnected.GetComponent<CircuitComponent>();
+            if(circuitComponent != null) {
+                SetComponentData(circuitComponent.GetComponentData(), _refConnected);
+                NodeStateChange(NodeConectionStates.PLACED_COMPONENT_LOCKED);
+                circuitComponent.ForcePermanentNodeConnection(transform.position + _positionOffset, transform, this);
+            }
+        }
     }
 
     #region Node class Implementation
@@ -71,11 +95,6 @@ public class Node_Interactive : Node, INodeInteraction
     /// <inheritdoc />
     public override void CalculateValues(NodeDataModel passValues, NodeDataModel originValues)
     {
-        if(_componentData.type == ComponentType.CAPACITOR && !_chargingCapacitorStarted)
-        {
-            _chargingCapacitorStarted = true;
-            _DC_CapacitorRoutine = StartCoroutine(StartCapacitorCharging());
-        }
         if(passValues.Ic.GetMagnitude() != 0)
         {
             NodeStateChange(NodeConectionStates.ACTIVE_CLOSED_CIRCUIT);
@@ -84,25 +103,14 @@ public class Node_Interactive : Node, INodeInteraction
 
         (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
         Logger.LogNode(this, "U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
-        _circuitComponent?.SetData(ComponentControlState.ACTIVE, U, I);
+        _circuitComponent?.SetData(ComponentControlState.ACTIVE, U, I, originValues.Rc, passValues.signalType == SignalType.DC);
 
         if (_nextNode != null) _nextNode.CalculateValues(passValues, originValues);
     }
 
     public override ComplexFloat GetResistanceSum(SignalType signalType, float frequency)
     {
-        if(signalType == SignalType.DC)
-        {
-            R = NodeCalculationModel.GetImpedanceDC(_componentData);
-            if(_chargingCapacitorStarted)
-            {
-                R = _chargingCapacitorRezistance;
-            }
-        }
-        else
-        {
-            
-        }
+        R = NodeCalculationModel.GetImpedance(_componentData, frequency, signalType == SignalType.DC);
        /* switch(_componentData.type)
         {
             case ComponentType.RESISTOR:
@@ -115,23 +123,6 @@ public class Node_Interactive : Node, INodeInteraction
         Logger.LogNode(this, "Local R: " + R, LogType.INFO);
         return _nextNode == null? R : R + _nextNode.GetResistanceSum(signalType, frequency);
     }
-
-    private IEnumerator StartCapacitorCharging()
-    {
-        float elapsed = 0f;
-        float capacitance = 0.001f;
-        float totalRezistance = 255;
-        while(_chargingCapacitorRezistance.GetMagnitude() < 100000)
-        {
-            yield return new WaitForSeconds(0.5f);
-            elapsed += 0.5f;
-            float divider = capacitance * totalRezistance * ChargingMultiplier;
-            _chargingCapacitorRezistance.real += Mathf.Exp(elapsed/divider);
-            R = _chargingCapacitorRezistance;
-        }
-        _chargingCapacitorRezistance.SetNumberAsInf(true);
-    }
-
     #endregion
 
     #region Node Conections
@@ -181,6 +172,7 @@ public class Node_Interactive : Node, INodeInteraction
     {
         if (componentData == null)
         {
+            _nodeStateChange?.RaiseEvent(new NodeStateChange(_nodeCircuit_ID, false), this.name);
             ClearNode(obj);
             return;
         }
@@ -200,7 +192,7 @@ public class Node_Interactive : Node, INodeInteraction
                 break;
         }*/
         _circuitComponent = obj.GetComponent<CircuitComponent>();
-        _nodeStateChange?.RaiseEvent(new NodeStateChange(_nodeCircuit_ID), this.name);
+        _nodeStateChange?.RaiseEvent(new NodeStateChange(_nodeCircuit_ID, true), this.name);
     }
 
     public bool CanConnect(ComponentType type) => !_excludedComponents.Contains(type) && !_connected && !_locked;
@@ -221,9 +213,9 @@ public class Node_Interactive : Node, INodeInteraction
             _refConnected = null;
             _connected = false;
             RefreshValues();
-            _circuitComponent?.SetData(ComponentControlState.INACTIVE, U, I);
+            _circuitComponent?.SetData(ComponentControlState.INACTIVE, U, I, R, false);
             _circuitComponent = null;
-            _nodeStateChange?.RaiseEvent(new NodeStateChange(_nodeCircuit_ID), this.name);
+            _nodeStateChange?.RaiseEvent(new NodeStateChange(_nodeCircuit_ID, false), this.name);
             _componentData = null;
         }
     }
@@ -233,16 +225,18 @@ public class Node_Interactive : Node, INodeInteraction
     void OnEnable()
     {
         _circuitActiveState.OnEventRaised += CircuitActiveStateChange;
+        reload.OnEventRaised += ReferenceLock;
     }
 
     void OnDisable()
     {
         _circuitActiveState.OnEventRaised -= CircuitActiveStateChange;
+        reload.OnEventRaised -= ReferenceLock;
     }
 
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
     {
-        if(!_nodeCircuit_ID.RoomMatch(@event.nodeCircuit_ID)) return;
+        if(_nodeCircuit_ID != @event.nodeCircuit_ID) return;
         _locked = @event.circuitActive;
         _chargingCapacitorStarted = false;
         if(_locked)
@@ -258,7 +252,10 @@ public class Node_Interactive : Node, INodeInteraction
         {
             Logger.LogNode(this, "Grab lock state changed for: " + _refConnected.name, LogType.INFO);
             grabable.LockGrab(_locked);
-            _circuitComponent?.SetData(ComponentControlState.INACTIVE,U, I);
+            if(!_locked)
+            {
+                _circuitComponent?.SetData(ComponentControlState.INACTIVE,U, I, R, false);
+            }
         }
     }
     #endregion
@@ -267,7 +264,20 @@ public class Node_Interactive : Node, INodeInteraction
     private void NodeStateChange(NodeConectionStates nodeState)
     {
         if(_nodeState == nodeState) return;
-        _nodeState = nodeState;
+        if(_referenceLock)
+        {
+            if(nodeState == NodeConectionStates.ACTIVE_CLOSED_CIRCUIT)
+            {
+                _nodeState = nodeState;
+            }
+            else
+            {
+                _nodeState = NodeConectionStates.PLACED_COMPONENT_LOCKED;
+            }
+        }
+        else {
+            _nodeState = nodeState;
+        }
         if(_coroutine != null) StopCoroutine(_coroutine);
         _coroutine = StartCoroutine(AnimateColorStrip());
     }

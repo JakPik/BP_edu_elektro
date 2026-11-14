@@ -17,16 +17,28 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
     [SerializeField] protected float animationSpeed;
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected INodeInteraction nodeInteraction;
+    [SerializeField] private bool canGrab;
     protected bool isConnected = false;
 
     protected Vector3 savedPosition;
     protected Quaternion savedRotation;
     protected INodeInteraction savedNodeInteraction;
+    private bool _permanentlyLockedToNode;
     [SerializeField] protected ComponentPropertyPanel _componentPropertyPanel;
 
     protected abstract void SendData(INodeInteraction node, bool placed = true);
-    public abstract void SetData(ComponentControlState controlState, ComplexFloat voltage, ComplexFloat current);
-    protected abstract Quaternion FindTargetRotation(Transform local, Transform target);
+    public virtual void SetData(ComponentControlState controlState, ComplexFloat voltage, ComplexFloat current, ComplexFloat R, bool isDC) { return; }
+    public abstract ComponentData GetComponentData();
+    protected Quaternion FindTargetRotation(Transform local, Transform target)
+    {
+        float angle = Vector3.SignedAngle(target.forward, local.forward, target.up);
+
+        angle = Math.Abs(angle) > 90f ? 180 * Math.Sign(angle) : 0;
+
+        Quaternion baseRot = Quaternion.LookRotation(target.forward);
+        Quaternion finalRot = baseRot * Quaternion.AngleAxis(angle, Vector3.up);
+        return finalRot;
+    }
 
     protected IEnumerator AnimateNewPosition(Vector3 targetPosition, Transform targetTransform)
     {
@@ -63,12 +75,19 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
         rigidBody.transform.position = targetPosition;
     }
 
-    protected void CanAnimate(Rigidbody rb, Vector3 targetPos, Transform targetTransfrom)
+    protected void CanAnimate(Vector3 targetPos, Transform targetTransfrom)
     {
         if (curCoroutine != null) StopCoroutine(curCoroutine);
 
         rb.constraints = RigidbodyConstraints.FreezeAll;
         curCoroutine = StartCoroutine(AnimateNewPosition(targetPos, targetTransfrom));
+    }
+
+    public void ForcePermanentNodeConnection(Vector3 targetPos, Transform targetTransfrom, INodeInteraction nodeInteraction)
+    {
+        _permanentlyLockedToNode = true;
+        CanAnimate(targetPos, targetTransfrom);
+        this.nodeInteraction = nodeInteraction;
     }
     public INodeInteraction GetIsConnected() => (nodeInteraction == null || !isConnected)? null : nodeInteraction;
 
@@ -93,9 +112,28 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
         rb.useGravity = true;
     }
 
-    public abstract bool CanGrab();
-    public abstract void LockGrab(bool locked);
-    public abstract void OnGrab(bool grabbed, GameObject caller);
+    public bool CanGrab() => !_permanentlyLockedToNode && canGrab;
+    public void LockGrab(bool locked) => canGrab = !locked;
+    public void OnGrab(bool grabbed, GameObject caller)
+    {
+        rb.angularVelocity = Vector3.zero;
+        if (grabbed)
+        {
+            isConnected = false;
+            SetGrabbedState(rb, caller);
+            SendData(nodeInteraction, false);
+        }
+        else
+        {
+            SetReleasedState(rb);
+            if(!CanConnectToNode()) return;
+
+            Logger.Log(this, "COMPONENT", "Animating new position", LogType.INFO);
+            SendData(nodeInteraction);
+            var (targetPos, targetTransfrom) = nodeInteraction.GetTransform();
+            CanAnimate(targetPos, targetTransfrom);
+        }
+    }
     public abstract bool CanConnectToNode();
 
     public void SaveCurrentState()
@@ -107,13 +145,13 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
         Debug.Log(savedNodeInteraction);
     }
 
-    public void ReloadResistorState()
+    public void ReloadComponentState()
     {
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         transform.localPosition = savedPosition;
         transform.localRotation = savedRotation;
-
+        if(_permanentlyLockedToNode) return;
         if(savedNodeInteraction != null)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -157,7 +195,7 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction) && !rb.useGravity)
+        if (other.gameObject.TryGetComponent(out INodeInteraction nodeInteraction))
         {
             Logger.Log(this, "COMPONENT", "Found Interaction Node: " + other.name, LogType.INFO);
             this.nodeInteraction = nodeInteraction;

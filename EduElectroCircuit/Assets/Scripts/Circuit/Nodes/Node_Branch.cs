@@ -52,14 +52,14 @@ public class Node_Branch : Node
             new ComplexFloat(),
             new ComplexFloat(),
             passValues.sourceType,
-            passValues.circuitType);
+            passValues.signalType);
 
         NodeDataModel staticValues = new NodeDataModel(
             U,
             new ComplexFloat(),
             new ComplexFloat(),
             passValues.sourceType,
-            passValues.circuitType);
+            passValues.signalType);
 
         (U, I) = NodeCalculationModel.CalculateNodeValues(passValues, R);
 

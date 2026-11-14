@@ -180,15 +180,18 @@ public class PlayerInteractionControl : MonoBehaviour
 
     private void OnRoomReload(ReloadEvent @event)
     {
-        if (holding)
+        if(@event.LoadingState == LevelLoadingStates.LOADING_DATA_TRANSFER)
         {
-            grabbedObject.grabable.OnGrab(false, this.gameObject);
-            //grabbedObject.grabable?.DisplayInfo(false);
-            grabbedObject.Refresh();
-            holding = false;
+            if (holding)
+            {
+                grabbedObject.grabable.OnGrab(false, this.gameObject);
+                //grabbedObject.grabable?.DisplayInfo(false);
+                grabbedObject.Refresh();
+                holding = false;
+            }
+            interactable?.DisplayInfo(false);
+            interactable = null;
         }
-        interactable?.DisplayInfo(false);
-        interactable = null;
     }
 
     private void OnHold(InputAction.CallbackContext context)

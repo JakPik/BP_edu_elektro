@@ -99,7 +99,10 @@ public class CameraControl : MonoBehaviour
 
     private void OnRoomReload(ReloadEvent @event)
     {
-        ResetView(@event.SpawnTransform.rotation);
+        if(@event.LoadingState == LevelLoadingStates.LOADING_DATA_TRANSFER)
+        {
+            ResetView(@event.SpawnTransform.rotation);
+        }
     }
 
     private void OnLookInput(InputAction.CallbackContext context)

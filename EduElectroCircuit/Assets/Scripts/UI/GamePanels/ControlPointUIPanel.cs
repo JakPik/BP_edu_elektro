@@ -6,9 +6,12 @@
  */
 
 using UnityEngine.UIElements;
+using UnityEngine;
 
 public class ControlPointUIPanel : UIPanel
 {
+    [SerializeField] private string _lockedStateLabel;
+    [SerializeField] private string _unlockedStateLabel;
     private Label _stateLabel;
     private Label _resistanceLabel;
     private Label _requireLabel;
@@ -19,7 +22,7 @@ public class ControlPointUIPanel : UIPanel
         _resistanceLabel = display.rootVisualElement.Q<Label>("Resistance");
         _requireLabel = display.rootVisualElement.Q<Label>("Required");
 
-        _stateLabel.text = "Zmačeny";
+        _stateLabel.text = _lockedStateLabel;
         UIStyleControler.StyleLabel(_stateLabel, LabelStyles.ERROR);
         UIStyleControler.StyleLabel(_requireLabel, LabelStyles.ERROR);
     }
@@ -42,13 +45,13 @@ public class ControlPointUIPanel : UIPanel
     {
         if (locked)
         {
-            _stateLabel.text = "Zmačeny";
+            _stateLabel.text = _lockedStateLabel;
             UIStyleControler.StyleLabel(_stateLabel, LabelStyles.ERROR);
             UIStyleControler.StyleLabel(_requireLabel, LabelStyles.ERROR);
         }
         else
         {
-            _stateLabel.text = "Odemčeny";
+            _stateLabel.text = _unlockedStateLabel;
             UIStyleControler.StyleLabel(_stateLabel, LabelStyles.SUCCESS);
             UIStyleControler.StyleLabel(_requireLabel, LabelStyles.SUCCESS);
         }

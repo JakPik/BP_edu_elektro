@@ -164,7 +164,7 @@ public class Node_Validation : Node
 
     private void CircuitActiveStateChange(CircuitActiveStateEvent @event)
     {
-        if(!_nodeCircuit_ID.RoomMatch(@event.nodeCircuit_ID)) return;
+        if(_nodeCircuit_ID != @event.nodeCircuit_ID) return;
         _locked = @event.circuitActive;
         if (!_locked)
         {

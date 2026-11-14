@@ -51,6 +51,7 @@ MonoBehaviour:
   actionMap: {fileID: -944628639613478452, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   pauseAction: {fileID: -2681525880936574576, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   reloadRequest: {fileID: 11400000, guid: 3ae08cb5737bef9409040cf4dac168f7, type: 2}
+  reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}
 --- !u!114 &876185908978904854
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,10 +8,12 @@
 public class NodeStateChange : EventBaseType
 {
     public NodeCircuit_ID nodeCircuit_ID;
+    public bool valueUpdate;
 
-    public NodeStateChange(NodeCircuit_ID nodeCircuit_ID)
+    public NodeStateChange(NodeCircuit_ID nodeCircuit_ID, bool valueUpdate)
     {
         this.nodeCircuit_ID = nodeCircuit_ID;
+        this.valueUpdate = valueUpdate;
     }
 
     public override string DisplayData()

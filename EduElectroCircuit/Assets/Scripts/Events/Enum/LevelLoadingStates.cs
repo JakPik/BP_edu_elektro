@@ -1,0 +1,7 @@
+public enum LevelLoadingStates
+{
+    LOADING_START,
+    LOADING_FINISHED,
+    RELOAD_FINISHED,
+    LOADING_DATA_TRANSFER
+}

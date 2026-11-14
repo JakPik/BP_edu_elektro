@@ -49,7 +49,7 @@ public class LevelControl : MonoBehaviour
     void Start()
     {
         PersistanceManager.InitPersistance();
-        curCoroutine = StartCoroutine(LevelEnterInit());
+        curCoroutine = StartCoroutine(LevelLoading(true));
     }
     public void EndLevel()
     {
@@ -77,6 +77,7 @@ public class LevelControl : MonoBehaviour
         levelProgression.ResetLevelProgression(startSpawnPoint);
         reload.RaiseEvent(
             new ReloadEvent(
+                LevelLoadingStates.LOADING_DATA_TRANSFER,
                 levelProgression.curspawnPoint.transform,
                 null),
             this.name
@@ -86,6 +87,11 @@ public class LevelControl : MonoBehaviour
         yield return StartCoroutine(GameUIControl.Instance.Fade(false));
         levelProgression.LevelTime(true);
         curCoroutine = null;
+        reload.RaiseEvent(
+            new ReloadEvent(
+                LevelLoadingStates.LOADING_FINISHED),
+            this.name
+        );
     }
 
     public void SetNextSpawnPoint(GameObject spawnPoint, int roomID)
@@ -109,15 +115,21 @@ public class LevelControl : MonoBehaviour
 
         reload.RaiseEvent(
             new ReloadEvent(
+                LevelLoadingStates.LOADING_DATA_TRANSFER,
                 levelProgression.curspawnPoint.transform,
                 levelProgression.curspawnPoint),
             this.name
         );
-        StartCoroutine(roomProgressControl.ReloadRooms(levelProgression.currentRoomID));
+        StartCoroutine(roomProgressControl.ReloadRooms(levelProgression.highestRoomID));
 
         yield return new WaitForSeconds(0.8f);
         yield return StartCoroutine(GameUIControl.Instance.Fade(false));
         curCoroutine = null;
+        reload.RaiseEvent(
+            new ReloadEvent(
+                LevelLoadingStates.RELOAD_FINISHED),
+            this.name
+        );
     }
 
     void OnEnable()
@@ -143,13 +155,23 @@ public class LevelControl : MonoBehaviour
     private void OnReloadRequest(ReloadRequestEvent @event)
     {
         if (curCoroutine != null) return;
-        if (@event.FirstLoad)
+        curCoroutine = StartCoroutine(LevelLoading(@event.FirstLoad));
+    }
+
+    private IEnumerator LevelLoading(bool firstLoad)
+    {
+        reload.RaiseEvent(
+            new ReloadEvent(
+                LevelLoadingStates.LOADING_START),
+            this.name
+        );
+        if (firstLoad)
         {
-            curCoroutine = StartCoroutine(LevelEnterInit());
+            yield return StartCoroutine(LevelEnterInit());
         }
         else
         {
-            curCoroutine = StartCoroutine(Respawn());
+            yield return StartCoroutine(Respawn());
         }
     }
 }

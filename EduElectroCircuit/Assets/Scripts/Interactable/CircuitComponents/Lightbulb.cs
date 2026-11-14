@@ -1,16 +1,14 @@
 using System;
+using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Lightbulb : CircuitComponent
 {
     public float bright;
     [Header("Control Data")]
-    [SerializeField] private bool canGrab;
     [SerializeField] private LightbulbData lightbulbData;
     [SerializeField] private float maxBrightness;
-
-    [Header("Interaction set up")]
-    [SerializeField] private InteractionSO grabInteraction;
 
     [Header("Refference set up")]
     [SerializeField] private Light pointLight;
@@ -60,11 +58,12 @@ public class Lightbulb : CircuitComponent
         meshFilter.mesh = solid_base;
     }
 
-    private void BreakLight()
+    private IEnumerator BreakLight()
     {
+        yield return new WaitForSeconds(1.0f);
         broken = true;
         isConnected = false;
-        canGrab = true;
+        LockGrab(false);
 
         glassBroken.SetActive(true);
         for (int i = 0; i < glassBroken.transform.childCount; i++)
@@ -81,6 +80,7 @@ public class Lightbulb : CircuitComponent
         
         SendData(nodeInteraction, false);
     }
+
 
     private void TurnLightOFF()
     {
@@ -131,7 +131,9 @@ public class Lightbulb : CircuitComponent
         }
     }
 
-    public override void SetData(ComponentControlState controlState, ComplexFloat voltage, ComplexFloat current)
+    public override ComponentData GetComponentData() => lightbulbData;
+
+    public override void SetData(ComponentControlState controlState, ComplexFloat voltage, ComplexFloat current, ComplexFloat R, bool isDC)
     {
         var (state ,brightness)= lightbulbData.GetBrightness(voltage);
         if(state != ComponentControlState.UNCHANGED)
@@ -164,60 +166,22 @@ public class Lightbulb : CircuitComponent
             new ComponentPropertyData
             {
                 label = "Odpor",
-                value = NodeCalculationModel.FormatValue(lightbulbData.GetResistance(), ElectricalQuantityType.RESISTANCE)
+                value = NodeCalculationModel.FormatValue(lightbulbData.Resistance, ElectricalQuantityType.RESISTANCE)
             },
             new ComponentPropertyData
             {
                 label = "Pracovní Napětí",
-                value = NodeCalculationModel.FormatValue(lightbulbData.GetRatedVoltage(), ElectricalQuantityType.VOLTAGE)
+                value = NodeCalculationModel.FormatValue(lightbulbData.RatedVoltage, ElectricalQuantityType.VOLTAGE)
             },
             new ComponentPropertyData
             {
                 label = "Maximální Napětí",
-                value = NodeCalculationModel.FormatValue(lightbulbData.GetMaxVoltage(), ElectricalQuantityType.VOLTAGE)
+                value = NodeCalculationModel.FormatValue(lightbulbData.MaxVoltage, ElectricalQuantityType.VOLTAGE)
             }
         };
         _componentPropertyPanel.SetData(data, "Lightbulb");
     }
-
-    protected override Quaternion FindTargetRotation(Transform local, Transform target)
-    {
-        float angle = Vector3.SignedAngle(target.forward, local.forward, target.up);
-
-        angle = Math.Abs(angle) > 90f ? 180 * Math.Sign(angle) : 0;
-
-        Quaternion baseRot = Quaternion.LookRotation(target.forward);
-        Quaternion finalRot = baseRot * Quaternion.AngleAxis(angle, Vector3.up);
-        return finalRot;
-    }
-
-    #region IGrabable
-    public override bool CanGrab() => canGrab;
-    public override void LockGrab(bool locked) => canGrab = !locked;
-
-    public override void OnGrab(bool grabbed, GameObject caller)
-    {
-        rb.angularVelocity = Vector3.zero;
-        if (grabbed)
-        {
-            isConnected = false;
-            SetGrabbedState(rb, caller);
-            SendData(nodeInteraction, false);
-        }
-        else
-        {
-            SetReleasedState(rb);
-            if(!CanConnectToNode()) return;
-
-            Logger.Log(this, "COMPONENT", "Animating new position", LogType.INFO);
-            SendData(nodeInteraction);
-            var (targetPos, targetTransfrom) = nodeInteraction.GetTransform();
-            CanAnimate(rb, targetPos, targetTransfrom);
-        }
-    }
-
     public LightbulbData GetLightbulbData() => lightbulbData;
-    #endregion
 
 
   /* protected override void TriggerStay(Collider other, INodeInteraction nodeInteraction)
@@ -244,7 +208,7 @@ public class Lightbulb : CircuitComponent
     private void RepairContextMenu()
     {
         propertyBlock = new MaterialPropertyBlock();
-        SetData(ComponentControlState.REPAIR, new ComplexFloat(),new ComplexFloat());
+        SetData(ComponentControlState.REPAIR, new ComplexFloat(),new ComplexFloat(),new ComplexFloat(), false);
     }
 
     public override bool CanConnectToNode() => nodeInteraction?.CanConnect(lightbulbData.type) ?? false && !broken;

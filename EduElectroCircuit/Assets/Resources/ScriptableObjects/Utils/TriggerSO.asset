@@ -16,11 +16,11 @@ MonoBehaviour:
   - triggerType: 0
     boxColor: {r: 1, g: 0.30616918, b: 0.02352941, a: 0.7490196}
     borderColor: {r: 1, g: 0.35581625, b: 0.02352941, a: 1}
-    showInEditor: 1
+    showInEditor: 0
   - triggerType: 3
     boxColor: {r: 0.25035164, g: 0.6528301, b: 0, a: 0.7490196}
     borderColor: {r: 0.2509804, g: 0.654902, b: 0, a: 1}
-    showInEditor: 1
+    showInEditor: 0
   - triggerType: 1
     boxColor: {r: 1, g: 0, b: 0, a: 0.74509805}
     borderColor: {r: 1, g: 0, b: 0, a: 1}

@@ -2,5 +2,7 @@ public enum ElectricalQuantityType
 {
     VOLTAGE,
     CURRENT,
-    RESISTANCE
+    RESISTANCE,
+    CAPACITANCE,
+    INDUCTANCE
 }

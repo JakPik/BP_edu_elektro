@@ -5,4 +5,6 @@ public class RoomConfigurationDTO
     public DoorPanelDTO[] doorPanelDTOs;
     public ResistorDTO[] resistors;
     public LightbulbDTO[] lightbulbs;
+    public CapacitorDTO[] capacitors;
+    public InductorDTO[] inductors;
 }

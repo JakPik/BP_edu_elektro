@@ -12,7 +12,7 @@ public static class InteractiveNodeStatesExt
                 return new Color(1f,0.5f,0f);
             case NodeConectionStates.ACTIVE_CLOSED_CIRCUIT:
                 return Color.blue;
-            case NodeConectionStates.ACTIVE_ON_INTERACTION:
+            case NodeConectionStates.PLACED_COMPONENT_LOCKED:
                 return Color.red;
             case NodeConectionStates.EMPTY:
             default:

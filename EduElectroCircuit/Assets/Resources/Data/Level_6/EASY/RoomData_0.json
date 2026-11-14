@@ -1,0 +1,600 @@
+{
+    "roomConfigurations": [
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 80.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 240.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "sourceType": "CURRENT",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 0.25,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "sourceType": "CURRENT",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 1.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 16.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 68.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 96.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 80.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 62.5,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 250.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 75.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 75.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -1.039600133895874,
+                        "y": 0.0,
+                        "z": -1.825876235961914
+                    },
+                    "resistance": {
+                        "real": 136.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -1.0,
+                        "y": 0.0,
+                        "z": -5.5
+                    },
+                    "resistance": {
+                        "real": 120.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": 2.303671360015869,
+                        "y": 0.0,
+                        "z": 0.8557472229003906
+                    },
+                    "resistance": {
+                        "real": 136.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [],
+            "inductors": [
+                {
+                    "name": "Inductor",
+                    "position": {
+                        "x": -3.0,
+                        "y": 0.0,
+                        "z": -9.75
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                },
+                {
+                    "name": "Inductor (1)",
+                    "position": {
+                        "x": 2.5,
+                        "y": 0.0,
+                        "z": -9.25
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                },
+                {
+                    "name": "Inductor (2)",
+                    "position": {
+                        "x": 7.25,
+                        "y": 0.0,
+                        "z": -4.25
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                },
+                {
+                    "name": "Inductor (3)",
+                    "position": {
+                        "x": 3.25,
+                        "y": 0.0,
+                        "z": -0.25
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                }
+            ]
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 120.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 29.280000686645509,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 61.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": 5.457327842712402,
+                        "y": 0.0,
+                        "z": 2.161923408508301
+                    },
+                    "resistance": {
+                        "real": 72.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": -2.402688980102539,
+                        "y": 0.0,
+                        "z": 5.404853820800781
+                    },
+                    "resistance": {
+                        "real": 49.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": 3.0540590286254885,
+                        "y": 0.0,
+                        "z": 6.548456192016602
+                    },
+                    "resistance": {
+                        "real": 68.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (3)",
+                    "position": {
+                        "x": 2.75,
+                        "y": 0.0,
+                        "z": 4.0
+                    },
+                    "resistance": {
+                        "real": 58.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [
+                {
+                    "name": "Capacitor",
+                    "position": {
+                        "x": -1.0,
+                        "y": 0.1889999955892563,
+                        "z": 1.5
+                    },
+                    "capacitance": 0.0015
+                }
+            ],
+            "inductors": []
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 340.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 29.75,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 42.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -8.0,
+                        "y": 0.0,
+                        "z": 5.0
+                    },
+                    "resistance": {
+                        "real": 25.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": -5.0,
+                        "y": 0.0,
+                        "z": 5.0
+                    },
+                    "resistance": {
+                        "real": 35.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -1.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    },
+                    "resistance": {
+                        "real": 60.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (3)",
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 3.0
+                    },
+                    "resistance": {
+                        "real": 40.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (4)",
+                    "position": {
+                        "x": 5.0,
+                        "y": 0.0,
+                        "z": 1.0
+                    },
+                    "resistance": {
+                        "real": 30.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (5)",
+                    "position": {
+                        "x": 5.0,
+                        "y": 0.0,
+                        "z": -8.0
+                    },
+                    "resistance": {
+                        "real": 48.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [
+                {
+                    "name": "Capacitor",
+                    "position": {
+                        "x": 1.9618587493896485,
+                        "y": 0.059784919023513797,
+                        "z": -4.582520484924316
+                    },
+                    "capacitance": 0.0010000000474974514
+                }
+            ],
+            "inductors": []
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 165.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 81.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 135.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -1.8330154418945313,
+                        "y": 0.0,
+                        "z": 6.09599494934082
+                    },
+                    "resistance": {
+                        "real": 50.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": 8.554683685302735,
+                        "y": 0.0,
+                        "z": -1.0223274230957032
+                    },
+                    "resistance": {
+                        "real": 120.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": 3.137990951538086,
+                        "y": 0.0,
+                        "z": -3.0065078735351564
+                    },
+                    "resistance": {
+                        "real": 360.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [],
+            "inductors": [
+                {
+                    "name": "Inductor",
+                    "position": {
+                        "x": -3.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                }
+            ]
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "DC",
+                    "sourceValue": {
+                        "real": 200.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 84.0,
+                        "imaginary": 0.0
+                    },
+                    "resistance": {
+                        "real": 42.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -10.0,
+                        "y": 0.0,
+                        "z": -4.5
+                    },
+                    "resistance": {
+                        "real": 32.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": -4.5
+                    },
+                    "resistance": {
+                        "real": 10.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (3)",
+                    "position": {
+                        "x": 2.0,
+                        "y": 0.0,
+                        "z": 1.5
+                    },
+                    "resistance": {
+                        "real": 105.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (4)",
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 4.5
+                    },
+                    "resistance": {
+                        "real": 70.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (5)",
+                    "position": {
+                        "x": -2.0,
+                        "y": 0.0,
+                        "z": 4.5
+                    },
+                    "resistance": {
+                        "real": 70.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (6)",
+                    "position": {
+                        "x": -6.0,
+                        "y": 0.0,
+                        "z": 3.5
+                    },
+                    "resistance": {
+                        "real": 30.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -5.0,
+                        "y": 0.0,
+                        "z": -4.5
+                    },
+                    "resistance": {
+                        "real": 31.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [],
+            "inductors": [
+                {
+                    "name": "Inductor",
+                    "position": {
+                        "x": -7.0,
+                        "y": 0.0,
+                        "z": 0.5
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                },
+                {
+                    "name": "Inductor (1)",
+                    "position": {
+                        "x": -4.0,
+                        "y": 0.0,
+                        "z": 0.5
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                },
+                {
+                    "name": "Inductor (2)",
+                    "position": {
+                        "x": -1.0,
+                        "y": 0.0,
+                        "z": 0.5
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                },
+                {
+                    "name": "Inductor (3)",
+                    "position": {
+                        "x": 2.0,
+                        "y": 0.0,
+                        "z": -1.0
+                    },
+                    "inductance": 0.05000000074505806,
+                    "numberOfTurns": 10
+                }
+            ]
+        }
+    ]
+}

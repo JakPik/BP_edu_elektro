@@ -23,7 +23,7 @@ public class UIButton
     private const string StyleButtonHover = "hover";
     private const float ClickTransition = 0.2f;
 
-    public void SetUpButton(UIDocument display)
+    public void SetUpButton(UIDocument display, bool? isEnabled = null)
     {
         _button = display.rootVisualElement.Q<Button>(_buttonName);
         _defaultEnable = _isEnabled;
@@ -31,8 +31,8 @@ public class UIButton
         _button.RemoveFromClassList(_toggleOn? StyleToggleOFF: StyleToggleON);
         _button.AddToClassList(_toggleOn? StyleToggleON: StyleToggleOFF);
         _button.text = _toggleOn? _toggleOnText: _toggleOffText;
-        _button.SetEnabled(_isEnabled);
-        _button.style.display = _isEnabled? DisplayStyle.Flex : DisplayStyle.None;
+        
+        ChangeButtonEnableState(_isEnabled);
     }
 
     public void Hover(bool hover)
@@ -48,19 +48,12 @@ public class UIButton
         }
     }
 
-    public void OnButtonReset(bool changed, MonoBehaviour coroutineOwner)
-    {
-        _toggleOn = changed? !_defaultToogle : _defaultToogle;
-        _isEnabled = _defaultEnable;
-        _onInteraction.Invoke(_toggleOn);
-        coroutineOwner.StartCoroutine(ButtonClick());
-    }
-
     public void OnButtonReset(MonoBehaviour coroutineOwner)
     {
         _toggleOn = _defaultToogle;
         _savedToggle = _defaultToogle;
         _isEnabled = _defaultEnable;
+        ChangeButtonEnableState(_isEnabled);
         _onInteraction.Invoke(_toggleOn);
         coroutineOwner.StartCoroutine(ButtonClick());
     }
@@ -69,6 +62,7 @@ public class UIButton
     {
         _toggleOn = _savedToggle;
         _isEnabled = _defaultEnable;
+        ChangeButtonEnableState(_isEnabled);
         _onInteraction.Invoke(_toggleOn);
         coroutineOwner.StartCoroutine(ButtonClick());
     }
@@ -120,5 +114,13 @@ public class UIButton
         if(position.y < y || position.y > y + height) return false;
         if(position.x < x || position.x > x + width) return false;
         return true;
+    }
+
+    public void ChangeButtonEnableState(bool enabled)
+    {
+        _button.SetEnabled(enabled);
+        _defaultEnable = enabled;
+        _isEnabled = enabled;
+        _button.style.display = enabled? DisplayStyle.Flex : DisplayStyle.None;
     }
 }

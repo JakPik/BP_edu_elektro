@@ -21,6 +21,7 @@ public class GameUIControl : MonoBehaviour
     [SerializeField] private InputActionAsset actionMap;
     [SerializeField] private InputActionReference pauseAction;
     [SerializeField] private GenericEventChannel<ReloadRequestEvent> reloadRequest;
+    [SerializeField] private GenericEventChannel<ReloadEvent> reload;
 
 
     private VisualElement _pauseGUI;
@@ -52,6 +53,8 @@ public class GameUIControl : MonoBehaviour
     private InteractionControl _interactionControl;
 
     private Coroutine coroutine;
+    private bool _paused;
+    private bool _loading;
 
     void Awake()
     {
@@ -115,6 +118,7 @@ public class GameUIControl : MonoBehaviour
         _mainMenuButton.clicked += OnMainMenu;
         _menu.clicked += OnMainMenu;
         _nextLevel.clicked += OnNextLevel;
+        reload.OnEventRaised += OnReload;
     }
 
     void OnDisable()
@@ -126,6 +130,20 @@ public class GameUIControl : MonoBehaviour
         _mainMenuButton.clicked -= OnMainMenu;
         _menu.clicked -= OnMainMenu;
         _nextLevel.clicked -= OnNextLevel;
+        reload.OnEventRaised -= OnReload;
+    }
+
+    private void OnReload(ReloadEvent @event)
+    {
+        if(@event.LoadingState == LevelLoadingStates.LOADING_START)
+        {
+            _loading = true;
+        }
+        if(@event.LoadingState == LevelLoadingStates.LOADING_FINISHED ||
+            @event.LoadingState == LevelLoadingStates.RELOAD_FINISHED)
+        {
+            _loading = false;
+        }
     }
 
     public void UpdateInteraction(InteractionControlData interact, InteractionControlData grab)
@@ -135,6 +153,13 @@ public class GameUIControl : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext context)
     {
+        if(_loading) return;
+        if(_paused)
+        {
+            OnResume();
+            return;
+        }
+        _paused = true;
         actionMap.Disable();
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
@@ -144,6 +169,7 @@ public class GameUIControl : MonoBehaviour
 
     private void OnResume()
     {
+        _paused = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         SwitchVisibility(true, _playerGUI);
@@ -275,6 +301,7 @@ public class GameUIControl : MonoBehaviour
 
     private IEnumerator Restart()
     {
+        _loading = true;
         yield return StartCoroutine(Fade(true));
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         SwitchVisibility(true, _playerGUI);

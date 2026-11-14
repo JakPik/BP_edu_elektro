@@ -12,7 +12,7 @@
 public class NodeDataModel
 {
     public ElectricalQuantityType sourceType;
-    public SignalType circuitType;
+    public SignalType signalType;
     public ComplexFloat Uc;
     public ComplexFloat Ic;
     public ComplexFloat Rc;
@@ -24,7 +24,7 @@ public class NodeDataModel
         this.Rc = Rc;
 
         sourceType = sType;
-        circuitType = cType;
+        signalType = cType;
     }
 
     /// <summary>

@@ -34,7 +34,7 @@ public class Node_Measurement : Node
         R = originValues.Rc;
         Logger.LogNode(this, "Measured => U: " + U + "V, I: " + I + " mA, R: " + R, LogType.INFO);
 
-        DisplayValues(passValues.circuitType.ToString());
+        DisplayValues(passValues.signalType.ToString());
 
         if (_nextNode != null) _nextNode.CalculateValues(passValues, originValues);
     }

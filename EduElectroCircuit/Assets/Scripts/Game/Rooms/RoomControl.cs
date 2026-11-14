@@ -18,6 +18,8 @@ public class RoomControl: MonoBehaviour
 
     private Resistor[] resistors;
     private Lightbulb[] lightbulbs;
+    private Capacitor[] capacitors;
+    private Inductor[] inductors;
     private int roomID;
     private EvaluationGrade grade;
 
@@ -45,13 +47,20 @@ public class RoomControl: MonoBehaviour
             roomConfigurationDTO.doorPanelDTOs[i].DTO_ToValidationNode(node_Validation[i]);
         }
 
-        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(roomConfigurationDTO.resistors, componentsContainer);
-        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(roomConfigurationDTO.lightbulbs, componentsContainer);
+        LoadLocalComponentLists(roomConfigurationDTO);
         
         _numberOfActivations = 0;
         _numberOfReloads = 0;
 
         _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.RESET, roomID), this.name);
+    }
+
+    private void LoadLocalComponentLists(RoomConfigurationDTO roomConfigurationDTO)
+    {
+        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(roomConfigurationDTO.resistors, componentsContainer);
+        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(roomConfigurationDTO.lightbulbs, componentsContainer);
+        capacitors = RoomDataManager.LoadComponentSetUp<Capacitor, CapacitorDTO>(roomConfigurationDTO.capacitors, componentsContainer);
+        inductors = RoomDataManager.LoadComponentSetUp<Inductor, InductorDTO>(roomConfigurationDTO.inductors, componentsContainer);
     }
 
    /* private void ClearComponents()
@@ -71,15 +80,23 @@ public class RoomControl: MonoBehaviour
         circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false, new NodeCircuit_ID(roomID) ), this.name);
         foreach(Resistor resistor in resistors)
         {
-            resistor.ReloadResistorState();            
+            resistor.ReloadComponentState();            
         }
         foreach(Lightbulb lightbulb in lightbulbs)
         {
-            lightbulb.ReloadResistorState();
-            lightbulb.SetData(ComponentControlState.REPAIR, new ComplexFloat(),new ComplexFloat());    
+            lightbulb.ReloadComponentState();
+            lightbulb.SetData(ComponentControlState.REPAIR, new ComplexFloat(),new ComplexFloat(),new ComplexFloat(), false);    
+        }
+        foreach(Capacitor capacitor in capacitors)
+        {
+            capacitor.ReloadComponentState();            
+        }
+        foreach(Inductor inductor in inductors)
+        {
+            inductor.ReloadComponentState();
         }
 
-        circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(circuitActive, new NodeCircuit_ID(roomID) ), this.name);
+        //circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(circuitActive, new NodeCircuit_ID(roomID) ), this.name);
         _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.RELOAD, roomID), this.name);
     }
 
@@ -108,7 +125,13 @@ public class RoomControl: MonoBehaviour
     public void SaveComponents()
     {
         _roomCommandEventChannel.RaiseEvent(new RoomCommandEvent(RoomCommand.SAVE, roomID), this.name);
-        foreach(Resistor resistor in resistors)
+        RoomDataManager.SaveComponentsCurrentState(resistors);
+        RoomDataManager.SaveComponentsCurrentState(lightbulbs);
+        RoomDataManager.SaveComponentsCurrentState(capacitors);
+        RoomDataManager.SaveComponentsCurrentState(inductors);
+        
+        
+        /*foreach(Resistor resistor in resistors)
         {
             resistor.SaveCurrentState();            
         }
@@ -116,6 +139,14 @@ public class RoomControl: MonoBehaviour
         {
             lightbulb.SaveCurrentState();
         }
+        foreach(Capacitor capacitor in capacitors)
+        {
+            capacitor.SaveCurrentState();            
+        }
+        foreach(Inductor inductor in inductors)
+        {
+            inductor.SaveCurrentState();
+        }*/
     }
 
     public void UpdateGradeValues(int numberOfActivations, int numberOfReloads)
@@ -134,8 +165,7 @@ public class RoomControl: MonoBehaviour
     {
         circuitActiveStateEventChannel.RaiseEvent(new CircuitActiveStateEvent(false, new NodeCircuit_ID(roomID) ), this.name);
 
-        resistors = RoomDataManager.LoadComponentSetUp<Resistor, ResistorDTO>(roomConfigurationDTO.resistors, componentsContainer);
-        lightbulbs = RoomDataManager.LoadComponentSetUp<Lightbulb, LightbulbDTO>(roomConfigurationDTO.lightbulbs, componentsContainer);
+        LoadLocalComponentLists(roomConfigurationDTO);
         
         _numberOfActivations = 0;
         _numberOfReloads = 0;

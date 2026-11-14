@@ -11,7 +11,9 @@ using UnityEngine;
 public class ResistorData : ComponentData
 {
     [SerializeField] private ComplexFloat resistance;
-    private Color[] colorCode = new Color[5];
+    [SerializeField] private Color[] colorCode = new Color[5];
+    public ComplexFloat Resistance => resistance;
+    public Color[] ColorCode => colorCode;
 
     public ResistorData(ComplexFloat resistance)
     {
@@ -39,8 +41,4 @@ public class ResistorData : ComponentData
         colorCode[3] = ResistorColorCode.GetColor(multiplier);
         colorCode[4] = Color.black;
     }
-
-    public Color[] GetColorCode() => colorCode;
-
-    public ComplexFloat GetResistance() => resistance;
 }
