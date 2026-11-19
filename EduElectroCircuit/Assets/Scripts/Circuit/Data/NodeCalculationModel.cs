@@ -11,6 +11,7 @@ using UnityEngine;
 
 public static class NodeCalculationModel
 {
+    private const float PI_2 = 6.25f;
     private static string GetUnit(ElectricalQuantityType type)
     {
         switch (type)
@@ -166,7 +167,7 @@ public static class NodeCalculationModel
             case ComponentType.LIGHTBULB:
                 return ((LightbulbData)componentData).Resistance;
             case ComponentType.CAPACITOR:
-                return isDC? ((CapacitorData)componentData).ChargingRezistanceChange: CalculateInductiveImpedance(frequency, ((CapacitorData)componentData).Capacitance);
+                return isDC? ((CapacitorData)componentData).ChargingRezistanceChange: CalculateCapacitiveImpedance(frequency, ((CapacitorData)componentData).Capacitance);
             case ComponentType.INDUCTOR:
                 return isDC? new ComplexFloat() : CalculateInductiveImpedance(frequency, ((InductorData)componentData).Inductance);
             default:
@@ -176,11 +177,11 @@ public static class NodeCalculationModel
 
     private static ComplexFloat CalculateInductiveImpedance(float frequency, float inductance)
     {
-        return new ComplexFloat(0, 2*Mathf.PI*frequency*inductance);
+        return new ComplexFloat(0, PI_2 * frequency * inductance);
     }
 
     private static ComplexFloat CalculateCapacitiveImpedance(float frequency, float capacitance)
     {
-        return new ComplexFloat(0, Mathf.Pow(2*Mathf.PI*frequency*capacitance, -1));
+        return new ComplexFloat(0, Mathf.Pow(PI_2 * frequency * capacitance, -1));
     }
 }

@@ -1,0 +1,43 @@
+{
+    "roomConfigurations": [
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "AC",
+                    "sourceValue": {
+                        "real": 120.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 24.0,
+                        "imaginary": -48.0
+                    },
+                    "resistance": {
+                        "real": 8.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [],
+            "lightbulbs": [],
+            "capacitors": [
+                {
+                    "name": "Capacitor",
+                    "position": {
+                        "x": 1.917056679725647,
+                        "y": 0.0,
+                        "z": -1.7483339309692383
+                    },
+                    "capacitance": 0.00009999999747378752
+                }
+            ],
+            "inductors": []
+        }
+    ]
+}
