@@ -21,14 +21,14 @@ MonoBehaviour:
   difficultyGradeImproved: 0
   bestEasy:
     _star: 0
-    _timeGrade: 1
+    _timeGrade: 8
     _levelTime:
       _hours: 0
       _minutes: 0
       _seconds: 0
-    _roomGrades: 00000000000000000000000000000000
-    _roomsGrade: 2
-    _difficultyGrade: 2
+    _roomGrades: 
+    _roomsGrade: 8
+    _difficultyGrade: 8
   bestNormal:
     _star: 0
     _timeGrade: 8
@@ -49,4 +49,4 @@ MonoBehaviour:
     _roomGrades: 
     _roomsGrade: 8
     _difficultyGrade: 8
-  levelGrade: 6
+  levelGrade: 8

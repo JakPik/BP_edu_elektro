@@ -247,7 +247,7 @@
                         "y": 0.1889999955892563,
                         "z": 1.5
                     },
-                    "capacitance": 0.0015
+                    "capacitance": 0.0
                 }
             ],
             "inductors": []

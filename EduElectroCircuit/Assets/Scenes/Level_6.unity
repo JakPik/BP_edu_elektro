@@ -40360,7 +40360,7 @@ PrefabInstance:
     - target: {fileID: 2072441783639675463, guid: 0aea2c9af5e13104793e1900d3acc8c7, type: 3}
       propertyPath: levelSO
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: e10d15f77565a0f489d7d97fcb93bc3d, type: 2}
     - target: {fileID: 2072441783639675463, guid: 0aea2c9af5e13104793e1900d3acc8c7, type: 3}
       propertyPath: startSpawnPoint
       value: 
