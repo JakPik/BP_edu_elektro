@@ -8,13 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wall_aqua_cornerOut
-  m_Shader: {fileID: -6465566751694194690, guid: 290d55c55c329c64fbc0a4dfe20c671c, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c8ae9be85b3a8fb41b8fb7c4055968c1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -78,10 +78,14 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _Base: {r: 0.23529407, g: 0.36078426, b: 0.34509796, a: 1}
+    - _BaseColor: {r: 0.23529413, g: 0.36078432, b: 0.34509805, a: 1}
     - _Grate: {r: 0.14901957, g: 0.19999996, b: 0.19215685, a: 1}
+    - _GrateColor: {r: 0.14901961, g: 0.20000002, b: 0.19215688, a: 1}
     - _Light: {r: 1, g: 1, b: 1, a: 1}
     - _Panel: {r: 0.18823525, g: 0.7607843, b: 0.682353, a: 1}
+    - _PanelColor: {r: 0.39607847, g: 0.909804, b: 0.83921576, a: 1}
     - _Plate: {r: 0.6941177, g: 0.6039216, b: 0.5647059, a: 1}
+    - _PlateColor: {r: 1, g: 0.8700565, b: 0.81355935, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &513055655404899584

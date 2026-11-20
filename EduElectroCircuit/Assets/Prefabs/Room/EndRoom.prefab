@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6878490581184984361
 Transform:
@@ -935,7 +935,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2009320984707916273
 Transform:
@@ -1114,8 +1114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndPoint
   objectCollider: {fileID: 6957574230020600851}
   triggerType: 4
-  boundsSize: {x: 4, y: 4, z: 3}
-  boundsCenter: {x: 57, y: 2, z: 10}
+  boundsSize: {x: 3, y: 4.000001, z: 4.000002}
+  boundsCenter: {x: 25, y: 2, z: 2.0000005}
 --- !u!1001 &991273168146278852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,9 +1262,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorUp_Twoway
       objectReference: {fileID: 0}
+    - target: {fileID: 4346033298031816949, guid: e06a3ae2c2c65924897b965b732f27d2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4801015570196996052, guid: e06a3ae2c2c65924897b965b732f27d2, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838880141787864447, guid: e06a3ae2c2c65924897b965b732f27d2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2673816323537166985, guid: e06a3ae2c2c65924897b965b732f27d2, type: 3}

@@ -11,6 +11,7 @@ using System.Collections;
 public abstract class DoorControl : ColliderDrawUtil
 {
     [SerializeField] protected GameObject _enterPoint;
+    [SerializeField] protected OcclusionPortal _portal;
     [SerializeField] protected float _animSpeed;
     [SerializeField] private bool _twoWay = false;
     [SerializeField] private bool _locked = false;
@@ -22,6 +23,10 @@ public abstract class DoorControl : ColliderDrawUtil
     private PlayerInteractionControl _playerInteraction = null;
     private int _numberOfComponents = 0;
 
+    void Awake()
+    {
+        _portal.open = !_locked;
+    }
 
 
     private void OnEnable()
@@ -32,6 +37,7 @@ public abstract class DoorControl : ColliderDrawUtil
             return;
         }
         _nodeValidation.OnEventRaised += LockState;
+        
     }
 
     private void OnDisable()
@@ -43,12 +49,14 @@ public abstract class DoorControl : ColliderDrawUtil
     public void LockState(NodeValidationEvent @event)
     {
         _locked = !@event.Valid;
+        
         if(_locked)
         {
             StartAnimation(CloseDoor());
         }
         else if(_playerInteraction != null)
         {
+            _portal.open = !_locked;
             if(!_transportComponents && (_numberOfComponents > 0 || _playerInteraction.GetHoldingState())) return;
             StartAnimation(OpenDoor());
         }

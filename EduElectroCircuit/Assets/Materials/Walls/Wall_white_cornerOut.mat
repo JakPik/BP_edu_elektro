@@ -21,13 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wall_white_cornerOut
-  m_Shader: {fileID: -6465566751694194690, guid: 7b38f5c0ecda5d64abcecaa230462af3, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c8ae9be85b3a8fb41b8fb7c4055968c1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -91,9 +91,13 @@ Material:
     - _QueueOffset: 0
     m_Colors:
     - _Base: {r: 0.14901957, g: 0.18431365, b: 0.23529407, a: 1}
+    - _BaseColor: {r: 0.14901961, g: 0.18431373, b: 0.23529413, a: 1}
     - _Grate: {r: 0.15294117, g: 0.15294117, b: 0.15294117, a: 1}
+    - _GrateColor: {r: 0.15294118, g: 0.15294118, b: 0.15294118, a: 1}
     - _Light: {r: 1, g: 1, b: 1, a: 1}
     - _Panel: {r: 1, g: 1, b: 1, a: 1}
+    - _PanelColor: {r: 1, g: 1, b: 1, a: 1}
     - _Plate: {r: 0.36078426, g: 0.29803917, b: 0.23137257, a: 1}
+    - _PlateColor: {r: 0.36078432, g: 0.29803923, b: 0.23137257, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

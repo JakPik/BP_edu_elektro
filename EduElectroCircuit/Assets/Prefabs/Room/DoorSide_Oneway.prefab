@@ -96,6 +96,7 @@ Transform:
   - {fileID: 5367842311028548326}
   - {fileID: 5859642749359331195}
   - {fileID: 8710872291907042921}
+  - {fileID: 1669220388288255421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &9145639505676336818
@@ -136,6 +137,7 @@ MonoBehaviour:
   boundsSize: {x: 6, y: 4, z: 8}
   boundsCenter: {x: 0, y: 2, z: 0}
   _enterPoint: {fileID: 2749730838193786936}
+  _portal: {fileID: 2563937728986762986}
   _animSpeed: 2.5
   _twoWay: 1
   _locked: 0
@@ -174,6 +176,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8583728883864261948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8849220592514014058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1669220388288255421}
+  - component: {fileID: 2563937728986762986}
+  m_Layer: 0
+  m_Name: OcclusionPortal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1669220388288255421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849220592514014058}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8583728883864261948}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!41 &2563937728986762986
+OcclusionPortal:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849220592514014058}
+  m_Open: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 3, z: 1}
 --- !u!1001 &5617344816252077325
 PrefabInstance:
   m_ObjectHideFlags: 0

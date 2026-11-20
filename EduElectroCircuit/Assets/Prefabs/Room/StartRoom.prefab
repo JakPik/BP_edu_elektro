@@ -799,9 +799,11 @@ MonoBehaviour:
   objectCollider: {fileID: 2027320196644024692}
   triggerType: 0
   boundsSize: {x: 2, y: 2, z: 2}
-  boundsCenter: {x: 1, y: 1, z: -5}
+  boundsCenter: {x: -6, y: 1, z: 19}
   roomID: 0
+  _startActive: 1
   reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}
+  _validationChannel: {fileID: 0}
   multiTrigger: 0
 --- !u!65 &2027320196644024692
 BoxCollider:
@@ -840,7 +842,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2766413328927035689
 Transform:
@@ -967,7 +969,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7660627184450925945
 Transform:
@@ -1666,6 +1668,14 @@ PrefabInstance:
     - target: {fileID: 4346033298031816949, guid: 827d1f52b93af2d47950e891327a1e93, type: 3}
       propertyPath: m_Name
       value: DoorUp_Oneway
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346033298031816949, guid: 827d1f52b93af2d47950e891327a1e93, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838880141787864447, guid: 827d1f52b93af2d47950e891327a1e93, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2673816323537166985, guid: 827d1f52b93af2d47950e891327a1e93, type: 3}
