@@ -50,17 +50,33 @@ public abstract class DoorControl : ColliderDrawUtil
     {
         _locked = !@event.Valid;
         
+        StartAnimation(LockStateChange());
+    }
+
+    private IEnumerator LockStateChange()
+    {
         if(_locked)
         {
-            StartAnimation(CloseDoor());
+            yield return CloseDoor();
+            _portal.open = false;
         }
-        else if(_playerInteraction != null)
+        else
         {
-            _portal.open = !_locked;
-            if(!_transportComponents && (_numberOfComponents > 0 || _playerInteraction.GetHoldingState())) return;
-            StartAnimation(OpenDoor());
-        }
+            _portal.open = true;
+            if(_playerInteraction == null)
+            {
+                _curCoroutine = null;
+                yield break;
+            }
 
+            if(!_transportComponents && (_numberOfComponents > 0 || _playerInteraction.GetHoldingState()))
+            {
+                _curCoroutine = null;
+                yield break;
+            }
+            
+            yield return OpenDoor();
+        }
     }
 
     private void StartAnimation(IEnumerator coroutine)

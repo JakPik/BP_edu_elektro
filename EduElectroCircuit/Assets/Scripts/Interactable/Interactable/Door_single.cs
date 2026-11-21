@@ -38,6 +38,5 @@ public class Door_single : DoorControl
         }
         _door.transform.localPosition = new Vector3(0.0f, CLOSED_HEIGHT, 0.0f);
         _curCoroutine = null;
-        _portal.open = false;
     }
 }

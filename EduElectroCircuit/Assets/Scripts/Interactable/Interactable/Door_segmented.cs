@@ -38,6 +38,5 @@ public class Door_segmented : DoorControl
         _doorL.transform.localPosition = new Vector3(CLOSED_OFFSET, _doorL.transform.localPosition.y, _doorL.transform.localPosition.z);
         _doorR.transform.localPosition = new Vector3(CLOSED_OFFSET, _doorR.transform.localPosition.y, _doorR.transform.localPosition.z);
         _curCoroutine = null;
-        _portal.open = false;
     }
 }
