@@ -119,9 +119,12 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
         rb.angularVelocity = Vector3.zero;
         if (grabbed)
         {
-            isConnected = false;
             SetGrabbedState(rb, caller);
-            SendData(nodeInteraction, false);
+            if(isConnected)
+            {
+                isConnected = false;
+                SendData(nodeInteraction, false);
+            }
         }
         else
         {
@@ -207,7 +210,7 @@ public abstract class CircuitComponent : MonoBehaviour, IGrabable, IInteractable
         if (other.gameObject.TryGetComponent(out INodeInteraction _))
         {
             this.nodeInteraction = null;
-        Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
+            Logger.Log(this, "COMPONENT", "Pending Coroutine remove", LogType.INFO);
         }
     }
 }

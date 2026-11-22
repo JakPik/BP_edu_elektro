@@ -153,7 +153,7 @@ public class Lightbulb : CircuitComponent
                 RepairLight();
             break;
             case ComponentControlState.BROKEN:
-                BreakLight();
+                if(!broken) StartCoroutine(BreakLight());
             break;
         }
     }
@@ -179,7 +179,7 @@ public class Lightbulb : CircuitComponent
                 value = NodeCalculationModel.FormatValue(lightbulbData.MaxVoltage, ElectricalQuantityType.VOLTAGE)
             }
         };
-        _componentPropertyPanel.SetData(data, "Lightbulb");
+        _componentPropertyPanel.SetData(data, "Žárovka");
     }
     public LightbulbData GetLightbulbData() => lightbulbData;
 

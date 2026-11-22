@@ -14,6 +14,7 @@ public class CameraControl : MonoBehaviour
     [Header("Control Variables")]
     [SerializeField] private Transform orientation;
     [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private InputActionReference c_lookAction;
     [SerializeField] private float sensitivity = 0.01f;
     [SerializeField] private bool _smoothing = false;
     [SerializeField] private float _smoothness = 0.25f;
@@ -77,16 +78,22 @@ public class CameraControl : MonoBehaviour
         _xRotation = 0f;
     }
 
-    public void InitHandShake(GameObject caller, bool cinematicMove)
+    public void InitHandShake(GameObject caller)
     {
-        _smoothing = cinematicMove;
         _yRotation = caller.transform.eulerAngles.y;
+    }
+
+    public void ChangeCinematic(bool cinematic)
+    {
+        _smoothing = cinematic;
     }
 
     private void OnEnable()
     {
         lookAction.action.performed += OnLookInput;
         lookAction.action.canceled += OnLookInput;
+        c_lookAction.action.performed += OnLookInput;
+        c_lookAction.action.canceled += OnLookInput;
         reload.OnEventRaised += OnRoomReload;
     }
 

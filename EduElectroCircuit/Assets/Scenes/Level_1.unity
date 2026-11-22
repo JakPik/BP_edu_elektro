@@ -14386,7 +14386,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4782256649004484023, guid: bc5d99e7a67e65246a65bddf68ea7806, type: 3}
       propertyPath: _textTop
-      value: "P\u0159ipojn\xE9 desky funguj\xED jako rozpojen\xFD obvod."
+      value: "Desky pro osazen\xED sou\u010D\xE1stek funguj\xED jako rozpojen\xFD
+        obvod."
       objectReference: {fileID: 0}
     - target: {fileID: 4782256649004484023, guid: bc5d99e7a67e65246a65bddf68ea7806, type: 3}
       propertyPath: _panelImage
@@ -14394,7 +14395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4782256649004484023, guid: bc5d99e7a67e65246a65bddf68ea7806, type: 3}
       propertyPath: _textBottom
-      value: "Pro uzav\u0159en\xED obvodu je nutn\xE9 desku osadit sou\u010D\xE1stkou."
+      value: "Pro uzav\u0159en\xED obvodu je nutn\xE9 desky osadit sou\u010D\xE1stkou."
       objectReference: {fileID: 0}
     - target: {fileID: 4782256649004484023, guid: bc5d99e7a67e65246a65bddf68ea7806, type: 3}
       propertyPath: _topLabelStyle
@@ -27367,6 +27368,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1291590127436455042, guid: da4449b842fe53648a4f0069eef06887, type: 3}
   m_PrefabInstance: {fileID: 1501606841}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2086408879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2086408881}
+  - component: {fileID: 2086408880}
+  m_Layer: 0
+  m_Name: PanelInputConfiguration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2086408880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086408879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19106, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.PanelInputConfiguration
+  m_Settings:
+    m_ProcessWorldSpaceInput: 1
+    m_InteractionLayers:
+      serializedVersion: 2
+      m_Bits: 507
+    m_MaxInteractionDistance: Infinity
+    m_DefaultEventCameraIsMainCamera: 1
+    m_EventCameras: []
+    m_PanelInputRedirection: 0
+    m_AutoCreatePanelComponents: 1
+--- !u!4 &2086408881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086408879}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2093346794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28434,3 +28489,4 @@ SceneRoots:
   - {fileID: 1590047222}
   - {fileID: 770387096}
   - {fileID: 1785119549}
+  - {fileID: 2086408881}

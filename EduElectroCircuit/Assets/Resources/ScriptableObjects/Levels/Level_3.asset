@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31ffc5b068258946a2438e0662d07e7, type: 3}
   m_Name: Level_3
   m_EditorClassIdentifier: Assembly-CSharp::LevelSO
-  levelName: Current circuits
+  levelName: "Proudov\xE9 obvody"
   levelID: Level_3
+  levelImage: {fileID: 2800000, guid: f6115c501dd402c48ab35348eb202e78, type: 3}
   fullComplete: 0
   locked: 0
   timeImporved: 0

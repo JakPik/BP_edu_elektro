@@ -13,6 +13,7 @@ public class LevelSO : ScriptableObject
 {
     public string levelName;
     public string levelID;
+    public Texture2D levelImage;
     public bool fullComplete;
     public bool locked = true;
 

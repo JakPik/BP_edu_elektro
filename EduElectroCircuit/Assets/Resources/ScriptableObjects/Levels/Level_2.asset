@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31ffc5b068258946a2438e0662d07e7, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: Assembly-CSharp::LevelSO
-  levelName: Voltage Circuits
+  levelName: "Nap\u011B\u0165ov\xE9 obvody"
   levelID: Level_2
+  levelImage: {fileID: 2800000, guid: 3ee1c572d3aa16b4aa095cafa273fcd5, type: 3}
   fullComplete: 0
-  locked: 1
+  locked: 0
   timeImporved: 0
   roomsGradeImproved: 0
   difficultyGradeImproved: 0

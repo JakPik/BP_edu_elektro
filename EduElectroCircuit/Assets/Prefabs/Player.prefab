@@ -247,9 +247,18 @@ MonoBehaviour:
   cameraControl: {fileID: 2867309754542850734}
   moveSpeed: 6
   drag: 4
+  _cinematicMove: 0
   rb: {fileID: 6771733417102760532}
-  moveAction: {fileID: -4608556605388281726, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
-  respawnAction: {fileID: 3595909093326258, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  actionMap: {fileID: -944628639613478452, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  _moveAction: {fileID: -4608556605388281726, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  _respawnAction: {fileID: 3595909093326258, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  _sprintAction: {fileID: -3842809116728786456, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  _jumpAction: {fileID: 602805674749616658, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  _cinematicOnAction: {fileID: 7791386446546154531, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  c_moveAction: {fileID: 5691649543356134423, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  c_cinematicOffAction: {fileID: 8487767149849936587, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  c_moveUpAction: {fileID: 1540193201626558617, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  c_moveDownAction: {fileID: -2465785284718849533, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   reloadRequest: {fileID: 11400000, guid: 3ae08cb5737bef9409040cf4dac168f7, type: 2}
   reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}
 --- !u!114 &8205525601010639547
@@ -274,6 +283,7 @@ MonoBehaviour:
   grabbedObject:
     component: {fileID: 0}
     object_rb: {fileID: 0}
+    circuitComponent: {fileID: 0}
   interactAction: {fileID: 2210774455778319481, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   holdtAction: {fileID: -7169816095283335344, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}
@@ -429,5 +439,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraControl
   orientation: {fileID: 1648670873973747761}
   lookAction: {fileID: 7390212839690022815, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
+  c_lookAction: {fileID: -6274209149336369890, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   sensitivity: 0.15
+  _smoothing: 0
+  _smoothness: 0.25
   reload: {fileID: 11400000, guid: 4cd47b05c72df754792caddcf15d8727, type: 2}

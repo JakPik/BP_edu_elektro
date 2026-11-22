@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31ffc5b068258946a2438e0662d07e7, type: 3}
   m_Name: Level_4
   m_EditorClassIdentifier: Assembly-CSharp::LevelSO
-  levelName: Lighbulbs
+  levelName: "\u017D\xE1rovky"
   levelID: Level_4
+  levelImage: {fileID: 2800000, guid: 9bd05bd0d37a2e34085640113df7eae6, type: 3}
   fullComplete: 0
   locked: 0
   timeImporved: 0

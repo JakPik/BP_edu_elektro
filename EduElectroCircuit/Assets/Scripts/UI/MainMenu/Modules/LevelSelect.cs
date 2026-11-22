@@ -28,6 +28,8 @@ public class LevelSelect
     private VisualElement _levelSelectContainer;
     private VisualElement _levelSelectPanel;
 
+    private Image _levelImage;
+
     private MainMenuUIControl _mainMenuControl;
     private LevelSO _selectedLevel;
 
@@ -44,6 +46,8 @@ public class LevelSelect
         _easyPanel = DifficultyPanelLoader(_levelSelectContainer.Q<VisualElement>("EasyPanel"));
         _normalPanel = DifficultyPanelLoader(_levelSelectContainer.Q<VisualElement>("NormalPanel"));
         _hardPanel = DifficultyPanelLoader(_levelSelectContainer.Q<VisualElement>("HardPanel"));
+
+        _levelImage = _levelSelectContainer.Q<Image>("LevelImage");
 
         _scrollView = _levelSelectContainer.Q<ScrollView>("ScrollView");
 
@@ -193,6 +197,8 @@ public class LevelSelect
         LoadDifficultyDetail(_easyPanel, levelSO.GetLevelData(LevelDifficulty.EASY));
         LoadDifficultyDetail(_normalPanel, levelSO.GetLevelData(LevelDifficulty.NORMAL));
         LoadDifficultyDetail(_hardPanel, levelSO.GetLevelData(LevelDifficulty.HARD));
+
+        _levelImage.image = levelSO.levelImage;
 
        // Texture2D texture2D = Resources.Load<Textture2D>("Textures/Level_1_thumbnail")
     }
