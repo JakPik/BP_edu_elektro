@@ -294,7 +294,7 @@
             "id": "5efc8720-462f-4e4d-b53e-bdd46221752f",
             "actions": [
                 {
-                    "name": "Pause_MenuOff",
+                    "name": "PauseMenuToggle",
                     "type": "Button",
                     "id": "44c85df1-178c-40fc-bd27-83bec39c6e19",
                     "expectedControlType": "",
@@ -311,7 +311,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause_MenuOff",
+                    "action": "PauseMenuToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

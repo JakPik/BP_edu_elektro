@@ -52,7 +52,7 @@ public class GamePersistanceSO: ScriptableObject
         {
             int levelID = int.Parse(_curLevel.levelID.Split("_")[1]);
             _curLevel = Resources.Load<LevelSO>("ScriptableObjects/Levels/Level_" + (levelID + 1));
-            _curLevel.locked = false;
+            if(_curLevel != null) _curLevel.locked = false;
         }
     }
 

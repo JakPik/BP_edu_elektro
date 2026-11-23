@@ -18,7 +18,8 @@ public class GameUIControl : MonoBehaviour
     [SerializeField] private UIDocument uiDocument;
     [SerializeField] private float animSpeedIn = 3.5f;
     [SerializeField] private float animSpeedOut = 1.0f;
-    [SerializeField] private InputActionAsset actionMap;
+    [SerializeField] private InputActionAsset _actionMap;
+    private InputActionMap _gameplayMap;
     [SerializeField] private InputActionReference pauseAction;
     [SerializeField] private GenericEventChannel<ReloadRequestEvent> reloadRequest;
     [SerializeField] private GenericEventChannel<ReloadEvent> reload;
@@ -67,6 +68,8 @@ public class GameUIControl : MonoBehaviour
             Instance = this;
         }
         SetUpGUI();
+        _gameplayMap = _actionMap.FindActionMap("Gameplay");
+        _actionMap.FindActionMap("GUI").Enable();
     }
 
     public void SetUpGUI()
@@ -160,7 +163,7 @@ public class GameUIControl : MonoBehaviour
             return;
         }
         _paused = true;
-        actionMap.Disable();
+        _gameplayMap.Disable();
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         Time.timeScale = 0f;
         SwitchVisibility(true, _pauseGUI);
@@ -174,7 +177,7 @@ public class GameUIControl : MonoBehaviour
         Time.timeScale = 1f;
         SwitchVisibility(true, _playerGUI);
         SwitchVisibility(false, _pauseGUI);
-        actionMap.Enable();
+        _gameplayMap.Enable();
     }
 
     private void OnRestart()
@@ -205,7 +208,7 @@ public class GameUIControl : MonoBehaviour
 
     public void OnLevelEnd(DifficultyData levelData, LevelSO levelSO)
     {
-        actionMap.Disable();
+        _gameplayMap.Disable();
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         _levelName.text = SceneManager.GetActiveScene().name;
 
@@ -291,11 +294,11 @@ public class GameUIControl : MonoBehaviour
         }
         if (fadeIn)
         {
-            actionMap.Disable();
+            _gameplayMap.Disable();
         }
         else
         {
-            actionMap.Enable();
+            _gameplayMap.Enable();
         }
     }
 

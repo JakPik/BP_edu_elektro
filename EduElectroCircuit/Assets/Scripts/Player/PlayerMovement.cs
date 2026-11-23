@@ -112,22 +112,23 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         _moveAction.action.performed += OnMoveInput;
         _moveAction.action.canceled += OnMoveInput;
-        c_moveAction.action.performed += OnMoveInput;
-        c_moveAction.action.canceled += OnMoveInput;
+        _curMoveSpeed = moveSpeed;
+       // c_moveAction.action.performed += OnMoveInput;
+       // c_moveAction.action.canceled += OnMoveInput;
 
 
         _respawnAction.action.started += OnRespawn;
         reload.OnEventRaised += OnRoomReload;
 
-        CinematicSwitch(new InputAction.CallbackContext());
+      //  CinematicSwitch(new InputAction.CallbackContext());
 
-        _cinematicOnAction.action.started += CinematicSwitch;
-        c_cinematicOffAction.action.started += CinematicSwitch;
+     //   _cinematicOnAction.action.started += CinematicSwitch;
+     //   c_cinematicOffAction.action.started += CinematicSwitch;
 
-        c_moveUpAction.action.performed += MoveUp;
-        c_moveDownAction.action.performed += MoveDown;
-        c_moveUpAction.action.canceled += MoveUp;
-        c_moveDownAction.action.canceled += MoveDown;
+     //   c_moveUpAction.action.performed += MoveUp;
+     //   c_moveDownAction.action.performed += MoveDown;
+     //   c_moveUpAction.action.canceled += MoveUp;
+     //   c_moveDownAction.action.canceled += MoveDown;
 
         
     }

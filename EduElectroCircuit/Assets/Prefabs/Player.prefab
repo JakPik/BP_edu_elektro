@@ -247,7 +247,7 @@ MonoBehaviour:
   cameraControl: {fileID: 2867309754542850734}
   moveSpeed: 6
   drag: 4
-  _cinematicMove: 0
+  _useCinematic: 0
   rb: {fileID: 6771733417102760532}
   actionMap: {fileID: -944628639613478452, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
   _moveAction: {fileID: -4608556605388281726, guid: 2cad5061330d42f4fb20686548121a5b, type: 3}
