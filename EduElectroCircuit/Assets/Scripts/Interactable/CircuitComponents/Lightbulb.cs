@@ -24,7 +24,7 @@ public class Lightbulb : CircuitComponent
     [SerializeField] private Color ON_33P;
     [SerializeField] private Color ON_66P;
     [SerializeField] private Color ON_MAX;
-
+    [SerializeField] private AudioSource _audioSource;
     private Vector3[] shardPositions;
     private Quaternion[] shardRotations;
     private MaterialPropertyBlock propertyBlock;
@@ -60,7 +60,7 @@ public class Lightbulb : CircuitComponent
 
     private IEnumerator BreakLight()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         broken = true;
         isConnected = false;
         LockGrab(false);
@@ -77,6 +77,7 @@ public class Lightbulb : CircuitComponent
         TurnLightOFF();
 
         meshFilter.mesh = broken_base;
+        _audioSource.Play();
         
         SendData(nodeInteraction, false);
     }
@@ -211,5 +212,8 @@ public class Lightbulb : CircuitComponent
         SetData(ComponentControlState.REPAIR, new ComplexFloat(),new ComplexFloat(),new ComplexFloat(), false);
     }
 
-    public override bool CanConnectToNode() => nodeInteraction?.CanConnect(lightbulbData.type) ?? false && !broken;
+    public override bool CanConnectToNode() {
+        if(nodeInteraction == null) return false;
+        return !broken && nodeInteraction.CanConnect(lightbulbData.type);
+    }
 }
