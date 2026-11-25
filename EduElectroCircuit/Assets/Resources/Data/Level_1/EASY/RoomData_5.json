@@ -182,7 +182,7 @@
                 {
                     "expectedValueType": "RESISTANCE",
                     "expectedValue": {
-                        "real": 50.0,
+                        "real": 336.0,
                         "imaginary": 0.0
                     },
                     "resistance": {
