@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,37 +9,44 @@ public partial class GraphRenderer: VisualElement
     [UxmlAttribute]
     public float Time
     {
-        get => time;
-        set => time = value;
+        get => _time;
+        set => _time = value;
     }
 
     [UxmlAttribute]
     public float Amplitude
     {
-        get => amplitude;
-        set => amplitude = value;
+        get => _amplitude;
+        set => _amplitude = value;
     }
 
     [UxmlAttribute]
     public int PointDensity
     {
-        get => density;
-        set => density = value;
+        get => _density;
+        set => _density = value;
     }
 
     [UxmlAttribute]
     public float Frequency
     {
-        get => frequency;
-        set => frequency = value;
+        get => _frequency;
+        set => _frequency = value;
     }
 
-    private int density;
+    [UxmlAttribute]
+    public bool Show
+    {
+        get => _show;
+        set => _show = value;
+    }
 
-    private float time;
-
-    private float amplitude;
-    private float frequency;
+    private int _density;
+    private float _time;
+    private float _amplitude;
+    private float _frequency;
+    private bool _show;
+    private Coroutine _curAnimation;
 
     public GraphRenderer()
     {
@@ -58,38 +66,66 @@ public partial class GraphRenderer: VisualElement
         MarkDirtyRepaint();
     }
 
+    public void VisualUpdate(bool show, float frequency, float amplitude, MonoBehaviour coroutineRunner)
+    {
+        _show = show;
+        _frequency = frequency;
+        _amplitude = amplitude;
+        if(_show && _curAnimation == null)
+        {
+            _curAnimation = coroutineRunner.StartCoroutine(AnimateGraph());
+        }
+        if(!_show && _curAnimation != null)
+        {
+            coroutineRunner.StopCoroutine(_curAnimation);
+            _curAnimation = null;
+            MarkDirtyRepaint();
+        }
+    }
+
+    private IEnumerator AnimateGraph()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            _time += 0.2f;
+            MarkDirtyRepaint();
+        }
+    }
+
     private void Draw(MeshGenerationContext context)
     {
-        if (density < 2)
-            return;
+        if(!_show || _density < 2 || _frequency == 0) return;
 
         Rect rect = context.visualElement.contentRect;
 
         float width = rect.width;
         float height = rect.height;
 
+        if(width == 0 || height == 0) return;
 
-        points = new List<Vector2>(density);
+
+        points = new List<Vector2>(_density);
 
 
         float circle = 2 * Mathf.PI;
-        float waveRation = width /(circle * frequency);
-        int waves = (int)(width / frequency);
-        float step = circle / (density*frequency-2);
+        float waveRation = width /(circle * _frequency);
+        int waves = (int)(width / _frequency);
+        float step = circle / (_density*_frequency-2);
         float position = 0;
         int pointOffset = 1;
-        float amplitudeRatio = (amplitude / 450);
+        float amplitudeRatio = (_amplitude / 450);
         float amplitdueMaxHeight = height / 2;
 
         for(int j = 0; j < waves -1; j++) {
-            for(int i = 0; i< density*frequency -1; i++)
+            for(int i = 0; i< _density*_frequency -1; i++)
             {
                 if(position * waveRation > width + step) {
-                    points.Add(new Vector2(position * waveRation, (Mathf.Sin(time*frequency + position)* amplitdueMaxHeight * amplitudeRatio) + amplitdueMaxHeight) );
+                    points.Add(new Vector2(position * waveRation, (Mathf.Sin(_time*_frequency + position)* amplitdueMaxHeight * amplitudeRatio) + amplitdueMaxHeight) );
                     pointOffset = 2;
                     break;
                 }
-                points.Add(new Vector2(position* waveRation, (Mathf.Sin(time*frequency + position)*amplitdueMaxHeight * amplitudeRatio) + amplitdueMaxHeight) );
+                points.Add(new Vector2(position* waveRation, (Mathf.Sin(_time*_frequency + position)*amplitdueMaxHeight * amplitudeRatio) + amplitdueMaxHeight) );
                 position += step;
             }
             if(position* waveRation > width+step) break;
@@ -105,7 +141,7 @@ public partial class GraphRenderer: VisualElement
         painter.BeginPath();
         painter.MoveTo(points[0]);
 
-        if (density == 2)
+        if (_density == 2)
         {
             painter.LineTo(points[1]);
         }

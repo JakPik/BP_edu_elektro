@@ -32978,6 +32978,10 @@ PrefabInstance:
       propertyPath: '_nextBranchNode.Array.data[1]'
       value: 
       objectReference: {fileID: 1708928857}
+    - target: {fileID: 1294663198116252037, guid: 76bc46db0c4d4314bb50348c71becd57, type: 3}
+      propertyPath: '_nextBranchNode.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7333695383445303040, guid: 76bc46db0c4d4314bb50348c71becd57, type: 3}
       propertyPath: m_Name
       value: Branching

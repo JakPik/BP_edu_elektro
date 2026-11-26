@@ -12,8 +12,6 @@ using UnityEngine.UIElements;
 
 public class MeterUIPanel : UIPanel
 {
-    [SerializeField] private Node_Measurement node;
-    //  private IDataUIProvider meter;
     private Label _meterName;
     private Label _signalType;
     private Label _value;
