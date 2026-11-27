@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5265358544798532729, guid: de6ffe341c779714189375b40b2c1227, type: 3}
       propertyPath: _labelText
-      value: Exit
+      value: EXIT
       objectReference: {fileID: 0}
     - target: {fileID: 5265358544798532729, guid: de6ffe341c779714189375b40b2c1227, type: 3}
       propertyPath: _labelStyle

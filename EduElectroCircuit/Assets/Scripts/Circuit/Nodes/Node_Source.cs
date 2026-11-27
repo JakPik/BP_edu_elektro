@@ -100,7 +100,8 @@ public class Node_Source : Node
         {
             sourceValue = value,
             sourceType = _sourceType,
-            signalType = _signalType
+            signalType = _signalType,
+            frequency = _frequency
         };
     }
 
@@ -108,6 +109,7 @@ public class Node_Source : Node
     {
         _sourceType = sourceData.sourceType;
         _signalType = sourceData.signalType;
+        _frequency = sourceData.frequency;
         switch(_sourceType)
         {
             case ElectricalQuantityType.VOLTAGE:

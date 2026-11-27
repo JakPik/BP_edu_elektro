@@ -6,6 +6,7 @@ public class SourcePanelDTO
     public string sourceType;
     public string signalType;
     public ComplexFloat sourceValue;
+    public float frequency = 0f;
 
     public SourcePanelDTO(Node_Source node)
     {
@@ -13,6 +14,7 @@ public class SourcePanelDTO
         sourceType = sourceData.sourceType.ToString();
         signalType = sourceData.signalType.ToString();
         sourceValue = sourceData.sourceValue;
+        frequency = sourceData.frequency;
     }
 
     public void DTO_ToSourceNode(Node_Source node_Source)
@@ -20,7 +22,8 @@ public class SourcePanelDTO
         node_Source.SetSourceData(new SourceData{
             sourceValue = sourceValue,
             sourceType = Enum.Parse<ElectricalQuantityType>(sourceType),
-            signalType = Enum.Parse<SignalType>(signalType)
+            signalType = Enum.Parse<SignalType>(signalType),
+            frequency = frequency
         });
     }
 }

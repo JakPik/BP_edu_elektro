@@ -4,5 +4,6 @@ public enum ElectricalQuantityType
     CURRENT,
     RESISTANCE,
     CAPACITANCE,
-    INDUCTANCE
+    INDUCTANCE,
+    FREQUENCY
 }

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3"/>
-    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=6c2a30a343cba4947a5db234dc5f7ae3&amp;type=3"/>
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/PanelStyle.uss?fileID=7433441132597879392&amp;guid=9c491798e8ed20e41a3716e8ca8b1d30&amp;type=3#PanelStyle"/>
+    <Style src="project://database/Assets/UI%20Toolkit/UI_USS/TextStyle.uss?fileID=7433441132597879392&amp;guid=6c2a30a343cba4947a5db234dc5f7ae3&amp;type=3#TextStyle"/>
     <ui:VisualElement name="PhasorPanel" class="display-background">
         <ui:Label binding-path="" name="MeterName" text="Fázový analyzátor" class="text-base text-info" style="-unity-text-align: upper-center; text-overflow: clip; white-space: normal; -unity-font-style: bold; padding-right: 0; padding-left: 0; margin-left: 0; margin-right: 0; margin-top: 2px; margin-bottom: 2px; padding-bottom: 0; padding-top: 0; display: flex; font-size: 7px; -unity-text-outline-width: 0.4px;"/>
         <ui:VisualElement name="VoltageAmplitude" style="margin-right: 3px; margin-left: 3px; display: flex; flex-direction: row;">
@@ -16,7 +16,7 @@
                 <ui:Label text="180°" name="" class="text-base text-parameter" style="font-size: 5px; -unity-text-outline-width: 0.3px; -unity-text-align: middle-center; width: 10px;"/>
                 <ui:VisualElement style="flex-grow: 1;">
                     <ui:Label text="90°" name="" class="text-base text-parameter" style="font-size: 5px; -unity-text-outline-width: 0.3px; -unity-text-align: upper-center;"/>
-                    <RadialPhasorViewer visible="true" rings="2" radius="15" _-label-color="rgb(255, 255, 255)" ring-color="rgb(136, 105, 30)" _-label-outreach="0.7" _-guides-outreach="4.16" _-label-size="2.74" voltage-phasors-color="rgb(255, 255, 255)" current-phasors-color="rgb(255, 0, 0)" current-phasors-position="1.79,-5.51" voltage-phasors-position="1.59,1.51" label-color="rgb(255, 255, 255)" label-outreach="5.3" guides-outreach="2.46" label-size="3" thin-line="0.1" normal-line="0.5" thick-line="0.25" name="Phasor" style="width: auto; height: auto; flex-grow: 1;"/>
+                    <RadialPhasorViewer visible="true" rings="2" radius="15" _-label-color="rgb(255, 255, 255)" ring-color="rgb(136, 105, 30)" _-label-outreach="0.7" _-guides-outreach="4.16" _-label-size="2.74" voltage-phasors-color="rgb(255, 255, 255)" current-phasors-color="rgb(255, 0, 0)" current-phasors-position="0.61,1" voltage-phasors-position="1,1" label-color="rgb(255, 255, 255)" label-outreach="5.3" guides-outreach="2.46" label-size="3" thin-line="0.1" normal-line="0.25" thick-line="0.25" name="Phasor" style="width: auto; height: auto; flex-grow: 1;"/>
                     <ui:Label text="270°" name="" class="text-base text-parameter" style="font-size: 5px; -unity-text-outline-width: 0.3px; -unity-text-align: upper-center;"/>
                 </ui:VisualElement>
                 <ui:Label text="0°" name="" class="text-base text-parameter" style="font-size: 5px; -unity-text-outline-width: 0.3px; -unity-text-align: middle-center; width: 10px;"/>

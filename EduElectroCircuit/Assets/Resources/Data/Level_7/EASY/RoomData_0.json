@@ -8,18 +8,72 @@
                     "sourceValue": {
                         "real": 120.0,
                         "imaginary": 0.0
-                    }
+                    },
+                    "frequency": 100.0
                 }
             ],
             "doorPanelDTOs": [
                 {
                     "expectedValueType": "VOLTAGE",
                     "expectedValue": {
-                        "real": 24.0,
-                        "imaginary": -48.0
+                        "real": 30.0,
+                        "imaginary": 30.0
                     },
                     "resistance": {
                         "real": 8.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -2.7021310329437258,
+                        "y": 0.0,
+                        "z": -3.2685508728027345
+                    },
+                    "resistance": {
+                        "real": 8.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [
+                {
+                    "name": "Capacitor",
+                    "position": {
+                        "x": -3.1268186569213869,
+                        "y": 0.0,
+                        "z": -2.063288688659668
+                    },
+                    "capacitance": 0.00009999999747378752
+                }
+            ],
+            "inductors": []
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "AC",
+                    "sourceValue": {
+                        "real": 240.0,
+                        "imaginary": 0.0
+                    },
+                    "frequency": 640.0
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 120.0,
+                        "imaginary": 120.0
+                    },
+                    "resistance": {
+                        "real": 125.0,
                         "imaginary": 0.0
                     }
                 }
@@ -28,13 +82,200 @@
             "lightbulbs": [],
             "capacitors": [
                 {
+                    "name": "Capacitor (3)",
+                    "position": {
+                        "x": -1.0770111083984376,
+                        "y": 0.0,
+                        "z": -3.6463470458984377
+                    },
+                    "capacitance": 9.999999974752428e-7
+                },
+                {
+                    "name": "Capacitor (4)",
+                    "position": {
+                        "x": -4.377109527587891,
+                        "y": 0.0,
+                        "z": -3.217428207397461
+                    },
+                    "capacitance": 9.999999974752428e-7
+                }
+            ],
+            "inductors": []
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "VOLTAGE",
+                    "signalType": "AC",
+                    "sourceValue": {
+                        "real": 250.0,
+                        "imaginary": 0.0
+                    },
+                    "frequency": 160.0
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 40.0,
+                        "imaginary": 80.0
+                    },
+                    "resistance": {
+                        "real": 72.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": -3.5270845890045168,
+                        "y": 0.0,
+                        "z": -5.909453392028809
+                    },
+                    "resistance": {
+                        "real": 18.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": -3.89509654045105,
+                        "y": 0.0,
+                        "z": -4.44830322265625
+                    },
+                    "resistance": {
+                        "real": 256.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (2)",
+                    "position": {
+                        "x": -4.015332221984863,
+                        "y": 0.0,
+                        "z": -3.2056541442871095
+                    },
+                    "resistance": {
+                        "real": 256.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [
+                {
                     "name": "Capacitor",
                     "position": {
-                        "x": 1.917056679725647,
+                        "x": 2.7611589431762697,
                         "y": 0.0,
-                        "z": -1.7483339309692383
+                        "z": -6.974668502807617
                     },
-                    "capacitance": 0.00009999999747378752
+                    "capacitance": 0.000004999999873689376
+                },
+                {
+                    "name": "Capacitor (1)",
+                    "position": {
+                        "x": 2.899078369140625,
+                        "y": 0.0,
+                        "z": -5.227496147155762
+                    },
+                    "capacitance": 0.00001249999968422344
+                },
+                {
+                    "name": "Capacitor (2)",
+                    "position": {
+                        "x": 1.6939525604248047,
+                        "y": 0.0,
+                        "z": -7.525774955749512
+                    },
+                    "capacitance": 0.000004999999873689376
+                }
+            ],
+            "inductors": []
+        },
+        {
+            "sourcePanelDTOs": [
+                {
+                    "sourceType": "CURRENT",
+                    "signalType": "AC",
+                    "sourceValue": {
+                        "real": 5.0,
+                        "imaginary": 0.0
+                    },
+                    "frequency": 500.0
+                }
+            ],
+            "doorPanelDTOs": [
+                {
+                    "expectedValueType": "VOLTAGE",
+                    "expectedValue": {
+                        "real": 174.06979370117188,
+                        "imaginary": -19.94076919555664
+                    },
+                    "resistance": {
+                        "real": 60.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "resistors": [
+                {
+                    "name": "Resistor",
+                    "position": {
+                        "x": 4.719460964202881,
+                        "y": 0.0,
+                        "z": 3.131916046142578
+                    },
+                    "resistance": {
+                        "real": 100.0,
+                        "imaginary": 0.0
+                    }
+                },
+                {
+                    "name": "Resistor (1)",
+                    "position": {
+                        "x": 2.668818950653076,
+                        "y": 0.0,
+                        "z": 3.8565711975097658
+                    },
+                    "resistance": {
+                        "real": 50.0,
+                        "imaginary": 0.0
+                    }
+                }
+            ],
+            "lightbulbs": [],
+            "capacitors": [
+                {
+                    "name": "Capacitor",
+                    "position": {
+                        "x": 4.534024715423584,
+                        "y": 0.0,
+                        "z": 4.7473907470703129
+                    },
+                    "capacitance": 0.000019999999494757503
+                },
+                {
+                    "name": "Capacitor (1)",
+                    "position": {
+                        "x": 2.605450391769409,
+                        "y": 0.0,
+                        "z": 5.803375244140625
+                    },
+                    "capacitance": 0.000004999999873689376
+                },
+                {
+                    "name": "Capacitor (2)",
+                    "position": {
+                        "x": 6.291747570037842,
+                        "y": 0.0,
+                        "z": 3.2569026947021486
+                    },
+                    "capacitance": 0.000002499999936844688
                 }
             ],
             "inductors": []

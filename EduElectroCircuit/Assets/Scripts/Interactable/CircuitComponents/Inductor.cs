@@ -52,7 +52,7 @@ public class Inductor : CircuitComponent
         if(!isDC && controlState == ComponentControlState.ACTIVE)
         {
             // magnetic field
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 

@@ -18,6 +18,8 @@ public partial class Phasor
 [UxmlElement]
 public partial class RadialPhasorViewer: VisualElement
 {
+    private const float CenterRadius = 0.8f;
+
     [UxmlObjectReference("phasor")]
     public Phasor phasors;
 
@@ -244,7 +246,7 @@ public partial class RadialPhasorViewer: VisualElement
         painter.strokeColor = Color.grey;
         painter.fillColor = Color.grey;
         painter.BeginPath();
-        painter.Arc(center, 0.8f, 0f, 360f);
+        painter.Arc(center, CenterRadius, 0f, 360f);
         painter.Fill();
 
     }
@@ -252,19 +254,35 @@ public partial class RadialPhasorViewer: VisualElement
     private void DrawPhasors(Painter2D painter, Vector2 center, float radius)
     {
         if(!_visible) return;
-        painter.lineWidth = _phasorLineThickness;
+        painter.lineWidth = _phasorLineThickness * 2;
+        
+        Vector2 direction = _voltagePhasorsPosition.normalized;
+        Vector2 tangent = new Vector2(direction.y, -direction.x);
    
         painter.strokeColor = _voltagePhasorsColor;
+        painter.fillColor = _voltagePhasorsColor;
         painter.BeginPath();
-        painter.MoveTo(center);
-        painter.LineTo(center + _voltagePhasorsPosition.normalized * radius);
-        painter.Stroke();
+        painter.MoveTo(center - tangent * CenterRadius);
+        painter.LineTo(center + tangent * CenterRadius);
+        painter.LineTo(center + _voltagePhasorsPosition.normalized * radius + tangent * _phasorLineThickness);
+        painter.LineTo(center + _voltagePhasorsPosition.normalized * radius - tangent * _phasorLineThickness);
+        painter.Fill();
+
+
+        direction = _currentPhasorsPosition.normalized;
+        tangent = new Vector2(direction.y, -direction.x);
+        painter.lineWidth = _phasorLineThickness;
+        float offsetBaseSize = CenterRadius - (CenterRadius / 2);
+        float offsetTipSize = _phasorLineThickness - (_phasorLineThickness / 2);
 
         painter.strokeColor = _currentPhasorsColor;
+        painter.fillColor = _currentPhasorsColor;
         painter.BeginPath();
-        painter.MoveTo(center);
-        painter.LineTo(center + _currentPhasorsPosition.normalized * radius);
-        painter.Stroke();
+        painter.MoveTo(center - tangent * offsetBaseSize);
+        painter.LineTo(center + tangent * offsetBaseSize);
+        painter.LineTo(center + _currentPhasorsPosition.normalized * radius + tangent * offsetTipSize);
+        painter.LineTo(center + _currentPhasorsPosition.normalized * radius - tangent * offsetTipSize);
+        painter.Fill();
     }
 
     private void DrawRadialCircles(Painter2D painter, Vector2 center, float radius)

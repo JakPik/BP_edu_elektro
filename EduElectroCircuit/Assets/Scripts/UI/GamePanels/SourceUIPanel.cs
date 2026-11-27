@@ -23,10 +23,10 @@ public class SourceUIPanel : InteractiveUIPanel
     private Label _sourceTypeLabel;
     private Label _signalTypeLabel;
     private Label _valueLabel;
-    private Label _periodLabel;
+    private Label _frequencyLabel;
     private Label _offlineLabel;
     
-    private VisualElement _periodPanel;
+    private VisualElement _frequencyPanel;
     private VisualElement _sourcePanel;
     private VisualElement _valuePanel;
     private VisualElement _signalPanel;
@@ -37,10 +37,10 @@ public class SourceUIPanel : InteractiveUIPanel
         _sourceTypeLabel = display.rootVisualElement.Q<Label>("SourceType");
         _signalTypeLabel = display.rootVisualElement.Q<Label>("SignalType");
         _valueLabel = display.rootVisualElement.Q<Label>("Value");
-        _periodLabel = display.rootVisualElement.Q<Label>("Period");
+        _frequencyLabel = display.rootVisualElement.Q<Label>("Frequency");
         _offlineLabel = display.rootVisualElement.Q<Label>("Offline");
 
-        _periodPanel = display.rootVisualElement.Q<VisualElement>("PeriodPanel");
+        _frequencyPanel = display.rootVisualElement.Q<VisualElement>("FrequencyPanel");
         _sourcePanel = display.rootVisualElement.Q<VisualElement>("SourcePanel");
         _valuePanel = display.rootVisualElement.Q<VisualElement>("ValuePanel");
         _signalPanel = display.rootVisualElement.Q<VisualElement>("SignalPanel");
@@ -62,6 +62,7 @@ public class SourceUIPanel : InteractiveUIPanel
             _sourceTypeLabel.text = sourceData.sourceType.ToString();
             _signalTypeLabel.text = sourceData.signalType.ToString();
             _valueLabel.text = NodeCalculationModel.FormatValue(sourceData.sourceValue,sourceData.sourceType);
+            _frequencyLabel.text = NodeCalculationModel.FormatValue(sourceData.frequency, ElectricalQuantityType.FREQUENCY);
             Logger.LogUI(this, "Data loaded. ", LogType.SUCCESS);
             _isDC = sourceData.signalType == SignalType.DC;
             DisplayChange();
@@ -164,11 +165,12 @@ public class SourceUIPanel : InteractiveUIPanel
     {
         _isOffline = isOffline;
     }
+
     private void DisplayChange()
     {
         if(_isOffline)
         {
-            _periodPanel.style.display = DisplayStyle.None;
+            _frequencyPanel.style.display = DisplayStyle.None;
             _signalPanel.style.display = DisplayStyle.None;
             _valuePanel.style.display = DisplayStyle.None;
             _sourcePanel.style.display = DisplayStyle.None;
@@ -183,7 +185,7 @@ public class SourceUIPanel : InteractiveUIPanel
             _offlineLabel.style.display = DisplayStyle.None;
             _uIButton.ChangeButtonEnableState(true);
 
-            _periodPanel.style.display = _isDC? DisplayStyle.None : DisplayStyle.Flex;
+            _frequencyPanel.style.display = _isDC? DisplayStyle.None : DisplayStyle.Flex;
         }
     }
 

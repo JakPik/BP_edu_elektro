@@ -24,6 +24,10 @@ public static class NodeCalculationModel
                 return "Ω";
             case ElectricalQuantityType.CAPACITANCE:
                 return "F";
+            case ElectricalQuantityType.INDUCTANCE:
+                return "H";
+            case ElectricalQuantityType.FREQUENCY:
+                return "Hz";
             default:
                 return "";
         }
@@ -182,6 +186,6 @@ public static class NodeCalculationModel
 
     private static ComplexFloat CalculateCapacitiveImpedance(float frequency, float capacitance)
     {
-        return new ComplexFloat(0, Mathf.Pow(PI_2 * frequency * capacitance, -1));
+        return new ComplexFloat(0, -Mathf.Pow(PI_2 * frequency * capacitance, -1));
     }
 }
